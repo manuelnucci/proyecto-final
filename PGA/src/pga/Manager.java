@@ -41,7 +41,14 @@ public class Manager
     {
         
     }
-    
+
+
+    /**
+     * Metodo que da de alta un alumno al sistema
+     * pre: todos los parametros se encuentras validados incluyendo mascaras
+     * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
+     * 
+     */
     public void altaAlumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
                             Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
     {
@@ -50,7 +57,12 @@ public class Manager
         else
             throw new EntidadRepetidaException("Alumno repetido");
     }
-    
+   /**
+    * Metodo que da de baja a un alumno del sistema
+    * pre: alumno surge del metodo que ubica alumno 
+    * post: se da de baja el alumno al sistema o se lanza una excepcion si el alumno no existe
+    * 
+    */
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException
     {
         Iterator<Cursada> i;
@@ -68,12 +80,25 @@ public class Manager
             throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
     }
     
+    /**
+     * Metodo que da de baja al alumno de la cursada
+     * pre: alumno y cursada estan validados vienen de las funciones de ubicacion
+     * post: da de baja de la cursada al alumno, sino lanza una excepcion si el alumno no esta en esa cursada
+     */
     public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException
     {
         if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
             throw new NoEstaEntidadException("Alumno no encontrado en la cursada");
     }
     
+    /**
+     * Metodo que modifica los valores del alumno que viene por parametro con los atributos que tambien llegan por
+     * parametro
+     * 
+     * pre: el alumno proviene del metodo ubicaAlumno, y los parametros se encuentran validados
+     * post: modifica los valores del alumno que se ven reflejados en las demas colecciones o lanza una excepcion
+     * si el nuevo legajo se encuentra repetido
+     */
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
                             Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
     {
@@ -90,6 +115,12 @@ public class Manager
             throw new EntidadRepetidaException("Alumno repetido al intentar modificarlo");      
     }
     
+    /**
+     * Metodo que ubica al alumno a traves de su clave
+     * 
+     * pre: el formato legajo se encuentra validado
+     * post: devuelve un alumno si lo encuentra o lanza excepcion si no
+     */
     public Alumno ubicarAlumno(String legajo) throws NoEstaEntidadException
     {
         Alumno ret = this.alumnos.get(legajo);
@@ -100,14 +131,22 @@ public class Manager
         return ret;
     }
     
+    /**
+     * Metodo que da de baja al profesor de la cursada
+     * pre: profesor y cursada estan validados vienen de las funciones de ubicacion
+     * post: da de baja de la cursada al profesor, sino lanza una excepcion si el profesor no esta en esa cursada
+     */
     public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException
     {
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
             throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
     }
     
-    
-    
+    /**
+     * Metodo que agrega una cursada al sistema
+     * pre: los parametros se encuentran validados en formato
+     * post: da de alta la cursada al sistema, si el id no esta repetido de ser asi lanza una excepcion
+     */
     public void altaCursada(String id, Asignatura asignatura, String periodo, String dia, String hora) throws EntidadRepetidaException
     {
         if(!this.cursadas.containsKey(id))
@@ -116,6 +155,11 @@ public class Manager
             throw new EntidadRepetidaException("Cursada repetida");
     }
     
+    /**
+    * Metodo que da de baja a una cursada del sistema
+    * pre: cursada surge del metodo que ubica cursada
+    * post: se da de baja la cursada al sistema o se lanza una excepcion si la cursada no existe 
+    */
     public void bajaCursada(Cursada cursada) throws NoEstaEntidadException
     {
         Cursada c = this.cursadas.remove(cursada.getId());
@@ -126,7 +170,8 @@ public class Manager
     
     public void modificacionCursada(Cursada cursada, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
-        
+        //Se modificaran se hara en 2 partes: una que cambia los atributos y otra las colecciones
+        //O sino se hara todo en 1 
     }
     
     public void verificaAlumnoAptoParaCursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -185,7 +230,6 @@ public class Manager
     }
     public void verificaProfesorOcupado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
     {
-        Iterator<Asignatura> ia;
         Iterator<Cursada> ic;
         Cursada c;
         boolean sigue = true;
@@ -205,6 +249,30 @@ public class Manager
             
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException("El profesor no cumple con las franjas horarias");
+    }
+    
+    public void verificaPersonaOcupado(Persona persona, Cursada cursada) throws EntidadNoAptaParaCursadaException
+    {
+        Iterator<Cursada> ic;
+        Cursada c;
+        boolean sigue = true;
+        
+        ic = this.cursadas.values().iterator();
+        while(ic.hasNext() && sigue)
+        {
+            c = ic.next();
+            if((persona.getLegajo().startsWith("ALU") && c.getAlumnos().containsKey(persona.getLegajo())) || 
+                persona.getLegajo().startsWith("PRO") && c.getProfesores().containsKey(persona.getLegajo()))
+            {
+                sigue = !((cursada.getHoraInicio().compareTo(c.getHoraInicio()) >= 0 && 
+                            cursada.getHoraInicio().compareTo(c.getHoraFin()) <= 0) ||
+                        (cursada.getHoraFin().compareTo(c.getHoraInicio()) >= 0 && 
+                            cursada.getHoraFin().compareTo(c.getHoraFin()) <= 0)); 
+            }
+        }
+        
+        if(!sigue)
+            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias");
     }
     
     public boolean verificaId(String id, int tipo)
