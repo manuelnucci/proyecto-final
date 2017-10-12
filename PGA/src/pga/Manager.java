@@ -17,7 +17,6 @@ public class Manager
     private Hashtable<String, Cursada> cursadas;
     private Hashtable<String, Profesor> profesores;
     
-    
     public Manager()
     {
         super();
@@ -41,7 +40,6 @@ public class Manager
     {
         
     }
-
 
     /**
      * Metodo que da de alta un alumno al sistema
@@ -130,16 +128,13 @@ public class Manager
         return ret;
     }
 
-
-
-
     /**
      * Metodo que da de alta un alumno al sistema
      * pre: todos los parametros se encuentras validados incluyendo mascaras
      * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
      * 
      */
-    public void altaAlumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
+    public void altaProfesor(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
                             Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
     {
         if(!this.alumnos.containsKey(legajo))
