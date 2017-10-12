@@ -36,11 +36,7 @@ public class Cursada implements Comparable
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getNombre()
+    public String getNombre() 
     {
         return nombre;
     }

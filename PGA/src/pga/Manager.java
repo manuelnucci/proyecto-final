@@ -12,8 +12,7 @@ public class Manager
     public static final int TAMANO_MAIL = 12;
     public static final int TAMANO_LEGAJO = 7;
     public static final int TAMANO_PERIODO = 7;
-    public static final int TAMANO_HORA = 7;
-    private LinkedList<Asignatura>  
+    public static final int TAMANO_HORA = 7;  
     private Hashtable<String, Asignatura> asignaturas;
     private Hashtable<String, Alumno> alumnos;
     private Hashtable<String, Cursada> cursadas;

@@ -17,7 +17,7 @@ public class Profesor extends Persona
         this.competencias = competencias;
     }
 
-    public Hashtable<String, Asignatura> getCompetencias()
+    public Hashtable <String, Asignatura> getCompetencias()
     {
         return competencias;
     }
