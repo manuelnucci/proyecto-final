@@ -5,6 +5,7 @@ import java.util.Hashtable;
 public class Cursada
 {
     private String id;
+    private String nombre;
     private Asignatura asignatura;
     private String periodo;
     private String dia;
@@ -33,6 +34,11 @@ public class Cursada
     public String getId()
     {
         return id;
+    }
+
+    public String getNombre()
+    {
+        return nombre;
     }
 
     public Asignatura getAsignatura()

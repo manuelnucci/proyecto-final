@@ -12,6 +12,11 @@ public class Profesor extends Persona
         super();
     }
 
+    public void setCompetencias(Hashtable<String, Asignatura> competencias)
+    {
+        this.competencias = competencias;
+    }
+
     public Hashtable<String, Asignatura> getCompetencias()
     {
         return competencias;
