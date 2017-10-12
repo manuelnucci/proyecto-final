@@ -13,7 +13,10 @@ public class Manager
     public static final int TAMANO_LEGAJO = 7;
     public static final int TAMANO_PERIODO = 7;
     public static final int TAMANO_HORA = 7;
-    private LinkedList<Asignatura>  
+    private LinkedList<Asignatura>  asignaturasOrdenadas;
+    private LinkedList<Alumno>  alumnosOrdenados;
+    private LinkedList<Cursada>  cursadasOrdenadas;
+    private LinkedList<Profesor>  profesoresOrdenados;
     private Hashtable<String, Asignatura> asignaturas;
     private Hashtable<String, Alumno> alumnos;
     private Hashtable<String, Cursada> cursadas;
@@ -54,8 +57,12 @@ public class Manager
     public void altaAlumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
                             Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
     {
-        if(!this.alumnos.containsKey(legajo))
-            this.alumnos.put(legajo, new Alumno(nombre, apellido, legajo, domicilio, mail, telefono, historia));
+        if(!this.alumnos.containsKey(legajo)) 
+        {
+            Alumno alumno = new Alumno(nombre, apellido, legajo, domicilio, mail, telefono, historia);
+            this.alumnos.put(legajo, alumno);   
+            this.alumnosOrdenados.add(alumno);
+        }
         else
             throw new EntidadRepetidaException("Alumno repetido");
     }

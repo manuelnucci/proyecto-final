@@ -12,9 +12,9 @@ public class Alumno extends Persona
         super();
     }
 
-    public Alumno(String nombree, String apellido, String legajo, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
+    public Alumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
     {
-        super(nombree, apellido, legajo, domicilio, mail, telefono);
+        super(nombre, apellido, legajo, domicilio, mail, telefono);
         this.historiaAcademica = historiaAcademica;
     }
 
