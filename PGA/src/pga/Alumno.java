@@ -27,7 +27,7 @@ public class Alumno extends Persona
     {
         return historiaAcademica;
     }
-
+    
     @Override
     public String toString()
     {

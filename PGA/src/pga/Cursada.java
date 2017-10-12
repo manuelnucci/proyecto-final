@@ -2,9 +2,10 @@ package pga;
 
 import java.util.Hashtable;
 
-public class Cursada
+public class Cursada implements Comparable
 {
     private String id;
+    private String nombre;
     private Asignatura asignatura;
     private String periodo;
     private String dia;
@@ -33,6 +34,10 @@ public class Cursada
     public String getId()
     {
         return id;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public Asignatura getAsignatura()
@@ -68,6 +73,13 @@ public class Cursada
     public Hashtable<String, Alumno> getAlumnos()
     {
         return alumnos;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+        Cursada cursada = (Cursada) object;
+        
+        return this.nombre.compareTo(cursada.getNombre());
     }
 
     @Override
