@@ -20,15 +20,15 @@ public class Profesor extends Persona
     @Override
     public String toString()
     {
-        Iterator <Asignatura> it = this.competencias.values().iterator();
+        Iterator <Asignatura> i = this.competencias.values().iterator();
         String cad;
         Asignatura a;
         
         cad = super.toString();
         
-        while(it.hasNext())
+        while(i.hasNext())
         {
-            a = it.next();
+            a = i.next();
             cad += " " + a.getId() + a.getNombre();
         }
         
