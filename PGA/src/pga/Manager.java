@@ -1,5 +1,6 @@
 package pga;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,6 +27,7 @@ public class Manager
     {
         super();
     }
+    
     public Manager(String nombreArchivo)
     {
         super();
@@ -74,7 +76,7 @@ public class Manager
     {
         Iterator<Cursada> i;
         
-        if(this.alumnos.remove(alumno.getLegajo()) != null)
+        if(this.alumnos.remove(alumno.getLegajo()) != null && !this.alumnosOrdenados.remove(alumno)) // Si es eliminable en ambas colecciones
         {
             i = this.cursadas.values().iterator();
             while(i.hasNext())
@@ -122,12 +124,46 @@ public class Manager
     }
     
     /**
+     * Método que busca a todos las posibles personas (profesores o alumnos) con el mismo nombre y los devuelve dentro de un iterador de personas
+     * 
+     * pre: los parámetros se encuentran validos pero no se sabe si existen. Tipo es una constante, 1 para alumnos y 2 para profesores
+     * post: se devuelve un iterador de personas
+     */
+    public ArrayList<Persona> ubicarPersona(String nombre, String apellido, int tipo)
+    {
+        Iterator<Persona> ip;
+        ArrayList<Persona> ret = new ArrayList<Persona>();
+        boolean sigue = true;
+        Persona persona;
+        
+        if (tipo == 1)
+            ip = new LinkedList<Persona> (this.alumnosOrdenados).iterator();
+        else
+            ip = new LinkedList<Persona> (this.profesoresOrdenados).iterator();
+        
+        while (ip.hasNext() && sigue)
+        {
+            persona = ip.next();
+            if (persona.getNombre().equals(nombre) && persona.getApellido().equals(apellido))
+            {                       
+                while(persona.getNombre().equals(nombre) && persona.getApellido().equals(apellido))
+                {
+                    ret.add(persona);
+                    persona = ip.next();    
+                }
+                sigue = false;
+            }
+        }
+        return ret;
+    }
+    
+    /**
      * Metodo que ubica al alumno a traves de su clave
      * 
      * pre: el formato legajo se encuentra validado
      * post: devuelve un alumno si lo encuentra o lanza excepcion si no
      */
-    public Alumno ubicarAlumno(String legajo) throws NoEstaEntidadException
+    public Alumno ubicarAlumno(String legajo) throws NoEstaEntidadException /// RF05
     {
         Alumno ret = this.alumnos.get(legajo);
         
