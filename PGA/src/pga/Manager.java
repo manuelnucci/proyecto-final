@@ -22,7 +22,6 @@ public class Manager
     private Hashtable<String, Cursada> cursadas;
     private Hashtable<String, Profesor> profesores;
     
-    
     public Manager()
     {
         super();
@@ -46,7 +45,6 @@ public class Manager
     {
         
     }
-
 
     /**
      * Metodo que da de alta un alumno al sistema
@@ -76,14 +74,13 @@ public class Manager
     {
         Iterator<Cursada> i;
         
-        if(this.alumnos.containsKey(alumno.getLegajo()))
+        if(this.alumnos.remove(alumno.getLegajo()) != null)
         {
             i = this.cursadas.values().iterator();
             while(i.hasNext())
             {
                 i.next().getAlumnos().remove(alumno.getLegajo());
             }
-            this.alumnos.remove(alumno.getLegajo());
         }
         else
             throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
@@ -139,7 +136,43 @@ public class Manager
         
         return ret;
     }
-    
+
+    /**
+     * Metodo que da de alta un alumno al sistema
+     * pre: todos los parametros se encuentras validados incluyendo mascaras
+     * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
+     * 
+     */
+    public void altaProfesor(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
+    {
+        if(!this.alumnos.containsKey(legajo))
+            this.alumnos.put(legajo, new Alumno(nombre, apellido, legajo, domicilio, mail, telefono, historia));
+        else
+            throw new EntidadRepetidaException("Alumno repetido");
+    }
+    /**
+    * Metodo que da de baja a un alumno del sistema
+    * pre: alumno surge del metodo que ubica alumno 
+    * post: se da de baja el alumno al sistema o se lanza una excepcion si el alumno no existe
+    * 
+    */
+    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException
+    {
+        Iterator<Cursada> i;
+        
+        if(this.profesores.remove(profesor.getLegajo()) != null)
+        {
+            i = this.cursadas.values().iterator();
+            while(i.hasNext())
+            {
+                i.next().getProfesores().remove(profesor.getLegajo());
+            }
+        }
+        else
+            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
+    }
+
     /**
      * Metodo que da de baja al profesor de la cursada
      * pre: profesor y cursada estan validados vienen de las funciones de ubicacion
@@ -149,8 +182,32 @@ public class Manager
     {
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
             throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
-    }
-    
+    }    
+
+    /**
+     * Metodo que modifica los valores del alumno que viene por parametro con los atributos que tambien llegan por
+     * parametro
+     * 
+     * pre: el alumno proviene del metodo ubicaAlumno, y los parametros se encuentran validados
+     * post: modifica los valores del alumno que se ven reflejados en las demas colecciones o lanza una excepcion
+     * si el nuevo legajo se encuentra repetido
+     */
+    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
+    {
+        if(!this.profesores.containsKey(legajo))
+        {    
+            profesor.setNombre(nombre);
+            profesor.setApellido(apellido);
+            profesor.setLegajo(legajo);
+            profesor.setDomicilio(domicilio);
+            profesor.setMail(mail);
+            profesor.setCompetencias(competencias);
+        }
+        else
+            throw new EntidadRepetidaException("Profesor repetido al intentar modificarlo");      
+    }    
+
     /**
      * Metodo que agrega una cursada al sistema
      * pre: los parametros se encuentran validados en formato
