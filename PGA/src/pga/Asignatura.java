@@ -3,7 +3,7 @@ package pga;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-public class Asignatura
+public class Asignatura implements Comparable
 {
     private String id;
     private String nombre;
@@ -29,6 +29,13 @@ public class Asignatura
     public Hashtable<String, Asignatura> getCorrelatividades()
     {
         return correlatividades;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+        Asignatura asignatura = (Asignatura) object;
+        
+        return this.nombre.compareTo(asignatura.getNombre());
     }
 
     @Override

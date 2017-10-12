@@ -1,6 +1,6 @@
 package pga;
 
-public class Persona
+public class Persona implements Comparable
 {
     private String nombre;
     private String apellido;
@@ -84,7 +84,14 @@ public class Persona
         return telefono;
     }
 
-
+    @Override
+    public int compareTo(Object object) {
+        Alumno alumno = (Alumno) object;
+        String nombreCompleto = this.getApellido() + this.getNombre();
+        
+        return nombreCompleto.compareTo(alumno.getApellido() + alumno.getNombre());
+    }
+    
     @Override
     public String toString()
     {

@@ -5,16 +5,16 @@ import java.util.Iterator;
 
 public class Alumno extends Persona
 {
-    private Hashtable<String, Asignatura> historiaAcademica;
+    private Hashtable <String, Asignatura> historiaAcademica;
     
     public Alumno()
     {
         super();
     }
 
-    public Alumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
+    public Alumno(String nombree, String apellido, String legajo, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
     {
-        super(nombre, apellido, legajo, domicilio, mail, telefono);
+        super(nombree, apellido, legajo, domicilio, mail, telefono);
         this.historiaAcademica = historiaAcademica;
     }
 
@@ -27,7 +27,7 @@ public class Alumno extends Persona
     {
         return historiaAcademica;
     }
-
+    
     @Override
     public String toString()
     {
