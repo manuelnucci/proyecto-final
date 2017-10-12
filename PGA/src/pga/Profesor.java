@@ -5,14 +5,14 @@ import java.util.Iterator;
 
 public class Profesor extends Persona
 {
-    private Hashtable<String, Asignatura> competencias;
+    private Hashtable <String, Asignatura> competencias;
     
     public Profesor()
     {
         super();
     }
 
-    public Hashtable<String, Asignatura> getCompetencias()
+    public Hashtable <String, Asignatura> getCompetencias()
     {
         return competencias;
     }
@@ -20,7 +20,7 @@ public class Profesor extends Persona
     @Override
     public String toString()
     {
-        Iterator<Asignatura> i = this.competencias.values().iterator();
+        Iterator <Asignatura> i = this.competencias.values().iterator();
         String cad;
         Asignatura a;
         

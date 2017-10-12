@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Alumno extends Persona
 {
-    private Hashtable<String, Asignatura> historiaAcademica;
+    private Hashtable <String, Asignatura> historiaAcademica;
     
     public Alumno()
     {
