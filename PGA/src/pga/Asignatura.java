@@ -5,6 +5,9 @@ import java.util.Iterator;
 
 public class Asignatura implements Comparable
 {
+    private static int numAsignatura = 0;
+    private static final String ID_LEGAJO = "ASI";
+    
     private String id;
     private String nombre;
     private Hashtable<String, Asignatura> correlatividades;
@@ -14,6 +17,12 @@ public class Asignatura implements Comparable
         super();
     }
 
+    public Asignatura(String nombre, Hashtable<String, Asignatura> correlatividades)
+    {
+        this.id = ID_LEGAJO + String.format("%04d", numAsignatura++);
+        this.nombre = nombre;
+        this.correlatividades = correlatividades;
+    }
 
     public String getId()
     {

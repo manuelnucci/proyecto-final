@@ -54,18 +54,13 @@ public class Manager
      * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
      * 
      */
-    public void altaAlumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
+    public void altaAlumno(String nombre, String apellido, String domicilio, String mail, String telefono,
                             Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
     {
-        if(!this.alumnos.containsKey(legajo)) 
-        {
-            Alumno alumno = new Alumno(nombre, apellido, legajo, domicilio, mail, telefono, historia);
-            this.alumnos.put(legajo, alumno);   
-            this.alumnosOrdenados.add(alumno);
-        }
-        else
-            throw new EntidadRepetidaException("Alumno repetido");
+        Alumno alumno = (Alumno) Factory.getPersona(ALU, nombre, apellido, domicilio, mail, telefono, historia);
+        this.alumnos.put(alumno.getLegajo(), alumno);   
     }
+    
    /**
     * Metodo que da de baja a un alumno del sistema
     * pre: alumno surge del metodo que ubica alumno 
@@ -107,20 +102,62 @@ public class Manager
      * post: modifica los valores del alumno que se ven reflejados en las demas colecciones o lanza una excepcion
      * si el nuevo legajo se encuentra repetido
      */
-    public void modificaAlumno(Alumno alumno, String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
+    public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> historia)
+    {   
+        alumno.setNombre(nombre);
+        alumno.setApellido(apellido);
+        alumno.setDomicilio(domicilio);
+        alumno.setMail(mail);
+        alumno.setTelefono(telefono);
+        alumno.setHistoriaAcademica(historia);     
+    }
+    
+    public void altaProfesor(String nombre, String apellido, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
     {
-        if(!this.alumnos.containsKey(legajo))
-        {    
-            alumno.setNombre(nombre);
-            alumno.setApellido(apellido);
-            alumno.setLegajo(legajo);
-            alumno.setDomicilio(domicilio);
-            alumno.setMail(mail);
-            alumno.setHistoriaAcademica(historia);
+        Profesor profesor = (Profesor) Factory.getPersona(PRO, nombre, apellido, domicilio, mail, telefono, competencias);
+        this.profesores.put(profesor.getLegajo(), profesor);   
+    }
+    
+    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException
+    {
+        Iterator<Cursada> i;
+        
+        if(this.profesores.remove(profesor.getLegajo()) != null && !this.profesoresOrdenados.remove(profesor)) // Si es eliminable en ambas colecciones
+        {
+            i = this.cursadas.values().iterator();
+            while(i.hasNext())
+            {
+                i.next().getProfesores().remove(profesor.getLegajo());
+            }
         }
         else
-            throw new EntidadRepetidaException("Alumno repetido al intentar modificarlo");      
+            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
+    }
+    
+    public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException
+    {
+        if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
+            throw new NoEstaEntidadException("Alumno no encontrado en la cursada");
+    }
+    
+    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> competenecias)
+    { 
+            profesor.setNombre(nombre);
+            profesor.setApellido(apellido);
+            profesor.setDomicilio(domicilio);
+            profesor.setMail(mail);
+            profesor.setTelefono(telefono);
+            profesor.setCompetencias(competenecias);      
+    }
+    
+    //////////////////////////////////public void altaAsignatura(String nombre, String apellido, String domicilio, String mail, String telefono,
+                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
+    {
+        Profesor profesor = (Profesor) Factory.getPersona(PRO, nombre, apellido, domicilio, mail, telefono, competencias);
+        this.profesores.put(profesor.getLegajo(), profesor);   
     }
     
     /**

@@ -5,6 +5,9 @@ import java.util.Iterator;
 
 public class Alumno extends Persona
 {
+    private static int legajoAlumno = 0;
+    private static final String ID_LEGAJO = "ALU";
+    
     private Hashtable <String, Asignatura> historiaAcademica;
     
     public Alumno()
@@ -12,9 +15,9 @@ public class Alumno extends Persona
         super();
     }
 
-    public Alumno(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
+    public Alumno(String nombre, String apellido, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> historiaAcademica)
     {
-        super(nombre, apellido, legajo, domicilio, mail, telefono);
+        super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoAlumno++), domicilio, mail, telefono);
         this.historiaAcademica = historiaAcademica;
     }
 

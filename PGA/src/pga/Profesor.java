@@ -5,11 +5,20 @@ import java.util.Iterator;
 
 public class Profesor extends Persona
 {
+    private static int legajoProfesor = 0;
+    private static final String ID_LEGAJO = "PRO";
+    
     private Hashtable <String, Asignatura> competencias;
     
     public Profesor()
     {
         super();
+    }
+
+    public Profesor(String nombre, String apellido, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> competencias)
+    {
+        super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoProfesor++), domicilio, mail, telefono);
+        this.competencias = competencias;
     }
 
     public void setCompetencias(Hashtable<String, Asignatura> competencias)

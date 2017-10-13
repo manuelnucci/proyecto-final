@@ -4,6 +4,9 @@ import java.util.Hashtable;
 
 public class Cursada implements Comparable
 {
+    private static int numCursada = 0;
+    private static final String ID_LEGAJO = "CUR";
+    
     private String id;
     private String nombre;
     private Asignatura asignatura;
@@ -20,9 +23,9 @@ public class Cursada implements Comparable
     }
 
 
-    public Cursada(String id, Asignatura asignatura, String periodo, String dia, String horaInicio)
+    public Cursada(Asignatura asignatura, String periodo, String dia, String horaInicio)
     {
-        this.id = id;
+        this.id = ID_LEGAJO + String.format("%04d", numCursada++);
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.dia = dia;
