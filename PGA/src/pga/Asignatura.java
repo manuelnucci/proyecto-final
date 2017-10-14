@@ -1,6 +1,6 @@
 package pga;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Asignatura implements Comparable
@@ -10,14 +10,14 @@ public class Asignatura implements Comparable
     
     private String id;
     private String nombre;
-    private Hashtable<String, Asignatura> correlatividades;
+    private HashMap<String, Asignatura> correlatividades;
     
     public Asignatura()
     {
         super();
     }
 
-    public Asignatura(String nombre, Hashtable<String, Asignatura> correlatividades)
+    public Asignatura(String nombre, HashMap<String, Asignatura> correlatividades)
     {
         this.id = ID_LEGAJO + String.format("%04d", numAsignatura++);
         this.nombre = nombre;
@@ -39,12 +39,12 @@ public class Asignatura implements Comparable
         return nombre;
     }
 
-    public void setCorrelatividades(Hashtable<String, Asignatura> correlatividades)
+    public void setCorrelatividades(HashMap<String, Asignatura> correlatividades)
     {
         this.correlatividades = correlatividades;
     }
 
-    public Hashtable<String, Asignatura> getCorrelatividades()
+    public HashMap<String, Asignatura> getCorrelatividades()
     {
         return correlatividades;
     }

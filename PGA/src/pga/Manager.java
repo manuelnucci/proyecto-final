@@ -1,10 +1,7 @@
 package pga;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.TreeSet;
 
 public class Manager
@@ -53,7 +50,7 @@ public class Manager
     }
 
     public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail,
-                            Hashtable<String, Asignatura> historiaAcademica) // RF01
+                            HashMap<String, Asignatura> historiaAcademica) // RF01
     {
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail, historiaAcademica);
         String nombreCompleto = alumno.getNombre() + alumno.getApellido();
@@ -91,7 +88,7 @@ public class Manager
     }
     
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, String mail,
-                            Hashtable<String, Asignatura> historiaAcademica) // RF03
+                            HashMap<String, Asignatura> historiaAcademica) // RF03
     {   
         alumno.setNombre(nombre);
         alumno.setApellido(apellido);
@@ -131,7 +128,7 @@ public class Manager
      */
     
     public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail,
-                            Hashtable<String, Asignatura> competencias) // RF01
+                            HashMap<String, Asignatura> competencias) // RF01
     {
         Profesor profesor = (Profesor) Factory.getPersona(Factory.PROFESOR, nombre, apellido, domicilio, telefono, mail, competencias);
         String nombreCompleto = profesor.getNombre() + profesor.getApellido();
@@ -169,7 +166,7 @@ public class Manager
     }
     
     public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono, String mail,
-                            Hashtable<String, Asignatura> competencias) // RF03
+                            HashMap<String, Asignatura> competencias) // RF03
     {   
         profesor.setNombre(nombre);
         profesor.setApellido(apellido);
@@ -212,7 +209,7 @@ public class Manager
      * ***************************************************************************************************************
      */
     
-    public void altaAsignatura(String nombre, Hashtable<String, Asignatura> correlatividades) 
+    public void altaAsignatura(String nombre, HashMap<String, Asignatura> correlatividades) 
         throws EntidadRepetidaException // RF01
     {
         Asignatura asignatura = Factory.getAsignatura(nombre, correlatividades);
@@ -242,7 +239,7 @@ public class Manager
         }
     }
     
-    public void modificaAsignatura(Asignatura asignatura, String nombre, Hashtable<String, Asignatura> correlatividades) 
+    public void modificaAsignatura(Asignatura asignatura, String nombre, HashMap<String, Asignatura> correlatividades) 
         throws EntidadRepetidaException // RF03
     {   
         if (this.asignaturas.containsKey(nombre))

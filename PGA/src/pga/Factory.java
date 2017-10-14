@@ -1,6 +1,6 @@
 package pga;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Factory
 {
@@ -13,7 +13,7 @@ public class Factory
     }
     
     public static Persona getPersona(int tipo, String nombre, String apellido, String domicilio, String telefono, String mail,
-                            Hashtable<String, Asignatura> asignaturas)
+                            HashMap<String, Asignatura> asignaturas)
     {
         Persona ret;
         
@@ -27,7 +27,7 @@ public class Factory
         return ret;       
     }
     
-    public static Asignatura getAsignatura(String nombre, Hashtable<String, Asignatura> correlatividades)
+    public static Asignatura getAsignatura(String nombre, HashMap<String, Asignatura> correlatividades)
     {
         return new Asignatura(nombre, correlatividades);
     }

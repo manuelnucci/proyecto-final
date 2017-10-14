@@ -1,6 +1,6 @@
 package pga;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Cursada implements Comparable
 {
@@ -14,8 +14,8 @@ public class Cursada implements Comparable
     private String dia;
     private String horaInicio;
     private String horaFin;
-    private Hashtable<String, Alumno> alumnos;
-    private Hashtable<String, Profesor> profesores;
+    private HashMap<String, Alumno> alumnos;
+    private HashMap<String, Profesor> profesores;
     
     public Cursada()
     {
@@ -30,9 +30,9 @@ public class Cursada implements Comparable
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.alumnos = new Hashtable<String, Alumno>(); // Los alumnos estarán en una tabla hash cuya clave será
+        this.alumnos = new HashMap<String, Alumno>(); // Los alumnos estarán en una tabla hash cuya clave será
                                                         // el legajo del alumno
-        this.profesores = new Hashtable<String, Profesor>(); // Los profesores estarán en una tabla hash cuya clave será
+        this.profesores = new HashMap<String, Profesor>(); // Los profesores estarán en una tabla hash cuya clave será
                                                              // el legajo del profesos
     }
 
@@ -101,22 +101,22 @@ public class Cursada implements Comparable
         return horaFin;
     }
 
-    public void setAlumnos(Hashtable<String, Alumno> alumnos)
+    public void setAlumnos(HashMap<String, Alumno> alumnos)
     {
         this.alumnos = alumnos;
     }
 
-    public Hashtable<String, Alumno> getAlumnos()
+    public HashMap<String, Alumno> getAlumnos()
     {
         return alumnos;
     }
 
-    public void setProfesores(Hashtable<String, Profesor> profesores)
+    public void setProfesores(HashMap<String, Profesor> profesores)
     {
         this.profesores = profesores;
     }
 
-    public Hashtable<String, Profesor> getProfesores()
+    public HashMap<String, Profesor> getProfesores()
     {
         return profesores;
     }

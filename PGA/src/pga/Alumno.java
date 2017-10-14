@@ -1,6 +1,6 @@
 package pga;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Alumno extends Persona
@@ -8,25 +8,25 @@ public class Alumno extends Persona
     private static int legajoAlumno = 0;
     private static final String ID_LEGAJO = "ALU";
     
-    private Hashtable <String, Asignatura> historiaAcademica; // Las claves serán la ID de la asignaturas
+    private HashMap <String, Asignatura> historiaAcademica; // Las claves serán la ID de la asignaturas
     
     public Alumno()
     {
         super();
     }
 
-    public Alumno(String nombre, String apellido, String domicilio, String telefono, String mail, Hashtable<String, Asignatura> historiaAcademica)
+    public Alumno(String nombre, String apellido, String domicilio, String telefono, String mail, HashMap<String, Asignatura> historiaAcademica)
     {
         super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoAlumno++), domicilio, telefono, mail);
         this.historiaAcademica = historiaAcademica;
     }
 
-    public void setHistoriaAcademica(Hashtable<String, Asignatura> historiaAcademica)
+    public void setHistoriaAcademica(HashMap<String, Asignatura> historiaAcademica)
     {
         this.historiaAcademica = historiaAcademica;
     }
 
-    public Hashtable<String, Asignatura> getHistoriaAcademica()
+    public HashMap<String, Asignatura> getHistoriaAcademica()
     {
         return historiaAcademica;
     }
