@@ -26,6 +26,16 @@ public class Alumno extends Persona
         this.historiaAcademica = historiaAcademica;
     }
 
+    public static void setLegajoAlumno(int legajoAlumno)
+    {
+        Alumno.legajoAlumno = legajoAlumno;
+    }
+
+    public static int getLegajoAlumno()
+    {
+        return legajoAlumno;
+    }
+
     public HashMap<String, Asignatura> getHistoriaAcademica()
     {
         return historiaAcademica;

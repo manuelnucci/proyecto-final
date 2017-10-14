@@ -122,6 +122,16 @@ public class Cursada implements Comparable
         return profesores;
     }
 
+    public static void setNumCursada(int numCursada)
+    {
+        Cursada.numCursada = numCursada;
+    }
+
+    public static int getNumCursada()
+    {
+        return numCursada;
+    }
+
     @Override
     public boolean equals(Object object)
     {

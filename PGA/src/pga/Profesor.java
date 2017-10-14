@@ -26,6 +26,16 @@ public class Profesor extends Persona
         this.competencias = competencias;
     }
 
+    public static void setLegajoProfesor(int legajoProfesor)
+    {
+        Profesor.legajoProfesor = legajoProfesor;
+    }
+
+    public static int getLegajoProfesor()
+    {
+        return legajoProfesor;
+    }
+
     public HashMap <String, Asignatura> getCompetencias()
     {
         return competencias;

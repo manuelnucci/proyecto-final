@@ -1,5 +1,12 @@
 package pga;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+
+import java.io.BufferedOutputStream;
+
+import java.io.FileOutputStream;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -7,46 +14,29 @@ import java.util.TreeSet;
 public class Manager
 {
     private static Manager instancia = null;
-    
-    private HashMap<String, TreeSet<Alumno>> alumnos; // Las claves serán los nombres y apellidos de los alumnos
-    private HashMap<String, TreeSet<Profesor>> profesores; // Las claves serán los nombres y apellidos de los profesores
-    private HashMap<String, TreeSet<Asignatura>> asignaturas; // Las claves serán los nombres de las asignaturas
-    private HashMap<String, TreeSet<Cursada>> cursadas; // Las claves serán los nombres de las cursadas
-    
+    // Las claves serán los nombres y apellidos de los alumnos
+    private HashMap<String, TreeSet<Alumno>> alumnos = new HashMap<String, TreeSet<Alumno>>();
+    // Las claves serán los nombres y apellidos de los profesores
+    private HashMap<String, TreeSet<Profesor>> profesores = new HashMap<String, TreeSet<Profesor>>(); 
+    // Las claves serán los nombres de las asignaturas
+    private HashMap<String, TreeSet<Asignatura>> asignaturas = new HashMap<String, TreeSet<Asignatura>>(); 
+    // Las claves serán los nombres de las cursadas
+    private HashMap<String, TreeSet<Cursada>> cursadas = new HashMap<String, TreeSet<Cursada>>();
+
     private Manager()
     {
         super();
     }
     
-    private Manager(String nombreArchivo)
-    {
-        super();
-        this.alumnos = new HashMap<String, TreeSet<Alumno>>();
-        this.profesores = new HashMap<String, TreeSet<Profesor>>();
-        this.asignaturas = new HashMap<String, TreeSet<Asignatura>>();
-        this.cursadas = new HashMap<String, TreeSet<Cursada>>();
-        this.leerArchivo(nombreArchivo); // Leemos el archivo XML con los datos de la última sesión
-    }
-    
     /**
      * Patrón Singleton
      */
-    public static Manager getInstancia(String nombreArchivo)
+    public static Manager getInstancia()
     {
         if (instancia == null)
-            instancia = new Manager(nombreArchivo);
+            instancia = new Manager();
         
         return instancia;
-    }
-    
-    public void guardarArchivo(String nombreArchivo)
-    {
-        
-    }
-    
-    public void leerArchivo(String nombreArchivo)
-    {
-        
     }
 
     public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail,

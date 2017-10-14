@@ -49,6 +49,21 @@ public class Asignatura implements Comparable
         return correlatividades;
     }
 
+    public static void setNumAsignatura(int numAsignatura)
+    {
+        Asignatura.numAsignatura = numAsignatura;
+    }
+
+    public static int getNumAsignatura()
+    {
+        return numAsignatura;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object object)
     {
