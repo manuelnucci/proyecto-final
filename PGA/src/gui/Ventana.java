@@ -1,16 +1,31 @@
 
 package gui;
 
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
 /**
  *
  * @author manuc
  */
 public class Ventana extends javax.swing.JFrame
 {    
+    private PanelAlumnos panelAlumnos;
+    
     /** Creates new form Ventana */
     public Ventana()
     {
         super();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("PGA");
+        //this.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
+        this.setPreferredSize(new Dimension(750,550));
+        this.setResizable(false);
+        this.initComponents();
+        this.setVisible(true);
+        this.panelAlumnos = new PanelAlumnos();
+
     }
 
     /** This method is called from within the constructor to
@@ -22,9 +37,10 @@ public class Ventana extends javax.swing.JFrame
     private void initComponents()//GEN-BEGIN:initComponents
     {
 
+        jPanelPrincipal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuAltaAlumno = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -37,12 +53,72 @@ public class Ventana extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Sistema PGA");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jMenu1.setText("Alumnos");
+        javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
+        jPanelPrincipal.setLayout(jPanelPrincipalLayout);
+        jPanelPrincipalLayout.setHorizontalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(jLabel1)
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
+        jPanelPrincipalLayout.setVerticalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                .addGap(124, 124, 124))
+        );
+
+        jMenuAltaAlumno.setText("Alumnos");
+        jMenuAltaAlumno.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenuAltaAlumnoMouseClicked(evt);
+            }
+        });
+        jMenuAltaAlumno.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuAltaAlumnoActionPerformed(evt);
+            }
+        });
 
         jMenuItem4.setText("Alta");
-        jMenu1.add(jMenuItem4);
+        jMenuItem4.addMenuKeyListener(new javax.swing.event.MenuKeyListener()
+        {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt)
+            {
+                jMenuItem4MenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt)
+            {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt)
+            {
+            }
+        });
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuItem4.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jMenuItem4KeyPressed(evt);
+            }
+        });
+        jMenuAltaAlumno.add(jMenuItem4);
 
         jMenuItem5.setText("Baja");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener()
@@ -52,21 +128,21 @@ public class Ventana extends javax.swing.JFrame
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenuAltaAlumno.add(jMenuItem5);
 
         jMenuItem6.setText("Modificación");
-        jMenu1.add(jMenuItem6);
+        jMenuAltaAlumno.add(jMenuItem6);
 
         jMenuItem7.setText("Consulta");
-        jMenu1.add(jMenuItem7);
+        jMenuAltaAlumno.add(jMenuItem7);
 
         jMenuItem1.setText("Alta a Cursada");
-        jMenu1.add(jMenuItem1);
+        jMenuAltaAlumno.add(jMenuItem1);
 
         jMenuItem2.setText("Baja de Cursada");
-        jMenu1.add(jMenuItem2);
+        jMenuAltaAlumno.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuAltaAlumno);
 
         jMenu2.setText("Profesores");
         jMenuBar1.add(jMenu2);
@@ -83,17 +159,11 @@ public class Ventana extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                .addGap(120, 120, 120))
+            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -103,6 +173,33 @@ public class Ventana extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jMenuItem4KeyPressed
+    {//GEN-HEADEREND:event_jMenuItem4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4KeyPressed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem4ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem4ActionPerformed
+        //this.
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem4MenuKeyPressed(javax.swing.event.MenuKeyEvent evt)//GEN-FIRST:event_jMenuItem4MenuKeyPressed
+    {//GEN-HEADEREND:event_jMenuItem4MenuKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4MenuKeyPressed
+
+    private void jMenuAltaAlumnoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuAltaAlumnoActionPerformed
+    {//GEN-HEADEREND:event_jMenuAltaAlumnoActionPerformed
+        this.jPanelPrincipal.removeAll();
+        this.jPanelPrincipal.add(this.panelAlumnos);
+    }//GEN-LAST:event_jMenuAltaAlumnoActionPerformed
+
+    private void jMenuAltaAlumnoMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenuAltaAlumnoMouseClicked
+    {//GEN-HEADEREND:event_jMenuAltaAlumnoMouseClicked
+        this.jPanelPrincipal.removeAll();
+        this.jPanelPrincipal.add(this.panelAlumnos);
+    }//GEN-LAST:event_jMenuAltaAlumnoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -185,10 +282,10 @@ public class Ventana extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenuAltaAlumno;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -196,6 +293,7 @@ public class Ventana extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JPanel jPanelPrincipal;
     // End of variables declaration//GEN-END:variables
 
 }
