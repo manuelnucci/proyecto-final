@@ -1,41 +1,45 @@
 package pga;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 public class Manager
 {
-    public static final int ALU = 0;
-    public static final int PRO = 1;
-    public static final int ASI = 2;
-    public static final int TAMANO_MAIL = 12;
-    public static final int TAMANO_LEGAJO = 7;
-    public static final int TAMANO_PERIODO = 7;
-    public static final int TAMANO_HORA = 7;
-    private LinkedList<Asignatura>  asignaturasOrdenadas;
-    private LinkedList<Alumno>  alumnosOrdenados;
-    private LinkedList<Cursada>  cursadasOrdenadas;
-    private LinkedList<Profesor>  profesoresOrdenados;
-    private Hashtable<String, Asignatura> asignaturas;
-    private Hashtable<String, Alumno> alumnos;
-    private Hashtable<String, Cursada> cursadas;
-    private Hashtable<String, Profesor> profesores;
+    private static Manager instancia = null;
     
-    public Manager()
+    private HashMap<String, TreeSet<Alumno>> alumnos;
+    private HashMap<String, TreeSet<Profesor>> profesores;
+    private HashMap<String, Asignatura> asignaturas;
+    private HashMap<String, Cursada> cursadas;
+    
+    private Manager()
     {
         super();
     }
     
-    public Manager(String nombreArchivo)
+    private Manager(String nombreArchivo)
     {
         super();
-        this.asignaturas = new Hashtable<String, Asignatura>();
-        this.alumnos = new Hashtable<String, Alumno>();
-        this.cursadas = new Hashtable<String, Cursada>();
-        this.profesores = new Hashtable<String, Profesor>();
-        this.leerArchivo(nombreArchivo);
+        this.alumnos = new HashMap<String, TreeSet<Alumno>>();
+        this.profesores = new HashMap<String, TreeSet<Profesor>>();
+        this.asignaturas = new HashMap<String, Asignatura>();
+        this.cursadas = new HashMap<String, Cursada>();
+        this.leerArchivo(nombreArchivo); // Leemos el archivo XML con los datos de la última sesión
+    }
+    
+    /**
+     * Patrón Singleton
+     */
+    public static Manager getInstancia(String nombreArchivo)
+    {
+        if (instancia == null)
+            instancia = new Manager(nombreArchivo);
+        
+        return instancia;
     }
     
     public void guardarArchivo(String nombreArchivo)
@@ -48,270 +52,274 @@ public class Manager
         
     }
 
-    /**
-     * Metodo que da de alta un alumno al sistema
-     * pre: todos los parametros se encuentras validados incluyendo mascaras
-     * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
-     * 
-     */
-    public void altaAlumno(String nombre, String apellido, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail,
+                            Hashtable<String, Asignatura> historiaAcademica) // RF01
     {
-        Alumno alumno = (Alumno) Factory.getPersona(ALU, nombre, apellido, domicilio, mail, telefono, historia);
-        this.alumnos.put(alumno.getLegajo(), alumno);   
+        Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail, historiaAcademica);
+        String nombreCompleto = alumno.getNombre() + alumno.getApellido();
+        
+        if (this.alumnos.containsKey(nombreCompleto))
+            this.alumnos.get(nombreCompleto).add(alumno); // Agregamos al TreeSet el alumno
+        else
+        {
+            TreeSet<Alumno> tree = new TreeSet<Alumno>(); // Creamos una nueva cubeta y depositamos al alumno allí
+            tree.add(alumno);
+            this.alumnos.put(nombreCompleto, tree); 
+        }
     }
     
-   /**
-    * Metodo que da de baja a un alumno del sistema
-    * pre: alumno surge del metodo que ubica alumno 
-    * post: se da de baja el alumno al sistema o se lanza una excepcion si el alumno no existe
-    * 
-    */
-    public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException
+    public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02
     {
-        Iterator<Cursada> i;
+        Iterator<Cursada> it;
+        String nombreCompleto = alumno.getNombre() + alumno.getApellido();
         
-        if(this.alumnos.remove(alumno.getLegajo()) != null && !this.alumnosOrdenados.remove(alumno)) // Si es eliminable en ambas colecciones
+        if (this.alumnos.containsKey(nombreCompleto) && this.alumnos.get(nombreCompleto).remove(alumno))
+            // Si el alumno existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
         {
-            i = this.cursadas.values().iterator();
-            while(i.hasNext())
+            if (this.alumnos.get(nombreCompleto).isEmpty()) // El Tree ha quedado vacío
+                this.alumnos.remove(nombreCompleto);
+            
+            it = this.cursadas.values().iterator(); // Eliminamos al alumno de todas las cursadas inscripto
+            while(it.hasNext())
             {
-                i.next().getAlumnos().remove(alumno.getLegajo());
+                it.next().getAlumnos().remove(alumno.getLegajo()); // Se lo busca por legajo aquí
+                // El remove puede dar T o F, logre eliminarlo o no seguimos avanzando.
             }
         }
         else
-            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
+            throw new NoEstaEntidadException("Alumno no encontrado en el sistema.");
     }
     
-    /**
-     * Metodo que da de baja al alumno de la cursada
-     * pre: alumno y cursada estan validados vienen de las funciones de ubicacion
-     * post: da de baja de la cursada al alumno, sino lanza una excepcion si el alumno no esta en esa cursada
-     */
-    public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException
-    {
-        if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
-            throw new NoEstaEntidadException("Alumno no encontrado en la cursada");
-    }
-    
-    /**
-     * Metodo que modifica los valores del alumno que viene por parametro con los atributos que tambien llegan por
-     * parametro
-     * 
-     * pre: el alumno proviene del metodo ubicaAlumno, y los parametros se encuentran validados
-     * post: modifica los valores del alumno que se ven reflejados en las demas colecciones o lanza una excepcion
-     * si el nuevo legajo se encuentra repetido
-     */
-    public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> historia)
+    public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, String mail,
+                            Hashtable<String, Asignatura> historiaAcademica) // RF03
     {   
         alumno.setNombre(nombre);
         alumno.setApellido(apellido);
         alumno.setDomicilio(domicilio);
-        alumno.setMail(mail);
         alumno.setTelefono(telefono);
-        alumno.setHistoriaAcademica(historia);     
+        alumno.setMail(mail);
+        alumno.setHistoriaAcademica(historiaAcademica);     
     }
     
-    public void altaProfesor(String nombre, String apellido, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
+    public TreeSet<Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
-        Profesor profesor = (Profesor) Factory.getPersona(PRO, nombre, apellido, domicilio, mail, telefono, competencias);
-        this.profesores.put(profesor.getLegajo(), profesor);   
-    }
-    
-    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException
-    {
-        Iterator<Cursada> i;
-        
-        if(this.profesores.remove(profesor.getLegajo()) != null && !this.profesoresOrdenados.remove(profesor)) // Si es eliminable en ambas colecciones
-        {
-            i = this.cursadas.values().iterator();
-            while(i.hasNext())
-            {
-                i.next().getProfesores().remove(profesor.getLegajo());
-            }
-        }
-        else
-            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
-    }
-    
-    public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException
-    {
-        if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
-            throw new NoEstaEntidadException("Alumno no encontrado en la cursada");
-    }
-    
-    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> competenecias)
-    { 
-            profesor.setNombre(nombre);
-            profesor.setApellido(apellido);
-            profesor.setDomicilio(domicilio);
-            profesor.setMail(mail);
-            profesor.setTelefono(telefono);
-            profesor.setCompetencias(competenecias);      
-    }
-    
-    //////////////////////////////////public void altaAsignatura(String nombre, String apellido, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
-    {
-        Profesor profesor = (Profesor) Factory.getPersona(PRO, nombre, apellido, domicilio, mail, telefono, competencias);
-        this.profesores.put(profesor.getLegajo(), profesor);   
-    }
-    
-    /**
-     * Método que busca a todos las posibles personas (profesores o alumnos) con el mismo nombre y los devuelve dentro de un iterador de personas
-     * 
-     * pre: los parámetros se encuentran validos pero no se sabe si existen. Tipo es una constante, 1 para alumnos y 2 para profesores
-     * post: se devuelve un iterador de personas
-     */
-    public ArrayList<Persona> ubicarPersona(String nombre, String apellido, int tipo)
-    {
-        Iterator<Persona> ip;
-        ArrayList<Persona> ret = new ArrayList<Persona>();
-        boolean sigue = true;
-        Persona persona;
-        
-        if (tipo == 1)
-            ip = new LinkedList<Persona> (this.alumnosOrdenados).iterator();
-        else
-            ip = new LinkedList<Persona> (this.profesoresOrdenados).iterator();
-        
-        while (ip.hasNext() && sigue)
-        {
-            persona = ip.next();
-            if (persona.getNombre().equals(nombre) && persona.getApellido().equals(apellido))
-            {                       
-                while(persona.getNombre().equals(nombre) && persona.getApellido().equals(apellido))
-                {
-                    ret.add(persona);
-                    persona = ip.next();    
-                }
-                sigue = false;
-            }
-        }
-        return ret;
-    }
-    
-    /**
-     * Metodo que ubica al alumno a traves de su clave
-     * 
-     * pre: el formato legajo se encuentra validado
-     * post: devuelve un alumno si lo encuentra o lanza excepcion si no
-     */
-    public Alumno ubicarAlumno(String legajo) throws NoEstaEntidadException /// RF05
-    {
-        Alumno ret = this.alumnos.get(legajo);
+        TreeSet<Alumno> ret = this.alumnos.get(nombre + apellido);
         
         if(ret == null)
-            throw new NoEstaEntidadException("Alumno no ubicado");
+            throw new NoEstaEntidadException("Alumno no ubicado.");
         
         return ret;
     }
-
-    /**
-     * Metodo que da de alta un alumno al sistema
-     * pre: todos los parametros se encuentras validados incluyendo mascaras
-     * post: se agrega el alumno al sistema o se lanza una excepcion si el legajo del alumno esta repetido
-     * 
-     */
-    public void altaProfesor(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> historia) throws EntidadRepetidaException
+    
+    public void altaAlumnoACursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException 
+        // RF11, RF13
     {
-        if(!this.alumnos.containsKey(legajo))
-            this.alumnos.put(legajo, new Alumno(nombre, apellido, legajo, domicilio, mail, telefono, historia));
-        else
-            throw new EntidadRepetidaException("Alumno repetido");
+        this.verificaAlumnoAptoParaCursada(alumno, cursada);
+        cursada.getAlumnos().put(alumno.getLegajo(), alumno); // La clave del alumno será su legajo dentro de la Cursada
     }
-    /**
-    * Metodo que da de baja a un alumno del sistema
-    * pre: alumno surge del metodo que ubica alumno 
-    * post: se da de baja el alumno al sistema o se lanza una excepcion si el alumno no existe
-    * 
-    */
-    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException
+                                
+    public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException // RF11, RF14
     {
-        Iterator<Cursada> i;
+        if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
+            throw new NoEstaEntidadException("Alumno no encontrado en la cursada.");
+    }
+    
+    /*
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     */
+    
+    public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail,
+                            Hashtable<String, Asignatura> competencias) // RF01
+    {
+        Profesor profesor = (Profesor) Factory.getPersona(Factory.PROFESOR, nombre, apellido, domicilio, telefono, mail, competencias);
+        String nombreCompleto = profesor.getNombre() + profesor.getApellido();
         
-        if(this.profesores.remove(profesor.getLegajo()) != null)
+        if (this.profesores.containsKey(nombreCompleto))
+            this.profesores.get(nombreCompleto).add(profesor); // Agregamos al TreeSet el profesor
+        else
         {
-            i = this.cursadas.values().iterator();
-            while(i.hasNext())
+            TreeSet<Profesor> tree = new TreeSet<Profesor>(); // Creamos una nueva cubeta y depositamos al alumno allí
+            tree.add(profesor);
+            this.profesores.put(nombreCompleto, tree); 
+        }
+    }
+    
+    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException // RF02
+    {
+        Iterator<Cursada> it;
+        String nombreCompleto = profesor.getNombre() + profesor.getApellido();
+        
+        if (this.profesores.containsKey(nombreCompleto) && this.profesores.get(nombreCompleto).remove(profesor))
+            // Si el profesor existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
+        {
+            if (this.profesores.get(nombreCompleto).isEmpty()) // El Tree ha quedado vacío, sin profesores
+                this.profesores.remove(nombreCompleto);
+            
+            it = this.cursadas.values().iterator(); // Eliminamos al profesor de todas las cursadas que dicta
+            while(it.hasNext())
             {
-                i.next().getProfesores().remove(profesor.getLegajo());
+                it.next().getProfesores().remove(profesor.getLegajo()); // Se lo busca por legajo aquí
+                // El remove puede dar T o F, logre eliminarlo o no seguimos avanzando.
             }
         }
         else
-            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
+            throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
     }
-
-    /**
-     * Metodo que da de baja al profesor de la cursada
-     * pre: profesor y cursada estan validados vienen de las funciones de ubicacion
-     * post: da de baja de la cursada al profesor, sino lanza una excepcion si el profesor no esta en esa cursada
-     */
-    public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException
+    
+    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono, String mail,
+                            Hashtable<String, Asignatura> competencias) // RF03
+    {   
+        profesor.setNombre(nombre);
+        profesor.setApellido(apellido);
+        profesor.setDomicilio(domicilio);
+        profesor.setTelefono(telefono);
+        profesor.setMail(mail);
+        profesor.setCompetencias(competencias);     
+    }
+    
+    public TreeSet<Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
+    {
+        TreeSet<Profesor> ret = this.profesores.get(nombre + apellido);
+        
+        if(ret == null)
+            throw new NoEstaEntidadException("Profesor no ubicado.");
+        
+        return ret;
+    }
+    
+    public void altaProfesorACursada(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
+        // RF12, RF15
+    {
+        this.verificaProfesorAptoParaCursada(profesor, cursada);
+        cursada.getProfesores().put(profesor.getLegajo(), profesor); // La clave del profesor será su legajo dentro de 
+                                                                     // la Cursada
+    }
+                                
+    public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException // RF12, RF16
     {
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
-            throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
-    }    
-
-    /**
-     * Metodo que modifica los valores del alumno que viene por parametro con los atributos que tambien llegan por
-     * parametro
-     * 
-     * pre: el alumno proviene del metodo ubicaAlumno, y los parametros se encuentran validados
-     * post: modifica los valores del alumno que se ven reflejados en las demas colecciones o lanza una excepcion
-     * si el nuevo legajo se encuentra repetido
-     */
-    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String legajo, String domicilio, String mail, String telefono,
-                            Hashtable<String, Asignatura> competencias) throws EntidadRepetidaException
-    {
-        if(!this.profesores.containsKey(legajo))
-        {    
-            profesor.setNombre(nombre);
-            profesor.setApellido(apellido);
-            profesor.setLegajo(legajo);
-            profesor.setDomicilio(domicilio);
-            profesor.setMail(mail);
-            profesor.setCompetencias(competencias);
-        }
-        else
-            throw new EntidadRepetidaException("Profesor repetido al intentar modificarlo");      
-    }    
-
-    /**
-     * Metodo que agrega una cursada al sistema
-     * pre: los parametros se encuentran validados en formato
-     * post: da de alta la cursada al sistema, si el id no esta repetido de ser asi lanza una excepcion
-     */
-    public void altaCursada(String id, Asignatura asignatura, String periodo, String dia, String hora) throws EntidadRepetidaException
-    {
-        if(!this.cursadas.containsKey(id))
-            this.cursadas.put(id, new Cursada(id, asignatura, periodo, dia, hora));
-        else
-            throw new EntidadRepetidaException("Cursada repetida");
-    }
-    
-    /**
-    * Metodo que da de baja a una cursada del sistema
-    * pre: cursada surge del metodo que ubica cursada
-    * post: se da de baja la cursada al sistema o se lanza una excepcion si la cursada no existe 
-    */
-    public void bajaCursada(Cursada cursada) throws NoEstaEntidadException
-    {
-        Cursada c = this.cursadas.remove(cursada.getId());
+            throw new NoEstaEntidadException("Profesor no encontrado en la cursada.");
         
-        if(c == null)
-            throw new NoEstaEntidadException("Cursada no encontrada");
+        if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
+            this.cursadas.remove(cursada.getNombre());
     }
     
-    public void modificacionCursada(Cursada cursada, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
+    /*
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     */
+    
+    public void altaAsignatura(String nombre, Hashtable<String, Asignatura> correlatividades) 
+        throws EntidadRepetidaException // RF01
     {
-        //Se modificaran se hara en 2 partes: una que cambia los atributos y otra las colecciones
-        //O sino se hara todo en 1 
+        Asignatura asignatura = Factory.getAsignatura(nombre, correlatividades);
+        
+        if (this.asignaturas.containsKey(nombre)) // Las asignaturas no pueden tener el mismo nombre
+            throw new EntidadRepetidaException("Asignatura repetida.");
+        else
+            this.asignaturas.put(nombre, asignatura);
     }
+    
+    public void bajaAsignatura(Asignatura asignatura) throws NoEstaEntidadException // RF02
+    {
+        Iterator<Cursada> it;
+        Cursada cursada;
+        
+        if (this.asignaturas.remove(asignatura.getNombre()) == null)
+            throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
+        else
+        {            
+            it = this.cursadas.values().iterator(); // Eliminamos todas las cursadas en las que la asignatura aparece
+            while(it.hasNext())
+            {
+                cursada = it.next();
+                if (cursada.getAsignatura().equals(asignatura))
+                    this.cursadas.remove(cursada.getNombre());
+            }
+        }
+    }
+    
+    public void modificaAsignatura(Asignatura asignatura, String nombre, Hashtable<String, Asignatura> correlatividades) 
+        throws EntidadRepetidaException // RF03
+    {   
+        if (this.asignaturas.containsKey(nombre))
+            throw new EntidadRepetidaException("Nombre de asignatura repetido. Imposible modificarla.");
+        else
+        {
+            asignatura.setNombre(nombre);
+            asignatura.setCorrelatividades(correlatividades);
+        }
+    }
+    
+    public Asignatura ubicarAsignatura(String nombre) throws NoEstaEntidadException // RF05
+    {
+        Asignatura ret = this.asignaturas.get(nombre);
+        
+        if(ret == null)
+            throw new NoEstaEntidadException("Asignatura no ubicada.");
+        
+        return ret;
+    }
+    
+    /*
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     */
+
+    public void altaCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, 
+        String horaFin)throws EntidadRepetidaException // RF06
+    {
+        /**
+         * El requisito de verificar que la cursada sea viable (RF17) no tiene sentido ya que podrían existir dos 
+         * cursadas, incluso de la misma asignatura, en el mismo día y horario.
+         * Verificamos únicamente que no exista otra cursada con el mismo nombre.
+         */
+        if(this.cursadas.containsKey(nombre)) // Si existe una cursada ya con el mismo nombre
+            throw new EntidadRepetidaException("Cursada repetida. Ya existe una cursada con el mismo nombre.");
+        else    
+            this.cursadas.put(nombre, Factory.getCursada(asignatura, periodo, dia, horaInicio, horaFin));
+    }
+    
+    public void bajaCursada(Cursada cursada) throws NoEstaEntidadException // RF07
+    {
+        if(this.cursadas.remove(cursada.getNombre()) == null)
+            throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
+    }
+    
+    public void modificaCursada(Cursada cursada, String nombre, Asignatura asignatura, String periodo, String dia, 
+        String horaInicio, String horaFin) throws EntidadRepetidaException
+    {
+        if (this.cursadas.containsKey(nombre))
+            throw new EntidadRepetidaException("Nombre de cursada repetido. Imposible modificarla.");
+        {
+            cursada.setNombre(nombre);
+            cursada.setAsignatura(asignatura);
+            cursada.setPeriodo(periodo);
+            cursada.setDia(dia);
+            cursada.setHoraInicio(horaInicio);
+            cursada.setHoraFin(horaFin);   
+        }
+    }
+    
+    public Cursada ubicarCursada(String nombre) throws NoEstaEntidadException // RF05
+    {
+        Cursada ret = this.cursadas.get(nombre);
+        
+        if(ret == null)
+            throw new NoEstaEntidadException("Cursada no ubicada.");
+        
+        return ret;
+    }
+    
+    /*
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     */
     
     public void verificaAlumnoAptoParaCursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
     {
@@ -320,28 +328,31 @@ public class Manager
     }
     
     public void verificaAlumnoHabilitado(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
+        // RF19
     {
-        Iterator<Asignatura> ia;
+        Iterator<Asignatura> it;
         boolean sigue = true;
         
-        ia = cursada.getAsignatura().getCorrelatividades().values().iterator();
-        while(ia.hasNext() && sigue)
-            sigue = alumno.getHistoriaAcademica().containsKey(ia.next().getId());
+        it = cursada.getAsignatura().getCorrelatividades().values().iterator();
+        while(it.hasNext() && sigue)
+            sigue = alumno.getHistoriaAcademica().containsKey(it.next().getId()); // La clave de la asignatura es su ID
         
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las correlatividades");
+            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las correlatividades para inscribirse" +
+                "a la cursada.");
     }
     
     public void verificaAlumnoOcupado(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
+        // RF21
     {
-        Iterator<Cursada> ic;
+        Iterator<Cursada> it;
         Cursada c;
         boolean sigue = true;
         
-        ic = this.cursadas.values().iterator();
-        while(ic.hasNext() && sigue)
+        it = this.cursadas.values().iterator();
+        while(it.hasNext() && sigue)
         {
-            c = ic.next();
+            c = it.next();
             if(c.getAlumnos().containsKey(alumno.getLegajo()))
             {
                 sigue = !((cursada.getHoraInicio().compareTo(c.getHoraInicio()) >= 0 && 
@@ -352,7 +363,8 @@ public class Manager
         }
         
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias");
+            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias para inscribirse" +
+                "a la cursada.");
     }
     
     public void verificaProfesorAptoParaCursada(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -362,21 +374,23 @@ public class Manager
     }
             
     public void verificaProfesorHabilitado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
+        // RF18
     {
         if(!profesor.getCompetencias().containsKey(cursada.getAsignatura().getId()))
-                throw new EntidadNoAptaParaCursadaException("El profesor no esta habilitado para la cursada");
+                throw new EntidadNoAptaParaCursadaException("El profesor no esta habilitado para dictar la cursada.");
 
     }
     public void verificaProfesorOcupado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
+        // RF20
     {
-        Iterator<Cursada> ic;
+        Iterator<Cursada> it;
         Cursada c;
         boolean sigue = true;
         
-        ic = this.cursadas.values().iterator();
-        while(ic.hasNext() && sigue)
+        it = this.cursadas.values().iterator();
+        while(it.hasNext() && sigue)
         {
-            c = ic.next();
+            c = it.next();
             if(c.getProfesores().containsKey(profesor.getLegajo()))
             {
                 sigue = !((cursada.getHoraInicio().compareTo(c.getHoraInicio()) >= 0 && 
@@ -387,19 +401,20 @@ public class Manager
         }
             
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El profesor no cumple con las franjas horarias");
+            throw new EntidadNoAptaParaCursadaException("El profesor no cumple con las franjas horarias para inscribirse" +
+                "a la cursada.");
     }
     
-    public void verificaPersonaOcupado(Persona persona, Cursada cursada) throws EntidadNoAptaParaCursadaException
+    /*public void verificaPersonaOcupado(Persona persona, Cursada cursada) throws EntidadNoAptaParaCursadaException
     {
-        Iterator<Cursada> ic;
+        Iterator<Cursada> it;
         Cursada c;
         boolean sigue = true;
         
-        ic = this.cursadas.values().iterator();
-        while(ic.hasNext() && sigue)
+        it = this.cursadas.values().iterator();
+        while(it.hasNext() && sigue)
         {
-            c = ic.next();
+            c = it.next();
             if((persona.getLegajo().startsWith("ALU") && c.getAlumnos().containsKey(persona.getLegajo())) || 
                 persona.getLegajo().startsWith("PRO") && c.getProfesores().containsKey(persona.getLegajo()))
             {
@@ -412,71 +427,5 @@ public class Manager
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias");
-    }
-    
-    public boolean verificaId(String id, int tipo)
-    {
-        boolean ret = false;
-        String parteNum;
-        
-        if(id.length() == TAMANO_LEGAJO)
-        {
-            parteNum = id.substring(3);
-            if(parteNum.compareTo("0000") >= 0 && parteNum.compareTo("9999") <= 0)
-            {
-                parteNum = id.substring(0, 2);
-                switch(tipo)
-                {
-                    case ALU:   ret = parteNum.equals("ALU");
-                                break;
-                    case PRO:   ret = parteNum.equals("PRO");
-                                break;
-                    case ASI:   ret = parteNum.equals("ASI");
-                                break;
-                    default:    ret = parteNum.equals("CUR");
-                                break;
-                }
-            }
-        }
-        return ret;
-    }
-    
-    public boolean verificaMail(String mail)
-    {
-        return (mail.length() == TAMANO_MAIL && mail.indexOf("@") == 5);
-    }
-    
-    public boolean verificaCursadaPeriodo(String periodo)
-    {
-        boolean ret = false;
-        String cad;
-        
-        if(periodo.length() == TAMANO_PERIODO && periodo.indexOf("-") == 2)
-        {
-            cad = periodo.substring(0,1);
-            if(cad.equals("01") || cad.equals("02"))
-            {
-                cad = periodo.substring(3, 6);
-                ret = cad.compareTo("2000") >= 0 && cad.compareTo("2100") <= 0;
-            }
-        }
-        return ret;
-    }
-    
-    public boolean verificaCursadaHora(String hora)
-    {
-        boolean ret = false;
-        String cad;
-        
-        if(hora.length() == TAMANO_HORA && hora.indexOf(":") == 2)
-        {
-            cad = hora.substring(0,1);
-            if(cad.compareTo("00") >= 0 && cad.compareTo("23") <= 0)
-            {
-                cad = hora.substring(3, 4);
-                ret = cad.compareTo("00") >= 0 && cad.compareTo("59") <= 0;
-            }
-        }
-        return ret;
-    }
+    }*/
 }

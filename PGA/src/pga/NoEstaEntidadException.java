@@ -4,7 +4,7 @@ public class NoEstaEntidadException extends Exception
 {
     private String mensaje;
     
-    NoEstaEntidadException(String mensaje)
+    public NoEstaEntidadException(String mensaje)
     {
         this.mensaje = mensaje;
     }

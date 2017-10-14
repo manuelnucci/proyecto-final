@@ -8,30 +8,32 @@ public class Cursada implements Comparable
     private static final String ID_LEGAJO = "CUR";
     
     private String id;
-    private String nombre;
+    private String nombre; //*************************
     private Asignatura asignatura;
     private String periodo;
     private String dia;
     private String horaInicio;
     private String horaFin;
-    private Hashtable<String, Profesor> profesores;
     private Hashtable<String, Alumno> alumnos;
+    private Hashtable<String, Profesor> profesores;
     
     public Cursada()
     {
         super();    
     }
 
-
-    public Cursada(Asignatura asignatura, String periodo, String dia, String horaInicio)
+    public Cursada(Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
         this.id = ID_LEGAJO + String.format("%04d", numCursada++);
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.dia = dia;
         this.horaInicio = horaInicio;
-        this.profesores = new Hashtable<String, Profesor>();
-        this.alumnos = new Hashtable<String, Alumno>();
+        this.horaFin = horaFin;
+        this.alumnos = new Hashtable<String, Alumno>(); // Los alumnos estarán en una tabla hash cuya clave será
+                                                        // el legajo del alumno
+        this.profesores = new Hashtable<String, Profesor>(); // Los profesores estarán en una tabla hash cuya clave será
+                                                             // el legajo del profesos
     }
 
     public String getId()
@@ -39,9 +41,19 @@ public class Cursada implements Comparable
         return id;
     }
 
-    public String getNombre() 
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
+    public String getNombre()
     {
         return nombre;
+    }
+
+    public void setAsignatura(Asignatura asignatura)
+    {
+        this.asignatura = asignatura;
     }
 
     public Asignatura getAsignatura()
@@ -49,9 +61,19 @@ public class Cursada implements Comparable
         return asignatura;
     }
 
+    public void setPeriodo(String periodo)
+    {
+        this.periodo = periodo;
+    }
+
     public String getPeriodo()
     {
         return periodo;
+    }
+
+    public void setDia(String dia)
+    {
+        this.dia = dia;
     }
 
     public String getDia()
@@ -59,9 +81,19 @@ public class Cursada implements Comparable
         return dia;
     }
 
+    public void setHoraInicio(String horaInicio)
+    {
+        this.horaInicio = horaInicio;
+    }
+
     public String getHoraInicio()
     {
         return horaInicio;
+    }
+
+    public void setHoraFin(String horaFin)
+    {
+        this.horaFin = horaFin;
     }
 
     public String getHoraFin()
@@ -69,9 +101,9 @@ public class Cursada implements Comparable
         return horaFin;
     }
 
-    public Hashtable<String, Profesor> getProfesores()
+    public void setAlumnos(Hashtable<String, Alumno> alumnos)
     {
-        return profesores;
+        this.alumnos = alumnos;
     }
 
     public Hashtable<String, Alumno> getAlumnos()
@@ -79,16 +111,54 @@ public class Cursada implements Comparable
         return alumnos;
     }
 
+    public void setProfesores(Hashtable<String, Profesor> profesores)
+    {
+        this.profesores = profesores;
+    }
+
+    public Hashtable<String, Profesor> getProfesores()
+    {
+        return profesores;
+    }
+
     @Override
-    public int compareTo(Object object) {
-        Cursada cursada = (Cursada) object;
-        
-        return this.nombre.compareTo(cursada.getNombre());
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof Cursada))
+        {
+            return false;
+        }
+        final Cursada other = (Cursada) object;
+        if (!(nombre == null ? other.nombre == null : nombre.equals(other.nombre)))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int PRIME = 37;
+        int result = 1;
+        result = PRIME * result + ((nombre == null) ? 0 : nombre.hashCode());
+        return result;
+    }
+
+    @Override
+    public int compareTo(Object object) {   
+        return this.nombre.compareTo(((Cursada) object).getNombre()); // Las cursadas serán ordenadas por su nombre
     }
 
     @Override
     public String toString()
     {
-        return this.getId() + this.getAsignatura().getNombre() + this.getPeriodo() + this.getDia() + this.getHoraInicio();
+        return "Id: " + this.getId() + "\nAsignatura: " + this.getAsignatura().getNombre() + "\nPeriodo: " +
+               this.getPeriodo() + "\nDia: " + this.getDia() + "\nHora de inicio: " + this.getHoraInicio() +
+               "\nHora de fin: " + this.horaFin;
     }
 }

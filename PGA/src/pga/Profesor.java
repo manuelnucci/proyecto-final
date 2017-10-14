@@ -8,16 +8,16 @@ public class Profesor extends Persona
     private static int legajoProfesor = 0;
     private static final String ID_LEGAJO = "PRO";
     
-    private Hashtable <String, Asignatura> competencias;
+    private Hashtable <String, Asignatura> competencias; // Las claves serán la ID de la asignaturas
     
     public Profesor()
     {
         super();
     }
 
-    public Profesor(String nombre, String apellido, String domicilio, String mail, String telefono, Hashtable<String, Asignatura> competencias)
+    public Profesor(String nombre, String apellido, String domicilio, String telefono, String mail, Hashtable<String, Asignatura> competencias)
     {
-        super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoProfesor++), domicilio, mail, telefono);
+        super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoProfesor++), domicilio, telefono, mail);
         this.competencias = competencias;
     }
 
@@ -34,17 +34,13 @@ public class Profesor extends Persona
     @Override
     public String toString()
     {
-        Iterator <Asignatura> i = this.competencias.values().iterator();
+        Iterator<Asignatura> it = this.competencias.values().iterator();
         String cad;
-        Asignatura a;
         
-        cad = super.toString();
+        cad = super.toString() + "\nCompetencias:";
         
-        while(i.hasNext())
-        {
-            a = i.next();
-            cad += " " + a.getId() + a.getNombre();
-        }
+        while(it.hasNext())
+            cad += "\n\t" + it.next().getNombre();
         
         return cad;
     }

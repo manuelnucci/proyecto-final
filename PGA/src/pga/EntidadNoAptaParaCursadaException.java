@@ -4,7 +4,7 @@ public class EntidadNoAptaParaCursadaException extends Exception
 {
     private String mensaje;
     
-    EntidadNoAptaParaCursadaException(String mensaje)
+    public EntidadNoAptaParaCursadaException(String mensaje)
     {
         this.mensaje = mensaje;
     }

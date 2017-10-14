@@ -29,11 +29,20 @@ public class Asignatura implements Comparable
         return id;
     }
 
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
     public String getNombre()
     {
         return nombre;
     }
 
+    public void setCorrelatividades(Hashtable<String, Asignatura> correlatividades)
+    {
+        this.correlatividades = correlatividades;
+    }
 
     public Hashtable<String, Asignatura> getCorrelatividades()
     {
@@ -41,25 +50,51 @@ public class Asignatura implements Comparable
     }
 
     @Override
-    public int compareTo(Object object) {
-        Asignatura asignatura = (Asignatura) object;
-        
-        return this.nombre.compareTo(asignatura.getNombre());
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof Asignatura))
+        {
+            return false;
+        }
+        final Asignatura other = (Asignatura) object;
+        if (!(nombre == null ? other.nombre == null : nombre.equals(other.nombre)))
+        {
+            return false;
+        }
+        return true;
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int PRIME = 37;
+        int result = 1;
+        result = PRIME * result + ((nombre == null) ? 0 : nombre.hashCode());
+        return result;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+        return this.nombre.compareTo(((Asignatura) object).getNombre()); // Las asignaturas serán ordenadas por su nombre
+    }    
 
     @Override
     public String toString()
     {
-        Iterator<Asignatura> i = this.correlatividades.values().iterator();
+        Iterator<Asignatura> it = this.correlatividades.values().iterator();
         String cad;
-        Asignatura a;
+        Asignatura asignatura;
         
-        cad = this.getId() + this.getNombre();
+        cad = "Id: " + this.getId() + "\nNombre: " + this.getNombre() + "\nCorrelatividades: ";
         
-        while(i.hasNext())
+        while(it.hasNext())
         {
-            a = i.next();
-            cad += " " + a.getId() + a.getNombre();
+            asignatura = it.next();
+            cad += "\n\tId: " + asignatura.getId() + ", Nombre: " + asignatura.getNombre();
         }
         
         return cad;

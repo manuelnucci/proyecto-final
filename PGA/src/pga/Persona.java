@@ -6,22 +6,22 @@ public class Persona implements Comparable
     private String apellido;
     private String legajo;
     private String domicilio;
-    private String mail;
     private String telefono;
+    private String mail;
 
     public Persona()
     {
         super();
     }
 
-    public Persona(String nombre, String apellido, String legajo, String domicilio, String mail, String telefono)
+    public Persona(String nombre, String apellido, String legajo, String domicilio, String telefono, String mail)
     {
         this.nombre = nombre;
         this.apellido = apellido;
         this.legajo = legajo;
         this.domicilio = domicilio;
-        this.mail = mail;
         this.telefono = telefono;
+        this.mail = mail;
     }
 
     public void setNombre(String nombre)
@@ -29,34 +29,14 @@ public class Persona implements Comparable
         this.nombre = nombre;
     }
 
-    public void setApellido(String apellido)
-    {
-        this.apellido = apellido;
-    }
-
-    public void setLegajo(String legajo)
-    {
-        this.legajo = legajo;
-    }
-
-    public void setDomicilio(String domicilio)
-    {
-        this.domicilio = domicilio;
-    }
-
-    public void setMail(String mail)
-    {
-        this.mail = mail;
-    }
-
-    public void setTelefono(String telefono)
-    {
-        this.telefono = telefono;
-    }
-
     public String getNombre()
     {
         return nombre;
+    }
+
+    public void setApellido(String apellido)
+    {
+        this.apellido = apellido;
     }
 
     public String getApellido()
@@ -64,9 +44,19 @@ public class Persona implements Comparable
         return apellido;
     }
 
+    public void setLegajo(String legajo)
+    {
+        this.legajo = legajo;
+    }
+
     public String getLegajo()
     {
         return legajo;
+    }
+
+    public void setDomicilio(String domicilio)
+    {
+        this.domicilio = domicilio;
     }
 
     public String getDomicilio()
@@ -74,9 +64,9 @@ public class Persona implements Comparable
         return domicilio;
     }
 
-    public String getMail()
+    public void setTelefono(String telefono)
     {
-        return mail;
+        this.telefono = telefono;
     }
 
     public String getTelefono()
@@ -84,17 +74,53 @@ public class Persona implements Comparable
         return telefono;
     }
 
+    public void setMail(String mail)
+    {
+        this.mail = mail;
+    }
+
+    public String getMail()
+    {
+        return mail;
+    }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        if (this == object)
+        {
+            return true;
+        }
+        if (!(object instanceof Persona))
+        {
+            return false;
+        }
+        final Persona other = (Persona) object;
+        if (!(legajo == null ? other.legajo == null : legajo.equals(other.legajo)))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int PRIME = 37;
+        int result = 1;
+        result = PRIME * result + ((legajo == null) ? 0 : legajo.hashCode());
+        return result;
+    }
+
     @Override
     public int compareTo(Object object) {
-        Alumno alumno = (Alumno) object;
-        String nombreCompleto = this.getApellido() + this.getNombre();
-        
-        return nombreCompleto.compareTo(alumno.getApellido() + alumno.getNombre());
+        return this.legajo.compareTo(((Alumno) object).getLegajo());
     }
     
     @Override
     public String toString()
     {
-        return this.apellido + this.nombre + this.legajo + this.domicilio + this.telefono + this.mail;
+        return "Nombre y apellido: " + this.nombre + " " + this.apellido + "\nLegajo: " + this.legajo + "\nDomicilio: " 
+               + this.domicilio + "\nTelefono " + this.telefono + "\nMail " + this.mail;
     }
 }
