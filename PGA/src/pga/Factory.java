@@ -32,8 +32,8 @@ public class Factory
         return new Asignatura(nombre, correlatividades);
     }
     
-    public static Cursada getCursada(Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
+    public static Cursada getCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
-        return new Cursada(asignatura, periodo, dia, horaInicio, horaFin);
+        return new Cursada(nombre, asignatura, periodo, dia, horaInicio, horaFin);
     }
 }

@@ -61,7 +61,7 @@ public class Asignatura implements Comparable
             return false;
         }
         final Asignatura other = (Asignatura) object;
-        if (!(nombre == null ? other.nombre == null : nombre.equals(other.nombre)))
+        if (!(id == null ? other.id == null : id.equals(other.id)))
         {
             return false;
         }
@@ -73,13 +73,13 @@ public class Asignatura implements Comparable
     {
         final int PRIME = 37;
         int result = 1;
-        result = PRIME * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = PRIME * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
     @Override
     public int compareTo(Object object) {
-        return this.nombre.compareTo(((Asignatura) object).getNombre()); // Las asignaturas serán ordenadas por su nombre
+        return this.id.compareTo(((Asignatura) object).getId()); // Las asignaturas serán ordenadas por su ID
     }    
 
     @Override

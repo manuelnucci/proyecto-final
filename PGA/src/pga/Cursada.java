@@ -8,7 +8,7 @@ public class Cursada implements Comparable
     private static final String ID_LEGAJO = "CUR";
     
     private String id;
-    private String nombre; //*************************
+    private String nombre;
     private Asignatura asignatura;
     private String periodo;
     private String dia;
@@ -22,9 +22,10 @@ public class Cursada implements Comparable
         super();    
     }
 
-    public Cursada(Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
+    public Cursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
         this.id = ID_LEGAJO + String.format("%04d", numCursada++);
+        this.nombre = nombre;
         this.asignatura = asignatura;
         this.periodo = periodo;
         this.dia = dia;
@@ -133,7 +134,7 @@ public class Cursada implements Comparable
             return false;
         }
         final Cursada other = (Cursada) object;
-        if (!(nombre == null ? other.nombre == null : nombre.equals(other.nombre)))
+        if (!(id == null ? other.id == null : id.equals(other.id)))
         {
             return false;
         }
@@ -145,13 +146,13 @@ public class Cursada implements Comparable
     {
         final int PRIME = 37;
         int result = 1;
-        result = PRIME * result + ((nombre == null) ? 0 : nombre.hashCode());
+        result = PRIME * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
     @Override
     public int compareTo(Object object) {   
-        return this.nombre.compareTo(((Cursada) object).getNombre()); // Las cursadas serán ordenadas por su nombre
+        return this.id.compareTo(((Cursada) object).getId()); // Las cursadas serán ordenadas por su ID
     }
 
     @Override
