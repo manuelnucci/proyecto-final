@@ -8,7 +8,7 @@ public class Alumno extends Persona
     private static int legajoAlumno = 0;
     private static final String ID_LEGAJO = "ALU";
     
-    private HashMap <String, Asignatura> historiaAcademica; // Las claves serán la ID de la asignaturas
+    private HashMap <String, Asignatura> historiaAcademica; // Las claves serán las IDs de la asignaturas
     
     public Alumno()
     {

@@ -14,8 +14,8 @@ public class Cursada implements Comparable
     private String dia;
     private String horaInicio;
     private String horaFin;
-    private HashMap<String, Alumno> alumnos;
-    private HashMap<String, Profesor> profesores;
+    private HashMap<String, Alumno> alumnos; // Las claves serán los legajos de los alumnos
+    private HashMap<String, Profesor> profesores; // Las claves serán los legajos de los profesores
     
     public Cursada()
     {

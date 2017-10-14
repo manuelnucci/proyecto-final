@@ -10,7 +10,7 @@ public class Asignatura implements Comparable
     
     private String id;
     private String nombre;
-    private HashMap<String, Asignatura> correlatividades;
+    private HashMap<String, Asignatura> correlatividades; // Las claves serán las IDs de la asignaturas
     
     public Asignatura()
     {

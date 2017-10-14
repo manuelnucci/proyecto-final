@@ -8,7 +8,7 @@ public class Profesor extends Persona
     private static int legajoProfesor = 0;
     private static final String ID_LEGAJO = "PRO";
     
-    private HashMap <String, Asignatura> competencias; // Las claves serán la ID de la asignaturas
+    private HashMap <String, Asignatura> competencias; // Las claves serán las IDs de la asignaturas
     
     public Profesor()
     {

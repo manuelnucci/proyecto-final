@@ -8,10 +8,10 @@ public class Manager
 {
     private static Manager instancia = null;
     
-    private HashMap<String, TreeSet<Alumno>> alumnos;
-    private HashMap<String, TreeSet<Profesor>> profesores;
-    private HashMap<String, Asignatura> asignaturas;
-    private HashMap<String, Cursada> cursadas;
+    private HashMap<String, TreeSet<Alumno>> alumnos; // Las claves serán los nombres y apellidos de los alumnos
+    private HashMap<String, TreeSet<Profesor>> profesores; // Las claves serán los nombres y apellidos de los profesores
+    private HashMap<String, Asignatura> asignaturas; // Las claves serán los nombres de las asignaturas
+    private HashMap<String, Cursada> cursadas; // Las claves serán los nombres de las cursadas
     
     private Manager()
     {
