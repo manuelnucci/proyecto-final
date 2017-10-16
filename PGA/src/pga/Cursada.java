@@ -24,7 +24,7 @@ public class Cursada implements Comparable
 
     public Cursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
-        this.id = ID_LEGAJO + String.format("%04d", numCursada++);
+        this.id = ID_LEGAJO + String.format("%04d", ++numCursada);
         this.nombre = nombre;
         this.asignatura = asignatura;
         this.periodo = periodo;

@@ -17,7 +17,7 @@ public class Alumno extends Persona
 
     public Alumno(String nombre, String apellido, String domicilio, String telefono, String mail, HashMap<String, Asignatura> historiaAcademica)
     {
-        super(nombre, apellido, ID_LEGAJO + String.format("%04d", legajoAlumno++), domicilio, telefono, mail);
+        super(nombre, apellido, ID_LEGAJO + String.format("%04d", ++legajoAlumno), domicilio, telefono, mail);
         this.historiaAcademica = historiaAcademica;
     }
 

@@ -19,7 +19,7 @@ public class Asignatura implements Comparable
 
     public Asignatura(String nombre, HashMap<String, Asignatura> correlatividades)
     {
-        this.id = ID_LEGAJO + String.format("%04d", numAsignatura++);
+        this.id = ID_LEGAJO + String.format("%04d", ++numAsignatura);
         this.nombre = nombre;
         this.correlatividades = correlatividades;
     }

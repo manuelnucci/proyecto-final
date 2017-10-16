@@ -31,6 +31,52 @@ public class Manager
         return instancia;
     }
 
+    public void setAlumnos(HashMap<String, HashMap<String, Alumno>> alumnos)
+    {
+        this.alumnos = alumnos;
+    }
+
+    public HashMap<String, HashMap<String, Alumno>> getAlumnos()
+    {
+        return alumnos;
+    }
+
+    public void setProfesores(HashMap<String, HashMap<String, Profesor>> profesores)
+    {
+        this.profesores = profesores;
+    }
+
+    public HashMap<String, HashMap<String, Profesor>> getProfesores()
+    {
+        return profesores;
+    }
+
+    public void setAsignaturas(HashMap<String, HashMap<String, Asignatura>> asignaturas)
+    {
+        this.asignaturas = asignaturas;
+    }
+
+    public HashMap<String, HashMap<String, Asignatura>> getAsignaturas()
+    {
+        return asignaturas;
+    }
+
+    public void setCursadas(HashMap<String, HashMap<String, Cursada>> cursadas)
+    {
+        this.cursadas = cursadas;
+    }
+
+    public HashMap<String, HashMap<String, Cursada>> getCursadas()
+    {
+        return cursadas;
+    }
+
+    /*
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     * ***************************************************************************************************************
+     */
+
     public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail,
                            HashMap<String, Asignatura> historiaAcademica) // RF01
     {
