@@ -114,7 +114,7 @@ public class Persona implements Comparable
 
     @Override
     public int compareTo(Object object) {
-        return this.legajo.compareTo(((Alumno) object).getLegajo());
+        return this.legajo.compareTo(((Persona) object).getLegajo());
     }
     
     @Override

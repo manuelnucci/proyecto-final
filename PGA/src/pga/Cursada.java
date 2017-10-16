@@ -32,9 +32,19 @@ public class Cursada implements Comparable
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.alumnos = new HashMap<String, Alumno>(); // Los alumnos estarán en una tabla hash cuya clave será
-                                                        // el legajo del alumno
+                                                      // el legajo del alumno
         this.profesores = new HashMap<String, Profesor>(); // Los profesores estarán en una tabla hash cuya clave será
-                                                             // el legajo del profesos
+                                                           // el legajo del profesor
+    }
+
+    public static void setNumCursada(int numCursada)
+    {
+        Cursada.numCursada = numCursada;
+    }
+
+    public static int getNumCursada()
+    {
+        return numCursada;
     }
 
     public String getId()
@@ -102,34 +112,24 @@ public class Cursada implements Comparable
         return horaFin;
     }
 
-    public void setAlumnos(HashMap<String, Alumno> alumnos)
+    /*public void setAlumnos(HashMap<String, Alumno> alumnos)
     {
         this.alumnos = alumnos;
-    }
+    }*/
 
     public HashMap<String, Alumno> getAlumnos()
     {
         return alumnos;
     }
 
-    public void setProfesores(HashMap<String, Profesor> profesores)
+    /*public void setProfesores(HashMap<String, Profesor> profesores)
     {
         this.profesores = profesores;
-    }
+    }*/
 
     public HashMap<String, Profesor> getProfesores()
     {
         return profesores;
-    }
-
-    public static void setNumCursada(int numCursada)
-    {
-        Cursada.numCursada = numCursada;
-    }
-
-    public static int getNumCursada()
-    {
-        return numCursada;
     }
 
     @Override

@@ -21,11 +21,6 @@ public class Profesor extends Persona
         this.competencias = competencias;
     }
 
-    public void setCompetencias(HashMap<String, Asignatura> competencias)
-    {
-        this.competencias = competencias;
-    }
-
     public static void setLegajoProfesor(int legajoProfesor)
     {
         Profesor.legajoProfesor = legajoProfesor;
@@ -36,7 +31,12 @@ public class Profesor extends Persona
         return legajoProfesor;
     }
 
-    public HashMap <String, Asignatura> getCompetencias()
+    public void setCompetencias(HashMap<String, Asignatura> competencias)
+    {
+        this.competencias = competencias;
+    }
+
+    public HashMap<String, Asignatura> getCompetencias()
     {
         return competencias;
     }

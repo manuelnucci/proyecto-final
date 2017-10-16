@@ -21,11 +21,6 @@ public class Alumno extends Persona
         this.historiaAcademica = historiaAcademica;
     }
 
-    public void setHistoriaAcademica(HashMap<String, Asignatura> historiaAcademica)
-    {
-        this.historiaAcademica = historiaAcademica;
-    }
-
     public static void setLegajoAlumno(int legajoAlumno)
     {
         Alumno.legajoAlumno = legajoAlumno;
@@ -36,11 +31,16 @@ public class Alumno extends Persona
         return legajoAlumno;
     }
 
+    public void setHistoriaAcademica(HashMap<String, Asignatura> historiaAcademica)
+    {
+        this.historiaAcademica = historiaAcademica;
+    }
+
     public HashMap<String, Asignatura> getHistoriaAcademica()
     {
         return historiaAcademica;
     }
-    
+
     @Override
     public String toString()
     {

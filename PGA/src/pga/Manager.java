@@ -1,27 +1,19 @@
 package pga;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-
-import java.io.BufferedOutputStream;
-
-import java.io.FileOutputStream;
-
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 public class Manager
 {
     private static Manager instancia = null;
     // Las claves serán los nombres y apellidos de los alumnos
-    private HashMap<String, TreeSet<Alumno>> alumnos = new HashMap<String, TreeSet<Alumno>>();
+    private HashMap<String, HashMap<String, Alumno>> alumnos = new HashMap<String, HashMap<String, Alumno>>();
     // Las claves serán los nombres y apellidos de los profesores
-    private HashMap<String, TreeSet<Profesor>> profesores = new HashMap<String, TreeSet<Profesor>>(); 
+    private HashMap<String, HashMap<String, Profesor>> profesores = new HashMap<String, HashMap<String, Profesor>>(); 
     // Las claves serán los nombres de las asignaturas
-    private HashMap<String, TreeSet<Asignatura>> asignaturas = new HashMap<String, TreeSet<Asignatura>>(); 
+    private HashMap<String, HashMap<String, Asignatura>> asignaturas = new HashMap<String, HashMap<String, Asignatura>>(); 
     // Las claves serán los nombres de las cursadas
-    private HashMap<String, TreeSet<Cursada>> cursadas = new HashMap<String, TreeSet<Cursada>>();
+    private HashMap<String, HashMap<String, Cursada>> cursadas = new HashMap<String, HashMap<String, Cursada>>();
 
     private Manager()
     {
@@ -46,35 +38,37 @@ public class Manager
         String nombreCompleto = alumno.getNombre() + alumno.getApellido();
         
         if (this.alumnos.containsKey(nombreCompleto))
-            this.alumnos.get(nombreCompleto).add(alumno); // Agregamos al TreeSet el alumno
+            this.alumnos.get(nombreCompleto).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno cuya clave
+                                                                              // será su legajo
         else
         {
-            TreeSet<Alumno> tree = new TreeSet<Alumno>(); // Creamos una nueva cubeta y depositamos al alumno allí
-            tree.add(alumno);
-            this.alumnos.put(nombreCompleto, tree); 
+            HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y depositamos 
+                                                                          // al alumno allí
+            hash.put(alumno.getLegajo(), alumno);
+            this.alumnos.put(nombreCompleto, hash);
         }
     }
     
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02
     {
-        Iterator<TreeSet<Cursada>> itT;
-        Iterator<Cursada> it;
+        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<Cursada> itC;
         String nombreCompleto = alumno.getNombre() + alumno.getApellido();
         
-        if (this.alumnos.containsKey(nombreCompleto) && this.alumnos.get(nombreCompleto).remove(alumno))
+        if (this.alumnos.containsKey(nombreCompleto) && this.alumnos.get(nombreCompleto).remove(alumno.getLegajo(), alumno))
             // Si el alumno existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
         {
-            if (this.alumnos.get(nombreCompleto).isEmpty()) // El Tree ha quedado vacío
+            if (this.alumnos.get(nombreCompleto).isEmpty()) // El HashMap ha quedado vacío, sin alumnos
                 this.alumnos.remove(nombreCompleto);
             
             // Eliminamos al alumno de todas las cursadas inscripto
-            itT = this.cursadas.values().iterator();
-            // La sentencia anterior nos devuelve un iterator de TreeSet 
-            while(itT.hasNext())
+            itH = this.cursadas.values().iterator();
+            // La sentencia anterior nos devuelve un iterator de HashMap 
+            while(itH.hasNext())
             {
-                it = itT.next().iterator();
-                while (it.hasNext())
-                    it.next().getAlumnos().remove(alumno.getLegajo()); // Se lo busca por legajo aquí
+                itC = itH.next().values().iterator();
+                while (itC.hasNext())
+                    itC.next().getAlumnos().remove(alumno.getLegajo()); // Se lo busca por legajo aquí
                     // El remove puede dar T o F, logre eliminarlo o no seguimos avanzando.
             }
         }
@@ -93,9 +87,9 @@ public class Manager
         {
             nombreViejo = alumno.getNombre() + alumno.getApellido();
             
-            if (this.alumnos.containsKey(nombreViejo) && this.alumnos.get(nombreViejo).remove(alumno))
+            if (this.alumnos.containsKey(nombreViejo) && this.alumnos.get(nombreViejo).remove(alumno.getLegajo(), alumno))
             {
-                if (this.alumnos.get(nombreViejo).isEmpty()) // El Tree ha quedado vacío
+                if (this.alumnos.get(nombreViejo).isEmpty()) // El HashMap ha quedado vacío, sin alumnos
                     this.alumnos.remove(nombreViejo);
                 
                 alumno.setNombre(nombre);
@@ -103,12 +97,13 @@ public class Manager
                 nombreNuevo = nombre + apellido;
                 
                 if (this.alumnos.containsKey(nombreNuevo))
-                    this.alumnos.get(nombreNuevo).add(alumno); // Agregamos al TreeSet el alumno
+                    this.alumnos.get(nombreNuevo).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno
                 else
                 {
-                    TreeSet<Alumno> tree = new TreeSet<Alumno>(); // Creamos una nueva cubeta y depositamos al alumno allí
-                    tree.add(alumno);
-                    this.alumnos.put(nombreNuevo, tree); 
+                    HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y 
+                                                                                  // depositamos al alumno allí
+                    hash.put(alumno.getLegajo(), alumno);
+                    this.alumnos.put(nombreNuevo, hash);
                 }
             }
             else
@@ -121,9 +116,9 @@ public class Manager
         alumno.setHistoriaAcademica(historiaAcademica);
     }
     
-    public TreeSet<Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
+    public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
-        TreeSet<Alumno> ret = this.alumnos.get(nombre + apellido);
+        HashMap<String, Alumno> ret = this.alumnos.get(nombre + apellido);
         
         if(ret == null)
             throw new NoEstaEntidadException("Alumno no ubicado.");
@@ -157,35 +152,37 @@ public class Manager
         String nombreCompleto = profesor.getNombre() + profesor.getApellido();
         
         if (this.profesores.containsKey(nombreCompleto))
-            this.profesores.get(nombreCompleto).add(profesor); // Agregamos al TreeSet el profesor
+            this.profesores.get(nombreCompleto).put(profesor.getLegajo(), profesor); // Agregamos al HashMap el profesor 
+                                                                                     // cuya clave será su legajo
         else
         {
-            TreeSet<Profesor> tree = new TreeSet<Profesor>(); // Creamos una nueva cubeta y depositamos al profesor allí
-            tree.add(profesor);
-            this.profesores.put(nombreCompleto, tree); 
+            HashMap<String, Profesor> hash = new HashMap<String, Profesor>(); // Creamos una nueva cubeta y depositamos 
+                                                                              // al profesor allí
+            hash.put(profesor.getLegajo(), profesor);
+            this.profesores.put(nombreCompleto, hash); 
         }
     }
     
     public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException // RF02
     {
-        Iterator<TreeSet<Cursada>> itT;
-        Iterator<Cursada> it;
+        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<Cursada> itC;
         String nombreCompleto = profesor.getNombre() + profesor.getApellido();
         
-        if (this.profesores.containsKey(nombreCompleto) && this.profesores.get(nombreCompleto).remove(profesor))
+        if (this.profesores.containsKey(nombreCompleto) && this.profesores.get(nombreCompleto).remove(profesor.getLegajo(), profesor))
             // Si el profesor existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
         {
-            if (this.profesores.get(nombreCompleto).isEmpty()) // El Tree ha quedado vacío, sin profesores
+            if (this.profesores.get(nombreCompleto).isEmpty()) // El HashMap ha quedado vacío, sin profesores
                 this.profesores.remove(nombreCompleto);
             
             // Eliminamos al profesor de todas las cursadas inscripto
-            itT = this.cursadas.values().iterator();
+            itH = this.cursadas.values().iterator();
             // La sentencia anterior nos devuelve un iterator de TreeSet 
-            while(itT.hasNext())
+            while(itH.hasNext())
             {
-                it = itT.next().iterator();
-                while (it.hasNext())
-                    it.next().getProfesores().remove(profesor.getLegajo()); // Se lo busca por legajo aquí
+                itC = itH.next().values().iterator();
+                while (itC.hasNext())
+                    itC.next().getProfesores().remove(profesor.getLegajo()); // Se lo busca por legajo aquí
                     // El remove puede dar T o F, logre eliminarlo o no seguimos avanzando.
             }
         }
@@ -204,9 +201,9 @@ public class Manager
         {
             nombreViejo = profesor.getNombre() + profesor.getApellido();
             
-            if (this.profesores.containsKey(nombreViejo) && this.profesores.get(nombreViejo).remove(profesor))
+            if (this.profesores.containsKey(nombreViejo) && this.profesores.get(nombreViejo).remove(profesor.getLegajo(), profesor))
             {
-                if (this.profesores.get(nombreViejo).isEmpty()) // El Tree ha quedado vacío
+                if (this.profesores.get(nombreViejo).isEmpty()) // El HashMap ha quedado vacío, sin profesores
                     this.profesores.remove(nombreViejo);
                 
                 profesor.setNombre(nombre);
@@ -214,13 +211,13 @@ public class Manager
                 nombreNuevo = nombre + apellido;
                 
                 if (this.profesores.containsKey(nombreNuevo))
-                    this.profesores.get(nombreNuevo).add(profesor); // Agregamos al TreeSet el profesor
+                    this.profesores.get(nombreNuevo).put(profesor.getLegajo(), profesor); // Agregamos al HashMap el profesor
                 else
                 {
-                    TreeSet<Profesor> tree = new TreeSet<Profesor>(); // Creamos una nueva cubeta y depositamos al 
-                                                                      // profesor allí
-                    tree.add(profesor);
-                    this.profesores.put(nombreNuevo, tree); 
+                    HashMap<String, Profesor> hash = new HashMap<String, Profesor>(); // Creamos una nueva cubeta y 
+                                                                                      // depositamos al profesor allí
+                    hash.put(profesor.getLegajo(), profesor);
+                    this.profesores.put(nombreNuevo, hash); 
                 }
             }
             else
@@ -233,9 +230,9 @@ public class Manager
         profesor.setCompetencias(competencias);  
     }
     
-    public TreeSet<Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
+    public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
-        TreeSet<Profesor> ret = this.profesores.get(nombre + apellido);
+        HashMap<String, Profesor> ret = this.profesores.get(nombre + apellido);
         
         if(ret == null)
             throw new NoEstaEntidadException("Profesor no ubicado.");
@@ -259,8 +256,9 @@ public class Manager
         if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
         {
             this.cursadas.get(cursada.getNombre()).remove(cursada);
-            if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si hemos dejado al TreeSet sin cursadas eliminamos
-                                                                  // también al Tree y a su clave del HashMap
+            if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si hemos dejado al HashMap sin cursadas eliminamos
+                                                                  // también al HashMap y a su clave del HashMap de 
+                                                                  // cursadas
                 this.cursadas.remove(cursada.getNombre());
         }
         // Si esta última parte es correcta, ¿qué sucede cuando se elimina un profesor del sistema? ¿Se verifica que
@@ -278,42 +276,43 @@ public class Manager
         Asignatura asignatura = Factory.getAsignatura(nombre, correlatividades);
         
         if (this.asignaturas.containsKey(nombre))
-            this.asignaturas.get(nombre).add(asignatura); // Agregamos al TreeSet la asignatura
+            this.asignaturas.get(nombre).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
         else
         {
-            TreeSet<Asignatura> tree = new TreeSet<Asignatura>(); // Creamos una nueva cubeta y depositamos a la 
-                                                                  // asignatura allí
-            tree.add(asignatura);
-            this.asignaturas.put(nombre, tree); 
+            HashMap<String, Asignatura> hash = new HashMap<String, Asignatura>(); // Creamos una nueva cubeta y 
+                                                                                  // depositamos a la asignatura allí
+            hash.put(asignatura.getId(), asignatura);
+            this.asignaturas.put(nombre, hash); 
         }
     }
     
     public void bajaAsignatura(Asignatura asignatura) throws NoEstaEntidadException // RF02
     {
-        Iterator<TreeSet<Cursada>> itT;
-        Iterator<Cursada> it;
+        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<Cursada> itC;
         Cursada cursada;
         
-        if (this.asignaturas.containsKey(asignatura.getNombre()) && this.asignaturas.get(asignatura.getNombre()).remove(asignatura))
+        if (this.asignaturas.containsKey(asignatura.getNombre()) && this.asignaturas.get(asignatura.getNombre()).remove(asignatura.getId(), asignatura))
             // Si hemos encontrado la asignatura y podido eliminarla
         {   
-            if (this.asignaturas.get(asignatura.getNombre()).isEmpty()) // Si el Tree de las asignaturas ha quedado vacío
-                                                                        // lo eliminamos del HashMap
+            if (this.asignaturas.get(asignatura.getNombre()).isEmpty()) // Si el HashMap de las asignaturas ha quedado
+                                                                        // vacío lo eliminamos del HashMap general de 
+                                                                        // asignaturas
                 this.asignaturas.remove(asignatura.getNombre());
             
             // Eliminamos todas las cursadas en las que la asignatura aparece
-            itT = this.cursadas.values().iterator();
-            while(itT.hasNext())
+            itH = this.cursadas.values().iterator();
+            while(itH.hasNext())
             {
-                it = itT.next().iterator();
-                while (it.hasNext())
+                itC = itH.next().values().iterator();
+                while (itC.hasNext())
                 {
-                    cursada = it.next();
+                    cursada = itC.next();
                     if (cursada.getAsignatura().equals(asignatura))
                     {
-                        this.cursadas.get(cursada.getNombre()).remove(cursada); // Eliminamos la cursada de su Tree
-                        if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si el Tree queda vacío se lo debe
-                                                                              // eliminar del HashMap
+                        this.cursadas.get(cursada.getNombre()).remove(cursada); // Eliminamos la cursada de su HashMap
+                        if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si el HashMap queda vacío se lo debe
+                                                                              // eliminar del HashMap general de cursadas
                             this.cursadas.remove(cursada.getNombre());
                     }
                 }
@@ -328,21 +327,22 @@ public class Manager
     {           
         if (!asignatura.getNombre().equals(nombre))
         {            
-            if (this.asignaturas.containsKey(asignatura.getNombre()) && this.asignaturas.get(asignatura.getNombre()).remove(asignatura))
+            if (this.asignaturas.containsKey(asignatura.getNombre()) && this.asignaturas.get(asignatura.getNombre()).remove(asignatura.getId(), asignatura))
             {
-                if (this.asignaturas.get(asignatura.getNombre()).isEmpty()) // El Tree ha quedado vacío
+                if (this.asignaturas.get(asignatura.getNombre()).isEmpty()) // El HashMpa ha quedado vacío, sin asignaturas
                     this.asignaturas.remove(asignatura.getNombre());
                 
                 asignatura.setNombre(nombre);
                 
                 if (this.asignaturas.containsKey(nombre))
-                    this.asignaturas.get(nombre).add(asignatura); // Agregamos al TreeSet la asignatura
+                    this.asignaturas.get(nombre).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
                 else
                 {
-                    TreeSet<Asignatura> tree = new TreeSet<Asignatura>(); // Creamos una nueva cubeta y depositamos a la
-                                                                      // asignatura allí
-                    tree.add(asignatura);
-                    this.asignaturas.put(nombre, tree); 
+                    HashMap<String, Asignatura> hash = new HashMap<String, Asignatura>(); // Creamos una nueva cubeta y 
+                                                                                          // depositamos a la
+                                                                                          // asignatura allí
+                    hash.put(asignatura.getId(), asignatura);
+                    this.asignaturas.put(nombre, hash); 
                 }
             }
             else
@@ -352,9 +352,9 @@ public class Manager
         asignatura.setCorrelatividades(correlatividades);
     }
     
-    public TreeSet<Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException // RF05
+    public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException // RF05
     {
-        TreeSet<Asignatura> ret = this.asignaturas.get(nombre);
+        HashMap<String, Asignatura> ret = this.asignaturas.get(nombre);
         
         if(ret == null)
             throw new NoEstaEntidadException("Asignatura no ubicada.");
@@ -378,22 +378,22 @@ public class Manager
         Cursada cursada = Factory.getCursada(nombre, asignatura, periodo, dia, horaInicio, horaFin);
         
         if (this.cursadas.containsKey(nombre))
-            this.cursadas.get(nombre).add(cursada); // Agregamos al TreeSet la cursada
+            this.cursadas.get(nombre).put(cursada.getId(), cursada); // Agregamos al HashMap la cursada
         else
         {
-            TreeSet<Cursada> tree = new TreeSet<Cursada>(); // Creamos una nueva cubeta y depositamos a la 
-                                                            // cursada allí
-            tree.add(cursada);
-            this.cursadas.put(nombre, tree); 
+            HashMap<String, Cursada> hash = new HashMap<String, Cursada>(); // Creamos una nueva cubeta y depositamos
+                                                                            // a la cursada allí
+            hash.put(cursada.getId(), cursada);
+            this.cursadas.put(nombre, hash); 
         }
     }
     
     public void bajaCursada(Cursada cursada) throws NoEstaEntidadException // RF07
     {        
-        if (this.cursadas.containsKey(cursada.getNombre()) && this.cursadas.get(cursada.getNombre()).remove(cursada))
+        if (this.cursadas.containsKey(cursada.getNombre()) && this.cursadas.get(cursada.getNombre()).remove(cursada.getId(), cursada))
             // Si hemos encontrado la cursada y podido eliminarla
-            if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si el Tree de las cursadas ha quedado vacío
-                                                                  // lo eliminamos del HashMap
+            if (this.cursadas.get(cursada.getNombre()).isEmpty()) // Si el HashMap de las cursadas ha quedado vacío
+                                                                  // lo eliminamos del HashMap general de cursadas
                 this.cursadas.remove(cursada.getNombre());
         else
             throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
@@ -404,21 +404,21 @@ public class Manager
     {
         if (!cursada.getNombre().equals(nombre))
         {            
-            if (this.cursadas.containsKey(cursada.getNombre()) && this.cursadas.get(cursada.getNombre()).remove(cursada))
+            if (this.cursadas.containsKey(cursada.getNombre()) && this.cursadas.get(cursada.getNombre()).remove(cursada.getId(), cursada))
             {
-                if (this.cursadas.get(cursada.getNombre()).isEmpty()) // El Tree ha quedado vacío
+                if (this.cursadas.get(cursada.getNombre()).isEmpty()) // El HashMap ha quedado vacío, sin cursadas
                     this.cursadas.remove(cursada.getNombre());
                 
                 cursada.setNombre(nombre);
                 
                 if (this.cursadas.containsKey(nombre))
-                    this.cursadas.get(nombre).add(cursada); // Agregamos al TreeSet la cursada
+                    this.cursadas.get(nombre).put(cursada.getId(), cursada); // Agregamos al HashMap la cursada
                 else
                 {
-                    TreeSet<Cursada> tree = new TreeSet<Cursada>(); // Creamos una nueva cubeta y depositamos a la
-                                                                    // cursada allí
-                    tree.add(cursada);
-                    this.cursadas.put(nombre, tree); 
+                    HashMap<String, Cursada> hash = new HashMap<String, Cursada>(); // Creamos una nueva cubeta y 
+                                                                                    // depositamos a la cursada allí
+                    hash.put(cursada.getId(), cursada);
+                    this.cursadas.put(nombre, hash); 
                 }
             }
             else
@@ -432,9 +432,9 @@ public class Manager
         cursada.setHoraFin(horaFin);   
     }
     
-    public TreeSet<Cursada> ubicarCursada(String nombre) throws NoEstaEntidadException // RF05
+    public HashMap<String, Cursada> ubicarCursada(String nombre) throws NoEstaEntidadException // RF05
     {
-        TreeSet<Cursada> ret = this.cursadas.get(nombre);
+        HashMap<String, Cursada> ret = this.cursadas.get(nombre);
         
         if(ret == null)
             throw new NoEstaEntidadException("Cursada no ubicada.");
@@ -480,18 +480,18 @@ public class Manager
     public void verificaAlumnoOcupado(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
         // RF21
     {
-        Iterator<TreeSet<Cursada>> itT;
-        Iterator<Cursada> it;
+        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<Cursada> itC;
         Cursada c;
         boolean sigue = true;
         
-        itT = this.cursadas.values().iterator();
-        while (itT.hasNext() && sigue)
+        itH = this.cursadas.values().iterator();
+        while (itH.hasNext() && sigue)
         {
-            it = itT.next().iterator();
-            while(it.hasNext() && sigue)
+            itC = itH.next().values().iterator();
+            while(itC.hasNext() && sigue)
             {
-                c = it.next();
+                c = itC.next();
                 if(c.getAlumnos().containsKey(alumno.getLegajo()))
                     sigue = !this.horariosSolapan(cursada, c);
             }
@@ -518,18 +518,18 @@ public class Manager
     public void verificaProfesorOcupado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
         // RF20
     {        
-        Iterator<TreeSet<Cursada>> itT;
-        Iterator<Cursada> it;
+        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<Cursada> itC;
         Cursada c;
         boolean sigue = true;
         
-        itT = this.cursadas.values().iterator();
-        while (itT.hasNext() && sigue)
+        itH = this.cursadas.values().iterator();
+        while (itH.hasNext() && sigue)
         {
-            it = itT.next().iterator();
-            while(it.hasNext() && sigue)
+            itC = itH.next().values().iterator();
+            while(itC.hasNext() && sigue)
             {
-                c = it.next();
+                c = itC.next();
                 if(c.getProfesores().containsKey(profesor.getLegajo()))
                     sigue = !this.horariosSolapan(cursada, c);
             }

@@ -24,6 +24,16 @@ public class Asignatura implements Comparable
         this.correlatividades = correlatividades;
     }
 
+    public static void setNumAsignatura(int numAsignatura)
+    {
+        Asignatura.numAsignatura = numAsignatura;
+    }
+
+    public static int getNumAsignatura()
+    {
+        return numAsignatura;
+    }
+
     public String getId()
     {
         return id;
@@ -47,21 +57,6 @@ public class Asignatura implements Comparable
     public HashMap<String, Asignatura> getCorrelatividades()
     {
         return correlatividades;
-    }
-
-    public static void setNumAsignatura(int numAsignatura)
-    {
-        Asignatura.numAsignatura = numAsignatura;
-    }
-
-    public static int getNumAsignatura()
-    {
-        return numAsignatura;
-    }
-
-    public void setId(String id)
-    {
-        this.id = id;
     }
 
     @Override
