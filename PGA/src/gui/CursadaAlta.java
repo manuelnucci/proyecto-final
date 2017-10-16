@@ -1,13 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
-
-import java.awt.Dimension;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,22 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class AlumnoAlta extends JFrame implements ActionListener
+/*public class CursadaAlta extends JFrame implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
     private JPanel panel1, panel2;
-    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
+    private JTextField jTextFieldNombre, jTextFieldPeriodo, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
     private JButton jButtonAceptar, jButtonCancelar;
     //Cantidad de campos
     private int numPairs = 5;
-    
-    public AlumnoAlta()
+    */
+    /*public AlumnoAlta()
     {
         super();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Alta alumno");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
         this.add(panel1, BorderLayout.WEST);
         panel1.setOpaque(true);
@@ -38,7 +33,8 @@ public class AlumnoAlta extends JFrame implements ActionListener
         this.addListeners();
         this.pack();
         this.setVisible(true);
-        this.setResizable(false);     
+        this.setResizable(false);
+        
     }
     
     public void initComponents()
@@ -126,5 +122,5 @@ public class AlumnoAlta extends JFrame implements ActionListener
                             this.dispose();//Ponele que cierra la ventana
                             break;
         }
-    }
-}
+    }*/
+//}

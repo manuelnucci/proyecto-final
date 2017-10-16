@@ -111,10 +111,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         if(e.getSource() == this.miAlumnoAlta)
         {
             System.out.println("AlumnoAlta");
-            AlumnoAlta a = new AlumnoAlta();
+            AlumnoAlta aA = new AlumnoAlta();
         }
-        if(e.getSource() == this.miAlumnoConsulta)
-            System.out.println("AlumnoConsulta");
+        if(e.getSource() == this.miAlumnoBaja)
+        {
+            AlumnoBaja aB = new AlumnoBaja();
+        }
         if(e.getSource() == this.miProfesorBaja)
             System.out.println("ProfesorBaja");
         if(e.getSource() == this.miCursadaModificacion)
