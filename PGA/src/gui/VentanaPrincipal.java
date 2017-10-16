@@ -66,7 +66,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.menuProfesor = new JMenu("Profesores");
         this.menuAsignatura = new JMenu("Asignaturas");
         this.menuCursada = new JMenu("Cursadas");
-        //Anade las opciones al menu
+        //Añade las opciones al menu
         this.menuBar.add(menuAlumno);
         this.menuBar.add(menuProfesor);
         this.menuBar.add(menuAsignatura);
