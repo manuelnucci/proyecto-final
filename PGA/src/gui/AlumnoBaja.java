@@ -18,12 +18,12 @@ import javax.swing.SpringLayout;
 
 public class AlumnoBaja extends JFrame implements ActionListener
 {
-    private JLabel jLabelNombre, jLabelLegajo;
-    private JTextField jTextFieldNombre, jTextFieldLegajo;
+    private JLabel jLabelNombre, jLabelApellido,jLabelLegajo;
+    private JTextField jTextFieldNombre, jTextFieldApellido,jTextFieldLegajo;
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
     private JScrollPane scrollPanel;
     private JTextArea jTextArea;
-    private JPanel panelIzq, panelDer;
+    private JPanel panel, panelDer;
     
     public AlumnoBaja()
     {
@@ -33,8 +33,7 @@ public class AlumnoBaja extends JFrame implements ActionListener
         this.initComponents();
         //this.setLayout(new GridLayout(2,2));
 
-        this.add(this.panelIzq, BorderLayout.WEST);
-        this.add(this.panelDer, BorderLayout.EAST);
+        this.add(this.panel, BorderLayout.WEST);
         this.pack();
         this.setResizable(false);
         this.setVisible(true);
@@ -43,8 +42,8 @@ public class AlumnoBaja extends JFrame implements ActionListener
     
     public void initComponents()
     {
-        this.panelIzq = new JPanel();
-        this.panelDer = new JPanel();
+
+        this.panel = new JPanel();
         
         /*this.panelIzq.setLayout(new GridLayout(4, 2));
         this.panelDer.setLayout(new BorderLayout());
@@ -106,10 +105,12 @@ public class AlumnoBaja extends JFrame implements ActionListener
 */
         GridBagConstraints c = new GridBagConstraints();
         
-        this.panelIzq.setLayout(new GridBagLayout());
+        this.panel.setLayout(new GridBagLayout());
 
         this.jLabelNombre = new JLabel("Nombre");
+        this.jLabelApellido = new JLabel("Apellido");
         this.jTextFieldNombre = new JTextField();
+        this.jTextFieldApellido = new JTextField();
         this.jButtonBuscar = new JButton("Buscar");
         this.jLabelLegajo = new JLabel("Legajo");
         this.jTextFieldLegajo = new JTextField();
@@ -123,55 +124,62 @@ public class AlumnoBaja extends JFrame implements ActionListener
         c.gridy = 0;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panelIzq.add(this.jLabelNombre, c);
+        this.panel.add(this.jLabelNombre, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 0;
         c.gridheight = 1; 
         c.gridwidth = 4;
-        this.panelIzq.add(this.jTextFieldNombre, c);
+        this.panel.add(this.jTextFieldNombre, c);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 3;
+        c.gridx = 0;
         c.gridy = 1;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panelIzq.add(this.jButtonBuscar, c);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelIzq.add(this.jLabelLegajo, c);
+        this.panel.add(this.jLabelApellido, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 1;
         c.gridheight = 1; 
         c.gridwidth = 4;
-        this.panelIzq.add(this.jTextFieldLegajo, c);
+        this.panel.add(this.jTextFieldApellido, c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 3;
+        c.gridy = 2;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel.add(this.jButtonBuscar, c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel.add(this.jLabelLegajo, c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 3;
+        c.gridheight = 1; 
+        c.gridwidth = 4;
+        this.panel.add(this.jTextFieldLegajo, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 4;
-        c.gridy = 3;
+        c.gridy = 4;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panelIzq.add(this.jButtonAceptar, c);
+        this.panel.add(this.jButtonAceptar, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 5;
-        c.gridy = 3;
+        c.gridy = 4;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panelIzq.add(this.jButtonCancelar, c);
+        this.panel.add(this.jButtonCancelar, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 5;
         c.gridy = 0;
         c.gridheight = 3; 
         c.gridwidth = 2;
-        this.panelIzq.add(this.scrollPanel, c);
+        this.panel.add(this.scrollPanel, c);
 
-
-        
-
-
-        
     }
 
     @Override
