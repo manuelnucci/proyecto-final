@@ -22,7 +22,10 @@ public class PersistenciaXML
     {
         Manager ret;
         
-        if(new File(SERIALIZED_FILE_NAME).isFile())
+        //File f = new File(SERIALIZED_FILE_NAME);
+        
+        //if(f.exists() && !f.isDirectory())
+        if (new File(SERIALIZED_FILE_NAME).exists())
         {
             XMLDecoder decoder = null;
             try

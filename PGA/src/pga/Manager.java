@@ -15,7 +15,7 @@ public class Manager
     // Las claves serán los nombres de las cursadas
     private HashMap<String, HashMap<String, Cursada>> cursadas = new HashMap<String, HashMap<String, Cursada>>();
 
-    private Manager()
+    public Manager()
     {
         super();
     }
