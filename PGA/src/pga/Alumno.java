@@ -44,14 +44,14 @@ public class Alumno extends Persona
     @Override
     public String toString()
     {
-        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
+//        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
         String cad;
         
-        cad = super.toString() + "\nHistoria academica:";
+        cad = super.toString(); //+ "\nHistoria academica:";
         
-        while(it.hasNext())
+       /* while(it.hasNext())
             cad += "\n\t" + it.next().getNombre();
-        
+        */
         return cad;
     }
 }

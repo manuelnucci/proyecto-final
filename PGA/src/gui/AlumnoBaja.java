@@ -10,10 +10,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 
 public class AlumnoBaja extends JFrame implements ActionListener
@@ -23,6 +25,7 @@ public class AlumnoBaja extends JFrame implements ActionListener
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
     private JScrollPane scrollPanel;
     private JTextArea jTextArea;
+    private JList jList;
     private JPanel panel, panelDer;
     
     public AlumnoBaja()
@@ -116,8 +119,10 @@ public class AlumnoBaja extends JFrame implements ActionListener
         this.jTextFieldLegajo = new JTextField();
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
-        this.jTextArea = new JTextArea(12, 20);
-        this.scrollPanel = new JScrollPane(this.jTextArea);
+        this.jList = new JList();
+        this.jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        this.jList.setLayoutOrientation(JList.VERTICAL);
+        this.scrollPanel = new JScrollPane(this.jList);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;

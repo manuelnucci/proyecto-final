@@ -6,6 +6,305 @@
     <string>ManuelNucci</string>
     <object class="java.util.HashMap">
      <void method="put">
+      <string>ALU0032</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0032</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0152</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0152</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0155</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0155</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0077</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0077</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0110</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0110</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0113</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0113</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0035</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0035</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0038</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0038</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0071</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0071</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0074</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0074</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0116</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0116</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0119</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0119</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0065</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0065</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
       <string>ALU0020</string>
       <object class="pga.Alumno">
        <void property="apellido">
@@ -16,6 +315,374 @@
        </void>
        <void property="legajo">
         <string>ALU0020</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0023</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0023</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0143</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0143</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0146</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0146</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0068</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0068</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0101</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0101</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0104</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0104</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0026</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0026</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0140</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0140</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0062</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0062</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0029</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0029</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0149</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0149</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0107</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0107</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0098</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0098</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0131</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0131</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0053</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0053</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0056</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0056</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -75,6 +742,282 @@
       </object>
      </void>
      <void method="put">
+      <string>ALU0134</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0134</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0137</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0137</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0059</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0059</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0092</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0092</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0050</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0050</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0095</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0095</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0017</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0017</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0086</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0086</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0089</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0089</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0122</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0122</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0044</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0044</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0047</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0047</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
       <string>ALU0002</string>
       <object class="pga.Alumno">
        <void property="apellido">
@@ -121,7 +1064,7 @@
       </object>
      </void>
      <void method="put">
-      <string>ALU0017</string>
+      <string>ALU0125</string>
       <object class="pga.Alumno">
        <void property="apellido">
         <string>Nucci</string>
@@ -130,7 +1073,99 @@
         <string>ssGuanajjani5645</string>
        </void>
        <void property="legajo">
-        <string>ALU0017</string>
+        <string>ALU0125</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0080</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0080</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0083</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0083</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0041</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0041</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Manuel</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0128</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Nucci</string>
+       </void>
+       <void property="domicilio">
+        <string>ssGuanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0128</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -172,6 +1207,305 @@
     <string>SebastianCco</string>
     <object class="java.util.HashMap">
      <void method="put">
+      <string>ALU0153</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0153</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0075</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0075</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0078</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0078</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0111</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0111</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0033</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0033</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0036</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0036</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0156</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0156</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0114</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0114</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0072</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0072</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0030</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0030</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0150</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0150</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0117</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0117</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0039</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0039</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
       <string>ALU0021</string>
       <object class="pga.Alumno">
        <void property="apellido">
@@ -182,6 +1516,305 @@
        </void>
        <void property="legajo">
         <string>ALU0021</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0141</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0141</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0144</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0144</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0066</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0066</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0069</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0069</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0102</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0102</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0024</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0024</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0027</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0027</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0147</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0147</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0060</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0060</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0063</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0063</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0105</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0105</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0108</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0108</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0054</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0054</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -218,7 +1851,7 @@
       </object>
      </void>
      <void method="put">
-      <string>ALU0003</string>
+      <string>ALU0099</string>
       <object class="pga.Alumno">
        <void property="apellido">
         <string>Cco</string>
@@ -227,7 +1860,76 @@
         <string>Guanajjani5645</string>
        </void>
        <void property="legajo">
-        <string>ALU0003</string>
+        <string>ALU0099</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0132</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0132</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0135</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0135</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0057</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0057</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -264,6 +1966,98 @@
       </object>
      </void>
      <void method="put">
+      <string>ALU0090</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0090</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0093</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0093</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0096</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0096</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0051</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0051</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
       <string>ALU0018</string>
       <object class="pga.Alumno">
        <void property="apellido">
@@ -274,6 +2068,259 @@
        </void>
        <void property="legajo">
         <string>ALU0018</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0138</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0138</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0087</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0087</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0120</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0120</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0042</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0042</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0045</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0045</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0003</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0003</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0123</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0123</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0126</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0126</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0048</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0048</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0081</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0081</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0084</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0084</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -332,11 +2379,609 @@
        </void>
       </object>
      </void>
+     <void method="put">
+      <string>ALU0129</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Cco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0129</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
     </object>
    </void>
    <void method="put">
     <string>SebastianCanonaco</string>
     <object class="java.util.HashMap">
+     <void method="put">
+      <string>ALU0076</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0076</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0031</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0031</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0034</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0034</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0154</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0154</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0079</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0079</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0112</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0112</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0115</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0115</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0037</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0037</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0070</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0070</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0151</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0151</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0073</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0073</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0118</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0118</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0142</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0142</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0064</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0064</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0067</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0067</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0100</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0100</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0022</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0022</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0025</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0025</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0145</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0145</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0148</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0148</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0103</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0103</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0061</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0061</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0106</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0106</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0028</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0028</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0109</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0109</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
      <void method="put">
       <string>ALU0010</string>
       <object class="pga.Alumno">
@@ -361,7 +3006,7 @@
       </object>
      </void>
      <void method="put">
-      <string>ALU0001</string>
+      <string>ALU0097</string>
       <object class="pga.Alumno">
        <void property="apellido">
         <string>Canonaco</string>
@@ -370,7 +3015,99 @@
         <string>Guanajjani5645</string>
        </void>
        <void property="legajo">
-        <string>ALU0001</string>
+        <string>ALU0097</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0130</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0130</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0133</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0133</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0055</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0055</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0058</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0058</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -430,6 +3167,305 @@
       </object>
      </void>
      <void method="put">
+      <string>ALU0136</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0136</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0091</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0091</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0094</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0094</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0052</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0052</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0139</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0139</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0019</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0019</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0043</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0043</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0001</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0001</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0088</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0088</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0121</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0121</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0124</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0124</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0046</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0046</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0049</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0049</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
       <string>ALU0004</string>
       <object class="pga.Alumno">
        <void property="apellido">
@@ -440,6 +3476,75 @@
        </void>
        <void property="legajo">
         <string>ALU0004</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0082</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0082</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0085</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0085</string>
+       </void>
+       <void property="mail">
+        <string>sebas@aaaaaa</string>
+       </void>
+       <void property="nombre">
+        <string>Sebastian</string>
+       </void>
+       <void property="telefono">
+        <string>4823342</string>
+       </void>
+      </object>
+     </void>
+     <void method="put">
+      <string>ALU0040</string>
+      <object class="pga.Alumno">
+       <void property="apellido">
+        <string>Canonaco</string>
+       </void>
+       <void property="domicilio">
+        <string>Guanajjani5645</string>
+       </void>
+       <void property="legajo">
+        <string>ALU0040</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -476,7 +3581,7 @@
       </object>
      </void>
      <void method="put">
-      <string>ALU0019</string>
+      <string>ALU0127</string>
       <object class="pga.Alumno">
        <void property="apellido">
         <string>Canonaco</string>
@@ -485,7 +3590,7 @@
         <string>Guanajjani5645</string>
        </void>
        <void property="legajo">
-        <string>ALU0019</string>
+        <string>ALU0127</string>
        </void>
        <void property="mail">
         <string>sebas@aaaaaa</string>
@@ -509,7 +3614,7 @@
  <object idref="HashMap1"/>
  <object idref="HashMap2"/>
  <object idref="HashMap3"/>
- <int>21</int>
+ <int>156</int>
  <int>0</int>
  <int>0</int>
  <int>0</int>
