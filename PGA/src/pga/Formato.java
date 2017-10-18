@@ -44,7 +44,10 @@ public class Formato
     
     public static boolean verificaMail(String mail)
     {
-        return (mail.length() == TAMANO_MAIL && mail.indexOf("@") == 5);
+        int indiceArroba;
+        
+        indiceArroba = mail.indexOf("@");
+        return indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1;
     }
     
     public boolean verificaCursadaPeriodo(String periodo)

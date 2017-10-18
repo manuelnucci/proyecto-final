@@ -1,4 +1,4 @@
-package pga;
+package exceptions;
 
 public class NoEstaEntidadException extends Exception
 {

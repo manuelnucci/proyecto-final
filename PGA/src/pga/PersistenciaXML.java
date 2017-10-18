@@ -35,7 +35,7 @@ public class PersistenciaXML
             {
                 System.out.println("Error al intentar leer el archivo.");
             }
-            ret = (Manager)decoder.readObject();
+            ret = Manager.getInstancia(); // Creamos un Manager y luego le seteamos sus colecciones 
             ret.setAlumnos((HashMap<String, HashMap<String, Alumno>>)decoder.readObject());
             ret.setProfesores((HashMap<String, HashMap<String, Profesor>>)decoder.readObject());
             ret.setAsignaturas((HashMap<String, HashMap<String, Asignatura>>)decoder.readObject());
@@ -64,7 +64,6 @@ public class PersistenciaXML
         {
             System.out.println("Error al intentar guardar el archivo.");
         }
-        encoder.writeObject(manager);
         encoder.writeObject(manager.getAlumnos());
         encoder.writeObject(manager.getProfesores());
         encoder.writeObject(manager.getAsignaturas());

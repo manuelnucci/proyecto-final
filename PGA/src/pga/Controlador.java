@@ -1,5 +1,7 @@
 package pga;
 
+import exceptions.NoEstaEntidadException;
+
 import gui.VentanaPrincipal;
 
 import java.util.HashMap;
