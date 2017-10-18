@@ -80,10 +80,9 @@ public class Manager
      * ***************************************************************************************************************
      */
 
-    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail,
-                           HashMap<String, Asignatura> historiaAcademica) // RF01
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
-        Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail, historiaAcademica);
+        Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
         
         if (this.alumnos.containsKey(nombreCompleto))
@@ -126,8 +125,7 @@ public class Manager
     }
     
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
-                               String mail, HashMap<String, Asignatura> historiaAcademica) 
-                               throws NoEstaEntidadException // RF03
+                               String mail) throws NoEstaEntidadException // RF03
     {   
         String nombreViejo;
         String nombreNuevo;
@@ -162,7 +160,6 @@ public class Manager
         alumno.setDomicilio(domicilio);
         alumno.setTelefono(telefono);
         alumno.setMail(mail);
-        alumno.setHistoriaAcademica(historiaAcademica);
     }
     
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
@@ -194,10 +191,9 @@ public class Manager
      * ***************************************************************************************************************
      */
     
-    public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail,
-                             HashMap<String, Asignatura> competencias) // RF01
+    public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
-        Profesor profesor = (Profesor) Factory.getPersona(Factory.PROFESOR, nombre, apellido, domicilio, telefono, mail, competencias);
+        Profesor profesor = (Profesor) Factory.getPersona(Factory.PROFESOR, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (profesor.getNombre() + profesor.getApellido()).toUpperCase(); // El hash está en mayúscula
         
         if (this.profesores.containsKey(nombreCompleto))
@@ -239,9 +235,8 @@ public class Manager
             throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
     }
     
-    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono, 
-                                 String mail,HashMap<String, Asignatura> competencias)
-                                 throws NoEstaEntidadException // RF03
+    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono,
+                                 String mail) throws NoEstaEntidadException // RF03
     {   
         String nombreViejo;
         String nombreNuevo;
@@ -275,8 +270,7 @@ public class Manager
         
         profesor.setDomicilio(domicilio);
         profesor.setTelefono(telefono);
-        profesor.setMail(mail);
-        profesor.setCompetencias(competencias);  
+        profesor.setMail(mail);  
     }
     
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05

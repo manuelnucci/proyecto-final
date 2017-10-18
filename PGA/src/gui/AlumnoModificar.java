@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,7 +23,6 @@ import javax.swing.JTextField;
 
 import pga.Alumno;
 import pga.Controlador;
-import pga.NoEstaEntidadException;
 
 public class AlumnoModificar extends JFrame implements ActionListener
 {
