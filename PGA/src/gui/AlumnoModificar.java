@@ -454,6 +454,5 @@ public class AlumnoModificar extends JFrame implements ActionListener
                             break;
             
         }
-    }
-                                
+    }       
 }

@@ -24,7 +24,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
     private JPanel panelPrincipal;
     private JMenuBar menuBar;
     private JMenu menuAlumno, menuProfesor, menuAsignatura, menuCursada;
-    private JMenuItem miAlumnoAlta , miAlumnoBaja, miAlumnoModificacion, miAlumnoConsulta, miAlumnoAltaCursada, miAlumnoBajaCursada;
+    private JMenuItem miAlumnoAlta , miAlumnoBaja, miAlumnoModificacion, miAlumnoConsulta, miAlumnoAltaCursada, miAlumnoBajaCursada, miModificarHistoria;
     private JMenuItem miProfesorAlta , miProfesorBaja, miProfesorModificacion, miProfesorConsulta, miProfesorAltaCursada, miProfesorBajaCursada;
     private JMenuItem miAsignaturaAlta , miAsignaturaBaja, miAsignaturaModificacion, miAsignaturaConsulta;
     private JMenuItem miCursadaAlta , miCursadaBaja, miCursadaModificacion, miCursadaConsulta;
@@ -78,6 +78,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.miAlumnoConsulta = new JMenuItem("Consulta");
         this.miAlumnoAltaCursada = new JMenuItem("Alta cursada");
         this.miAlumnoBajaCursada = new JMenuItem("Baja cursada");
+        this.miModificarHistoria = new JMenuItem("Modificar Historia");
         this.miProfesorAlta = new JMenuItem("Alta");
         this.miProfesorBaja = new JMenuItem("Baja");
         this.miProfesorModificacion = new JMenuItem("Modificacion");
@@ -99,6 +100,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.menuAlumno.add(miAlumnoConsulta);
         this.menuAlumno.add(miAlumnoAltaCursada);
         this.menuAlumno.add(miAlumnoBajaCursada);
+        this.menuAlumno.add(this.miModificarHistoria);
         this.menuProfesor.add(miProfesorAlta);
         this.menuProfesor.add(miProfesorBaja);
         this.menuProfesor.add(miProfesorModificacion);
@@ -125,6 +127,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.miAlumnoConsulta.addActionListener(this);
         this.miAlumnoAltaCursada.addActionListener(this);
         this.miAlumnoBajaCursada.addActionListener(this);
+        this.miModificarHistoria.addActionListener(this);
         this.miProfesorAlta.addActionListener(this);
         this.miProfesorBaja.addActionListener(this);
         this.miProfesorModificacion.addActionListener(this);
@@ -175,5 +178,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         }
         if(e.getSource() == this.miCursadaModificacion)
             System.out.println("CursadaModificacion");
+        if(e.getSource() == this.miProfesorAlta)
+        {
+            ProfesorAlta pA = new ProfesorAlta();
+        }
+        if(e.getSource() == this.miModificarHistoria)
+        {
+            ModificaHistoriaAlumno mHA = new ModificaHistoriaAlumno();
+        }
+        if(e.getSource() == this.miCursadaAlta)
+        {
+            CursadaAlta cA = new CursadaAlta();
+        }
     }
 }
