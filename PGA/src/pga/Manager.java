@@ -80,7 +80,7 @@ public class Manager
      * ***************************************************************************************************************
      */
 
-    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
+    public Alumno altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
@@ -95,6 +95,7 @@ public class Manager
             hash.put(alumno.getLegajo(), alumno);
             this.alumnos.put(nombreCompleto, hash);
         }
+        return alumno;
     }
     
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02
@@ -160,6 +161,11 @@ public class Manager
         alumno.setDomicilio(domicilio);
         alumno.setTelefono(telefono);
         alumno.setMail(mail);
+    }
+    
+    public void modificaHistoriaAcademica(Alumno alumno, HashMap <String, Asignatura> historiaAcademica)
+    {
+        alumno.setHistoriaAcademica(historiaAcademica);
     }
     
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
@@ -272,7 +278,13 @@ public class Manager
         profesor.setTelefono(telefono);
         profesor.setMail(mail);  
     }
-    
+
+    public void modificaCompetencias(Profesor profesor, HashMap <String, Asignatura> competencias)
+    {
+        profesor.setCompetencias(competencias);
+    }
+
+
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
         HashMap<String, Profesor> ret = this.profesores.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
@@ -373,7 +385,7 @@ public class Manager
             throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
     }
     
-    public void modificaAsignatura(Asignatura asignatura, String nombre, HashMap<String, Asignatura> correlatividades)
+    public void modificaAsignatura(Asignatura asignatura, String nombre)
         throws NoEstaEntidadException // RF03
     {
         String nombreAsignaturaMayus = asignatura.getNombre(); // El hash está en mayúscula
@@ -401,7 +413,10 @@ public class Manager
             else
                 throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
         }
-        
+    }
+    
+    public void modificaCorrelatividades(Asignatura asignatura, HashMap <String, Asignatura> correlatividades)
+    {
         asignatura.setCorrelatividades(correlatividades);
     }
     

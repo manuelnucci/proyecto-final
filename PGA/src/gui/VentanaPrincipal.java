@@ -43,10 +43,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 close();
             }
-        });                
-         
-        
-        
+        });       
         
         this.setLayout(new BorderLayout());
         this.setTitle("PGA");
