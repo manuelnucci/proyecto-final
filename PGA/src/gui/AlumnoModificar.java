@@ -27,7 +27,6 @@ import javax.swing.SpringLayout;
 import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
-import pga.NoEstaEntidadException;
 
 public class AlumnoModificar extends JFrame implements ActionListener
 {
