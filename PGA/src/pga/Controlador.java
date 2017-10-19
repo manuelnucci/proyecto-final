@@ -23,6 +23,11 @@ public class Controlador
         return this.modelo.ubicarAlumno(nombre, apellido);
     }
     
+    public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException
+    {
+        return this.modelo.ubicarAsignatura(nombre);
+    }
+    
     public void guardarArchivo()
     {
         PersistenciaXML.guardarArchivo(this.modelo);
