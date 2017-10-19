@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -27,11 +28,11 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
     private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
     private JList jListA, jListC1, jListC2;
     private DefaultListModel listModel, listModelC1, listModelC2;
-    private JPanel panel;
+    private JPanel panelA, panelB;
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail, jTextFieldNombreAsignatura;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail, jLabelNombreAsignatura,
                         jLabelAsigTotales, jLabelAsigHistoria;
-    private JButton jButtonGuardar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonBuscar2;
+    private JButton jButtonGuardar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonElegir, jButtonBuscar, jButtonBuscar2;
     
     private Controlador c;
     
@@ -39,28 +40,39 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
     {
         super();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.initComponents();
-        this.add(this.panel);
+        this.initComponentsA();
+        this.initComponentsB();
+        this.add(this.panelA, BorderLayout.NORTH);
+        this.add(this.panelB, BorderLayout.SOUTH);
         this.pack();
         this.setVisible(true);
     }
     
-    public void initComponents()
+    public void initComponentsA()
     {
         GridBagConstraints c = new GridBagConstraints();
         
-        this.panel = new JPanel(new GridBagLayout());
+        this.panelA = new JPanel(new GridBagLayout());
         
+        this.listModel = new DefaultListModel();
         this.listModelC1 = new DefaultListModel();
         this.listModelC2 = new DefaultListModel();
+        this.jListA = new JList(this.listModel);
         this.jListC1 = new JList(this.listModelC1);
         this.jListC2 = new JList(this.listModelC2);
+        this.scrollPanel = new JScrollPane(this.jListA);
         this.scrollPanelC1 = new JScrollPane(this.jListC1);
         this.scrollPanelC2 = new JScrollPane(this.jListC2);
+        this.jLabelNombre = new JLabel("Nombre");
+        this.jLabelApellido = new JLabel("Apellido");
+        this.jTextFieldNombre = new JTextField();
+        this.jTextFieldApellido = new JTextField();
         this.jLabelNombreAsignatura = new JLabel("Nombre Asignatura");
         this.jTextFieldNombreAsignatura = new JTextField();
         this.jLabelAsigTotales = new JLabel("Asignaturas encontradas");
         this.jLabelAsigHistoria = new JLabel("Historia Academica");
+        this.jButtonBuscar = new JButton("Buscar");
+        this.jButtonElegir = new JButton("Elegir");
         this.jButtonBuscar2 = new JButton("Buscar");
         this.jButtonAnadir = new JButton("Anadir >>");
         this.jButtonRemover = new JButton("Remover <<");
@@ -84,78 +96,143 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
         c.gridy = 0;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jLabelNombreAsignatura, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panel.add(this.jTextFieldNombreAsignatura, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 0;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panel.add(this.jButtonBuscar2, c);
+        this.panelA.add(this.jLabelNombre, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jLabelAsigTotales, c);
+        this.panelA.add(this.jLabelApellido, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 2;
+        this.panelA.add(this.jTextFieldNombre, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridheight = 1; 
+        c.gridwidth = 2;
+        this.panelA.add(this.jTextFieldApellido, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 2;
+        c.gridheight = 1; 
+        c.gridwidth = 2;
+        this.panelA.add(this.jButtonBuscar, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 3;
+        c.gridy = 0;
+        c.gridheight = 3; 
+        c.gridwidth = 3;
+        this.panelA.add(this.scrollPanel, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 3;
+        c.gridy = 3;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panelA.add(this.jButtonElegir, c);
+        
+        for(int i = 6; i < 9; i++)
+        {
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 0;
+            c.gridy = i;
+            c.gridheight = 1; 
+            c.gridwidth = 1;
+            this.panelA.add(new JLabel(" "), c);
+        }
+    }
+    
+    public void initComponentsB()
+    {
+        GridBagConstraints c = new GridBagConstraints();
+        
+        this.panelB = new JPanel(new GridBagLayout());
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panelB.add(this.jLabelNombreAsignatura, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panelB.add(this.jTextFieldNombreAsignatura, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panelB.add(this.jButtonBuscar2, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panelB.add(this.jLabelAsigTotales, c);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 3;
         c.gridy = 1;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jLabelAsigHistoria, c);
+        this.panelB.add(this.jLabelAsigHistoria, c);
                 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 2;
         c.gridheight = 2; 
         c.gridwidth = 2;
-        this.panel.add(this.scrollPanelC1, c);
+        this.panelB.add(this.scrollPanelC1, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
         c.gridy = 2;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jButtonAnadir, c);
+        this.panelB.add(this.jButtonAnadir, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 2;
         c.gridy = 3;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jButtonRemover, c);
+        this.panelB.add(this.jButtonRemover, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 3;
         c.gridy = 2;
         c.gridheight = 2; 
         c.gridwidth = 2;
-        this.panel.add(this.scrollPanelC2, c);
+        this.panelB.add(this.scrollPanelC2, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 4;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jButtonGuardar, c);
+        this.panelB.add(this.jButtonGuardar, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 3;
         c.gridy = 4;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panel.add(this.jButtonCancelar, c);
-        
+        this.panelB.add(this.jButtonCancelar, c);
     }
 
 

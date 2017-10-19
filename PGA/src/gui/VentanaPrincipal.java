@@ -187,5 +187,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         {
             CursadaAlta cA = new CursadaAlta();
         }
+        if(e.getSource() == this.miCursadaBaja)
+        {
+            CursadaBaja cB = new CursadaBaja();
+        }
     }
 }

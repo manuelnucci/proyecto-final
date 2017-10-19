@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -35,7 +37,6 @@ public class AlumnoModificar extends JFrame implements ActionListener
     private static final String BUSCAR = "2";
     private static final String CANCELAR1 = "3";
     private static final String CANCELAR2 = "4";
-    private static final String MODIFICAR_HISTORIA = "5";
     private static final String ANADIR = "6";
     private static final String REMOVER = "7";
     private static final String BUSCAR2 = "8";
@@ -61,14 +62,10 @@ public class AlumnoModificar extends JFrame implements ActionListener
         this.c = c;
         this.initComponentsA();
         this.initComponentsB();
-        this.initComponentsC();
         this.add(panelA, BorderLayout.NORTH);
         this.add(panelB, BorderLayout.CENTER);
-        this.add(panelC, BorderLayout.SOUTH);
         this.deshabilitarPanel(this.panelB1);
         this.deshabilitarPanel(this.panelB2);
-        this.deshabilitarPanel(this.panelC1);
-        this.deshabilitarPanel(this.panelC2);
         this.setResizable(false);
         this.pack();
         this.setVisible(true);
@@ -155,6 +152,7 @@ public class AlumnoModificar extends JFrame implements ActionListener
         panelB1 = new JPanel();
         panelB1.setLayout(new SpringLayout());
         panelB2 = new JPanel();
+        panelB2.setLayout(new BorderLayout());
        // panel2.setLayout(new BoxLayout());
         
         //Crea las etiquetas/labels y anade los label al panel1 y referencia cada textfield con su label
@@ -197,143 +195,23 @@ public class AlumnoModificar extends JFrame implements ActionListener
         //Crea los botones
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
-        this.jButtonModificarHistoria = new JButton("Modificar Historia");
         
         //Anade los botones al panel
-        this.panelB2.add(this.jButtonAceptar, BorderLayout.WEST);
-        this.panelB2.add(this.jButtonCancelar, BorderLayout.EAST);   
-        this.panelB2.add(this.jButtonModificarHistoria, BorderLayout.SOUTH);
+        this.panelB2.add(this.jButtonAceptar, BorderLayout.NORTH);
+        this.panelB2.add(new JLabel(" "), BorderLayout.CENTER);
+        this.panelB2.add(this.jButtonCancelar, BorderLayout.SOUTH);   
         
         this.jButtonAceptar.setActionCommand(ACEPTAR2);
         this.jButtonCancelar.setActionCommand(CANCELAR2);
-        this.jButtonModificarHistoria.setActionCommand(MODIFICAR_HISTORIA);
         
         this.jButtonAceptar.addActionListener(this);
         this.jButtonCancelar.addActionListener(this);
-        this.jButtonModificarHistoria.addActionListener(this);
         
         this.panelB.add(this.panelB1, BorderLayout.WEST);
         this.panelB.add(this.panelB2, BorderLayout.EAST);
            
     }
     
-    public void initComponentsC()
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        this.panelC = new JPanel();
-        this.panelC1 = new JPanel(new GridBagLayout());
-        this.panelC2 = new JPanel();
-        
-        this.listModelC1 = new DefaultListModel();
-        this.listModelC2 = new DefaultListModel();
-        this.jListC1 = new JList(this.listModelC1);
-        this.jListC2 = new JList(this.listModelC2);
-        this.scrollPanelC1 = new JScrollPane(this.jListC1);
-        this.scrollPanelC2 = new JScrollPane(this.jListC2);
-        this.jLabelNombreAsignatura = new JLabel("Nombre Asignatura");
-        this.jTextFieldNombreAsignatura = new JTextField();
-        this.jLabelAsigTotales = new JLabel("Asignaturas encontradas");
-        this.jLabelAsigHistoria = new JLabel("Historia Academica");
-        this.jButtonBuscar2 = new JButton("Buscar");
-        this.jButtonAnadir = new JButton("Anadir >>");
-        this.jButtonRemover = new JButton("Remover <<");
-        this.jButtonAceptar3 = new JButton("Aceptar");
-        this.jButtonCancelar3 = new JButton("Cancelar");
-        
-        this.jButtonBuscar2.setActionCommand(BUSCAR2);
-        this.jButtonAnadir.setActionCommand(ANADIR);
-        this.jButtonRemover.setActionCommand(REMOVER);
-        this.jButtonAceptar3.setActionCommand(ACEPTAR3);
-        this.jButtonCancelar3.setActionCommand(CANCELAR3);
-        
-        this.jButtonBuscar2.addActionListener(this);
-        this.jButtonAnadir.addActionListener(this);
-        this.jButtonRemover.addActionListener(this);
-        this.jButtonAceptar3.addActionListener(this);
-        this.jButtonCancelar3.addActionListener(this);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jLabelNombreAsignatura, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jTextFieldNombreAsignatura, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 0;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jButtonBuscar2, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jLabelAsigTotales, c);
-
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 3;
-        c.gridy = 1;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jLabelAsigHistoria, c);
-                
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridheight = 2; 
-        c.gridwidth = 2;
-        this.panelC1.add(this.scrollPanelC1, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 2;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jButtonAnadir, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 2;
-        c.gridy = 3;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jButtonRemover, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 3;
-        c.gridy = 2;
-        c.gridheight = 2; 
-        c.gridwidth = 2;
-        this.panelC1.add(this.scrollPanelC2, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 4;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jButtonAceptar3, c);
-        
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 3;
-        c.gridy = 4;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panelC1.add(this.jButtonCancelar3, c);
-        
-        this.panelC.add(panelC1);
-        //this.panelC1.add(this);
-        
-    }
-
     private void listar(HashMap<String, Alumno> h)
     {
         Iterator i = h.values().iterator();
@@ -435,8 +313,6 @@ public class AlumnoModificar extends JFrame implements ActionListener
         
             case CANCELAR1: 
             case ACEPTAR2:  
-            case MODIFICAR_HISTORIA:    this.habilitarPanel(panelC1);
-                                        break;
             case BUSCAR2:
                             try
                             {
