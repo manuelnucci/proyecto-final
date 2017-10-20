@@ -28,6 +28,17 @@ public class Controlador
         this.modelo.altaAlumno(nombre, apellido, domicilio, telefono, mail);
     }
     
+    public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException
+    {
+        this.modelo.bajaAlumno(alumno);
+    }
+    
+    public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
+                               String mail) throws NoEstaEntidadException
+    {
+        this.modelo.modificaAlumno(alumno, nombre, apellido, domicilio, telefono, mail);
+    }
+    
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException
     {
         return this.modelo.ubicarAlumno(nombre, apellido);

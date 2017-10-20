@@ -4,27 +4,26 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import pga.Controlador;
 
 /**
  *
- * @author DELL
+ * @author manuc
  */
-public class AlumnoConsulta extends JFrame
+public class AlumnoConsulta2 extends javax.swing.JDialog
 {
     private Controlador controlador;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
-    /** Creates new form AlumnoConsulta */
-    public AlumnoConsulta(Controlador controlador)
+    /** Creates new form AlumnoConsulta2 */
+    public AlumnoConsulta2(Controlador controlador, java.awt.Frame parent, boolean modal)
     {
+        super(parent, modal);
         this.controlador = controlador;
         this.setTitle("Consulta Alumno");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //this.setModal(true);
         this.setResizable(false);
         initComponents();
         this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
@@ -68,7 +67,7 @@ public class AlumnoConsulta extends JFrame
         jListHistoria = new javax.swing.JList<>();
         jLabelHistoria = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -244,15 +243,16 @@ public class AlumnoConsulta extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,7 +287,7 @@ public class AlumnoConsulta extends JFrame
             java.util
                 .logging
                 .Logger
-                .getLogger(AlumnoConsulta.class.getName())
+                .getLogger(AlumnoConsulta2.class.getName())
                 .log(java.util
                          .logging
                          .Level
@@ -297,7 +297,7 @@ public class AlumnoConsulta extends JFrame
             java.util
                 .logging
                 .Logger
-                .getLogger(AlumnoConsulta.class.getName())
+                .getLogger(AlumnoConsulta2.class.getName())
                 .log(java.util
                          .logging
                          .Level
@@ -307,7 +307,7 @@ public class AlumnoConsulta extends JFrame
             java.util
                 .logging
                 .Logger
-                .getLogger(AlumnoConsulta.class.getName())
+                .getLogger(AlumnoConsulta2.class.getName())
                 .log(java.util
                          .logging
                          .Level
@@ -317,7 +317,7 @@ public class AlumnoConsulta extends JFrame
             java.util
                 .logging
                 .Logger
-                .getLogger(AlumnoConsulta.class.getName())
+                .getLogger(AlumnoConsulta2.class.getName())
                 .log(java.util
                          .logging
                          .Level
@@ -325,14 +325,23 @@ public class AlumnoConsulta extends JFrame
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt
             .EventQueue
             .invokeLater(new Runnable()
             {
                 public void run()
                 {
-                    new AlumnoConsulta(null).setVisible(true);
+                    AlumnoConsulta2 dialog = new AlumnoConsulta2(null, new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                    {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e)
+                        {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
                 }
             });
     }

@@ -47,7 +47,6 @@ public class Formato
         int indiceArroba;
         
         indiceArroba = mail.indexOf("@");
-        System.out.println(mail.indexOf("@") + "  " + mail.lastIndexOf("@"));
         return indiceArroba != -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1;
     }
     

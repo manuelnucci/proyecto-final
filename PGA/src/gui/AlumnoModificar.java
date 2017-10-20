@@ -4,8 +4,10 @@ import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,56 +21,52 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 
 import pga.Alumno;
-import pga.Asignatura;
 import pga.Controlador;
 
-public class AlumnoModificar extends JFrame implements ActionListener
+public class AlumnoModificar extends JDialog implements ActionListener
 {
-    private Controlador controlador;
-    private static final String ELEGIR = "0";
-    private static final String ACEPTAR2 = "1";
-    private static final String BUSCAR = "2";
-    private static final String CANCELAR1 = "3";
-    private static final String CANCELAR2 = "4";
-    private static final String ANADIR = "6";
-    private static final String REMOVER = "7";
-    private static final String BUSCAR2 = "8";
-    private static final String CANCELAR3 = "9";
-    private static final String ACEPTAR3 = "10";
-    private JLabel jLabelNombre1, jLabelApellido1, jLabelLegajo1;
-    private JTextField jTextFieldNombre1, jTextFieldApellido1, jTextFieldLegajo1;
-    private JButton jButtonBuscar1, jButtonElegir, jButtonCancelar1, jButtonAceptar3, jButtonCancelar3;
-    private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
-    private JList jListA, jListC1, jListC2;
-    private DefaultListModel listModel, listModelC1, listModelC2;
-    private JPanel panelA, panelB, panelB1, panelB2, panelC, panelC1, panelC2;
-    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail, jTextFieldNombreAsignatura;
-    private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail, jLabelNombreAsignatura,
-                        jLabelAsigTotales, jLabelAsigHistoria;
-    private JButton jButtonAceptar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonBuscar2;
+    private static final String BUSCAR = "0";
+    private static final String ELEGIR = "1";
+    private static final String ACEPTAR = "2";
+    private static final String CANCELAR = "3";
     
-    private Controlador c;
+    private Controlador controlador;
+    private JLabel jLabelNombre1, jLabelApellido1;
+    private JTextField jTextFieldNombre1, jTextFieldApellido1;
+    private JButton jButtonElegir, jButtonBuscar, jButtonAceptar, jButtonCancelar;
+    private JScrollPane scrollPanel;
+    private JList jList;
+    private DefaultListModel listModel;
+    private JPanel panelA, panelB, panelB1, panelB2;
+    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
+    private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
     public AlumnoModificar(Controlador controlador)
     {
         super();
         this.controlador = controlador;
+        this.setTitle("Modificación Alumno");
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setModal(true);
+        this.setResizable(false);
         this.initComponentsA();
         this.initComponentsB();
         this.add(panelA, BorderLayout.NORTH);
         this.add(panelB, BorderLayout.CENTER);
         this.deshabilitarPanel(this.panelB1);
         this.deshabilitarPanel(this.panelB2);
-        this.setResizable(false);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
 
@@ -81,17 +79,18 @@ public class AlumnoModificar extends JFrame implements ActionListener
         this.panelA.setLayout(new GridBagLayout());
 
         this.jLabelNombre1 = new JLabel("Nombre");
-        this.jLabelApellido1 = new JLabel("Apellido");
         this.jTextFieldNombre1 = new JTextField();
+        this.jLabelApellido1 = new JLabel("Apellido");
         this.jTextFieldApellido1 = new JTextField();
-        this.jButtonBuscar1 = new JButton("Buscar");
-        this.jLabelLegajo1 = new JLabel("Legajo");
-        this.jTextFieldLegajo1 = new JTextField();
+        this.jButtonBuscar = new JButton("Buscar");
         this.jButtonElegir = new JButton("Elegir");
-        this.jButtonCancelar1 = new JButton("Cancelar");
+        this.jButtonAceptar = new JButton("Aceptar");
+        this.jButtonCancelar = new JButton("Cancelar");
         this.listModel = new DefaultListModel();
-        this.jListA = new JList(this.listModel);
-        this.scrollPanel = new JScrollPane(this.jListA);
+        this.jList = new JList();
+        this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.jList.setLayoutOrientation(JList.VERTICAL);
+        this.scrollPanel = new JScrollPane(this.jList);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -122,9 +121,9 @@ public class AlumnoModificar extends JFrame implements ActionListener
         c.gridy = 2;
         c.gridheight = 1; 
         c.gridwidth = 1;
-        this.panelA.add(this.jButtonBuscar1, c);
+        this.panelA.add(this.jButtonBuscar, c);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 5;
+        c.gridx = 6;
         c.gridy = 4;
         c.gridheight = 1; 
         c.gridwidth = 1;
@@ -138,25 +137,22 @@ public class AlumnoModificar extends JFrame implements ActionListener
         this.panelA.add(this.scrollPanel, c);
         
         this.jButtonElegir.setActionCommand(ELEGIR);
-        this.jButtonBuscar1.setActionCommand(BUSCAR);
-        this.jButtonCancelar1.setActionCommand(CANCELAR1);
+        this.jButtonBuscar.setActionCommand(BUSCAR);
         
         this.jButtonElegir.addActionListener(this);
-        this.jButtonBuscar1.addActionListener(this);
-        this.jButtonCancelar1.addActionListener(this);
+        this.jButtonBuscar.addActionListener(this);
     }
     
     public void initComponentsB()
     {
-        //Crea los paneles
+        // Crea los paneles
         panelB = new JPanel();
         panelB1 = new JPanel();
         panelB1.setLayout(new SpringLayout());
         panelB2 = new JPanel();
         panelB2.setLayout(new BorderLayout());
-       // panel2.setLayout(new BoxLayout());
         
-        //Crea las etiquetas/labels y anade los label al panel1 y referencia cada textfield con su label
+        // Crea las etiquetas/labels y añade los label al panel1 y referencia cada textfield con su label
         this.jLabelNombre = new JLabel("Nombre", JLabel.TRAILING);
         panelB1.add(this.jLabelNombre);
         this.jTextFieldNombre = new JTextField(20);
@@ -187,54 +183,51 @@ public class AlumnoModificar extends JFrame implements ActionListener
         this.jLabelMail.setLabelFor(this.jTextFieldMail);
         panelB1.add(this.jTextFieldMail);
 
-        //Lay out the panel.
+        // Layout the panel.
         SpringUtilities.makeCompactGrid(panelB1,
                                         5, 2, //rows, cols
-                                        10, 10,        //initX, initY
-                                        10, 10);       //xPad, yPad
+                                        10, 10, //initX, initY
+                                        10, 10); //xPad, yPad
 
-        //Crea los botones
+        // Crea los botones
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
         
-        //Anade los botones al panel
+        // Añade los botones al panel
         this.panelB2.add(this.jButtonAceptar, BorderLayout.NORTH);
         this.panelB2.add(new JLabel(" "), BorderLayout.CENTER);
         this.panelB2.add(this.jButtonCancelar, BorderLayout.SOUTH);   
         
-        this.jButtonAceptar.setActionCommand(ACEPTAR2);
-        this.jButtonCancelar.setActionCommand(CANCELAR2);
+        this.jButtonAceptar.setActionCommand(ACEPTAR);
+        this.jButtonCancelar.setActionCommand(CANCELAR);
         
         this.jButtonAceptar.addActionListener(this);
         this.jButtonCancelar.addActionListener(this);
         
         this.panelB.add(this.panelB1, BorderLayout.WEST);
         this.panelB.add(this.panelB2, BorderLayout.EAST);
-           
     }
     
-    private void listar(HashMap<String, Alumno> h)
+    public boolean camposVacios1()
     {
-        Iterator i = h.values().iterator();
-        
-        this.listModel.clear();
-        while(i.hasNext())
-        {
-            Alumno a = (Alumno) i.next();
-            this.listModel.addElement(a);
-        }
+        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
     }
     
-    private void listarAsignaturas(HashMap<String, Asignatura> h)
+    public boolean camposVacios2()
     {
-        Iterator i = h.values().iterator();
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0 &&
+                this.jTextFieldDomicilio.getText().length() != 0 && this.jTextFieldTelefono.getText().length() != 0 &&
+                this.jTextFieldMail.getText().length() != 0);
+    }
+    
+    public void listar(HashMap<String, Alumno> hash)
+    {
+        Iterator <Alumno> iA = hash.values().iterator();
         
         this.listModel.clear();
-        while(i.hasNext())
-        {
-            Alumno a = (Alumno) i.next();
-            this.listModel.addElement(a);
-        }
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
+        this.jList.setModel(this.listModel);
     }
     
     public void modificarDatos(Alumno a)
@@ -263,48 +256,61 @@ public class AlumnoModificar extends JFrame implements ActionListener
     }
     
     @Override
-    public void actionPerformed(ActionEvent ae)
+    public void actionPerformed(ActionEvent actionEvent)
     {
-        switch(ae.getActionCommand())
+        switch(actionEvent.getActionCommand())
         {
-            case ELEGIR:  if(this.jTextFieldLegajo1.getText().length() != 0);
-                                //2
-                                //TODO ventana error
+            case BUSCAR:    try
+                            {
+                                this.deshabilitarPanel(this.panelB1);
+                                this.deshabilitarPanel(this.panelB2);
+                                if (this.camposVacios1()) 
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMensaje(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            }
+                            break;
+            case ELEGIR:    if (this.camposVacios1())
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             else
+                                if (this.jList.getSelectedValue() != null)
+                                {
+                                    this.habilitarPanel(this.panelB1);
+                                    this.habilitarPanel(this.panelB2);
+                                    this.modificarDatos((Alumno)this.jList.getSelectedValue());
+                                }
+                                else
+                                    JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                            break;
+            case ACEPTAR:   try
                             {
-                                int index = this.jListA.getSelectedIndex();
-                                Alumno a = (Alumno) this.listModel.getElementAt(index);
-                                this.habilitarPanel(this.panelB1);
-                                this.habilitarPanel(this.panelB2);
-                                this.modificarDatos(a);
+                                if(this.camposVacios2())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                                else
+                                {
+                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al alumno?", "Modificación Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                    {
+                                        if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                        {
+                                            this.controlador.modificaAlumno((Alumno)this.jList.getSelectedValue(), this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
+                                            JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                            this.dispose();
+                                        }
+                                        else
+                                            JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                                    }
+                                }
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMensaje(), "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
-        
-            case BUSCAR:    if(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0)
-                            {
-                                try
-                                {
-                                    this.listar(c.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
-                                }
-                                catch(NoEstaEntidadException e)
-                                {
-                                    new VentanaAlerta(this, e.getMensaje(), "Error");
-                                }
-                            }
-
-                                //TODO ventana error
-                            break;
-        
-            case CANCELAR1: 
-            case ACEPTAR2:  
-            case BUSCAR2:
-                            try
-                            {
-                                this.listarAsignaturas(c.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
-                            } catch (NoEstaEntidadException e)
-                            {
-                                new VentanaAlerta(this, e.getMensaje(), "Error");
-                            }    
+            default:        this.dispose();
         }
     }       
 }

@@ -1,21 +1,16 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.awt.event.WindowEvent;
-
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import pga.Controlador;
 
@@ -28,7 +23,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
     private JMenuItem miAsignaturaAlta , miAsignaturaBaja, miAsignaturaModificacion, miAsignaturaConsulta, miModificarCorrelativas;
     private JMenuItem miCursadaAlta , miCursadaBaja, miCursadaModificacion, miCursadaConsulta;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-    private Controlador c;
+    private Controlador controlador;
     
     public VentanaPrincipal()
     {
@@ -142,9 +137,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.miCursadaConsulta.addActionListener(this);
     }
     
-    public void setControlador(Controlador c)
+    public void setControlador(Controlador controlador)
     {
-        this.c = c;
+        this.controlador = controlador;
     }
     
     private void close()
@@ -152,7 +147,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?",
                 "Salir del Sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
         {
-            this.c.guardarArchivo();
+            this.controlador.guardarArchivo();
             System.exit(0);
         }
     }
@@ -161,71 +156,71 @@ public class VentanaPrincipal extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == this.miAlumnoAlta)
-            new AlumnoAlta(this.c);
+            new AlumnoAlta(this.controlador);
         else 
             if(e.getSource() == this.miAlumnoBaja)
-                new AlumnoBaja(this.c);
+                new AlumnoBaja(this.controlador);
             else 
                 if(e.getSource() == this.miAlumnoModificacion)
-                    new AlumnoModificar(this.c);
+                    new AlumnoModificar(this.controlador);
                 else 
                     if(e.getSource() == this.miAlumnoConsulta)
-                        new AlumnoConsulta(this.c);
+                        new AlumnoConsulta(this.controlador);
                     else 
                         if(e.getSource() == this.miAlumnoAltaCursada)
-                            new AlumnoAltaACursada(this.c);
+                            new AlumnoAltaACursada(this.controlador);
                         else 
                             if(e.getSource() == this.miAlumnoBajaCursada)
-                                new AlumnoBajaACursada(this.c);
+                                new AlumnoBajaACursada(this.controlador);
                             else 
                                 if(e.getSource() == this.miModificarHistoria)
-                                    new ModificaHistoriaAlumno(this.c);
+                                    new ModificaHistoriaAlumno(this.controlador);
                                 else
                                     if(e.getSource() == this.miProfesorAlta)
-                                        new ProfesorAlta(this.c);
+                                        new ProfesorAlta(this.controlador);
                                     else 
                                         if(e.getSource() == this.miProfesorBaja)
-                                            new ProfesorBaja(this.c);
+                                            new ProfesorBaja(this.controlador);
                                         else 
                                             if(e.getSource() == this.miProfesorConsulta)
-                                                new ProfesorConsulta(this.c);
+                                                new ProfesorConsulta(this.controlador);
                                             else 
                                                 if(e.getSource() == this.miProfesorModificacion)
-                                                    new ProfesorModificacion(this.c);
+                                                    new ProfesorModificacion(this.controlador);
                                                 else 
                                                     if(e.getSource() == this.miProfesorAltaCursada)
-                                                        new ProfesorAltaACursada(this.c);
+                                                        new ProfesorAltaACursada(this.controlador);
                                                     else 
                                                         if(e.getSource() == this.miProfesorBajaCursada)
-                                                            new ProfesorBajaACursada(this.c);
+                                                            new ProfesorBajaACursada(this.controlador);
                                                         else 
                                                             if(e.getSource() == this.miModificarCompetencias)
-                                                                new ProfesorModificaCompetencias(this.c);
+                                                                new ProfesorModificaCompetencias(this.controlador);
                                                             else 
                                                                 if(e.getSource() == this.miAsignaturaAlta)
-                                                                    new AsignaturaAlta(this.c);
+                                                                    new AsignaturaAlta(this.controlador);
                                                                 else 
                                                                     if(e.getSource() == this.miAsignaturaBaja)
-                                                                        new AsignaturaBaja(this.c);
+                                                                        new AsignaturaBaja(this.controlador);
                                                                     else 
                                                                         if(e.getSource() == this.miAsignaturaConsulta)
-                                                                            new AsignaturaConsulta(this.c);
+                                                                            new AsignaturaConsulta(this.controlador);
                                                                         else 
                                                                             if(e.getSource() == this.miAsignaturaModificacion)
-                                                                                new AsignaturaModificacion(this.c);
+                                                                                new AsignaturaModificacion(this.controlador);
                                                                             else 
                                                                                 if(e.getSource() == this.miModificarCorrelativas)
-                                                                                    new AsignaturaModificarCorrelativas(this.c);
+                                                                                    new AsignaturaModificarCorrelativas(this.controlador);
                                                                                 else 
                                                                                     if(e.getSource() == this.miCursadaAlta)
-                                                                                        new CursadaAlta(this.c);
+                                                                                        new CursadaAlta(this.controlador);
                                                                                     else 
                                                                                         if(e.getSource() == this.miCursadaBaja)
-                                                                                            new CursadaBaja(this.c);
+                                                                                            new CursadaBaja(this.controlador);
                                                                                         else 
                                                                                             if(e.getSource() == this.miCursadaConsulta)
-                                                                                                new CursadaConsulta(this.c);
+                                                                                                new CursadaConsulta(this.controlador);
                                                                                             else
-                                                                                                 new CursadaModificacion(this.c);
+                                                                                                 new CursadaModificacion(this.controlador);
     }
 }

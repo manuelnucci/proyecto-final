@@ -121,7 +121,7 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Alumno no encontrado en el sistema.");
+            throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
     }
     
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
@@ -154,7 +154,7 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Alumno no encontrado en el sistema.");
+                throw new NoEstaEntidadException("Alumno no encontrado en el sistema");
         }
         
         alumno.setDomicilio(domicilio);
@@ -172,7 +172,7 @@ public class Manager
         HashMap<String, Alumno> ret = this.alumnos.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Alumno no ubicado.");
+            throw new NoEstaEntidadException("Alumno no ubicado");
         
         return ret;
     }
@@ -187,7 +187,7 @@ public class Manager
     public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException // RF11, RF14
     {
         if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
-            throw new NoEstaEntidadException("Alumno no encontrado en la cursada.");
+            throw new NoEstaEntidadException("Alumno no encontrado en la cursada");
     }
     
     /*
@@ -237,7 +237,7 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
+            throw new NoEstaEntidadException("Profesor no encontrado en el sistema");
     }
     
     public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono,
@@ -270,7 +270,7 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
+                throw new NoEstaEntidadException("Profesor no encontrado en el sistema");
         }
         
         profesor.setDomicilio(domicilio);
@@ -289,7 +289,7 @@ public class Manager
         HashMap<String, Profesor> ret = this.profesores.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Profesor no ubicado.");
+            throw new NoEstaEntidadException("Profesor no ubicado");
         
         return ret;
     }
@@ -307,7 +307,7 @@ public class Manager
         String nombreCursadaMayus;
         
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
-            throw new NoEstaEntidadException("Profesor no encontrado en la cursada.");
+            throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
         
         if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
         {
@@ -381,7 +381,7 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
+            throw new NoEstaEntidadException("Asignatura no encontrada en el sistema");
     }
     
     public void modificaAsignatura(Asignatura asignatura, String nombre)
@@ -410,7 +410,7 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
+                throw new NoEstaEntidadException("Asignatura no encontrada en el sistema");
         }
     }
     
@@ -424,7 +424,7 @@ public class Manager
         HashMap<String, Asignatura> ret = this.asignaturas.get(nombre.toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Asignatura no ubicada.");
+            throw new NoEstaEntidadException("Asignatura no ubicada");
         
         return ret;
     }
@@ -466,7 +466,7 @@ public class Manager
                                                                   // lo eliminamos del HashMap general de cursadas
                 this.cursadas.remove(nombreCursadaMayus);
         else
-            throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
+            throw new NoEstaEntidadException("Cursada no encontrada en el sistema");
     }
     
     public void modificaCursada(Cursada cursada, String nombre, Asignatura asignatura, String periodo, String dia, 
@@ -495,7 +495,7 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
+                throw new NoEstaEntidadException("Cursada no encontrada en el sistema");
         }
         
         cursada.setAsignatura(asignatura);
@@ -547,7 +547,7 @@ public class Manager
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las correlatividades para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
     
     public void verificaAlumnoOcupado(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -572,7 +572,7 @@ public class Manager
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
     
     public void verificaProfesorAptoParaCursada(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -610,6 +610,6 @@ public class Manager
             
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException("El profesor no cumple con las franjas horarias para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
 }

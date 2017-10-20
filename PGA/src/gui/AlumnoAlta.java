@@ -3,7 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +24,13 @@ public class AlumnoAlta extends JDialog implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
+    
     private Controlador controlador;
     private JPanel panel1, panel2;
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
     private JButton jButtonAceptar, jButtonCancelar;
-    //Cantidad de campos
+    // Cantidad de campos
     private int numPairs = 5;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
@@ -40,10 +42,9 @@ public class AlumnoAlta extends JDialog implements ActionListener
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setModal(true);
         this.setResizable(false);
+        this.initComponents();
         this.add(panel1, BorderLayout.WEST);
         this.add(panel2, BorderLayout.EAST);
-        panel1.setOpaque(true);
-        this.initComponents();
         this.addListeners();
         this.pack();
         this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
@@ -56,7 +57,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
         panel1 = new JPanel();
         panel1.setLayout(new SpringLayout());
         panel2 = new JPanel();
-        panel2.setLayout(new BorderLayout());
+        panel2.setLayout(new GridBagLayout());
         
         // Crea las etiquetas/labels y añade los label al panel1 y referencia cada textfield con su label
         this.jLabelNombre = new JLabel("Nombre", JLabel.TRAILING);
@@ -89,19 +90,39 @@ public class AlumnoAlta extends JDialog implements ActionListener
         this.jLabelMail.setLabelFor(this.jTextFieldMail);
         panel1.add(this.jTextFieldMail);
 
-        // Lay out the panel.
+        // Layout the panel.
         SpringUtilities.makeCompactGrid(panel1,
-                                        numPairs, 2, //rows, cols
-                                        10, 10,        //initX, initY
-                                        10, 10);       //xPad, yPad
+                                        numPairs , 2, //rows, cols
+                                        10, 10, //initX, initY
+                                        10, 10); //xPad, yPad
 
         // Crea los botones
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
         
-        //Añade los botones al panel
-        this.panel2.add(this.jButtonAceptar);
-        this.panel2.add(this.jButtonCancelar);   
+        // Añade los botones al panel
+        GridBagConstraints c = new GridBagConstraints();
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(this.jButtonAceptar, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(new JLabel(" "), c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(this.jButtonCancelar, c); 
         
         this.jButtonAceptar.setActionCommand(ACEPTAR);
         this.jButtonCancelar.setActionCommand(CANCELAR);
@@ -135,6 +156,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
                                     {
                                         controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
                                         JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                        this.dispose();
                                     }
                                     else
                                         JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
@@ -142,7 +164,6 @@ public class AlumnoAlta extends JDialog implements ActionListener
                             }
                             break;
             default:        this.dispose(); // Cierra la ventana de alta
-                            break;
         }
     }
 }
