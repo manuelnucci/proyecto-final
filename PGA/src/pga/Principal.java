@@ -20,7 +20,7 @@ public class Principal
         Controlador c = new Controlador(manager, v);
         v.setControlador(c);
         
-        Alumno a;
+       /* Alumno a;
         
         a = manager.altaAlumno("Sebastian", "Canonaco", "Guanajjani5645", "4823342", "sebas@aaaaaa");
         manager.altaAlumno("Manuel", "Nucci", "ssGuanajjani5645", "4823342", "sebas@aaaaaa");
@@ -29,6 +29,6 @@ public class Principal
         HashMap <String, Asignatura> h = new HashMap <String, Asignatura>();
         h.put("MATE", Factory.getAsignatura("mate", null));
         
-        manager.modificaHistoriaAcademica( a, h);
+        manager.modificaHistoriaAcademica( a, h);*/
     }
 }
