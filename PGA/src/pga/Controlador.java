@@ -6,8 +6,6 @@ import gui.VentanaPrincipal;
 
 import java.util.HashMap;
 
-import sun.swing.StringUIClientPropertyKey;
-
 public class Controlador
 {
     private Manager modelo;
@@ -18,6 +16,16 @@ public class Controlador
         super();
         this.modelo = modelo;
         this.ventana = ventana;
+    }
+    
+    public boolean verificaMail(String mail)
+    {
+        return Formato.verificaMail(mail);
+    }
+    
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail)
+    {
+        this.modelo.altaAlumno(nombre, apellido, domicilio, telefono, mail);
     }
     
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException
@@ -33,6 +41,5 @@ public class Controlador
     public void guardarArchivo()
     {
         PersistenciaXML.guardarArchivo(this.modelo);
-    }
-    
+    }  
 }

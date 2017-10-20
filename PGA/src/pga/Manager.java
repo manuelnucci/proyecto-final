@@ -80,7 +80,7 @@ public class Manager
      * ***************************************************************************************************************
      */
 
-    public Alumno altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
@@ -95,7 +95,6 @@ public class Manager
             hash.put(alumno.getLegajo(), alumno);
             this.alumnos.put(nombreCompleto, hash);
         }
-        return alumno;
     }
     
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02

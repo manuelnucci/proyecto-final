@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public class Alumno extends Persona
 {
-    private static int legajoAlumno =  0;
+    private static int legajoAlumno = 0;
     private static final String ID_LEGAJO = "ALU";
     
     private HashMap <String, Asignatura> historiaAcademica; // Las claves serán las IDs de la asignaturas
@@ -44,14 +44,14 @@ public class Alumno extends Persona
     @Override
     public String toString()
     {
-//        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
+        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
         String cad;
         
-        cad = super.toString(); //+ "\nHistoria academica:";
+        cad = super.toString() + "\nHistoria academica:";
         
-       /* while(it.hasNext())
+        while(it.hasNext())
             cad += "\n\t" + it.next().getNombre();
-        */
+        
         return cad;
     }
 }

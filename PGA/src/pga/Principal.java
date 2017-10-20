@@ -13,8 +13,6 @@ public class Principal
     
     public static void main(String[] args)
     {
-        Principal p = new Principal();
-
         Manager manager = PersistenciaXML.leerArchivo();
         VentanaPrincipal v = new VentanaPrincipal();
         Controlador c = new Controlador(manager, v);

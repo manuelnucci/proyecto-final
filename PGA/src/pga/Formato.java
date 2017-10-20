@@ -47,7 +47,8 @@ public class Formato
         int indiceArroba;
         
         indiceArroba = mail.indexOf("@");
-        return indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1;
+        System.out.println(mail.indexOf("@") + "  " + mail.lastIndexOf("@"));
+        return indiceArroba != -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1;
     }
     
     public boolean verificaCursadaPeriodo(String periodo)

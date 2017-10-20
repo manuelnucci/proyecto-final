@@ -3,19 +3,23 @@ package gui;
 import java.awt.BorderLayout;
 
 import java.awt.Dimension;
-
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class AlumnoAlta extends JFrame implements ActionListener
+import pga.Controlador;
+
+public class AlumnoAlta extends JDialog implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
@@ -25,10 +29,15 @@ public class AlumnoAlta extends JFrame implements ActionListener
     private JButton jButtonAceptar, jButtonCancelar;
     //Cantidad de campos
     private int numPairs = 5;
+    private Controlador controlador;
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
-    public AlumnoAlta()
+    public AlumnoAlta(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
+        this.setModal(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta alumno");
         this.initComponents();
@@ -37,6 +46,7 @@ public class AlumnoAlta extends JFrame implements ActionListener
         this.add(panel2, BorderLayout.EAST);
         this.addListeners();
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
         this.setResizable(false);     
     }
@@ -118,12 +128,22 @@ public class AlumnoAlta extends JFrame implements ActionListener
         switch(e.getActionCommand())
         {
             case ACEPTAR:   if(this.camposVacios())
-                                System.out.println("Faltan completar campos");
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta", JOptionPane.WARNING_MESSAGE);
                             else
-                                System.out.println("AltaRealizada");
+                            {
+                                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                {
+                                if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                {
+                                    controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
+                                    JOptionPane.showMessageDialog(rootPane, "Alta Exitosa");
+                                }
+                                else
+                                    JOptionPane.showMessageDialog(rootPane, "Formato de mail incorrecto.\n", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                                }
+                            }
                             break;
-            case CANCELAR:  System.out.println("AltaCancelada");
-                            this.dispose();//Ponele que cierra la ventana
+            case CANCELAR:  this.dispose();//Cierra la ventana de alta
                             break;
         }
     }
