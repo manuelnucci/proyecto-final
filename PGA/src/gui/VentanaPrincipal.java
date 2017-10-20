@@ -25,8 +25,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener
     private JMenuBar menuBar;
     private JMenu menuAlumno, menuProfesor, menuAsignatura, menuCursada;
     private JMenuItem miAlumnoAlta , miAlumnoBaja, miAlumnoModificacion, miAlumnoConsulta, miAlumnoAltaCursada, miAlumnoBajaCursada, miModificarHistoria;
-    private JMenuItem miProfesorAlta , miProfesorBaja, miProfesorModificacion, miProfesorConsulta, miProfesorAltaCursada, miProfesorBajaCursada;
-    private JMenuItem miAsignaturaAlta , miAsignaturaBaja, miAsignaturaModificacion, miAsignaturaConsulta;
+    private JMenuItem miProfesorAlta , miProfesorBaja, miProfesorModificacion, miProfesorConsulta, miProfesorAltaCursada, miProfesorBajaCursada, miModificarCompetencias;
+    private JMenuItem miAsignaturaAlta , miAsignaturaBaja, miAsignaturaModificacion, miAsignaturaConsulta, miModificarCorrelativas;
     private JMenuItem miCursadaAlta , miCursadaBaja, miCursadaModificacion, miCursadaConsulta;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador c;
@@ -82,10 +82,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.miProfesorConsulta = new JMenuItem("Consulta");
         this.miProfesorAltaCursada = new JMenuItem("Alta cursada");
         this.miProfesorBajaCursada = new JMenuItem("Baja cursada");
+        this.miModificarCompetencias = new JMenuItem("Modificar Competencias");
         this.miAsignaturaAlta = new JMenuItem("Alta");
         this.miAsignaturaBaja = new JMenuItem("Baja");
         this.miAsignaturaModificacion = new JMenuItem("Modificacion");
         this.miAsignaturaConsulta = new JMenuItem("Consulta");
+        this.miModificarCorrelativas = new JMenuItem("Modificar Correlativas");
         this.miCursadaAlta = new JMenuItem("Alta");
         this.miCursadaBaja = new JMenuItem("Baja");
         this.miCursadaModificacion = new JMenuItem("Modificacion");
@@ -104,10 +106,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.menuProfesor.add(miProfesorConsulta);
         this.menuProfesor.add(this.miProfesorAltaCursada);
         this.menuProfesor.add(this.miProfesorBajaCursada);
+        this.menuProfesor.add(this.miModificarCompetencias);
         this.menuAsignatura.add(miAsignaturaAlta);
         this.menuAsignatura.add(miAsignaturaBaja);
         this.menuAsignatura.add(miAsignaturaModificacion);
         this.menuAsignatura.add(miAsignaturaConsulta);
+        this.menuAsignatura.add(miModificarCorrelativas);
         this.menuCursada.add(miCursadaAlta);
         this.menuCursada.add(miCursadaBaja);
         this.menuCursada.add(miCursadaModificacion);
@@ -131,10 +135,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.miProfesorConsulta.addActionListener(this);
         this.miProfesorAltaCursada.addActionListener(this);
         this.miProfesorBajaCursada.addActionListener(this);
+        this.miModificarCompetencias.addActionListener(this);
         this.miAsignaturaAlta.addActionListener(this);
         this.miAsignaturaBaja.addActionListener(this);
         this.miAsignaturaModificacion.addActionListener(this);
         this.miAsignaturaConsulta.addActionListener(this);
+        this.miModificarCorrelativas.addActionListener(this);
         this.miCursadaAlta.addActionListener(this);
         this.miCursadaBaja.addActionListener(this);
         this.miCursadaModificacion.addActionListener(this);
@@ -173,23 +179,89 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         {
             AlumnoModificar aM = new AlumnoModificar(this.c);
         }
-        if(e.getSource() == this.miCursadaModificacion)
-            System.out.println("CursadaModificacion");
+        if(e.getSource() == this.miAlumnoConsulta)
+        {
+            new AlumnoConsulta();
+        }
+        if(e.getSource() == this.miAlumnoAltaCursada)
+        {
+            new AlumnoAltaACursada();
+        }
+        if(e.getSource() == this.miAlumnoBajaCursada)
+        {
+            new AlumnoBajaACursada();
+        }
+        if(e.getSource() == this.miModificarHistoria)
+        {
+            new ModificaHistoriaAlumno();
+        }
         if(e.getSource() == this.miProfesorAlta)
         {
             ProfesorAlta pA = new ProfesorAlta();
         }
-        if(e.getSource() == this.miModificarHistoria)
+        if(e.getSource() == this.miProfesorBaja)
         {
-            ModificaHistoriaAlumno mHA = new ModificaHistoriaAlumno();
+            new ProfesorBaja();
+        }
+        if(e.getSource() == this.miProfesorConsulta)
+        {
+            new ProfesorConsulta();
+        }
+        if(e.getSource() == this.miProfesorModificacion)
+        {
+            new ProfesorModificacion(this.c);
+        }
+        if(e.getSource() == this.miProfesorAltaCursada)
+        {
+            new ProfesorAltaACursada();
+        }
+        if(e.getSource() == this.miProfesorBajaCursada)
+        {
+            new ProfesorBajaACursada();
+        }
+        if(e.getSource() == this.miModificarCompetencias)
+        {
+            new ProfesorModificaCompetencias();
+        }
+        if(e.getSource() == this.miAsignaturaAlta)
+        {
+            new AsignaturaAlta();
+        }
+        if(e.getSource() == this.miAsignaturaAlta)
+        {
+            new AsignaturaAlta();
+        }
+        if(e.getSource() == this.miAsignaturaBaja)
+        {
+            new AsignaturaBaja();
+        }
+        if(e.getSource() == this.miAsignaturaConsulta)
+        {
+            new AsignaturaConsulta();
+        }
+        if(e.getSource() == this.miAsignaturaModificacion)
+        {
+            new AsignaturaModificacion(this.c);
+        }
+        if(e.getSource() == this.miModificarCorrelativas)
+        {
+            new AsignaturaModificarCorrelativas();
         }
         if(e.getSource() == this.miCursadaAlta)
         {
-            CursadaAlta cA = new CursadaAlta();
-        }
+            new CursadaAlta();
+        } 
         if(e.getSource() == this.miCursadaBaja)
         {
-            CursadaBaja cB = new CursadaBaja();
+             new CursadaBaja();
+        } 
+        if(e.getSource() == this.miCursadaConsulta)
+        {
+            new CursadaConsulta();
         }
+        if(e.getSource() == this.miCursadaModificacion)
+         {
+             new CursadaModificacion();
+         } 
     }
 }

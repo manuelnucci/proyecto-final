@@ -10,27 +10,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.HashMap;
-
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import javax.swing.SpringLayout;
 
 import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 
-public class AlumnoModificar extends JFrame implements ActionListener
+public class ProfesorModificacion extends JFrame implements ActionListener
 {
     private static final String ELEGIR = "0";
     private static final String ACEPTAR2 = "1";
@@ -56,7 +52,7 @@ public class AlumnoModificar extends JFrame implements ActionListener
     
     private Controlador c;
     
-    public AlumnoModificar(Controlador c)
+    public ProfesorModificacion (Controlador c)
     {
         super();
         this.c = c;
@@ -245,6 +241,23 @@ public class AlumnoModificar extends JFrame implements ActionListener
         this.jTextFieldMail.setText(a.getMail());
     }
     
+    private void anadirAsignatura()
+    {
+        int index = this.jListC1.getSelectedIndex();
+        Asignatura as = (Asignatura) this.listModelC1.getElementAt(index);
+        this.listModelC2.addElement(as);
+    }
+    
+    private void removerAsignatura()
+    {
+        int index = this.jListC2.getSelectedIndex();
+        this.listModelC2.removeElementAt(index);
+    }
+    
+    public void modificarHistoria(Alumno a)
+    {
+    }
+    
     public void deshabilitarPanel(JPanel panel)
     {
         Component[] componentes = panel.getComponents();
@@ -303,7 +316,14 @@ public class AlumnoModificar extends JFrame implements ActionListener
                             } catch (NoEstaEntidadException e)
                             {
                                 new VentanaAlerta(this, e.getMensaje(), "Error");
-                            }    
+                            }
+            
+            case ANADIR:    this.anadirAsignatura();
+                            break;               
+            
+            case REMOVER:   this.removerAsignatura();
+                            break;
+            
         }
     }       
 }
