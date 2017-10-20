@@ -35,6 +35,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
     private static final String CANCELAR2 = "4";
     private static final String BUSCAR2 = "8";
 
+    private Controlador controlador;
     private JLabel jLabelNombre1;
     private JTextField jTextFieldNombre1;
     private JButton jButtonBuscar1, jButtonElegir, jButtonCancelar1;
@@ -46,12 +47,10 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
     private JLabel jLabelNombre;
     private JButton jButtonAceptar, jButtonCancelar;
     
-    private Controlador c;
-    
-    public AsignaturaModificacion(Controlador c)
+    public AsignaturaModificacion(Controlador controlador)
     {
         super();
-        this.c = c;
+        this.controlador = controlador;
         this.initComponentsA();
         this.initComponentsB();
         this.add(panelA, BorderLayout.NORTH);
@@ -233,7 +232,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
                             {
                                 try
                                 {
-                                    this.listar(c.ubicarAsignatura(this.jTextFieldNombre1.getText()));
+                                    this.listar(controlador.ubicarAsignatura(this.jTextFieldNombre1.getText()));
                                 }
                                 catch(NoEstaEntidadException e)
                                 {
@@ -249,7 +248,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
             case BUSCAR2:
                             try
                             {
-                                this.listarAsignaturas(c.ubicarAsignatura(this.jTextFieldNombre.getText()));
+                                this.listarAsignaturas(controlador.ubicarAsignatura(this.jTextFieldNombre.getText()));
                             } catch (NoEstaEntidadException e)
                             {
                                 new VentanaAlerta(this, e.getMensaje(), "Error");

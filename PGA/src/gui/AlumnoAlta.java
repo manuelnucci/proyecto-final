@@ -23,43 +23,42 @@ public class AlumnoAlta extends JDialog implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
+    private Controlador controlador;
     private JPanel panel1, panel2;
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
     private JButton jButtonAceptar, jButtonCancelar;
     //Cantidad de campos
     private int numPairs = 5;
-    private Controlador controlador;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
     public AlumnoAlta(Controlador controlador)
     {
         super();
         this.controlador = controlador;
+        this.setTitle("Alta alumno");
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setModal(true);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Alta alumno");
-        this.initComponents();
         this.add(panel1, BorderLayout.WEST);
-        panel1.setOpaque(true);
         this.add(panel2, BorderLayout.EAST);
+        panel1.setOpaque(true);
+        this.initComponents();
         this.addListeners();
         this.pack();
         this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
-        this.setVisible(true);
-        this.setResizable(false);     
+        this.setVisible(true);     
     }
     
     public void initComponents()
     {
-        //Crea los paneles
+        // Crea los paneles
         panel1 = new JPanel();
         panel1.setLayout(new SpringLayout());
         panel2 = new JPanel();
-       // panel2.setLayout(new BoxLayout());
+        panel2.setLayout(new BorderLayout());
         
-        //Crea las etiquetas/labels y anade los label al panel1 y referencia cada textfield con su label
+        // Crea las etiquetas/labels y añade los label al panel1 y referencia cada textfield con su label
         this.jLabelNombre = new JLabel("Nombre", JLabel.TRAILING);
         panel1.add(this.jLabelNombre);
         this.jTextFieldNombre = new JTextField(20);
@@ -90,23 +89,22 @@ public class AlumnoAlta extends JDialog implements ActionListener
         this.jLabelMail.setLabelFor(this.jTextFieldMail);
         panel1.add(this.jTextFieldMail);
 
-        //Lay out the panel.
+        // Lay out the panel.
         SpringUtilities.makeCompactGrid(panel1,
                                         numPairs, 2, //rows, cols
                                         10, 10,        //initX, initY
                                         10, 10);       //xPad, yPad
 
-        //Crea los botones
+        // Crea los botones
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
         
-        //Anade los botones al panel
+        //Añade los botones al panel
         this.panel2.add(this.jButtonAceptar);
         this.panel2.add(this.jButtonCancelar);   
         
         this.jButtonAceptar.setActionCommand(ACEPTAR);
         this.jButtonCancelar.setActionCommand(CANCELAR);
-           
     }
 
     public void addListeners()
@@ -133,17 +131,17 @@ public class AlumnoAlta extends JDialog implements ActionListener
                             {
                                 if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                 {
-                                if (controlador.verificaMail(this.jTextFieldMail.getText()))
-                                {
-                                    controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
-                                    JOptionPane.showMessageDialog(rootPane, "Alta Exitosa");
-                                }
-                                else
-                                    JOptionPane.showMessageDialog(rootPane, "Formato de mail incorrecto.\n", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                                    if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                    {
+                                        controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
+                                        JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                    }
+                                    else
+                                        JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
                                 }
                             }
                             break;
-            case CANCELAR:  this.dispose();//Cierra la ventana de alta
+            default:        this.dispose(); // Cierra la ventana de alta
                             break;
         }
     }

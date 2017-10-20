@@ -1,16 +1,20 @@
 
 package gui;
 
+import pga.Controlador;
+
 /**
  *
  * @author DELL
  */
 public class AlumnoConsulta extends javax.swing.JFrame
 {
+    private Controlador controlador;
 
     /** Creates new form AlumnoConsulta */
-    public AlumnoConsulta()
+    public AlumnoConsulta(Controlador controlador)
     {
+        this.controlador = controlador;
         initComponents();
     }
 
@@ -327,7 +331,7 @@ public class AlumnoConsulta extends javax.swing.JFrame
             {
                 public void run()
                 {
-                    new AlumnoConsulta().setVisible(true);
+                    new AlumnoConsulta(null).setVisible(true);
                 }
             });
     }

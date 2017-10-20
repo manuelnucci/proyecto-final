@@ -3,16 +3,20 @@ package gui;
 
 import javax.swing.JFrame;
 
+import pga.Controlador;
+
 /**
  *
  * @author DELL
  */
 public class ProfesorConsulta extends javax.swing.JFrame
 {
+    private Controlador controlador;
 
     /** Creates new form ProfesorConsulta */
-    public ProfesorConsulta()
+    public ProfesorConsulta(Controlador controlador)
     {
+        this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -332,7 +336,7 @@ public class ProfesorConsulta extends javax.swing.JFrame
             {
                 public void run()
                 {
-                    new ProfesorConsulta().setVisible(true);
+                    new ProfesorConsulta(null).setVisible(true);
                 }
             });
     }

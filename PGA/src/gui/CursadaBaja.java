@@ -18,8 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import pga.Controlador;
+
 public class CursadaBaja extends JFrame implements ActionListener
 {
+    private Controlador controlador;
     private JLabel jLabelNombre;
     private JTextField jTextFieldNombre;
     private JButton jButtonBuscar, jButtonElegir, jButtonCancelar;
@@ -29,9 +32,10 @@ public class CursadaBaja extends JFrame implements ActionListener
     private DefaultListModel listModel;
     private JPanel panel, panelDer;
     
-    public CursadaBaja()
+    public CursadaBaja(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Baja Cursada");
         this.initComponents();

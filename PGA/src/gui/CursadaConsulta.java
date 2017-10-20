@@ -3,16 +3,20 @@ package gui;
 
 import javax.swing.JFrame;
 
+import pga.Controlador;
+
 /**
  *
  * @author DELL
  */
 public class CursadaConsulta extends javax.swing.JFrame
 {
+    private Controlador controlador;
 
     /** Creates new form CursadaConsulta */
-    public CursadaConsulta()
+    public CursadaConsulta(Controlador controlador)
     {
+        this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -291,7 +295,7 @@ public class CursadaConsulta extends javax.swing.JFrame
             {
                 public void run()
                 {
-                    new CursadaConsulta().setVisible(true);
+                    new CursadaConsulta(null).setVisible(true);
                 }
             });
     }

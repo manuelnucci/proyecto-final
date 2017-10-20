@@ -32,6 +32,7 @@ import pga.Controlador;
 
 public class AlumnoModificar extends JFrame implements ActionListener
 {
+    private Controlador controlador;
     private static final String ELEGIR = "0";
     private static final String ACEPTAR2 = "1";
     private static final String BUSCAR = "2";
@@ -56,10 +57,10 @@ public class AlumnoModificar extends JFrame implements ActionListener
     
     private Controlador c;
     
-    public AlumnoModificar(Controlador c)
+    public AlumnoModificar(Controlador controlador)
     {
         super();
-        this.c = c;
+        this.controlador = controlador;
         this.initComponentsA();
         this.initComponentsB();
         this.add(panelA, BorderLayout.NORTH);

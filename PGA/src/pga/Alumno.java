@@ -41,8 +41,7 @@ public class Alumno extends Persona
         return historiaAcademica;
     }
 
-    @Override
-    public String toString()
+    public String infoAlumno()
     {
         Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
         String cad;

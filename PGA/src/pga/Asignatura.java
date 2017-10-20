@@ -92,14 +92,13 @@ public class Asignatura implements Comparable
         return this.id.compareTo(((Asignatura) object).getId()); // Las asignaturas serán ordenadas por su ID
     }    
 
-    @Override
-    public String toString()
+    public String infoAsignatura()
     {
         Iterator<Asignatura> it = this.correlatividades.values().iterator();
         String cad;
         Asignatura asignatura;
         
-        cad = "Id: " + this.getId() + "\nNombre: " + this.getNombre() + "\nCorrelatividades: ";
+        cad = "Id: " + this.id + "\nNombre: " + this.nombre + "\nCorrelatividades: ";
         
         while(it.hasNext())
         {
@@ -108,5 +107,11 @@ public class Asignatura implements Comparable
         }
         
         return cad;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Id: " + this.id + "\nNombre: " + this.nombre;
     }
 }

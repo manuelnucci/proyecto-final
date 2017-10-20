@@ -16,8 +16,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import pga.Controlador;
+
 public class AsignaturaBaja extends JFrame implements ActionListener
 {
+    private Controlador controlador;
     private JLabel jLabelNombre;
     private JTextField jTextFieldNombre;
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
@@ -26,9 +29,10 @@ public class AsignaturaBaja extends JFrame implements ActionListener
     private JList jList;
     private JPanel panel, panelDer;
     
-    public AsignaturaBaja()
+    public AsignaturaBaja(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Baja Asigantura");
         this.initComponents();

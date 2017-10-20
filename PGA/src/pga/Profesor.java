@@ -41,8 +41,7 @@ public class Profesor extends Persona
         return competencias;
     }
 
-    @Override
-    public String toString()
+    public String infoProfesor()
     {
         Iterator<Asignatura> it = this.competencias.values().iterator();
         String cad;

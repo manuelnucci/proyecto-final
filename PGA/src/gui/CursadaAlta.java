@@ -4,16 +4,20 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.SpinnerNumberModel;
 
+import pga.Controlador;
+
 /**
  *
  * @author DELL
  */
 public class CursadaAlta extends javax.swing.JFrame
 {
+    private Controlador controlador;
 
     /** Creates new form CursadaAlta */
-    public CursadaAlta()
+    public CursadaAlta(Controlador controlador)
     {
+        this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -430,7 +434,7 @@ public class CursadaAlta extends javax.swing.JFrame
             {
                 public void run()
                 {
-                    new CursadaAlta().setVisible(true);
+                    new CursadaAlta(null).setVisible(true);
                 }
             });
     }

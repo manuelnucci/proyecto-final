@@ -18,8 +18,11 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 
+import pga.Controlador;
+
 public class AlumnoBaja extends JFrame implements ActionListener
 {
+    private Controlador controlador;
     private JLabel jLabelNombre, jLabelApellido,jLabelLegajo;
     private JTextField jTextFieldNombre, jTextFieldApellido,jTextFieldLegajo;
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
@@ -28,9 +31,10 @@ public class AlumnoBaja extends JFrame implements ActionListener
     private JList jList;
     private JPanel panel, panelDer;
     
-    public AlumnoBaja()
+    public AlumnoBaja(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Baja Alumno");
         this.initComponents();
