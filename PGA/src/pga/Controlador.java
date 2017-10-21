@@ -1,5 +1,6 @@
 package pga;
 
+import exceptions.EntidadNoAptaParaCursadaException;
 import exceptions.NoEstaEntidadException;
 
 import gui.VentanaPrincipal;
@@ -44,9 +45,19 @@ public class Controlador
         return this.modelo.ubicarAlumno(nombre, apellido);
     }
     
+    public void altaAlumnoACursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
+    {
+        this.modelo.altaAlumnoACursada(alumno, cursada);
+    }
+    
     public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException
     {
         return this.modelo.ubicarAsignatura(nombre);
+    }
+    
+    public HashMap<String, Cursada> ubicarCursada(String nombre) throws NoEstaEntidadException
+    {
+        return this.modelo.ubicarCursada(nombre);
     }
     
     public void guardarArchivo()

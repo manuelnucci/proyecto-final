@@ -30,9 +30,8 @@ public class AlumnoConsulta extends javax.swing.JDialog
     private HashMap<String, Alumno> hash = null;
     private DefaultListModel listModel;
     
-
     /** Creates new form AlumnoConsulta2 */
-    public AlumnoConsulta(Controlador controlador, java.awt.Frame parent, boolean modal)
+    public AlumnoConsulta(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
         super(parent, modal);
         this.controlador = controlador;
@@ -67,7 +66,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
     
     public boolean camposVacios()
     {
-        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido2.getText().length() != 0);
+        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
     }
     
     public void listar1(HashMap<String, Alumno> hash)
@@ -112,7 +111,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
         jLabelNombre1 = new javax.swing.JLabel();
         jLabelApellido1 = new javax.swing.JLabel();
         jTextFieldNombre1 = new javax.swing.JTextField();
-        jTextFieldApellido2 = new javax.swing.JTextField();
+        jTextFieldApellido1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         listModel = new DefaultListModel();
         jList = new javax.swing.JList<>(listModel);
@@ -183,7 +182,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                        .addComponent(jTextFieldApellido2))
+                        .addComponent(jTextFieldApellido1))
                     .addComponent(jButtonBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -206,7 +205,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelApellido1)
-                            .addComponent(jTextFieldApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBuscar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -352,7 +351,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
         else
             try
             {
-                this.hash = controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido2.getText());
+                this.hash = controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText());
                 this.listar1(hash);
             } catch (NoEstaEntidadException e)
             {
@@ -483,7 +482,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
             {
                 public void run()
                 {
-                    AlumnoConsulta dialog = new AlumnoConsulta(null, new javax.swing.JFrame(), true);
+                    AlumnoConsulta dialog = new AlumnoConsulta(new javax.swing.JFrame(), true, null);
                     dialog.addWindowListener(new java.awt.event.WindowAdapter()
                     {
                         @Override
@@ -517,7 +516,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextFieldApellido;
-    private javax.swing.JTextField jTextFieldApellido2;
+    private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldDomicilio;
     private javax.swing.JTextField jTextFieldMail;
     private javax.swing.JTextField jTextFieldNombre;
