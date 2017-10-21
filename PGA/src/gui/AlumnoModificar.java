@@ -230,13 +230,13 @@ public class AlumnoModificar extends JDialog implements ActionListener
         this.jList.setModel(this.listModel);
     }
     
-    public void modificarDatos(Alumno a)
+    public void modificarDatos(Alumno alumno)
     {
-        this.jTextFieldNombre.setText(a.getNombre());
-        this.jTextFieldApellido.setText(a.getApellido());
-        this.jTextFieldDomicilio.setText(a.getDomicilio());
-        this.jTextFieldTelefono.setText(a.getTelefono());
-        this.jTextFieldMail.setText(a.getMail());
+        this.jTextFieldNombre.setText(alumno.getNombre());
+        this.jTextFieldApellido.setText(alumno.getApellido());
+        this.jTextFieldDomicilio.setText(alumno.getDomicilio());
+        this.jTextFieldTelefono.setText(alumno.getTelefono());
+        this.jTextFieldMail.setText(alumno.getMail());
     }
     
     public void deshabilitarPanel(JPanel panel)
@@ -297,7 +297,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                         if (controlador.verificaMail(this.jTextFieldMail.getText()))
                                         {
                                             this.controlador.modificaAlumno((Alumno)this.jList.getSelectedValue(), this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
-                                            JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                            JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
                                             this.dispose();
                                         }
                                         else

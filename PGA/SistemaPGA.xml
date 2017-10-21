@@ -30,6 +30,58 @@
       </void>
      </object>
     </void>
+    <void method="put">
+     <string>ALU0007</string>
+     <object class="pga.Alumno">
+      <void property="apellido">
+       <string>nucci</string>
+      </void>
+      <void property="domicilio">
+       <string>dsadl</string>
+      </void>
+      <void property="historiaAcademica">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="legajo">
+       <string>ALU0007</string>
+      </void>
+      <void property="mail">
+       <string>dasljd@djslahdl</string>
+      </void>
+      <void property="nombre">
+       <string>manu</string>
+      </void>
+      <void property="telefono">
+       <string>dasldjha</string>
+      </void>
+     </object>
+    </void>
+    <void method="put">
+     <string>ALU0006</string>
+     <object class="pga.Alumno">
+      <void property="apellido">
+       <string>nucci</string>
+      </void>
+      <void property="domicilio">
+       <string>dsaljdal</string>
+      </void>
+      <void property="historiaAcademica">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="legajo">
+       <string>ALU0006</string>
+      </void>
+      <void property="mail">
+       <string>sda@sdasda</string>
+      </void>
+      <void property="nombre">
+       <string>manu</string>
+      </void>
+      <void property="telefono">
+       <string>dsajhdalj</string>
+      </void>
+     </object>
+    </void>
    </object>
   </void>
   <void method="put">
@@ -155,7 +207,7 @@
  <object class="java.util.HashMap"/>
  <object class="java.util.HashMap"/>
  <object class="java.util.HashMap"/>
- <int>5</int>
+ <int>7</int>
  <int>0</int>
  <int>0</int>
  <int>0</int>
