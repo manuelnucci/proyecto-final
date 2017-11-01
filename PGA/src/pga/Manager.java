@@ -1,6 +1,7 @@
 package pga;
 
 import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.EntidadRepetidaException;
 import exceptions.NoEstaEntidadException;
 
 import java.util.HashMap;
@@ -80,7 +81,7 @@ public class Manager
      * ***************************************************************************************************************
      */
 
-    public Alumno altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
@@ -95,7 +96,6 @@ public class Manager
             hash.put(alumno.getLegajo(), alumno);
             this.alumnos.put(nombreCompleto, hash);
         }
-        return alumno;
     }
     
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02
@@ -163,12 +163,33 @@ public class Manager
         alumno.setMail(mail);
     }
     
+    /**
+     * Se añade a la historia académica del alumno la nueva asignatura aprobada por el alumno.<br>
+     * 
+     * <b>Pre:</b> La asignatura y el alumno son entidades válidas que existen en el sistema.<br>
+     * <b>Post:</b> El alumno posee la asignatura en su historia académica o, en el caso que ya la tuviese se lanza
+     * una excepción.
+     * 
+     * @param alumno Alumno al cual se le dará por aprobada la asignatura. Alumno != null.
+     * @param asignatura Asignatura aprobada por el alumno. Asignatura != null.
+     * @throws EntidadRepetidaException Excepción con la entidad repetida y el mensaje de error.
+     */
+    public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws EntidadRepetidaException
+    {
+        HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
+        
+        if (historiaAcademica.containsKey(asignatura.getId()))
+            throw new EntidadRepetidaException("El alumno ya ha aprobado la asignatura.");
+        else
+            historiaAcademica.put(asignatura.getId(), asignatura);
+    }
+    
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
         HashMap<String, Alumno> ret = this.alumnos.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Alumno no ubicado.");
+            throw new NoEstaEntidadException("Alumno no ubicado");
         
         return ret;
     }
@@ -273,7 +294,7 @@ public class Manager
         profesor.setTelefono(telefono);
         profesor.setMail(mail);  
     }
-    
+
     public void agregarCompetencia(Profesor profesor, Asignatura asignatura) throws EntidadRepetidaException
     {
         HashMap<String, Asignatura> competencias = profesor.getCompetencias();
@@ -283,19 +304,18 @@ public class Manager
         else
             competencias.put(asignatura.getId(), asignatura);
     }
-    
+
     public void bajaCompetencia(Profesor profesor, Asignatura asignatura) throws NoEstaEntidadException
     {
         if (!profesor.getCompetencias().remove(asignatura.getId(), asignatura))
             throw new NoEstaEntidadException(asignatura, "No se encuentra la asignatura en la competencia");
     }
-
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
         HashMap<String, Profesor> ret = this.profesores.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Profesor no ubicado.");
+            throw new NoEstaEntidadException("Profesor no ubicado");
         
         return ret;
     }
@@ -310,23 +330,9 @@ public class Manager
                                 
     public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException // RF12, RF16
     {
-        String nombreCursadaMayus;
-        
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
-            throw new NoEstaEntidadException(profesor, "Profesor no encontrado en la cursada.");
-        
-        if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
-        {
-            nombreCursadaMayus = cursada.getClave().toUpperCase();  // El hash está en mayúscula
-            this.cursadas.get(nombreCursadaMayus).remove(cursada);
-            if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si hemos dejado al HashMap sin cursadas eliminamos
-                                                                 // también al HashMap y a su clave del HashMap de 
-                                                                 // cursadas
-                this.cursadas.remove(nombreCursadaMayus);
+            throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
         }
-        // Si esta última parte es correcta, ¿qué sucede cuando se elimina un profesor del sistema? ¿Se verifica que
-        // la cursada no haya quedado sin profesores? Si es así, ¿se la elimina?
-    }
     
     /*
      * ***************************************************************************************************************
@@ -353,10 +359,17 @@ public class Manager
     
     public void bajaAsignatura(Asignatura asignatura) throws NoEstaEntidadException // RF02
     {
-        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<HashMap<String, Cursada>> itHC;
         Iterator<Cursada> itC;
         Cursada cursada;
         String nombreAsignaturaMayus = asignatura.getClave().toUpperCase(); // El hash está en mayúscula
+        
+        Iterator<HashMap<String, Asignatura>> itHA;
+        Iterator<Asignatura> itA;
+        
+        Iterator<HashMap<String, Profesor>> itHP;
+        Iterator<Profesor> itP;
+        
         String nombreCursadaMayus;
         
         if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getId(), asignatura))
@@ -368,10 +381,10 @@ public class Manager
                 this.asignaturas.remove(nombreAsignaturaMayus);
             
             // Eliminamos todas las cursadas en las que la asignatura aparece
-            itH = this.cursadas.values().iterator();
-            while(itH.hasNext())
+            itHC = this.cursadas.values().iterator();
+            while(itHC.hasNext())
             {
-                itC = itH.next().values().iterator();
+                itC = itHC.next().values().iterator();
                 while (itC.hasNext())
                 {
                     cursada = itC.next();
@@ -385,6 +398,24 @@ public class Manager
                     }
                 }
             }
+            
+            itHA = this.asignaturas.values().iterator(); // Borramos a la asignatura de todas aquellas asignaturas que 
+                                                         // la posean como correlativa
+            while (itHA.hasNext())
+            {
+                itA = itHA.next().values().iterator();
+                while (itA.hasNext())
+                    itA.next().getCorrelatividades().remove(asignatura);
+        }
+            
+            itHP = this.profesores.values().iterator(); // Borramos a la asignatura de todos los profesores que la tengan 
+                                                        // como una competencia
+            while (itHP.hasNext())
+            {
+                itP = itHP.next().values().iterator();
+                while (itP.hasNext())
+                    itP.next().getCompetencias().remove(asignatura);
+            }            
         }
         else
             throw new NoEstaEntidadException(asignatura, "Asignatura no encontrada en el sistema.");
@@ -440,7 +471,7 @@ public class Manager
         HashMap<String, Asignatura> ret = this.asignaturas.get(nombre.toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Asignatura no ubicada.");
+            throw new NoEstaEntidadException("Asignatura no ubicada");
         
         return ret;
     }
@@ -557,7 +588,7 @@ public class Manager
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException(alumno, "El alumno no cumple con las correlatividades para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
     
     public void verificaAlumnoOcupado(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -582,7 +613,7 @@ public class Manager
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException(alumno, "El alumno no cumple con las franjas horarias para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
     
     public void verificaProfesorAptoParaCursada(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -620,6 +651,6 @@ public class Manager
             
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException(profesor, "El profesor no cumple con las franjas horarias para inscribirse" +
-                "a la cursada.");
+                "a la cursada");
     }
 }

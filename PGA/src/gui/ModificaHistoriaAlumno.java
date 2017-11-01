@@ -25,6 +25,8 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
     private static final String BUSCAR = "8";
     private static final String CANCELAR = "9";
     private static final String GUARDAR = "10";
+    
+    private Controlador controlador;
     private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
     private JList jListA, jListC1, jListC2;
     private DefaultListModel listModel, listModelC1, listModelC2;
@@ -34,11 +36,10 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
                         jLabelAsigTotales, jLabelAsigHistoria;
     private JButton jButtonGuardar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonElegir, jButtonBuscar, jButtonBuscar2;
     
-    private Controlador c;
-    
-    public ModificaHistoriaAlumno()
+    public ModificaHistoriaAlumno(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponentsA();
         this.initComponentsB();

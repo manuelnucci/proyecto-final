@@ -15,10 +15,12 @@ import javax.swing.SpringLayout;
 
 import pga.Controlador;
 
-public class AsignaturaAlta extends JDialog implements ActionListener
+public class AsignaturaAlta extends JFrame implements ActionListener
+
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
+    private Controlador controlador;
     private JPanel panel1, panel2;
     private JTextField jTextFieldNombre;
     private JLabel jLabelNombre;
@@ -27,12 +29,12 @@ public class AsignaturaAlta extends JDialog implements ActionListener
     private int numPairs = 1;
     private Controlador c;
     
-    public AsignaturaAlta(Controlador c)
+    public AsignaturaAlta(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta asignatura");
-        this.setModal(true);
         this.c = c;
         this.initComponents();
         this.add(panel1, BorderLayout.WEST);
@@ -100,7 +102,7 @@ public class AsignaturaAlta extends JDialog implements ActionListener
                             }
                             else
                             {
-                                this.c.altaAsignatura(this.jTextFieldNombre.getText());
+                                //this.c.altaAsignatura(this.jTextFieldNombre.getText());
                             }
                             break;
             case CANCELAR:  this.dispose();//Ponele que cierra la ventana

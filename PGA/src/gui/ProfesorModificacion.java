@@ -38,6 +38,8 @@ public class ProfesorModificacion extends JFrame implements ActionListener
     private static final String BUSCAR2 = "8";
     private static final String CANCELAR3 = "9";
     private static final String ACEPTAR3 = "10";
+    
+    private Controlador controlador;
     private JLabel jLabelNombre1, jLabelApellido1, jLabelLegajo1;
     private JTextField jTextFieldNombre1, jTextFieldApellido1, jTextFieldLegajo1;
     private JButton jButtonBuscar1, jButtonElegir, jButtonCancelar1, jButtonAceptar3, jButtonCancelar3;
@@ -50,12 +52,10 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                         jLabelAsigTotales, jLabelAsigHistoria;
     private JButton jButtonAceptar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonBuscar2;
     
-    private Controlador c;
-    
-    public ProfesorModificacion (Controlador c)
+    public ProfesorModificacion (Controlador controlador)
     {
         super();
-        this.c = c;
+        this.controlador = controlador;
         this.initComponentsA();
         this.initComponentsB();
         this.add(panelA, BorderLayout.NORTH);
@@ -296,7 +296,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                             {
                                 try
                                 {
-                                    this.listar(c.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
+                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
                                 }
                                 catch(NoEstaEntidadException e)
                                 {
@@ -312,7 +312,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
             case BUSCAR2:
                             try
                             {
-                                this.listarAsignaturas(c.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
+                                this.listarAsignaturas(controlador.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
                             } catch (NoEstaEntidadException e)
                             {
                                 new VentanaAlerta(this, e.getMessage(), "Error");

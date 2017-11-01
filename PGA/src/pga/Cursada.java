@@ -174,8 +174,8 @@ public class Cursada implements Comparable, Entidad
     @Override
     public String toString()
     {
-        return "Id: " + this.getId() + "\nAsignatura: " + this.getAsignatura().getNombre() + "\nPeriodo: " +
-               this.getPeriodo() + "\nDia: " + this.getDia() + "\nHora de inicio: " + this.getHoraInicio() +
+        return "Id: " + this.id + "\nAsignatura: " + this.getAsignatura().getNombre() + "\nPeriodo: " +
+               this.periodo + "\nDia: " + this.dia + "\nHora de inicio: " + this.horaInicio +
                "\nHora de fin: " + this.horaFin;
     }
 }

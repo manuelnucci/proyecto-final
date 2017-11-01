@@ -1,53 +1,73 @@
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 
-public class AlumnoBaja extends JFrame implements ActionListener
+import pga.Alumno;
+import pga.Controlador;
+
+public class AlumnoBaja extends JDialog implements ActionListener
 {
-    private JLabel jLabelNombre, jLabelApellido,jLabelLegajo;
-    private JTextField jTextFieldNombre, jTextFieldApellido,jTextFieldLegajo;
+    private static final String BUSCAR = "0";
+    private static final String ACEPTAR = "1";
+    private static final String CANCELAR = "2";
+    
+    private Controlador controlador;
+    private JLabel jLabelNombre, jLabelApellido;
+    private JTextField jTextFieldNombre, jTextFieldApellido;
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
     private JScrollPane scrollPanel;
-    private JTextArea jTextArea;
     private JList jList;
-    private JPanel panel, panelDer;
+    private DefaultListModel listModel;
+    private JPanel panel;
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
-    public AlumnoBaja()
+    public AlumnoBaja(Controlador controlador)
     {
         super();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.controlador = controlador;
         this.setTitle("Baja Alumno");
-        this.initComponents();
-        //this.setLayout(new GridLayout(2,2));
-
-        this.add(this.panel, BorderLayout.WEST);
-        this.pack();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setModal(true);
         this.setResizable(false);
+        this.initComponents();
+        this.add(this.panel, BorderLayout.WEST);
+        this.addListeners();
+        this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
-
     }
     
     public void initComponents()
     {
-
         this.panel = new JPanel();
-        
+
         GridBagConstraints c = new GridBagConstraints();
         
         this.panel.setLayout(new GridBagLayout());
@@ -57,12 +77,10 @@ public class AlumnoBaja extends JFrame implements ActionListener
         this.jTextFieldNombre = new JTextField();
         this.jTextFieldApellido = new JTextField();
         this.jButtonBuscar = new JButton("Buscar");
-        this.jLabelLegajo = new JLabel("Legajo");
-        this.jTextFieldLegajo = new JTextField();
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
         this.jList = new JList();
-        this.jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.jList.setLayoutOrientation(JList.VERTICAL);
         this.scrollPanel = new JScrollPane(this.jList);
         
@@ -97,18 +115,6 @@ public class AlumnoBaja extends JFrame implements ActionListener
         c.gridwidth = 1;
         this.panel.add(this.jButtonBuscar, c);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 3;
-        c.gridheight = 1; 
-        c.gridwidth = 1;
-        this.panel.add(this.jLabelLegajo, c);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 3;
-        c.gridheight = 1; 
-        c.gridwidth = 4;
-        this.panel.add(this.jTextFieldLegajo, c);
-        c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 4;
         c.gridy = 4;
         c.gridheight = 1; 
@@ -126,12 +132,77 @@ public class AlumnoBaja extends JFrame implements ActionListener
         c.gridheight = 3; 
         c.gridwidth = 2;
         this.panel.add(this.scrollPanel, c);
-
+        
+        this.jButtonAceptar.setActionCommand(ACEPTAR);
+        this.jButtonBuscar.setActionCommand(BUSCAR);
+        this.jButtonCancelar.setActionCommand(CANCELAR);
+    }
+    
+    public void addListeners()
+    {
+        this.jButtonAceptar.addActionListener(this);
+        this.jButtonBuscar.addActionListener(this);
+        this.jButtonCancelar.addActionListener(this);
+    }
+    
+    public boolean camposVacios()
+    {
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0);
+    }
+    
+    public void listar(HashMap<String, Alumno> hash)
+    {
+        Iterator <Alumno> iA = hash.values().iterator();
+        
+        this.listModel.clear();
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
+        this.jList.setModel(this.listModel);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        // TODO Implement this method
+        DefaultListModel lm = new DefaultListModel();
+        Iterator<Alumno> iA;
+        
+        switch(actionEvent.getActionCommand())
+        {
+            case BUSCAR:    try
+                            {
+                                if (this.camposVacios()) 
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText()));
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            }
+                            break;
+            case ACEPTAR:   try
+                            {
+                                if(this.camposVacios())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    if (this.jList.getSelectedValue() != null)
+                                    {
+                                        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de baja al alumno?", "Baja Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                        {
+                                            controlador.bajaAlumno((Alumno)this.jList.getSelectedValue());
+                                            JOptionPane.showMessageDialog(rootPane, "Baja del Alumno Exitosa");
+                                            this.dispose();
+                                        }
+                                    }
+                                    else
+                                        JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                            }                            
+                            break;
+            default:        this.dispose(); // Cierra la ventana de baja
+        }
     }
 }

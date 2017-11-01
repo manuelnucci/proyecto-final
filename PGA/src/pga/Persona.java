@@ -126,7 +126,7 @@ public class Persona implements Comparable, Entidad
     @Override
     public String toString()
     {
-        return "Nombre y apellido: " + this.nombre + " " + this.apellido + "\nLegajo: " + this.legajo + "\nDomicilio: " 
-               + this.domicilio + "\nTelefono " + this.telefono + "\nMail " + this.mail;
+        return "Nombre y apellido: " + this.nombre + " " + this.apellido + " Legajo: " + this.legajo + " Domicilio: " 
+               + this.domicilio + " Telefono: " + this.telefono + " Mail: " + this.mail;
     }
 }

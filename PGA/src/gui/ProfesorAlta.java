@@ -12,10 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import pga.Controlador;
+
 public class ProfesorAlta extends JFrame implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
+    
+    private Controlador controlador;
     private JPanel panel1, panel2;
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
@@ -23,9 +27,10 @@ public class ProfesorAlta extends JFrame implements ActionListener
     //Cantidad de campos
     private int numPairs = 5;
     
-    public ProfesorAlta()
+    public ProfesorAlta(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta alumno");
         this.initComponents();

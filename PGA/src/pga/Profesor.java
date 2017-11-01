@@ -18,7 +18,7 @@ public class Profesor extends Persona
     public Profesor(String nombre, String apellido, String domicilio, String telefono, String mail)
     {
         super(nombre, apellido, ID_LEGAJO + String.format("%04d", ++legajoProfesor), domicilio, telefono, mail);
-        this.competencias = new HashMap <String, Asignatura>();
+        this.competencias = new HashMap<String, Asignatura>();
     }
 
     public static void setLegajoProfesor(int legajoProfesor)
@@ -41,8 +41,7 @@ public class Profesor extends Persona
         return competencias;
     }
 
-    @Override
-    public String toString()
+    public String infoProfesor()
     {
         Iterator<Asignatura> it = this.competencias.values().iterator();
         String cad;

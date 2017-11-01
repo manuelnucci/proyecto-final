@@ -1,24 +1,63 @@
 package pga;
 
+import exceptions.EntidadRepetidaException;
+
 import java.util.HashMap;
 import java.util.Iterator;
-
+/*
+ * Clase que representa a los alumnos de la facultad.
+ */
 public class Alumno extends Persona
 {
-    private static int legajoAlumno = 0;
-    private static final String ID_LEGAJO = "ALU";
+    private static int legajoAlumno = 0; // Número de legajo del último alumno registrado
+    private static final String ID_LEGAJO = "ALU"; // Parte del formato con que se arma el legajo del alumno
     
-    private HashMap <String, Asignatura> historiaAcademica; // Las claves serán las IDs de la asignaturas
+    private HashMap <String, Asignatura> historiaAcademica; // Colección con las asignaturas aprobadas por el alumno
+    // Las claves serán las IDs de la asignaturas
     
+    /**
+     * Constructor vacío necesario para la serialización en XML
+     */
     public Alumno()
     {
         super();
     }
 
+    /**
+     * Constructor que crea una nueva instancia de alumno.<br>
+     * 
+     * <b> Pre:</b> Los parámetros vienen ya siendo válidos. Hay una asignación directa. 
+     * El mail ya cuenta con el formato correcto.<br>
+     * <b> Post:</b> Se crea una nueva instancia de alumno con los parámetros validados.
+     * 
+     * @param nombre Nombre del alumno. Nombre != null && nombre != ""
+     * @param apellido Apellido del alumno. Apellido != null && apellido != ""
+     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != ""
+     * @param telefono Telefono del alumno. Telefono != null && telefono != ""
+     * @param mail Mail del alumno. Mail != null && mail != ""
+     */
     public Alumno(String nombre, String apellido, String domicilio, String telefono, String mail)
     {
         super(nombre, apellido, ID_LEGAJO + String.format("%04d", ++legajoAlumno), domicilio, telefono, mail);
         this.historiaAcademica = new HashMap <String, Asignatura>();
+    }
+
+    /**
+     * Se añade a la historia académica del alumno la nueva asignatura aprobada por el alumno.<br>
+     * 
+     * <b>Pre:</b> La asignatura es una asignatura válida que existe en el sistema.<br>
+     * <b>Post:</b> El alumno posee la asignatura en su historia académica o, en el caso que ya la tuviese se lanza
+     * una excepción.
+     * 
+     * @param asignatura Asignatura aprobada por el alumno. Asignatura != null.
+     * @throws EntidadRepetidaException Excepción con la entidad repetida y el mensaje de error.
+     */
+    public void aprobarAsignatura(Asignatura asignatura) throws EntidadRepetidaException
+    {
+        if (this.historiaAcademica.containsKey(asignatura.getId()))
+            throw new EntidadRepetidaException("El alumno ya ha aprobado la asignatura.");
+        else
+            this.historiaAcademica.put(asignatura.getId(), asignatura);
     }
 
     public static void setLegajoAlumno(int legajoAlumno)
@@ -41,17 +80,24 @@ public class Alumno extends Persona
         return historiaAcademica;
     }
 
-    @Override
-    public String toString()
+    /**
+     * Método que muestra la información completa del alumno, tanto sus atributos personales como
+     * su historia académica.<br>
+     * 
+     * <b>Post:</b> Se devuelve un String con la información del alumno.
+     * 
+     * @return String con la información del alumno.
+     */
+    public String infoAlumno()
     {
-//        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
+        Iterator<Asignatura> it = this.historiaAcademica.values().iterator();
         String cad;
         
-        cad = super.toString(); //+ "\nHistoria academica:";
+        cad = super.toString() + "\nHistoria academica:";
         
-       /* while(it.hasNext())
+        while(it.hasNext())
             cad += "\n\t" + it.next().getNombre();
-        */
+        
         return cad;
     }
 }
