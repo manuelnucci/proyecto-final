@@ -283,7 +283,6 @@ public class Manager
         profesor.setCompetencias(competencias);
     }
 
-
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
         HashMap<String, Profesor> ret = this.profesores.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
@@ -303,23 +302,9 @@ public class Manager
     }
                                 
     public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException // RF12, RF16
-    {
-        String nombreCursadaMayus;
-        
+    {       
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
             throw new NoEstaEntidadException("Profesor no encontrado en la cursada");
-        
-        if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
-        {
-            nombreCursadaMayus = cursada.getNombre().toUpperCase();  // El hash está en mayúscula
-            this.cursadas.get(nombreCursadaMayus).remove(cursada);
-            if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si hemos dejado al HashMap sin cursadas eliminamos
-                                                                 // también al HashMap y a su clave del HashMap de 
-                                                                 // cursadas
-                this.cursadas.remove(nombreCursadaMayus);
-        }
-        // Si esta última parte es correcta, ¿qué sucede cuando se elimina un profesor del sistema? ¿Se verifica que
-        // la cursada no haya quedado sin profesores? Si es así, ¿se la elimina?
     }
     
     /*
@@ -328,11 +313,11 @@ public class Manager
      * ***************************************************************************************************************
      */
     
-    public void altaAsignatura(String nombre, HashMap<String, Asignatura> correlatividades) // RF01
+    public void altaAsignatura(String nombre) // RF01
     {
         String nombreAsignaturaMayus = nombre.toUpperCase(); // El hash está en mayúscula
         
-        Asignatura asignatura = Factory.getAsignatura(nombreAsignaturaMayus, correlatividades);
+        Asignatura asignatura = Factory.getAsignatura(nombreAsignaturaMayus);
         
         if (this.asignaturas.containsKey(nombreAsignaturaMayus))
             this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
@@ -347,9 +332,16 @@ public class Manager
     
     public void bajaAsignatura(Asignatura asignatura) throws NoEstaEntidadException // RF02
     {
-        Iterator<HashMap<String, Cursada>> itH;
+        Iterator<HashMap<String, Cursada>> itHC;
         Iterator<Cursada> itC;
         Cursada cursada;
+        
+        Iterator<HashMap<String, Asignatura>> itHA;
+        Iterator<Asignatura> itA;
+        
+        Iterator<HashMap<String, Profesor>> itHP;
+        Iterator<Profesor> itP;
+        
         String nombreAsignaturaMayus = asignatura.getNombre(); // El hash está en mayúscula
         String nombreCursadaMayus;
         
@@ -362,10 +354,10 @@ public class Manager
                 this.asignaturas.remove(nombreAsignaturaMayus);
             
             // Eliminamos todas las cursadas en las que la asignatura aparece
-            itH = this.cursadas.values().iterator();
-            while(itH.hasNext())
+            itHC = this.cursadas.values().iterator();
+            while(itHC.hasNext())
             {
-                itC = itH.next().values().iterator();
+                itC = itHC.next().values().iterator();
                 while (itC.hasNext())
                 {
                     cursada = itC.next();
@@ -379,6 +371,24 @@ public class Manager
                     }
                 }
             }
+            
+            itHA = this.asignaturas.values().iterator(); // Borramos a la asignatura de todas aquellas asignaturas que 
+                                                         // la posean como correlativa
+            while (itHA.hasNext())
+            {
+                itA = itHA.next().values().iterator();
+                while (itA.hasNext())
+                    itA.next().getCorrelatividades().remove(asignatura);
+            }
+            
+            itHP = this.profesores.values().iterator(); // Borramos a la asignatura de todos los profesores que la tengan 
+                                                        // como una competencia
+            while (itHP.hasNext())
+            {
+                itP = itHP.next().values().iterator();
+                while (itP.hasNext())
+                    itP.next().getCompetencias().remove(asignatura);
+            }            
         }
         else
             throw new NoEstaEntidadException("Asignatura no encontrada en el sistema");

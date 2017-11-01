@@ -7,11 +7,25 @@ import gui.VentanaPrincipal;
 
 import java.util.HashMap;
 
+/*
+ * Clase que sirve como intermediaria entre el modelo y la interfaz gráfica.
+ * Posee métodos que funcionan como mensajeros invocando métodos del modelo y, si fuese necesario,
+ * devuelven los resultados a la GUI para que los utilice luego.
+ */
 public class Controlador
 {
-    private Manager modelo;
-    private VentanaPrincipal ventana;
-    
+    private Manager modelo; // Modelo del sistema con todos sus métodos.
+    private VentanaPrincipal ventana; // Referencia a la ventana principal de la interfaz gráfica.
+
+    /**
+     * Constructor que crea una nueva instancia del Controlador
+     * 
+     * <b>Pre:</b> Los parámetros deben ser válidos.
+     * <b>Post:</b> Se crea una nueva instancia del controlador.
+     * 
+     * @param modelo Es el modelo o sistema. Modelo != null.
+     * @param ventana Es la interfaz de la aplicación. Ventana != null
+     */
     public Controlador(Manager modelo, VentanaPrincipal ventana)
     {
         super();

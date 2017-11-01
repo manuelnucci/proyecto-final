@@ -17,18 +17,18 @@ public class Factory
         Persona ret;
         
         if (tipo == ALUMNO)
-            ret = new Alumno(nombre, apellido, domicilio, telefono, mail, new HashMap <String, Asignatura>());
+            ret = new Alumno(nombre, apellido, domicilio, telefono, mail);
         else 
             if (tipo == PROFESOR)
-                ret = new Profesor(nombre, apellido, domicilio, telefono, mail, new HashMap <String, Asignatura>());
+                ret = new Profesor(nombre, apellido, domicilio, telefono, mail);
             else
                 ret = null;
         return ret;       
     }
     
-    public static Asignatura getAsignatura(String nombre, HashMap<String, Asignatura> correlatividades)
+    public static Asignatura getAsignatura(String nombre)
     {
-        return new Asignatura(nombre, correlatividades);
+        return new Asignatura(nombre);
     }
     
     public static Cursada getCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
