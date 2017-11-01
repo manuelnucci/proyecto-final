@@ -300,7 +300,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                                 }
                                 catch(NoEstaEntidadException e)
                                 {
-                                    new VentanaAlerta(this, e.getMensaje(), "Error");
+                                    new VentanaAlerta(this, e.getMessage(), "Error");
                                 }
                             }
 
@@ -315,7 +315,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                                 this.listarAsignaturas(c.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
                             } catch (NoEstaEntidadException e)
                             {
-                                new VentanaAlerta(this, e.getMensaje(), "Error");
+                                new VentanaAlerta(this, e.getMessage(), "Error");
                             }
             
             case ANADIR:    this.anadirAsignatura();
