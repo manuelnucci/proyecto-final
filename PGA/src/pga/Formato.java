@@ -10,7 +10,7 @@ public class Formato
     public static final int TAMANO_PERIODO = 7;
     public static final int TAMANO_HORA = 7;
     
-    public Formato()
+    private Formato()
     {
         super();
     }

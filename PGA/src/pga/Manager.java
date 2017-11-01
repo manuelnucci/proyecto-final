@@ -1,5 +1,6 @@
 package pga;
 
+import exceptions.EmailInvalidoException;
 import exceptions.EntidadNoAptaParaCursadaException;
 import exceptions.EntidadRepetidaException;
 import exceptions.NoEstaEntidadException;
@@ -10,22 +11,45 @@ import java.util.Iterator;
 public class Manager
 {
     private static Manager instancia = null;
+    
+    // Colección con todos los alumnos de la facultad
     // Las claves serán los nombres y apellidos de los alumnos
     private HashMap<String, HashMap<String, Alumno>> alumnos = new HashMap<String, HashMap<String, Alumno>>();
+    
+    // Colección con todos los profesores de la facultad
     // Las claves serán los nombres y apellidos de los profesores
     private HashMap<String, HashMap<String, Profesor>> profesores = new HashMap<String, HashMap<String, Profesor>>(); 
+    
+    // Colección con todas las asignaturas de la facultad
     // Las claves serán los nombres de las asignaturas
     private HashMap<String, HashMap<String, Asignatura>> asignaturas = new HashMap<String, HashMap<String, Asignatura>>(); 
+    
+    // Colección con todas las cursadas de la facultad
     // Las claves serán los nombres de las cursadas
     private HashMap<String, HashMap<String, Cursada>> cursadas = new HashMap<String, HashMap<String, Cursada>>();
 
+    /**
+     * Constructor vacío que crea una nueva instancia de Manager. 
+     * Su modificador de acceso es privado para poder aplicar el patrón Singleton correctamente y
+     * evitar inicializaciones que no pasen por el método getInstance().<br>
+     * 
+     * <b>Pre:</b> No existen precondiciones al momento de llamar al constructor.<br>
+     * <b>Post:</b> Se crea una nueva instancia de la clase Manager.
+     */
     private Manager()
     {
         super();
     }
-    
+
     /**
-     * Patrón Singleton
+     * Método estático que permite aplicar el Patrón Singleton y obtener siempre la misma instancia de
+     * la clase Manager.<br>
+     * 
+     * <b>Pre:</b> No existen precondiciones al momento de llamar al método.<br>
+     * <b>Post:</b> Se devuelve una nueva instancia de Manager si no existiese o la misma instancia si lo hace.
+     * 
+     * @return Nueva instancia de la clase Manager si nunca fue instanciada o la misma y única instancia en caso 
+     * contrario. 
      */
     public static Manager getInstancia()
     {
@@ -81,23 +105,52 @@ public class Manager
      * ***************************************************************************************************************
      */
 
-    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
+    /**
+     * Método que realiza un alta de un alumno en el sistema.<br>
+     * 
+     * <b>Pre:</b> La colección de alumnos ya fue inicializada.<br>
+     * <b>Post:</b> El alumno es dado de alta o se lanza una excepción en el caso que el formato del mail sea incorrecto.
+     * 
+     * @param nombre Nombre del alumno. Nombre != null && nombre != "".
+     * @param apellido Apellido del alumno. Apellido != null && apellido != "".
+     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != "".
+     * @param telefono Telefono del alumno. Telefono != null && telefono != "".
+     * @param mail Mail del alumno. Mail != null && mail != "".
+     * @throws EmailInvalidoException Excepción lanzada si el formato del mail no es válido.
+     */
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail)
+        throws EmailInvalidoException // RF01
     {
-        Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
-        String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
-        
-        if (this.alumnos.containsKey(nombreCompleto))
-            this.alumnos.get(nombreCompleto).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno cuya clave
-                                                                              // será su legajo
-        else
+        if (Formato.verificaMail(mail))
         {
-            HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y depositamos 
-                                                                          // al alumno allí
-            hash.put(alumno.getLegajo(), alumno);
-            this.alumnos.put(nombreCompleto, hash);
+            Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
+            String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
+            
+            if (this.alumnos.containsKey(nombreCompleto))
+                this.alumnos.get(nombreCompleto).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno cuya clave
+                                                                                  // será su legajo
+            else
+            {
+                HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y depositamos 
+                                                                              // al alumno allí
+                hash.put(alumno.getLegajo(), alumno);
+                this.alumnos.put(nombreCompleto, hash);
+            }   
         }
+        else
+            throw new EmailInvalidoException(mail, "El mail ingresado no cumple con el formato previsto.");
     }
-    
+
+    /**
+     * Método que da de baja un alumno del sistema.<br>
+     * 
+     * <b>Pre:</b> La colección de alumnos ya fue inicializada.<br>
+     * <b>Post:</b> Se da de baja al alumno de la institución o se lanza una excepción si el mismo no fue
+     * encontrado en la colección.
+     * 
+     * @param alumno Alumno a dar de baja. Alumno != null.
+     * @throws NoEstaEntidadException Excepción lanzada si el alumno no es encontrado en el sistema.
+     */
     public void bajaAlumno(Alumno alumno) throws NoEstaEntidadException // RF02
     {
         Iterator<HashMap<String, Cursada>> itH;
@@ -124,66 +177,99 @@ public class Manager
         else
             throw new NoEstaEntidadException(alumno, "Alumno no encontrado en el sistema.");
     }
-    
+
+    /**
+     * Método que modifica los atributos del alumno si este ya se encuentra en el sistema.<br>
+     * 
+     * <b>Pre:</b> El alumno es una entidad válida.<br>
+     * <b>Post:</b> Los atributos del alumno son modificados en el caso que se lo encuentre y cumplan con el formato.
+     * Si el mail no es válido se lanza una excepción notificando esto y si el alumno no es encontrado en la colección
+     * también se lanza una excepción para mostrar este problema.
+     * 
+     * @param nombre Nombre del alumno. Nombre != null && nombre != "".
+     * @param apellido Apellido del alumno. Apellido != null && apellido != "".
+     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != "".
+     * @param telefono Telefono del alumno. Telefono != null && telefono != "".
+     * @param mail Mail del alumno. Mail != null && mail != "".
+     * @throws NoEstaEntidadException Excepción lanzada si el alumno no es encontrado en la colección.
+     * @throws EmailInvalidoException Excepción lanzada si el mail no cumple con el formato previsto.
+     */
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
-                               String mail) throws NoEstaEntidadException // RF03
+                               String mail) throws NoEstaEntidadException, EmailInvalidoException // RF03
     {   
         String nombreViejo;
         String nombreNuevo;
         
-        if (!alumno.getNombre().toUpperCase().equals(nombre.toUpperCase()) || !alumno.getApellido().toUpperCase().equals(apellido.toUpperCase()))
+        if (Formato.verificaMail(mail))
         {
-            nombreViejo = alumno.getClave().toUpperCase(); // El hash está en mayúscula
-            
-            if (this.alumnos.containsKey(nombreViejo) && this.alumnos.get(nombreViejo).remove(alumno.getLegajo(), alumno))
+            if (!alumno.getNombre().toUpperCase().equals(nombre.toUpperCase()) || !alumno.getApellido().toUpperCase().equals(apellido.toUpperCase()))
+            // El nombre o apellido ha cambiado, hay movimiento de cubetas.
             {
-                if (this.alumnos.get(nombreViejo).isEmpty()) // El HashMap ha quedado vacío, sin alumnos
-                    this.alumnos.remove(nombreViejo);
-                
-                alumno.setNombre(nombre);
-                alumno.setApellido(apellido);
-                nombreNuevo = (nombre + apellido).toUpperCase(); // El hash está en mayúscula
-                
-                if (this.alumnos.containsKey(nombreNuevo))
-                    this.alumnos.get(nombreNuevo).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno
-                else
+                nombreViejo = alumno.getClave().toUpperCase(); // El hash está en mayúscula
+                if (this.alumnos.containsKey(nombreViejo) && this.alumnos.get(nombreViejo).remove(alumno.getLegajo(), alumno))
                 {
-                    HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y 
-                                                                                  // depositamos al alumno allí
-                    hash.put(alumno.getLegajo(), alumno);
-                    this.alumnos.put(nombreNuevo, hash);
+                    if (this.alumnos.get(nombreViejo).isEmpty()) // El HashMap ha quedado vacío, sin alumnos
+                        this.alumnos.remove(nombreViejo);
+                    
+                    alumno.setNombre(nombre);
+                    alumno.setApellido(apellido);
+                    nombreNuevo = alumno.getClave().toUpperCase(); // El hash está en mayúscula
+                    
+                    if (this.alumnos.containsKey(nombreNuevo))
+                        this.alumnos.get(nombreNuevo).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno
+                    else
+                    {
+                        HashMap<String, Alumno> hash = new HashMap<String, Alumno>(); // Creamos una nueva cubeta y 
+                                                                                      // depositamos al alumno allí
+                        hash.put(alumno.getLegajo(), alumno);
+                        this.alumnos.put(nombreNuevo, hash);
+                    }
                 }
+                else
+                    throw new NoEstaEntidadException(alumno, "Alumno no encontrado en el sistema.");
             }
-            else
-                throw new NoEstaEntidadException(alumno, "Alumno no encontrado en el sistema.");
+            alumno.setDomicilio(domicilio);
+            alumno.setTelefono(telefono);
+            alumno.setMail(mail);   
         }
-        
-        alumno.setDomicilio(domicilio);
-        alumno.setTelefono(telefono);
-        alumno.setMail(mail);
+        else
+            throw new EmailInvalidoException(mail, "El mail ingresado no cumple con el formato previsto.");
     }
     
     /**
-     * Se añade a la historia académica del alumno la nueva asignatura aprobada por el alumno.<br>
+     * Se añade a la historia académica del alumno la nueva asignatura aprobada por el mismo.<br>
      * 
      * <b>Pre:</b> La asignatura y el alumno son entidades válidas que existen en el sistema.<br>
-     * <b>Post:</b> El alumno posee la asignatura en su historia académica o, en el caso que ya la tuviese se lanza
+     * <b>Post:</b> El alumno posee la asignatura en su historia académica o, en el caso que ya la tuviese, se lanza
      * una excepción.
      * 
      * @param alumno Alumno al cual se le dará por aprobada la asignatura. Alumno != null.
      * @param asignatura Asignatura aprobada por el alumno. Asignatura != null.
-     * @throws EntidadRepetidaException Excepción con la entidad repetida y el mensaje de error.
+     * @throws EntidadRepetidaException Excepción con la asignatura repetida y el mensaje de error.
      */
     public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws EntidadRepetidaException
     {
         HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
         
         if (historiaAcademica.containsKey(asignatura.getId()))
-            throw new EntidadRepetidaException("El alumno ya ha aprobado la asignatura.");
+            throw new EntidadRepetidaException(asignatura, "El alumno ya ha aprobado la asignatura.");
         else
             historiaAcademica.put(asignatura.getId(), asignatura);
     }
-    
+
+    /**
+     * Método que devuelve todos aquellos alumnos que cumplen con los parámetros de búsqueda.
+     * En este caso, todos aquellos que posean dicho nombre y apellido.
+     * 
+     * <b>Pre:</b> La colección de alumnos ya fue inicializada.<br>
+     * <b>Post:</b> Se devuelve una colección con todos aquellos alumnos que surgieron de la búsqueda.
+     * 
+     * @param nombre Nombre del alumno a ubicar. Nombre != null && nombre != "".
+     * @param apellido Apellido del alumno a ubicar. Apellido != null && apellido != "".
+     * @return HashMap con todos aquellos alumnos que cumplen la condición.
+     * @throws NoEstaEntidadException Excepción lanzada en el caso que no se encuentre ningún alumno con 
+     * el nombre y apellido solicitados.
+     */
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
         HashMap<String, Alumno> ret = this.alumnos.get((nombre + apellido).toUpperCase()); // El hash está en mayúscula
@@ -193,7 +279,19 @@ public class Manager
         
         return ret;
     }
-    
+
+    /**
+     * Método que realiza una incripción de un alumno a una cursada.
+     * 
+     * <b>Pre:</b> Tanto el alumno como la cursada son entidades válidas que existen en el sistema.<br>
+     * <b>Post:</b> El alumno es incripto en la cursada o una excepción es lanzada en el caso que el estudiante
+     * no cumpla con las correlatividades y/u horarios.
+     * 
+     * @param alumno Alumno a dar de alta en la cursada. Alumno != null.
+     * @param cursada Cursada en la que se inscribirá el alumno. Cursada != null.
+     * @throws EntidadNoAptaParaCursadaException Excepción lanzada en el caso que el alumno no cumpla con las 
+     * correlatividades pedidas o presente una superposición de horarios con otra cursada.
+     */
     public void altaAlumnoACursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException 
         // RF11, RF13
     {
