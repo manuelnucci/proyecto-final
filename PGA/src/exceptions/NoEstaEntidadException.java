@@ -1,16 +1,24 @@
 package exceptions;
 
+import pga.Entidad;
+
 public class NoEstaEntidadException extends Exception
 {
-    private String mensaje;
+    private Entidad entidad;
     
-    public NoEstaEntidadException(String mensaje)
+    public NoEstaEntidadException(Entidad entidad, String mensaje)
     {
-        this.mensaje = mensaje;
+        super(mensaje);
+        this.entidad = entidad;
     }
 
-    public String getMensaje()
+    public NoEstaEntidadException(String mensaje)
     {
-        return mensaje;
+        super(mensaje);
+    }
+    
+    public Entidad getEntidad()
+    {
+        return entidad;
     }
 }

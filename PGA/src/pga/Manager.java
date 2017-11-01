@@ -102,7 +102,7 @@ public class Manager
     {
         Iterator<HashMap<String, Cursada>> itH;
         Iterator<Cursada> itC;
-        String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
+        String nombreCompleto = alumno.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (this.alumnos.containsKey(nombreCompleto) && this.alumnos.get(nombreCompleto).remove(alumno.getLegajo(), alumno))
             // Si el alumno existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
@@ -122,7 +122,7 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Alumno no encontrado en el sistema.");
+            throw new NoEstaEntidadException(alumno, "Alumno no encontrado en el sistema.");
     }
     
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
@@ -133,7 +133,7 @@ public class Manager
         
         if (!alumno.getNombre().toUpperCase().equals(nombre.toUpperCase()) || !alumno.getApellido().toUpperCase().equals(apellido.toUpperCase()))
         {
-            nombreViejo = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
+            nombreViejo = alumno.getClave().toUpperCase(); // El hash está en mayúscula
             
             if (this.alumnos.containsKey(nombreViejo) && this.alumnos.get(nombreViejo).remove(alumno.getLegajo(), alumno))
             {
@@ -155,17 +155,12 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Alumno no encontrado en el sistema.");
+                throw new NoEstaEntidadException(alumno, "Alumno no encontrado en el sistema.");
         }
         
         alumno.setDomicilio(domicilio);
         alumno.setTelefono(telefono);
         alumno.setMail(mail);
-    }
-    
-    public void modificaHistoriaAcademica(Alumno alumno, HashMap <String, Asignatura> historiaAcademica)
-    {
-        alumno.setHistoriaAcademica(historiaAcademica);
     }
     
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05
@@ -188,7 +183,7 @@ public class Manager
     public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException // RF11, RF14
     {
         if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
-            throw new NoEstaEntidadException("Alumno no encontrado en la cursada.");
+            throw new NoEstaEntidadException(alumno, "Alumno no encontrado en la cursada.");
     }
     
     /*
@@ -200,7 +195,7 @@ public class Manager
     public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail) // RF01
     {
         Profesor profesor = (Profesor) Factory.getPersona(Factory.PROFESOR, nombre, apellido, domicilio, telefono, mail);
-        String nombreCompleto = (profesor.getNombre() + profesor.getApellido()).toUpperCase(); // El hash está en mayúscula
+        String nombreCompleto = profesor.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (this.profesores.containsKey(nombreCompleto))
             this.profesores.get(nombreCompleto).put(profesor.getLegajo(), profesor); // Agregamos al HashMap el profesor 
@@ -218,7 +213,7 @@ public class Manager
     {
         Iterator<HashMap<String, Cursada>> itH;
         Iterator<Cursada> itC;
-        String nombreCompleto = (profesor.getNombre() + profesor.getApellido()).toUpperCase(); // El hash está en mayúscula
+        String nombreCompleto = profesor.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (this.profesores.containsKey(nombreCompleto) && this.profesores.get(nombreCompleto).remove(profesor.getLegajo(), profesor))
             // Si el profesor existe en la facultad y fue posible eliminarlo proseguimos a eliminarlo de todas las cursadas
@@ -238,7 +233,7 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
+            throw new NoEstaEntidadException(profesor, "Profesor no encontrado en el sistema.");
     }
     
     public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono,
@@ -249,7 +244,7 @@ public class Manager
         
         if (!profesor.getNombre().toUpperCase().equals(nombre.toUpperCase()) || !profesor.getApellido().toUpperCase().equals(apellido.toUpperCase()))
         {
-            nombreViejo = (profesor.getNombre() + profesor.getApellido()).toUpperCase(); // El hash está en mayúscula
+            nombreViejo = profesor.getClave().toUpperCase(); // El hash está en mayúscula
             
             if (this.profesores.containsKey(nombreViejo) && this.profesores.get(nombreViejo).remove(profesor.getLegajo(), profesor))
             {
@@ -271,19 +266,29 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Profesor no encontrado en el sistema.");
+                throw new NoEstaEntidadException(profesor, "Profesor no encontrado en el sistema.");
         }
         
         profesor.setDomicilio(domicilio);
         profesor.setTelefono(telefono);
         profesor.setMail(mail);  
     }
-
-    public void modificaCompetencias(Profesor profesor, HashMap <String, Asignatura> competencias)
+    
+    public void agregarCompetencia(Profesor profesor, Asignatura asignatura) throws EntidadRepetidaException
     {
-        profesor.setCompetencias(competencias);
+        HashMap<String, Asignatura> competencias = profesor.getCompetencias();
+        
+        if (competencias.containsKey(asignatura.getId()))
+            throw new EntidadRepetidaException(asignatura, "El profesor ya tiene la competencia");
+        else
+            competencias.put(asignatura.getId(), asignatura);
     }
-
+    
+    public void bajaCompetencia(Profesor profesor, Asignatura asignatura) throws NoEstaEntidadException
+    {
+        if (!profesor.getCompetencias().remove(asignatura.getId(), asignatura))
+            throw new NoEstaEntidadException(asignatura, "No se encuentra la asignatura en la competencia");
+    }
 
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException // RF05
     {
@@ -308,11 +313,11 @@ public class Manager
         String nombreCursadaMayus;
         
         if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
-            throw new NoEstaEntidadException("Profesor no encontrado en la cursada.");
+            throw new NoEstaEntidadException(profesor, "Profesor no encontrado en la cursada.");
         
         if (cursada.getProfesores().isEmpty()) // Si la cursada ha quedado sin profesores se la debe eliminar
         {
-            nombreCursadaMayus = cursada.getNombre().toUpperCase();  // El hash está en mayúscula
+            nombreCursadaMayus = cursada.getClave().toUpperCase();  // El hash está en mayúscula
             this.cursadas.get(nombreCursadaMayus).remove(cursada);
             if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si hemos dejado al HashMap sin cursadas eliminamos
                                                                  // también al HashMap y a su clave del HashMap de 
@@ -329,11 +334,11 @@ public class Manager
      * ***************************************************************************************************************
      */
     
-    public void altaAsignatura(String nombre, HashMap<String, Asignatura> correlatividades) // RF01
+    public void altaAsignatura(String nombre) // RF01
     {
         String nombreAsignaturaMayus = nombre.toUpperCase(); // El hash está en mayúscula
         
-        Asignatura asignatura = Factory.getAsignatura(nombreAsignaturaMayus, correlatividades);
+        Asignatura asignatura = Factory.getAsignatura(nombreAsignaturaMayus);
         
         if (this.asignaturas.containsKey(nombreAsignaturaMayus))
             this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
@@ -351,7 +356,7 @@ public class Manager
         Iterator<HashMap<String, Cursada>> itH;
         Iterator<Cursada> itC;
         Cursada cursada;
-        String nombreAsignaturaMayus = asignatura.getNombre(); // El hash está en mayúscula
+        String nombreAsignaturaMayus = asignatura.getClave().toUpperCase(); // El hash está en mayúscula
         String nombreCursadaMayus;
         
         if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getId(), asignatura))
@@ -372,7 +377,7 @@ public class Manager
                     cursada = itC.next();
                     if (cursada.getAsignatura().equals(asignatura))
                     {
-                        nombreCursadaMayus = cursada.getNombre().toUpperCase(); // El hash está en mayúscula
+                        nombreCursadaMayus = cursada.getClave().toUpperCase(); // El hash está en mayúscula
                         this.cursadas.get(nombreCursadaMayus).remove(cursada); // Eliminamos la cursada de su HashMap
                         if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si el HashMap queda vacío se lo debe
                                                                              // eliminar del HashMap general de cursadas
@@ -382,13 +387,13 @@ public class Manager
             }
         }
         else
-            throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
+            throw new NoEstaEntidadException(asignatura, "Asignatura no encontrada en el sistema.");
     }
     
     public void modificaAsignatura(Asignatura asignatura, String nombre)
         throws NoEstaEntidadException // RF03
     {
-        String nombreAsignaturaMayus = asignatura.getNombre(); // El hash está en mayúscula
+        String nombreAsignaturaMayus = asignatura.getClave().toUpperCase(); // El hash está en mayúscula
         if (!nombreAsignaturaMayus.equals(nombre.toUpperCase()))
         {            
             if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getId(), asignatura))
@@ -411,13 +416,23 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Asignatura no encontrada en el sistema.");
+                throw new NoEstaEntidadException(asignatura, "Asignatura no encontrada en el sistema.");
         }
     }
     
-    public void modificaCorrelatividades(Asignatura asignatura, HashMap <String, Asignatura> correlatividades)
+    public void agregarCorrelativa(Asignatura asignatura, Asignatura correlativa) throws EntidadRepetidaException
     {
-        asignatura.setCorrelatividades(correlatividades);
+        HashMap<String, Asignatura> correlativas = asignatura.getCorrelatividades(); 
+        if (correlativas.containsKey(correlativa.getId()))
+            throw new EntidadRepetidaException(correlativa, "La asignatura ya tiene la correlativa");
+        else
+            correlativas.put(correlativa.getId(), correlativa);
+    }
+    
+    public void bajaCorrelativa(Asignatura asignatura, Asignatura correlativa) throws NoEstaEntidadException
+    {
+        if (!asignatura.getCorrelatividades().remove(correlativa.getId(), correlativa))
+            throw new NoEstaEntidadException(correlativa, "No se encuentra la correlativa en las correlatividades");
     }
     
     public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException // RF05
@@ -439,10 +454,6 @@ public class Manager
     public void altaCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, 
                             String horaFin) // RF06
     {
-        /**
-         * El requisito de verificar que la cursada sea viable (RF17) no tiene sentido ya que podrían existir dos 
-         * cursadas, incluso de la misma asignatura, en el mismo día y horario.
-         */
         String nombreCursadaMayus = nombre.toUpperCase(); // El hash está en mayúscula
         Cursada cursada = Factory.getCursada(nombre, asignatura, periodo, dia, horaInicio, horaFin);
         
@@ -459,7 +470,7 @@ public class Manager
     
     public void bajaCursada(Cursada cursada) throws NoEstaEntidadException // RF07
     {        
-        String nombreCursadaMayus = cursada.getNombre(); // El hash está en mayúscula
+        String nombreCursadaMayus = cursada.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (this.cursadas.containsKey(nombreCursadaMayus) && this.cursadas.get(nombreCursadaMayus).remove(cursada.getId(), cursada))
             // Si hemos encontrado la cursada y podido eliminarla
@@ -467,13 +478,13 @@ public class Manager
                                                                   // lo eliminamos del HashMap general de cursadas
                 this.cursadas.remove(nombreCursadaMayus);
         else
-            throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
+            throw new NoEstaEntidadException(cursada, "Cursada no encontrada en el sistema.");
     }
     
     public void modificaCursada(Cursada cursada, String nombre, Asignatura asignatura, String periodo, String dia, 
                                 String horaInicio, String horaFin) throws NoEstaEntidadException //RF08
     {
-        String nombreCursadaMayus = cursada.getNombre().toUpperCase(); // El hash está en mayúscula
+        String nombreCursadaMayus = cursada.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (!nombreCursadaMayus.equals(nombre.toUpperCase()))
         {            
@@ -496,7 +507,7 @@ public class Manager
                 }
             }
             else
-                throw new NoEstaEntidadException("Cursada no encontrada en el sistema.");
+                throw new NoEstaEntidadException(cursada, "Cursada no encontrada en el sistema.");
         }
         
         cursada.setAsignatura(asignatura);
@@ -524,10 +535,8 @@ public class Manager
     
     public boolean horariosSolapan(Cursada c1, Cursada c2)
     {
-        return c1.getDia().equals(c2.getDia()) && ((c1.getHoraInicio().compareTo(c2.getHoraInicio()) >= 0 && 
-                                                    c1.getHoraInicio().compareTo(c2.getHoraFin()) <= 0) || 
-                                                   (c1.getHoraFin().compareTo(c2.getHoraInicio()) >= 0 && 
-                                                    c1.getHoraFin().compareTo(c2.getHoraFin()) <= 0)); 
+        return c1.getPeriodo().equals(c2.getPeriodo()) && c1.getDia().equals(c2.getDia()) &&
+                    !(c1.getHoraInicio().compareTo(c2.getHoraFin()) > 0 || c1.getHoraFin().compareTo(c2.getHoraInicio()) < 0); 
     }
     
     public void verificaAlumnoAptoParaCursada(Alumno alumno, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -547,7 +556,7 @@ public class Manager
             sigue = alumno.getHistoriaAcademica().containsKey(it.next().getId()); // La clave de la asignatura es su ID
         
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las correlatividades para inscribirse" +
+            throw new EntidadNoAptaParaCursadaException(alumno, "El alumno no cumple con las correlatividades para inscribirse" +
                 "a la cursada.");
     }
     
@@ -572,7 +581,7 @@ public class Manager
         }
         
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El alumno no cumple con las franjas horarias para inscribirse" +
+            throw new EntidadNoAptaParaCursadaException(alumno, "El alumno no cumple con las franjas horarias para inscribirse" +
                 "a la cursada.");
     }
     
@@ -586,7 +595,7 @@ public class Manager
         // RF18
     {
         if(!profesor.getCompetencias().containsKey(cursada.getAsignatura().getId()))
-                throw new EntidadNoAptaParaCursadaException("El profesor no está habilitado para dictar la cursada.");
+                throw new EntidadNoAptaParaCursadaException(profesor, "El profesor no está habilitado para dictar la cursada.");
 
     }
     public void verificaProfesorOcupado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
@@ -610,7 +619,7 @@ public class Manager
         }
             
         if(!sigue)
-            throw new EntidadNoAptaParaCursadaException("El profesor no cumple con las franjas horarias para inscribirse" +
+            throw new EntidadNoAptaParaCursadaException(profesor, "El profesor no cumple con las franjas horarias para inscribirse" +
                 "a la cursada.");
     }
 }

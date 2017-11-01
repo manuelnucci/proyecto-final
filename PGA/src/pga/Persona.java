@@ -1,6 +1,6 @@
 package pga;
 
-public class Persona implements Comparable
+public class Persona implements Comparable, Entidad
 {
     private String nombre;
     private String apellido;
@@ -42,6 +42,12 @@ public class Persona implements Comparable
     public String getApellido()
     {
         return apellido;
+    }
+    
+    @Override
+    public String getClave()
+    {
+        return this.nombre + this.apellido;
     }
 
     public void setLegajo(String legajo)

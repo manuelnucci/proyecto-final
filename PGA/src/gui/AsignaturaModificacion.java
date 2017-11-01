@@ -237,7 +237,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
                                 }
                                 catch(NoEstaEntidadException e)
                                 {
-                                    new VentanaAlerta(this, e.getMensaje(), "Error");
+                                    new VentanaAlerta(this, e.getMessage(), "Error");
                                 }
                             }
 

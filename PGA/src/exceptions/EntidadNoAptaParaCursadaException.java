@@ -1,16 +1,19 @@
 package exceptions;
 
+import pga.Entidad;
+
 public class EntidadNoAptaParaCursadaException extends Exception
 {
-    private String mensaje;
+    private Entidad entidad;
     
-    public EntidadNoAptaParaCursadaException(String mensaje)
+    public EntidadNoAptaParaCursadaException(Entidad entidad, String mensaje)
     {
-        this.mensaje = mensaje;
+        super(mensaje);
+        this.entidad = entidad;
     }
 
-    public String getMensaje()
+    public Entidad getEntidad()
     {
-        return mensaje;
+        return entidad;
     }
 }

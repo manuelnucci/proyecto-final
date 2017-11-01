@@ -3,7 +3,7 @@ package pga;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Asignatura implements Comparable
+public class Asignatura implements Comparable, Entidad
 {
     private static int numAsignatura = 0;
     private static final String ID_LEGAJO = "ASI";
@@ -17,11 +17,11 @@ public class Asignatura implements Comparable
         super();
     }
 
-    public Asignatura(String nombre, HashMap<String, Asignatura> correlatividades)
+    public Asignatura(String nombre)
     {
         this.id = ID_LEGAJO + String.format("%04d", ++numAsignatura);
         this.nombre = nombre;
-        this.correlatividades = correlatividades;
+        this.correlatividades = new HashMap <String, Asignatura>();
     }
 
     public static void setNumAsignatura(int numAsignatura)
@@ -47,6 +47,12 @@ public class Asignatura implements Comparable
     public String getNombre()
     {
         return nombre;
+    }
+    
+    @Override
+    public String getClave()
+    {
+        return this.nombre;
     }
 
     public void setCorrelatividades(HashMap<String, Asignatura> correlatividades)
@@ -109,4 +115,5 @@ public class Asignatura implements Comparable
         
         return cad;
     }
+
 }

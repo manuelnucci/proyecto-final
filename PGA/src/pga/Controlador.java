@@ -30,6 +30,11 @@ public class Controlador
         return this.modelo.ubicarAsignatura(nombre);
     }
     
+    public void altaAsignatura(String nombre) // RF01
+    {
+        this.modelo.altaAsignatura(nombre);
+    }
+    
     public void guardarArchivo()
     {
         PersistenciaXML.guardarArchivo(this.modelo);

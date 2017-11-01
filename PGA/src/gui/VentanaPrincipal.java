@@ -169,7 +169,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         if(e.getSource() == this.miAlumnoAlta)
         {
             System.out.println("AlumnoAlta");
-            AlumnoAlta aA = new AlumnoAlta();
+            AlumnoAlta aA = new AlumnoAlta(this.c, true);
         }
         if(e.getSource() == this.miAlumnoBaja)
         {
@@ -225,11 +225,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         }
         if(e.getSource() == this.miAsignaturaAlta)
         {
-            new AsignaturaAlta();
-        }
-        if(e.getSource() == this.miAsignaturaAlta)
-        {
-            new AsignaturaAlta();
+            new AsignaturaAlta(this.c);
         }
         if(e.getSource() == this.miAsignaturaBaja)
         {
@@ -260,8 +256,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener
             new CursadaConsulta();
         }
         if(e.getSource() == this.miCursadaModificacion)
-         {
+        {
              new CursadaModificacion();
-         } 
+        } 
     }
 }

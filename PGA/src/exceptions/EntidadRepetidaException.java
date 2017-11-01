@@ -1,16 +1,24 @@
 package exceptions;
 
+import pga.Entidad;
+
 public class EntidadRepetidaException extends Exception
 {
-    private String mensaje;
+    private Entidad entidad;
+    
+    public EntidadRepetidaException(Entidad entidad, String mensaje)
+    {
+        super(mensaje);
+        this.entidad = entidad;
+    }
     
     public EntidadRepetidaException(String mensaje)
     {
-        this.mensaje = mensaje;
+        super(mensaje);
     }
 
-    public String getMensaje()
+    public Entidad getEntidad()
     {
-        return mensaje;
+        return entidad;
     }
 }

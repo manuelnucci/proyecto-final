@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ public class AsignaturaBaja extends JFrame implements ActionListener
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
     private JScrollPane scrollPanel;
     private JTextArea jTextArea;
+    private DefaultListModel listModel;
     private JList jList;
     private JPanel panel, panelDer;
     
@@ -55,7 +57,8 @@ public class AsignaturaBaja extends JFrame implements ActionListener
         this.jButtonBuscar = new JButton("Buscar");
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
-        this.jList = new JList();
+        this.listModel = new DefaultListModel();
+        this.jList = new JList(this.listModel);
         this.jList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         this.jList.setLayoutOrientation(JList.VERTICAL);
         this.scrollPanel = new JScrollPane(this.jList);
@@ -104,6 +107,6 @@ public class AsignaturaBaja extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        // TODO Implement this method
+        
     }
 }

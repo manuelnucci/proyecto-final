@@ -2,7 +2,7 @@ package pga;
 
 import java.util.HashMap;
 
-public class Cursada implements Comparable
+public class Cursada implements Comparable, Entidad
 {
     private static int numCursada = 0;
     private static final String ID_LEGAJO = "CUR";
@@ -61,7 +61,13 @@ public class Cursada implements Comparable
     {
         return nombre;
     }
-
+    
+    @Override
+    public String getClave()
+    {
+        return this.nombre;
+    }
+    
     public void setAsignatura(Asignatura asignatura)
     {
         this.asignatura = asignatura;

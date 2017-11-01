@@ -1,6 +1,8 @@
 
 package gui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author DELL
@@ -12,6 +14,8 @@ public class AlumnoConsulta extends javax.swing.JFrame
     public AlumnoConsulta()
     {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
 
     /** This method is called from within the constructor to

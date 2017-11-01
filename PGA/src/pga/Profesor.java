@@ -15,10 +15,10 @@ public class Profesor extends Persona
         super();
     }
 
-    public Profesor(String nombre, String apellido, String domicilio, String telefono, String mail, HashMap<String, Asignatura> competencias)
+    public Profesor(String nombre, String apellido, String domicilio, String telefono, String mail)
     {
         super(nombre, apellido, ID_LEGAJO + String.format("%04d", ++legajoProfesor), domicilio, telefono, mail);
-        this.competencias = competencias;
+        this.competencias = new HashMap <String, Asignatura>();
     }
 
     public static void setLegajoProfesor(int legajoProfesor)

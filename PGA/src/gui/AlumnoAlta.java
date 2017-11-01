@@ -4,18 +4,23 @@ import java.awt.BorderLayout;
 
 import java.awt.Dimension;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class AlumnoAlta extends JFrame implements ActionListener
+import pga.Controlador;
+
+public class AlumnoAlta extends JDialog implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
@@ -26,9 +31,11 @@ public class AlumnoAlta extends JFrame implements ActionListener
     //Cantidad de campos
     private int numPairs = 5;
     
-    public AlumnoAlta()
+    public AlumnoAlta(Controlador c, boolean modal)
     {
         super();
+        this.setModal(modal);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta alumno");
         this.initComponents();
@@ -46,7 +53,7 @@ public class AlumnoAlta extends JFrame implements ActionListener
         //Crea los paneles
         panel1 = new JPanel();
         panel1.setLayout(new SpringLayout());
-        panel2 = new JPanel();
+        panel2 = new JPanel(new GridBagLayout());
        // panel2.setLayout(new BoxLayout());
         
         //Crea las etiquetas/labels y anade los label al panel1 y referencia cada textfield con su label
@@ -91,8 +98,28 @@ public class AlumnoAlta extends JFrame implements ActionListener
         this.jButtonCancelar = new JButton("Cancelar");
         
         //Anade los botones al panel
-        this.panel2.add(this.jButtonAceptar);
-        this.panel2.add(this.jButtonCancelar);   
+        GridBagConstraints c = new GridBagConstraints();
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(this.jButtonAceptar, c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(new JLabel(" "), c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridheight = 1; 
+        c.gridwidth = 1;
+        this.panel2.add(this.jButtonCancelar, c);   
         
         this.jButtonAceptar.setActionCommand(ACEPTAR);
         this.jButtonCancelar.setActionCommand(CANCELAR);

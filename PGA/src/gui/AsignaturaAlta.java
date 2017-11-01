@@ -5,13 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class AsignaturaAlta extends JFrame implements ActionListener
+import pga.Controlador;
+
+public class AsignaturaAlta extends JDialog implements ActionListener
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
@@ -21,12 +25,15 @@ public class AsignaturaAlta extends JFrame implements ActionListener
     private JButton jButtonAceptar, jButtonCancelar;
     //Cantidad de campos
     private int numPairs = 1;
+    private Controlador c;
     
-    public AsignaturaAlta()
+    public AsignaturaAlta(Controlador c)
     {
         super();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta asignatura");
+        this.setModal(true);
+        this.c = c;
         this.initComponents();
         this.add(panel1, BorderLayout.WEST);
         panel1.setOpaque(true);
@@ -88,12 +95,15 @@ public class AsignaturaAlta extends JFrame implements ActionListener
         switch(e.getActionCommand())
         {
             case ACEPTAR:   if(this.camposVacios())
-                                System.out.println("Faltan completar campos");
+                            {
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error alta", JOptionPane.INFORMATION_MESSAGE);
+                            }
                             else
-                                System.out.println("AltaRealizada");
+                            {
+                                this.c.altaAsignatura(this.jTextFieldNombre.getText());
+                            }
                             break;
-            case CANCELAR:  System.out.println("AltaCancelada");
-                            this.dispose();//Ponele que cierra la ventana
+            case CANCELAR:  this.dispose();//Ponele que cierra la ventana
                             break;
         }
     }
