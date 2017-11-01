@@ -1,6 +1,7 @@
 package pga;
 
 import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.EntidadRepetidaException;
 import exceptions.NoEstaEntidadException;
 
 import java.util.HashMap;
@@ -162,9 +163,25 @@ public class Manager
         alumno.setMail(mail);
     }
     
-    public void modificaHistoriaAcademica(Alumno alumno, HashMap <String, Asignatura> historiaAcademica)
+    /**
+     * Se añade a la historia académica del alumno la nueva asignatura aprobada por el alumno.<br>
+     * 
+     * <b>Pre:</b> La asignatura y el alumno son entidades válidas que existen en el sistema.<br>
+     * <b>Post:</b> El alumno posee la asignatura en su historia académica o, en el caso que ya la tuviese se lanza
+     * una excepción.
+     * 
+     * @param alumno Alumno al cual se le dará por aprobada la asignatura. Alumno != null.
+     * @param asignatura Asignatura aprobada por el alumno. Asignatura != null.
+     * @throws EntidadRepetidaException Excepción con la entidad repetida y el mensaje de error.
+     */
+    public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws EntidadRepetidaException
     {
-        alumno.setHistoriaAcademica(historiaAcademica);
+        HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
+        
+        if (historiaAcademica.containsKey(asignatura.getId()))
+            throw new EntidadRepetidaException("El alumno ya ha aprobado la asignatura.");
+        else
+            historiaAcademica.put(asignatura.getId(), asignatura);
     }
     
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException // RF05

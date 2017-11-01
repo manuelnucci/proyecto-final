@@ -17,7 +17,7 @@ public class Asignatura implements Comparable
     // Las claves serán las IDs de la asignaturas
     
     /**
-     * Constructor vacío necesario para la serialización en XML
+     * Constructor vacío necesario para la serialización en XML.
      */
     public Asignatura()
     {
@@ -25,12 +25,12 @@ public class Asignatura implements Comparable
     }
 
     /**
-     * Constructor que crea una instancia de Asignatura
+     * Constructor que crea una instancia de Asignatura.<br>
      * 
-     * <b>Pre:</b> El nombre ya se encuentra validado
-     * <b>Post:</b> Se crea una nueva instancia de la Asignatura
+     * <b>Pre:</b> El nombre ya se encuentra validado.<br>
+     * <b>Post:</b> Se crea una nueva instancia de la Asignatura.
      * 
-     * @param nombre Nombre de la asignatura. Nombre != null && nombre != ""
+     * @param nombre Nombre de la asignatura. Nombre != null && nombre != "".
      */
     public Asignatura(String nombre)
     {
@@ -103,9 +103,9 @@ public class Asignatura implements Comparable
     }
 
     /**
-     * Método que compara asignaturas a través de sus ids.
+     * Método que compara asignaturas a través de sus ids.<br>
      * 
-     * <b>Pre:</b> El objeto que viene por parámetro no es nulo y debe ser una asignatura.
+     * <b>Pre:</b> El objeto que viene por parámetro no es nulo y debe ser una asignatura.<br>
      * <b>Post:</b> Se devuelve un entero en función de que objeto sea mayor en base a la comparación.
      * 
      * @param object objeto a comparar con la instancia actual. Object != null.
@@ -117,9 +117,10 @@ public class Asignatura implements Comparable
     }    
 
     /**
-     * Método que muestra la información completa de la asignatura, tanto su nombre como sus correlatividades.
+     * Método que muestra la información completa de la asignatura, tanto su nombre como sus correlatividades.<br>
      * 
      * <b>Post:</b> Se devuelve un String con la información de la asignatura.
+     * 
      * @return String con la información de la asignatura.
      */
     public String infoAsignatura()

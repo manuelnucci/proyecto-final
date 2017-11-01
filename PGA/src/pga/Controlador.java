@@ -18,9 +18,9 @@ public class Controlador
     private VentanaPrincipal ventana; // Referencia a la ventana principal de la interfaz gráfica.
 
     /**
-     * Constructor que crea una nueva instancia del Controlador
+     * Constructor que crea una nueva instancia del Controlador.<br>
      * 
-     * <b>Pre:</b> Los parámetros deben ser válidos.
+     * <b>Pre:</b> Los parámetros deben ser válidos.<br>
      * <b>Post:</b> Se crea una nueva instancia del controlador.
      * 
      * @param modelo Es el modelo o sistema. Modelo != null.
@@ -31,11 +31,6 @@ public class Controlador
         super();
         this.modelo = modelo;
         this.ventana = ventana;
-    }
-    
-    public boolean verificaMail(String mail)
-    {
-        return Formato.verificaMail(mail);
     }
     
     public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail)

@@ -152,13 +152,13 @@ public class AlumnoAlta extends JDialog implements ActionListener
                             {
                                 if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                 {
-                                    if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                    //if (controlador.verificaMail(this.jTextFieldMail.getText()))
                                     {
                                         controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
                                         JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
                                         this.dispose();
                                     }
-                                    else
+                                    //else
                                         JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
                                 }
                             }

@@ -294,13 +294,13 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 {
                                     if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al alumno?", "Modificación Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                     {
-                                        if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                        //if (controlador.verificaMail(this.jTextFieldMail.getText()))
                                         {
                                             this.controlador.modificaAlumno((Alumno)this.jList.getSelectedValue(), this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
                                             JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
                                             this.dispose();
                                         }
-                                        else
+                                        //else
                                             JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
                                     }
                                 }

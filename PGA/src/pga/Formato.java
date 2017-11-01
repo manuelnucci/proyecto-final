@@ -15,7 +15,7 @@ public class Formato
         super();
     }
     
-    public static boolean verificaId(String id, int tipo)
+    /*public static boolean verificaId(String id, int tipo)
     {
         boolean ret = false;
         String parteNum;
@@ -40,7 +40,7 @@ public class Formato
             }
         }
         return ret;
-    }
+    }*/
     
     public static boolean verificaMail(String mail)
     {
