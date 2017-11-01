@@ -249,7 +249,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         } 
         if(e.getSource() == this.miCursadaBaja)
         {
-             new CursadaBaja();
+             new CursadaBaja2();
         } 
         if(e.getSource() == this.miCursadaConsulta)
         {

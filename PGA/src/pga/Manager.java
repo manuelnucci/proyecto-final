@@ -279,7 +279,7 @@ public class Manager
         HashMap<String, Asignatura> competencias = profesor.getCompetencias();
         
         if (competencias.containsKey(asignatura.getId()))
-            throw new EntidadRepetidaException(asignatura, "El profesor ya tiene la competencia");
+            throw new EntidadRepetidaException("El profesor ya tiene la competencia");
         else
             competencias.put(asignatura.getId(), asignatura);
     }
@@ -424,8 +424,8 @@ public class Manager
     {
         HashMap<String, Asignatura> correlativas = asignatura.getCorrelatividades(); 
         if (correlativas.containsKey(correlativa.getId()))
-            throw new EntidadRepetidaException(correlativa, "La asignatura ya tiene la correlativa");
-        else
+            throw new EntidadRepetidaException("La asignatura ya tiene la correlativa");
+        else 
             correlativas.put(correlativa.getId(), correlativa);
     }
     
