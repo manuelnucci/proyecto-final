@@ -1,5 +1,6 @@
 package pga;
 
+import exceptions.EmailInvalidoException;
 import exceptions.EntidadNoAptaParaCursadaException;
 import exceptions.NoEstaEntidadException;
 
@@ -7,7 +8,7 @@ import gui.VentanaPrincipal;
 
 import java.util.HashMap;
 
-/*
+/**
  * Clase que sirve como intermediaria entre el modelo y la interfaz gráfica.
  * Posee métodos que funcionan como mensajeros invocando métodos del modelo y, si fuese necesario,
  * devuelven los resultados a la GUI para que los utilice luego.
@@ -33,7 +34,7 @@ public class Controlador
         this.ventana = ventana;
     }
     
-    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail)
+    public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail) throws EmailInvalidoException
     {
         this.modelo.altaAlumno(nombre, apellido, domicilio, telefono, mail);
     }
@@ -44,7 +45,7 @@ public class Controlador
     }
     
     public void modificaAlumno(Alumno alumno, String nombre, String apellido, String domicilio, String telefono, 
-                               String mail) throws NoEstaEntidadException
+                               String mail) throws NoEstaEntidadException, EmailInvalidoException
     {
         this.modelo.modificaAlumno(alumno, nombre, apellido, domicilio, telefono, mail);
     }

@@ -1,5 +1,9 @@
 package pga;
 
+import exceptions.EmailInvalidoException;
+import exceptions.HoraInvalidaException;
+import exceptions.PeriodoInvalidoException;
+
 public class Formato
 {
     public static final int ALU = 0;
@@ -15,42 +19,16 @@ public class Formato
         super();
     }
     
-    /*public static boolean verificaId(String id, int tipo)
-    {
-        boolean ret = false;
-        String parteNum;
-        
-        if(id.length() == TAMANO_LEGAJO)
-        {
-            parteNum = id.substring(3);
-            if(parteNum.compareTo("0000") >= 0 && parteNum.compareTo("9999") <= 0)
-            {
-                parteNum = id.substring(0, 2);
-                switch(tipo)
-                {
-                    case ALU:   ret = parteNum.equals("ALU");
-                                break;
-                    case PRO:   ret = parteNum.equals("PRO");
-                                break;
-                    case ASI:   ret = parteNum.equals("ASI");
-                                break;
-                    default:    ret = parteNum.equals("CUR");
-                                break;
-                }
-            }
-        }
-        return ret;
-    }*/
-    
-    public static boolean verificaMail(String mail)
+    public static void verificaMail(String mail) throws EmailInvalidoException
     {
         int indiceArroba;
         
         indiceArroba = mail.indexOf("@");
-        return indiceArroba != -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1;
+        if (indiceArroba != -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1)
+            throw new EmailInvalidoException(mail, "El mail ingresado no cumple con el formato previsto.");
     }
     
-    public boolean verificaCursadaPeriodo(String periodo)
+    public static void verificaCursadaPeriodo(String periodo) throws PeriodoInvalidoException
     {
         boolean ret = false;
         String cad;
@@ -64,10 +42,11 @@ public class Formato
                 ret = cad.compareTo("2000") >= 0 && cad.compareTo("2100") <= 0;
             }
         }
-        return ret;
+        if (!ret)
+            throw new PeriodoInvalidoException(periodo, "El periodo ingresado no cumple con el formato previsto.");
     }
     
-    public static boolean verificaCursadaHora(String hora)
+    public static void verificaCursadaHora(String hora) throws HoraInvalidaException
     {
         boolean ret = false;
         String cad;
@@ -81,6 +60,7 @@ public class Formato
                 ret = cad.compareTo("00") >= 0 && cad.compareTo("59") <= 0;
             }
         }
-        return ret;
+        if (!ret)
+            throw new HoraInvalidaException(hora, "La hora ingresada no cumple con el formato previsto.");
     }
 }

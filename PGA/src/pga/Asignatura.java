@@ -3,10 +3,10 @@ package pga;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Asignatura implements Comparable, Entidad
 /**
  * Clase que representa a las Asignaturas que existen en la universidad.
  */
+public class Asignatura implements Comparable, Entidad
 {
     private static int numAsignatura = 0; // Número de id de la última asignatura registrada
     private static final String ID_LEGAJO = "ASI"; // Parte del formato con que se arma el id de la asignatura
@@ -125,6 +125,7 @@ public class Asignatura implements Comparable, Entidad
     /**
      * Método que muestra la información completa de la asignatura, tanto su nombre como sus correlatividades.<br>
      * 
+     * <b>Pre:</b> La colección de correlatividades ya se encuentra inicializada.<br>
      * <b>Post:</b> Se devuelve un String con la información de la asignatura.
      * 
      * @return String con la información de la asignatura.

@@ -25,19 +25,6 @@ public class EntidadRepetidaException extends Exception
         super(mensaje);
         this.entidad = entidad;
     }
-    
-    /**
-    * Constructor de la clase que crea una nueva instancia de EntidadRepetidaException.<br>
-    * 
-    * <b>Pre:</b> El mensaje que viene por parámetro no es nulo ni vacío.<br>
-    * <b>Post:</b> Se crea una nueva instancia de la clase.
-    * 
-    * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
-    */
-    public EntidadRepetidaException(String mensaje)
-    {
-        super(mensaje);
-    }
 
     public Entidad getEntidad()
     {
