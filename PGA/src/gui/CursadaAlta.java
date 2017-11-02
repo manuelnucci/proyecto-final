@@ -1,28 +1,93 @@
 
 package gui;
 
+import exceptions.EmailInvalidoException;
+import exceptions.HoraInvalidaException;
+import exceptions.NoEstaEntidadException;
+
+import exceptions.PeriodoInvalidoException;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
+import pga.Alumno;
+import pga.Asignatura;
 import pga.Controlador;
 
 /**
  *
  * @author DELL
  */
-public class CursadaAlta extends javax.swing.JFrame
+public class CursadaAlta extends javax.swing.JDialog
 {
     private Controlador controlador;
+    private DefaultListModel listModel;
+    private Asignatura asignatura = null;
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
     /** Creates new form CursadaAlta */
     public CursadaAlta(Controlador controlador)
     {
+        super();
         this.controlador = controlador;
-        initComponents();
+        this.initComponents();
+        this.setModal(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
 
+    public boolean camposVacios()
+    {
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jComboBoxDia.getSelectedItem() != null &&
+                this.jTextFieldHIHoras.getText().length() != 0 && this.jTextFieldHIMin.getText().length() != 0 &&
+                this.jTextFieldHFHoras.getText().length() != 0 && this.jTextFieldHFMin.getText().length() != 0 &&
+                !(this.jRadioButton1.isSelected() || this.jRadioButton2.isSelected()) && this.asignatura != null);
+    }
+    
+    public boolean camposVaciosAsignatura()
+    {
+        return (this.jTextFieldNombreAsignatura.getText().length() == 0);
+    }
+    
+    public void listar(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModel.clear();
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
+    }
+    
+    private String armaPeriodo()
+    {
+        String cad;
+        cad = (this.jRadioButton1.isSelected()) ? "C1:": "C2:";
+        cad += this.jSpinnerAno.getValue();
+
+        return cad;
+    }
+    
+    private String armaHora(int tipo)
+    {
+        String cad;
+        
+        cad = (tipo == 0) ? this.jTextFieldHIHoras + ":" + this.jTextFieldHIMin : 
+                            this.jTextFieldHFHoras + ":" + this.jTextFieldHFMin ;
+        
+        return cad;
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -48,7 +113,7 @@ public class CursadaAlta extends javax.swing.JFrame
         jLabelHoraFin = new javax.swing.JLabel();
         jTextFieldHFHoras = new javax.swing.JTextField();
         jLabelDosPuntos1 = new javax.swing.JLabel();
-        jTextFieldHFHorasMin = new javax.swing.JTextField();
+        jTextFieldHFMin = new javax.swing.JTextField();
         jLabelHorasMinutos2 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -58,10 +123,11 @@ public class CursadaAlta extends javax.swing.JFrame
         jLabelAsignatura2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonBuscar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelAsignaturaBuscar = new javax.swing.JLabel();
         jTextFieldNombreAsignatura = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListAsignaturas = new javax.swing.JList();
+        listModel = new DefaultListModel();
+        jListAsignaturas = new javax.swing.JList(listModel);
         jButtonElegirAsignatura = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButtonVolver = new javax.swing.JButton();
@@ -71,7 +137,7 @@ public class CursadaAlta extends javax.swing.JFrame
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -151,7 +217,7 @@ public class CursadaAlta extends javax.swing.JFrame
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabelHorasMinutos))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jTextFieldHFHorasMin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldHFMin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabelHorasMinutos2)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -198,7 +264,7 @@ public class CursadaAlta extends javax.swing.JFrame
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldHFHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelDosPuntos1)
-                        .addComponent(jTextFieldHFHorasMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldHFMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelHorasMinutos2)))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -226,13 +292,18 @@ public class CursadaAlta extends javax.swing.JFrame
             }
         });
 
-        jLabel1.setText("Nombre Asignatura");
+        jLabelAsignaturaBuscar.setText("Nombre Asignatura");
 
-        jListAsignaturas.setModel(new javax.swing.DefaultListModel()
-        );
         jScrollPane1.setViewportView(jListAsignaturas);
 
         jButtonElegirAsignatura.setText("Elegir");
+        jButtonElegirAsignatura.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirAsignaturaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -245,7 +316,7 @@ public class CursadaAlta extends javax.swing.JFrame
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabelAsignaturaBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButtonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
@@ -260,7 +331,7 @@ public class CursadaAlta extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelAsignaturaBuscar)
                     .addComponent(jTextFieldNombreAsignatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jButtonBuscar)
@@ -274,8 +345,22 @@ public class CursadaAlta extends javax.swing.JFrame
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
 
         jButtonDarAlta.setText("Dar Alta");
+        jButtonDarAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonDarAltaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -357,8 +442,68 @@ public class CursadaAlta extends javax.swing.JFrame
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarActionPerformed
     {//GEN-HEADEREND:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if (this.camposVaciosAsignatura()) 
+                JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de la asignatura", "Error de Busqueda", JOptionPane.WARNING_MESSAGE);
+            else
+                this.listar(controlador.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
+        }
+        catch (NoEstaEntidadException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonElegirAsignaturaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirAsignaturaActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirAsignaturaActionPerformed
+        int index;
+
+        if (this.camposVaciosAsignatura())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta de Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jListAsignaturas.getSelectedValue() != null)
+            {
+                index = this.jListAsignaturas.getSelectedIndex();
+                this.asignatura = (Asignatura) this.listModel.getElementAt(index);
+                JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado la asignatura");
+                this.jLabelAsignatura2.setText(this.asignatura.getNombre());
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta de Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirAsignaturaActionPerformed
+
+    private void jButtonDarAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonDarAltaActionPerformed
+    {//GEN-HEADEREND:event_jButtonDarAltaActionPerformed
+        try
+        {
+            if(this.camposVacios())
+                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta la Cursada?", "Alta Cursada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                {
+                   
+                        controlador.altaCursada(this.jTextFieldNombre.getText(), this.asignatura, this.armaPeriodo(), (String) this.jComboBoxDia.getSelectedItem(), this.armaHora(0), this.armaHora(1));
+                        JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                        this.dispose();
+                }
+            }
+        }
+        catch (PeriodoInvalidoException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
+        }
+        catch (HoraInvalidaException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonDarAltaActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonVolverActionPerformed
+    {//GEN-HEADEREND:event_jButtonVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,10 +591,10 @@ public class CursadaAlta extends javax.swing.JFrame
     private javax.swing.JButton jButtonElegirAsignatura;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox<String> jComboBoxDia;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAno;
     private javax.swing.JLabel jLabelAsignatura;
     private javax.swing.JLabel jLabelAsignatura2;
+    private javax.swing.JLabel jLabelAsignaturaBuscar;
     private javax.swing.JLabel jLabelDia;
     private javax.swing.JLabel jLabelDosPuntos;
     private javax.swing.JLabel jLabelDosPuntos1;
@@ -468,7 +613,7 @@ public class CursadaAlta extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerAno;
     private javax.swing.JTextField jTextFieldHFHoras;
-    private javax.swing.JTextField jTextFieldHFHorasMin;
+    private javax.swing.JTextField jTextFieldHFMin;
     private javax.swing.JTextField jTextFieldHIHoras;
     private javax.swing.JTextField jTextFieldHIMin;
     private javax.swing.JTextField jTextFieldNombre;

@@ -49,7 +49,7 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
     
     public boolean camposVaciosA()
     {
-        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
+        return (this.jTextFieldNombre1.getText().length() == 0 && this.jTextFieldApellido1.getText().length() == 0);
     }
     
     public void listar1(HashMap<String, Alumno> hash)
@@ -59,7 +59,6 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
         this.listModel1.clear();
         while(iA.hasNext())
             this.listModel1.addElement(iA.next());
-        this.jList1.setModel(this.listModel1);
     }
     
     public boolean camposVaciosC()
@@ -74,7 +73,6 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
         this.listModel2.clear();
         while(iC.hasNext())
             this.listModel2.addElement(iC.next());
-        this.jList2.setModel(this.listModel2);
     }
 
     /** This method is called from within the constructor to
@@ -94,7 +92,7 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
         jButtonBuscar1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         listModel1 = new DefaultListModel();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<>(listModel1);
         jButtonElegir1 = new javax.swing.JButton();
         jLabelAlumno = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -102,7 +100,7 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
         jTextFieldNombre2 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         listModel2 = new DefaultListModel();
-        jList2 = new javax.swing.JList<>();
+        jList2 = new javax.swing.JList<>(listModel2);
         jButtonBuscar2 = new javax.swing.JButton();
         jButtonElegir2 = new javax.swing.JButton();
         jLabelCursada = new javax.swing.JLabel();
@@ -147,7 +145,6 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
             }
         });
 
-        jList1.setModel(listModel1);
         jScrollPane3.setViewportView(jList1);
 
         jButtonElegir1.setText("Elegir");
@@ -216,7 +213,6 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
 
         jLabelNombre2.setText("Nombre");
 
-        jList2.setModel(listModel2);
         jScrollPane4.setViewportView(jList2);
 
         jButtonBuscar2.setText("Buscar");
@@ -391,106 +387,87 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
         if (this.camposVaciosA())
         JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
         else
-        try
-        {
-            this.hash1 = controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText());
-            this.listar1(hash1);
-        } catch (NoEstaEntidadException e)
-        {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
-        }
+            try
+            {
+                this.hash1 = controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText());
+                this.listar1(hash1);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
     }//GEN-LAST:event_jButtonBuscar1ActionPerformed
 
     private void jButtonElegir1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegir1ActionPerformed
     {//GEN-HEADEREND:event_jButtonElegir1ActionPerformed
-        int index, i;
-        Iterator <Alumno> iA;
+        int index;
 
         if (this.camposVaciosA())
-        JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
         else
-        if (this.jList1.getSelectedValue() != null)
-        {
-            index = this.jList1.getSelectedIndex();
-            iA = this.hash1.values().iterator();
-            i = 0;
-            while (iA.hasNext() && i < index)
+            if (this.jList1.getSelectedValue() != null)
             {
-                iA.next();
-                i++;
-            }
-            if (iA.hasNext())
-            {
-                this.alumno = iA.next();
+                index = this.jList1.getSelectedIndex();
+                this.alumno = (Alumno) this.listModel1.getElementAt(index);
                 JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado al alumno");
+                this.jLabelDatosAlumnoAlta1.setText(this.alumno.getNombre() + " " + this.alumno.getNombre());
             }
-        }
-        else
-        JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButtonElegir1ActionPerformed
 
     private void jButtonBuscar2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscar2ActionPerformed
     {//GEN-HEADEREND:event_jButtonBuscar2ActionPerformed
         if (this.camposVaciosC())
-        JOptionPane.showMessageDialog(rootPane, "Falta completar el campo", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Falta completar el campo", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
         else
-        try
-        {
-            this.hash2 = controlador.ubicarCursada(this.jTextFieldNombre2.getText());
-            this.listar2(hash2);
-        } catch (NoEstaEntidadException e)
-        {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
-        }
+            try
+            {
+                this.hash2 = controlador.ubicarCursada(this.jTextFieldNombre2.getText());
+                this.listar2(hash2);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
     }//GEN-LAST:event_jButtonBuscar2ActionPerformed
 
     private void jButtonElegir2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegir2ActionPerformed
     {//GEN-HEADEREND:event_jButtonElegir2ActionPerformed
-        int index, i;
-        Iterator <Cursada> iC;
+        int index;
 
         if (this.camposVaciosC())
-        JOptionPane.showMessageDialog(rootPane, "Faltan completar el campo", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar el campo", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
         else
-        if (this.jList2.getSelectedValue() != null)
-        {
-            index = this.jList2.getSelectedIndex();
-            iC = this.hash2.values().iterator();
-            i = 0;
-            while (iC.hasNext() && i < index)
+            if (this.jList2.getSelectedValue() != null)
             {
-                iC.next();
-                i++;
-            }
-            if (iC.hasNext())
-            {
-                this.cursada = iC.next();
+                index = this.jList2.getSelectedIndex();
+                this.cursada = (Cursada) this.listModel2.getElementAt(index);
                 JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado a la cursada");
+                this.jLabelDatosCursadaAlta1.setText(this.cursada.getNombre());
             }
-        }
-        else
-        JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButtonElegir2ActionPerformed
 
     private void jButtonDarAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonDarAltaActionPerformed
     {//GEN-HEADEREND:event_jButtonDarAltaActionPerformed
         if (this.camposVaciosA() || this.camposVaciosC())
-        JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
         else
-        if (this.jList1.getSelectedValue() == null || this.jList2.getSelectedValue() == null)
-        JOptionPane.showMessageDialog(rootPane, "Seleccione un alumno y/o una cursada de las listas", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
-        else
-        {
-            try
+            if (this.jList1.getSelectedValue() == null || this.jList2.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un alumno y/o una cursada de las listas", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+            else
             {
-                this.controlador.altaAlumnoACursada(this.alumno, this.cursada);
-                JOptionPane.showMessageDialog(rootPane, "Alta de Alumno a la Cursada Exitosa");
-                this.dispose();
-            } catch (EntidadNoAptaParaCursadaException e)
-            {
-                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno en la cursada?", "Alumno - Alta A Cursada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                    try
+                    {
+                        this.controlador.altaAlumnoACursada(this.alumno, this.cursada);
+                        JOptionPane.showMessageDialog(rootPane, "Alta de Alumno a la Cursada Exitosa");
+                        this.dispose();
+                    } catch (EntidadNoAptaParaCursadaException e)
+                    {
+                        JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+                    }
             }
-        }
     }//GEN-LAST:event_jButtonDarAltaActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed

@@ -130,7 +130,7 @@ public class Manager
         Formato.verificaMail(mail);
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
         String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
-        
+    
         if (this.alumnos.containsKey(nombreCompleto))
             this.alumnos.get(nombreCompleto).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno cuya clave
                                                                               // será su legajo
@@ -254,6 +254,14 @@ public class Manager
             throw new EntidadRepetidaException(asignatura, "El alumno ya ha aprobado la asignatura.");
         else
             historiaAcademica.put(asignatura.getId(), asignatura);
+    }
+    
+    public void quitarAsignatura(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException // RF03
+    {
+        HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
+        
+        if (!historiaAcademica.remove(asignatura.getId(), asignatura))
+            throw new NoEstaEntidadException(asignatura, "El alumno no tiene esta asignatura en su historia");
     }
 
     /**

@@ -28,18 +28,18 @@ public class AlumnoConsulta extends javax.swing.JDialog
     private Controlador controlador;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private HashMap<String, Alumno> hash = null;
-    private DefaultListModel listModel;
+    private DefaultListModel listModel1, listModel2;
 
     /** Creates new form AlumnoConsulta2 */
     public AlumnoConsulta(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
         super(parent, modal);
+        initComponents();
+        initComponents2();
         this.controlador = controlador;
         this.setTitle("Consulta Alumno");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
-        initComponents();
-        initComponents2();
         this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
@@ -60,33 +60,31 @@ public class AlumnoConsulta extends javax.swing.JDialog
         this.jTextFieldDomicilio.setText("");
         this.jTextFieldTelefono.setText("");
         this.jTextFieldMail.setText("");
-        this.listModel.clear();
-        this.jListHistoria.setModel(this.listModel);
+        this.listModel2.clear();
     }
     
     public boolean camposVacios()
     {
-        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
+        return (this.jTextFieldNombre1.getText().length() == 0 && this.jTextFieldApellido1.getText().length() == 0);
     }
     
     public void listar1(HashMap<String, Alumno> hash)
     {
         Iterator <Alumno> iA = hash.values().iterator();
         
-        this.listModel.clear();
+        this.listModel1.clear();
         while(iA.hasNext())
-            this.listModel.addElement(iA.next());
-        this.jList.setModel(this.listModel);
+            this.listModel1.addElement(iA.next());
+
     }
     
     public void listar2(HashMap<String, Asignatura> hash)
     {
         Iterator <Asignatura> iA = hash.values().iterator();
         
-        this.listModel.clear();
+        this.listModel2.clear();
         while(iA.hasNext())
-            this.listModel.addElement(iA.next());
-        this.jListHistoria.setModel(this.listModel);
+            this.listModel2.addElement(iA.next());
     }
     
     public void modificarDatos(Alumno alumno)
@@ -113,8 +111,8 @@ public class AlumnoConsulta extends javax.swing.JDialog
         jTextFieldNombre1 = new javax.swing.JTextField();
         jTextFieldApellido1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listModel = new DefaultListModel();
-        jList = new javax.swing.JList<>(listModel);
+        listModel1 = new DefaultListModel();
+        jList = new javax.swing.JList<>(listModel1);
         jButtonElegir = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -126,7 +124,8 @@ public class AlumnoConsulta extends javax.swing.JDialog
         jLabelMailC1 = new javax.swing.JLabel();
         jButtonAceptar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListHistoria = new javax.swing.JList<>();
+        listModel2 = new DefaultListModel();
+        jListHistoria = new javax.swing.JList<>(listModel2);
         jLabelHistoria = new javax.swing.JLabel();
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldNombre = new javax.swing.JTextField();
@@ -196,17 +195,17 @@ public class AlumnoConsulta extends javax.swing.JDialog
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelNombre1)
                             .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(21, 21, 21)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelApellido1)
                             .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonBuscar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonElegir)
@@ -261,12 +260,12 @@ public class AlumnoConsulta extends javax.swing.JDialog
                         .addGap(43, 43, 43)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelDomicilio)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabelNombre)
                                 .addComponent(jLabelApellido)
                                 .addComponent(jLabelMailC1)))
                         .addGap(23, 23, 23)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                     .addComponent(jTextFieldNombre)
                     .addComponent(jTextFieldDomicilio)
@@ -361,8 +360,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
 
     private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirActionPerformed
     {//GEN-HEADEREND:event_jButtonElegirActionPerformed
-        int index, i;
-        Iterator <Alumno> iA;
+        int index;
         Alumno alumno = null;
         
         if (this.camposVacios())
@@ -371,15 +369,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
             if (this.jList.getSelectedValue() != null)
             {
                 index = this.jList.getSelectedIndex();
-                iA = this.hash.values().iterator();
-                i = 0;
-                while (iA.hasNext() && i < index)
-                {
-                    iA.next();
-                    i++;
-                }
-                if (iA.hasNext())
-                    alumno = iA.next();
+                alumno = (Alumno) this.listModel1.getElementAt(index);
                 this.modificarDatos(alumno);
                 this.listar2(alumno.getHistoriaAcademica());
             }

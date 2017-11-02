@@ -170,7 +170,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         else if (e.getSource() == this.miAlumnoAltaCursada)
             new AlumnoAltaACursada2(this, true, this.controlador);
         else if (e.getSource() == this.miAlumnoBajaCursada)
-            new AlumnoBajaACursada(this.controlador);
+            new AlumnoBajaACursada(this, true, this.controlador);
         else if (e.getSource() == this.miModificarHistoria)
             new ModificaHistoriaAlumno(this.controlador);
         else if (e.getSource() == this.miProfesorAlta)

@@ -1,25 +1,78 @@
 
 package gui;
 
+import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.NoEstaEntidadException;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.util.HashMap;
+
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+
+import pga.Alumno;
 import pga.Controlador;
+import pga.Cursada;
 
 /**
  *
  * @author DELL
  */
-public class AlumnoBajaACursada extends javax.swing.JFrame
+public class AlumnoBajaACursada extends javax.swing.JDialog
 {
     private Controlador controlador;
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    private HashMap<String, Alumno> hash1;
+    private HashMap<String, Cursada> hash2;
+    private DefaultListModel listModel1, listModel2;
+    private Alumno alumno;    
+    private Cursada cursada;
 
     /** Creates new form AlumnoBajaACursada */
-    public AlumnoBajaACursada(Controlador controlador)
+    public AlumnoBajaACursada(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
+        super(parent, modal);
         this.controlador = controlador;
-        initComponents();
+        this.setTitle("Alumno - Baja de Cursada");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setResizable(false);
+        initComponents();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
+    }
+
+    public boolean camposVaciosA()
+    {
+        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
+    }
+   
+    public void listar1(HashMap<String, Alumno> hash)
+    {
+        Iterator <Alumno> iA = hash.values().iterator();
+        
+        this.listModel1.clear();
+        while(iA.hasNext())
+            this.listModel1.addElement(iA.next());
+    }
+    
+    public boolean camposVaciosC()
+    {
+        return this.jTextFieldNombre2.getText().length() == 0;
+    }
+    
+    public void listar2(HashMap<String, Cursada> hash)
+    {
+        Iterator <Cursada> iC = hash.values().iterator();
+        
+        this.listModel2.clear();
+        while(iC.hasNext())
+            this.listModel2.addElement(iC.next());
     }
 
     /** This method is called from within the constructor to
@@ -34,18 +87,20 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jLabelNombreA = new javax.swing.JLabel();
         jLabelApellido = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextFieldApellido = new javax.swing.JTextField();
+        jTextFieldApellido1 = new javax.swing.JTextField();
+        jTextFieldNombre1 = new javax.swing.JTextField();
         jButtonBuscarA = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListA = new javax.swing.JList<>();
+        listModel1 = new DefaultListModel();
+        jList1 = new javax.swing.JList<>(listModel1);
         jButtonElegirA = new javax.swing.JButton();
         jLabelAlumno = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelNombreC = new javax.swing.JLabel();
-        jTextFieldNombreC = new javax.swing.JTextField();
+        jTextFieldNombre2 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListC = new javax.swing.JList<>();
+        listModel2 = new DefaultListModel();
+        jList2 = new javax.swing.JList<>(listModel2);
         jButtonBuscarC = new javax.swing.JButton();
         jButtonElegirC = new javax.swing.JButton();
         jLabelCursada = new javax.swing.JLabel();
@@ -65,25 +120,33 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
 
         jLabelApellido.setText("Apellido");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener()
+        jTextFieldApellido1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField1ActionPerformed(evt);
+                jTextFieldApellido1ActionPerformed(evt);
             }
         });
 
         jButtonBuscarA.setText("Buscar");
-
-        jListA.setModel(new javax.swing.AbstractListModel<String>()
+        jButtonBuscarA.addActionListener(new java.awt.event.ActionListener()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarAActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(jListA);
+
+        jScrollPane1.setViewportView(jList1);
 
         jButtonElegirA.setText("Elegir");
+        jButtonElegirA.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirAActionPerformed(evt);
+            }
+        });
 
         jLabelAlumno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelAlumno.setText("Alumnos");
@@ -101,11 +164,11 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelNombreA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldApellido))
+                        .addComponent(jTextFieldNombre1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelApellido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -128,10 +191,10 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelNombreA)
-                            .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelApellido))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBuscarA)))
@@ -142,17 +205,25 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
 
         jLabelNombreC.setText("Nombre");
 
-        jListC.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jListC);
+        jScrollPane2.setViewportView(jList2);
 
         jButtonBuscarC.setText("Buscar");
+        jButtonBuscarC.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarCActionPerformed(evt);
+            }
+        });
 
         jButtonElegirC.setText("Elegir");
+        jButtonElegirC.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirCActionPerformed(evt);
+            }
+        });
 
         jLabelCursada.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCursada.setText("Cursadas");
@@ -167,7 +238,7 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonBuscarC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNombreC))
+                    .addComponent(jTextFieldNombre2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,7 +258,7 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelNombreC))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBuscarC)
@@ -210,6 +281,13 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
         jLabelDatosCursadaBaja.setText("Elija una cursada");
 
         jButtonBaja.setText("Dar baja");
+        jButtonBaja.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -248,6 +326,13 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
         );
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,10 +371,103 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
         pack();
     }//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed
-    {//GEN-HEADEREND:event_jTextField1ActionPerformed
+    private void jTextFieldApellido1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextFieldApellido1ActionPerformed
+    {//GEN-HEADEREND:event_jTextFieldApellido1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldApellido1ActionPerformed
+
+    private void jButtonBuscarAActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarAActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarAActionPerformed
+        if (this.camposVaciosA())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        else
+            try
+            {
+                this.hash1 = controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText());
+                this.listar1(hash1);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonBuscarAActionPerformed
+
+    private void jButtonElegirAActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirAActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirAActionPerformed
+    int index;
+
+    if (this.camposVaciosA())
+        JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+    else
+        if (this.jList1.getSelectedValue() != null)
+        {
+            index = this.jList1.getSelectedIndex();
+            this.alumno = (Alumno) this.listModel1.getElementAt(index);
+            JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado al alumno");
+            this.jLabelDatosAlumnoBaja.setText(this.alumno.getNombre() + " " + this.alumno.getNombre());
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirAActionPerformed
+
+    private void jButtonBuscarCActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarCActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarCActionPerformed
+        if (this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Falta completar el campo", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        else
+            try
+            {
+                this.hash2 = controlador.ubicarCursada(this.jTextFieldNombre2.getText());
+                this.listar2(hash2);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonBuscarCActionPerformed
+
+    private void jButtonBajaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaActionPerformed
+    {//GEN-HEADEREND:event_jButtonBajaActionPerformed
+        if (this.camposVaciosA() || this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jList1.getSelectedValue() == null || this.jList2.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un alumno y/o una cursada de las listas", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de baja al alumno en la cursada?", "Alumno - Baja A Cursada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                    try
+                    {
+                        this.controlador.bajaAlumnoDeCursada(this.alumno, this.cursada);
+                        JOptionPane.showMessageDialog(rootPane, "Baja de Alumno de la Cursada Exitosa");
+                        this.dispose();
+                    } catch (NoEstaEntidadException e)
+                    {
+                        JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Baja de Cursada", JOptionPane.WARNING_MESSAGE);
+                    }
+            }
+    }//GEN-LAST:event_jButtonBajaActionPerformed
+
+    private void jButtonElegirCActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirCActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirCActionPerformed
+        int index;
+
+        if (this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar el campo", "Error de Alta a Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jList2.getSelectedValue() != null)
+            {
+                index = this.jList2.getSelectedIndex();
+                this.cursada = (Cursada) this.listModel2.getElementAt(index);
+                JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado a la cursada");
+                this.jLabelDatosCursadaBaja.setText(this.cursada.getNombre());
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja de Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirCActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed
+    {//GEN-HEADEREND:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,7 +543,16 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
             {
                 public void run()
                 {
-                    new AlumnoBajaACursada(null).setVisible(true);
+                    AlumnoBajaACursada dialog = new AlumnoBajaACursada(new javax.swing.JFrame(), true, null);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                    {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e)
+                        {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
                 }
             });
     }
@@ -386,16 +573,16 @@ public class AlumnoBajaACursada extends javax.swing.JFrame
     private javax.swing.JLabel jLabelDatosCursadaBaja;
     private javax.swing.JLabel jLabelNombreA;
     private javax.swing.JLabel jLabelNombreC;
-    private javax.swing.JList<String> jListA;
-    private javax.swing.JList<String> jListC;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldApellido;
-    private javax.swing.JTextField jTextFieldNombreC;
+    private javax.swing.JTextField jTextFieldApellido1;
+    private javax.swing.JTextField jTextFieldNombre1;
+    private javax.swing.JTextField jTextFieldNombre2;
     // End of variables declaration//GEN-END:variables
 
 }

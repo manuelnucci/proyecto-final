@@ -79,7 +79,8 @@ public class AlumnoBaja extends JDialog implements ActionListener
         this.jButtonBuscar = new JButton("Buscar");
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
-        this.jList = new JList();
+        this.listModel = new DefaultListModel();
+        this.jList = new JList(listModel);
         this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.jList.setLayoutOrientation(JList.VERTICAL);
         this.scrollPanel = new JScrollPane(this.jList);
@@ -157,15 +158,11 @@ public class AlumnoBaja extends JDialog implements ActionListener
         this.listModel.clear();
         while(iA.hasNext())
             this.listModel.addElement(iA.next());
-        this.jList.setModel(this.listModel);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        DefaultListModel lm = new DefaultListModel();
-        Iterator<Alumno> iA;
-        
         switch(actionEvent.getActionCommand())
         {
             case BUSCAR:    try

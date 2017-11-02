@@ -40,7 +40,6 @@ public class AlumnoAlta extends JDialog implements ActionListener
         super();
         this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.controlador = controlador;
         this.setModal(true);
         this.setResizable(false);
         this.initComponents();
@@ -137,9 +136,9 @@ public class AlumnoAlta extends JDialog implements ActionListener
     
     public boolean camposVacios()
     {
-        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0 &&
-                this.jTextFieldDomicilio.getText().length() != 0 && this.jTextFieldTelefono.getText().length() != 0 &&
-                this.jTextFieldMail.getText().length() != 0);
+        return (this.jTextFieldNombre.getText().length() == 0 && this.jTextFieldApellido.getText().length() == 0 &&
+                this.jTextFieldDomicilio.getText().length() == 0 && this.jTextFieldTelefono.getText().length() == 0 &&
+                this.jTextFieldMail.getText().length() == 0);
     }
     
     @Override
@@ -155,18 +154,22 @@ public class AlumnoAlta extends JDialog implements ActionListener
                                 {
                                     if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                     {
-                                        controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
-                                        JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
-                                        this.dispose();
+                                       
+                                            controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
+                                            JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                            this.dispose();
                                     }
                                 }
-                                break;
                             }
                             catch (EmailInvalidoException e)
                             {
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
                             }
+                            break;
+            case CANCELAR:  this.dispose(); // Cierra la ventana de alta
+                            break;
             default:        this.dispose(); // Cierra la ventana de alta
+                            break;
         }
     }
 }

@@ -2,7 +2,10 @@ package pga;
 
 import exceptions.EmailInvalidoException;
 import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;
+
+import exceptions.PeriodoInvalidoException;
 
 import gui.VentanaPrincipal;
 
@@ -60,9 +63,35 @@ public class Controlador
         this.modelo.altaAlumnoACursada(alumno, cursada);
     }
     
+    public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException
+    {
+        this.modelo.bajaAlumnoDeCursada(alumno, cursada);
+    }
+    
+    public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws exceptions.EntidadRepetidaException
+    {
+        this.modelo.aprobarAsignatura(alumno, asignatura);
+    }
+    
+    public void quitarAsignatura(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException
+    {
+        this.modelo.quitarAsignatura(alumno, asignatura);
+    }
+    
     public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException
     {
         return this.modelo.ubicarAsignatura(nombre);
+    }
+    
+    public void altaCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, 
+                            String horaFin) throws PeriodoInvalidoException, HoraInvalidaException
+    {
+        this.modelo.altaCursada(nombre, asignatura, periodo, dia, horaInicio, horaFin);
+    }
+    
+    public void bajaCursada(Cursada cursada) throws NoEstaEntidadException
+    {
+        this.modelo.bajaCursada(cursada);
     }
     
     public HashMap<String, Cursada> ubicarCursada(String nombre) throws NoEstaEntidadException

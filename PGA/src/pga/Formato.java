@@ -24,8 +24,8 @@ public class Formato
         int indiceArroba;
         
         indiceArroba = mail.indexOf("@");
-        if (indiceArroba != -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1)
-            throw new EmailInvalidoException(mail, "El mail ingresado no cumple con el formato previsto.");
+        if (indiceArroba == -1 && indiceArroba == mail.lastIndexOf("@") && indiceArroba != 0 && indiceArroba != mail.length() - 1)
+               throw new EmailInvalidoException(mail, "El mail ingresado no cumple con el formato previsto.");
     }
     
     public static void verificaCursadaPeriodo(String periodo) throws PeriodoInvalidoException

@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.EmailInvalidoException;
 import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
@@ -266,7 +267,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 this.deshabilitarPanel(this.panelB2);
                                 if (this.camposVacios1()) 
                                     JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
-                            else
+                                else
                                     this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
                             }
                             catch (NoEstaEntidadException e)
@@ -281,8 +282,8 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 {
                                 this.habilitarPanel(this.panelB1);
                                 this.habilitarPanel(this.panelB2);
-                                    this.modificarDatos((Alumno)this.jList.getSelectedValue());
-                            }
+                                this.modificarDatos((Alumno)this.jList.getSelectedValue());
+                                }
                                 else
                                     JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             break;
@@ -291,26 +292,31 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 if(this.camposVacios2())
                                     JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                                 else
-                                {
                                     if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al alumno?", "Modificación Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                     {
-                                        //if (controlador.verificaMail(this.jTextFieldMail.getText()))
-                                        {
-                                            this.controlador.modificaAlumno((Alumno)this.jList.getSelectedValue(), this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
-                                            JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
-                                            this.dispose();
-                                        }
-                                        //else
-                                            JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                                        this.controlador.modificaAlumno((Alumno) this.jList.getSelectedValue(),
+                                        this.jTextFieldNombre.getText(),
+                                        this.jTextFieldApellido.getText(),
+                                        this.jTextFieldDomicilio.getText(),
+                                        this.jTextFieldTelefono.getText(),
+                                        this.jTextFieldMail.getText());
+                                        JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
+                                        this.dispose();
                                     }
-                                }
                             }
-                                catch(NoEstaEntidadException e)
-                                {
+                            catch(EmailInvalidoException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                            }
+                            catch(NoEstaEntidadException e)
+                            {
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificación", JOptionPane.WARNING_MESSAGE);
-                                }
+                            }
                             break;
-            default:        this.dispose();
+            case CANCELAR:  this.dispose(); // Cierra la ventana de modificacion
+                            break;
+            default:        this.dispose(); // Cierra la ventana de modificacion
+                            break;
         }
     }
 }
