@@ -1,13 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
+import exceptions.EmailInvalidoException;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +38,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
     public AlumnoAlta(Controlador controlador)
     {
         super();
+        this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.controlador = controlador;
         this.setModal(true);
@@ -143,27 +143,29 @@ public class AlumnoAlta extends JDialog implements ActionListener
     }
     
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent ae)
     {
-        switch(e.getActionCommand())
+        switch(ae.getActionCommand())
         {
-            case ACEPTAR:   if(this.camposVacios())
-                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta", JOptionPane.WARNING_MESSAGE);
-                            else
+            case ACEPTAR:   try
                             {
-                                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                if(this.camposVacios())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                                else
                                 {
-                                    //if (controlador.verificaMail(this.jTextFieldMail.getText()))
+                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                     {
                                         controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
                                         JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
                                         this.dispose();
                                     }
-                                    //else
-                                        JOptionPane.showMessageDialog(rootPane, "Formato del mail incorrecto.", "Error de Alta", JOptionPane.WARNING_MESSAGE);
                                 }
+                                break;
                             }
-                            break;
+                            catch (EmailInvalidoException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                            }
             default:        this.dispose(); // Cierra la ventana de alta
         }
     }
