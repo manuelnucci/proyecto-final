@@ -94,6 +94,13 @@ public class Controlador
         this.modelo.bajaCursada(cursada);
     }
     
+    public void modificaCursada(Cursada cursada, String nombre, Asignatura asignatura, String periodo, String dia, 
+                                String horaInicio, String horaFin) throws NoEstaEntidadException, PeriodoInvalidoException, 
+                                HoraInvalidaException
+    {
+        this.modelo.modificaCursada(cursada, nombre, asignatura, periodo, dia, horaInicio, horaFin);
+    }
+    
     public HashMap<String, Cursada> ubicarCursada(String nombre) throws NoEstaEntidadException
     {
         return this.modelo.ubicarCursada(nombre);

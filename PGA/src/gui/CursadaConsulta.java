@@ -1,9 +1,18 @@
 
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+
 import pga.Controlador;
+import pga.Cursada;
 
 /**
  *
@@ -12,6 +21,9 @@ import pga.Controlador;
 public class CursadaConsulta extends javax.swing.JFrame
 {
     private Controlador controlador;
+    private DefaultListModel listModel;
+    private Cursada cursada;
+    private HashMap<String, Cursada> hash;
 
     /** Creates new form CursadaConsulta */
     public CursadaConsulta(Controlador controlador)
@@ -20,6 +32,30 @@ public class CursadaConsulta extends javax.swing.JFrame
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    public boolean camposVaciosCursada()
+    {
+        return this.jTextFieldNombre.getText().length() == 0;
+    }
+
+    public void listarC(HashMap<String, Cursada> hash)
+    {
+        Iterator <Cursada> iA = hash.values().iterator();
+        
+        this.listModel.clear();
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
+    }
+    
+    public void consultaDatos()
+    {
+        this.jLabelNombreC2.setText(this.cursada.getNombre());
+        this.jLabelAsignaturaC2.setText(this.cursada.getAsignatura().getNombre());
+        this.jLabelDiaC2.setText(this.cursada.getDia());
+        this.jLabelHorarioC2.setText(this.cursada.getHoraInicio() + " - " + this.cursada.getHoraFin());
+        this.jLabelPeriodoC2.setText(this.cursada.getPeriodo());
+        this.jLabelIDC2.setText(this.cursada.getId());
     }
 
     /** This method is called from within the constructor to
@@ -35,7 +71,8 @@ public class CursadaConsulta extends javax.swing.JFrame
         jLabelNombre = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listModel = new DefaultListModel();
+        jList1 = new javax.swing.JList<>(listModel);
         jButtonElegir = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -60,17 +97,25 @@ public class CursadaConsulta extends javax.swing.JFrame
 
         jLabelNombre.setText("Nombre");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jButtonElegir.setText("Elegir");
+        jButtonElegir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirActionPerformed(evt);
+            }
+        });
 
         jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,6 +154,13 @@ public class CursadaConsulta extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jLabelNombreC1.setText("Nombre");
 
@@ -125,6 +177,13 @@ public class CursadaConsulta extends javax.swing.JFrame
         jLabelNombreC2.setText("..............");
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jLabelPeriodoC2.setText("..............");
 
@@ -220,6 +279,58 @@ public class CursadaConsulta extends javax.swing.JFrame
 
         pack();
     }//GEN-END:initComponents
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarActionPerformed
+        try
+        {
+            if (this.camposVaciosCursada()) 
+                JOptionPane.showMessageDialog(rootPane, "Ingrese el nombre de la cursada", "Error de Busqueda", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                this.hash = controlador.ubicarCursada(this.jTextFieldNombre.getText());
+                this.listarC(this.hash);
+            }
+        }
+        catch (NoEstaEntidadException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirActionPerformed
+        int index;
+
+        if (this.camposVaciosCursada())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Alta de Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jList1.getSelectedValue() != null)
+            {
+                index = this.jList1.getSelectedIndex();
+                this.cursada = (Cursada) this.listModel.getElementAt(index);
+                JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado la asignatura");
+                this.consultaDatos();
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Alta de Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarActionPerformed
+    {//GEN-HEADEREND:event_jButtonAceptarActionPerformed
+        if (this.hash != null)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Consulta de Cursada Exitosa");
+            this.dispose();   
+        }
+        else
+        JOptionPane.showMessageDialog(rootPane, "Realice una consulta o presione \"Cancelar\" para salir", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed
+    {//GEN-HEADEREND:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

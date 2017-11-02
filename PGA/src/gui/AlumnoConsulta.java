@@ -87,7 +87,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
             this.listModel2.addElement(iA.next());
     }
     
-    public void modificarDatos(Alumno alumno)
+    public void consultaDatos(Alumno alumno)
     {
         this.jTextFieldNombre.setText(alumno.getNombre());
         this.jTextFieldApellido.setText(alumno.getApellido());
@@ -370,7 +370,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
             {
                 index = this.jList.getSelectedIndex();
                 alumno = (Alumno) this.listModel1.getElementAt(index);
-                this.modificarDatos(alumno);
+                this.consultaDatos(alumno);
                 this.listar2(alumno.getHistoriaAcademica());
             }
             else

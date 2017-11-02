@@ -29,10 +29,10 @@ import pga.Controlador;
  */
 public class CursadaAlta extends javax.swing.JDialog
 {
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private DefaultListModel listModel;
     private Asignatura asignatura = null;
-    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 
     /** Creates new form CursadaAlta */
     public CursadaAlta(Controlador controlador)
