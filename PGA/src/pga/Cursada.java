@@ -2,26 +2,48 @@ package pga;
 
 import java.util.HashMap;
 
+/**
+ * Clase que representa a las cursadas existentes dentro de la facultad.
+ */
 public class Cursada implements Comparable, Entidad
 {
-    private static int numCursada = 0;
-    private static final String ID_LEGAJO = "CUR";
+    private static int numCursada = 0; // Número de id de la última cursada registrada
+    private static final String ID_LEGAJO = "CUR"; // Parte del formato con que se arma el id de la cursada
     
-    private String id;
-    private String nombre;
-    private Asignatura asignatura;
-    private String periodo;
-    private String dia;
-    private String horaInicio;
-    private String horaFin;
-    private HashMap<String, Alumno> alumnos; // Las claves serán los legajos de los alumnos
-    private HashMap<String, Profesor> profesores; // Las claves serán los legajos de los profesores
+    private String id; // Identificación de la cursada
+    private String nombre; // Nombre de la cursada
+    private Asignatura asignatura; // Asignatura a la cual pertenece la cursada
+    private String periodo; // Periodo en que se dicta la cursada (incluye año y cuatrimestre)
+    private String dia; // Día de la semana en que se dicta la cursada
+    private String horaInicio; // Hora de inicio de la cursada
+    private String horaFin; // Hora de finalización de la cursada
+    private HashMap<String, Alumno> alumnos; // Colección de los alumnos inscriptos en la cursada
+    // Las claves serán los legajos de los alumnos
+    private HashMap<String, Profesor> profesores; // Colección de los profesores que enseñan en la cursada
+    // Las claves serán los legajos de los profesores
     
+    /**
+     * Constructor vacío necesario para la serialización en XML.
+     */
     public Cursada()
     {
         super();    
     }
 
+    /**
+     * Constructor que crea una nueva instancia de la Cursada.<br>
+     * 
+     * <b>Pre:</b> Los parámetros ya se encuentran validados. Tanto el período
+     * como las horas de inicio y fin cumplen con los formatos estipulados.<br>
+     * <b>Post:</b> Se crea una nueva instancia de Cursada.
+     * 
+     * @param nombre Nombre de la cursada. Nombre != null && nombre != "".
+     * @param asignatura Asignatura a la cual pertenece la cursada. Asignatura != null.
+     * @param periodo Período en que se dicta la cursada. Periodo != null && periodo != "".
+     * @param dia Día en que se dicta la cursada. Dia != null && dia != "".
+     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null && HoraInicio != "".
+     * @param horaFin Hora de finalización de la cursada. HoraFin != null && HoraFin != "".
+     */
     public Cursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
         this.id = ID_LEGAJO + String.format("%04d", ++numCursada);
@@ -61,7 +83,16 @@ public class Cursada implements Comparable, Entidad
     {
         return nombre;
     }
-    
+
+    /**
+     * Método que devuelve la clave con que está hasheada la cursada.
+     * En este caso la clave es el nombre de la cursada.
+     * 
+     * <b>Pre:</b> La cursada debe poseer un nombre no nulo ni vacío.
+     * <b>Post:</b> Se devuelve la clave de la cursada.
+     * 
+     * @return Nombre de la cursada.
+     */
     @Override
     public String getClave()
     {
@@ -118,26 +149,25 @@ public class Cursada implements Comparable, Entidad
         return horaFin;
     }
 
-    /*public void setAlumnos(HashMap<String, Alumno> alumnos)
-    {
-        this.alumnos = alumnos;
-    }*/
-
     public HashMap<String, Alumno> getAlumnos()
     {
         return alumnos;
     }
-
-    /*public void setProfesores(HashMap<String, Profesor> profesores)
-    {
-        this.profesores = profesores;
-    }*/
 
     public HashMap<String, Profesor> getProfesores()
     {
         return profesores;
     }
 
+    /**
+     * Método que compara dos cursadas. El criterio de igualdad será por id.
+     * 
+     * <b>Pre:</b> El objeto que viene por parámetro debe ser una Cursada.<br>
+     * <b>Post:</b> Se devuelve verdadero o falso dependiendo si las cursadas son iguales o no.
+     * 
+     * @param object Objeto a comparar con la cursada actual. Object != null.
+     * @return Verdadero si los objetos cumplen el criterio de igualdad o falso en caso contrario.
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -166,11 +196,29 @@ public class Cursada implements Comparable, Entidad
         return result;
     }
 
+    /**
+     * Método que compara cursadas a través de sus ids.<br>
+     * 
+     * <b>Pre:</b> El objeto que viene por parámetro no es nulo y debe ser una cursada.<br>
+     * <b>Post:</b> Se devuelve un entero en función de qué objeto sea mayor en base a la comparación.
+     * 
+     * @param object objeto a comparar con la instancia actual. Object != null.
+     * @return Entero <, = o > a 0 según el resultado de la comparación.
+     */
     @Override
     public int compareTo(Object object) {   
         return this.id.compareTo(((Cursada) object).getId()); // Las cursadas serán ordenadas por su ID
     }
 
+    /**
+     * Método que devuelve una cadena con la información de la cursada.<br>
+     * 
+     * <b>Pre:</b> La cursada cuenta con todos sus atributos no nulos (exceptuando las colecciones que
+     * no son pertinentes para este método).<br>
+     * <b>Post:</b> Se devuelve la información de la cursada.
+     * 
+     * @return String con la información de la cursada.
+     */
     @Override
     public String toString()
     {

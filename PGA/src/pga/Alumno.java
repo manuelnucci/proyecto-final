@@ -15,7 +15,7 @@ public class Alumno extends Persona
     // Las claves serán las IDs de la asignaturas
     
     /**
-     * Constructor vacío necesario para la serialización en XML
+     * Constructor vacío necesario para la serialización en XML.
      */
     public Alumno()
     {
@@ -62,7 +62,7 @@ public class Alumno extends Persona
     }
 
     /**
-     * Método que muestra la información completa del alumno, tanto sus atributos personales como
+     * Método que devuelve una cadena con la información completa del alumno, tanto sus atributos personales como
      * su historia académica.<br>
      * 
      * <b>Pre:</b> La historia academica ya se encuentra inicializada.<br>

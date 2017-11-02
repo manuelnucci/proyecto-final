@@ -248,12 +248,28 @@ public class Manager
      */
     public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws EntidadRepetidaException // RF03
     {
-        HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
-        
-        if (historiaAcademica.containsKey(asignatura.getId()))
+        if (alumno.getHistoriaAcademica().containsKey(asignatura.getId()))
             throw new EntidadRepetidaException(asignatura, "El alumno ya ha aprobado la asignatura.");
         else
-            historiaAcademica.put(asignatura.getId(), asignatura);
+            alumno.getHistoriaAcademica().put(asignatura.getId(), asignatura);
+    }
+
+    /**
+     * Se elimina de la historía académica del alumno la asignatura recibida por parámetro.<br>
+     * 
+     * <b>Pre:</b> El alumno y la asignatura son entidades válidas que existen en el sistema.<br>
+     * <b>Post:</b> El alumno deja de poseer la asignatura en su historia académica o, en el caso que no
+     * se la encuentre, se lanza una excepción.
+     * 
+     * @param alumno Alumno a quitarle la asignatura. Alumno != null.
+     * @param asignatura Asignatura a dar de daja de la historia académica del alumno. Asignatura != null.
+     * @throws NoEstaEntidadException Excepción lanzada en el caso que la asignatura no se halle en la
+     * historia académica del alumno.
+     */
+    public void bajaAprobada(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException // RF03
+    {
+        if (!alumno.getHistoriaAcademica().remove(asignatura.getId(), asignatura))
+            throw new NoEstaEntidadException(asignatura, "No se ha encontrado la asignatura en la historia académica del alumno");
     }
 
     /**
@@ -313,7 +329,7 @@ public class Manager
      */
     public void bajaAlumnoDeCursada(Alumno alumno, Cursada cursada) throws NoEstaEntidadException // RF11, RF14
     {
-        if(cursada.getAlumnos().remove(alumno.getLegajo()) == null)
+        if(!cursada.getAlumnos().remove(alumno.getLegajo(), alumno))
             throw new NoEstaEntidadException(alumno, "Alumno no encontrado en la cursada.");
     }
     
@@ -543,7 +559,7 @@ public class Manager
      */                   
     public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException // RF12, RF16
     {
-        if(cursada.getProfesores().remove(profesor.getLegajo()) == null)
+        if(!cursada.getProfesores().remove(profesor.getLegajo(), profesor))
             throw new NoEstaEntidadException(profesor, "Profesor no encontrado en la cursada");
     }
     

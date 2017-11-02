@@ -64,6 +64,15 @@ public class Asignatura implements Comparable, Entidad
         return nombre;
     }
 
+    /**
+     * Método que devuelve la clave con que está hasheada la asignatura.
+     * En este caso la clave es el nombre de la asignatura.
+     * 
+     * <b>Pre:</b> La asignatura debe poseer un nombre no nulo ni vacío.
+     * <b>Post:</b> Se devuelve la clave de la asignatura.
+     * 
+     * @return Nombre de la asignatura.
+     */
     @Override
     public String getClave()
     {
@@ -80,6 +89,15 @@ public class Asignatura implements Comparable, Entidad
         return correlatividades;
     }
 
+    /**
+     * Método que compara dos asignaturas. El criterio de igualdad será por id.
+     * 
+     * <b>Pre:</b> El objeto que viene por parámetro debe ser una Asignatura.<br>
+     * <b>Post:</b> Se devuelve verdadero o falso dependiendo si las asignaturas son iguales o no.
+     * 
+     * @param object Objeto a comparar con la asignatura actual. Object != null.
+     * @return Verdadero si los objetos cumplen el criterio de igualdad o falso en caso contrario.
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -112,7 +130,7 @@ public class Asignatura implements Comparable, Entidad
      * Método que compara asignaturas a través de sus ids.<br>
      * 
      * <b>Pre:</b> El objeto que viene por parámetro no es nulo y debe ser una asignatura.<br>
-     * <b>Post:</b> Se devuelve un entero en función de que objeto sea mayor en base a la comparación.
+     * <b>Post:</b> Se devuelve un entero en función de qué objeto sea mayor en base a la comparación.
      * 
      * @param object objeto a comparar con la instancia actual. Object != null.
      * @return Entero <, = o > a 0 según el resultado de la comparación.
@@ -123,7 +141,8 @@ public class Asignatura implements Comparable, Entidad
     }    
 
     /**
-     * Método que muestra la información completa de la asignatura, tanto su nombre como sus correlatividades.<br>
+     * Método que devuelve una cadena con la información completa de la asignatura, tanto su nombre como sus 
+     * correlatividades.<br>
      * 
      * <b>Pre:</b> La colección de correlatividades ya se encuentra inicializada.<br>
      * <b>Post:</b> Se devuelve un String con la información de la asignatura.
@@ -147,9 +166,17 @@ public class Asignatura implements Comparable, Entidad
         return cad;
     }
 
+    /**
+     * Método que devuelve una cadena con la información básica de la asignatura: su id y su nombre.<br>
+     * 
+     * <b>Pre:</b> La asignatura cuenta con un id y un nombre.<br>
+     * <b>Post:</b> Se devuelve la información de la asignatura.
+     * 
+     * @return String con la información básica de la materia.
+     */
     @Override
     public String toString()
     {
         return "Id: " + this.id + "\nNombre: " + this.nombre;
-}
+    }
 }
