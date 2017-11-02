@@ -11,18 +11,12 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 
-/**
- *
- * @author manuc
- */
 public class AlumnoConsulta extends javax.swing.JDialog
 {
     private Controlador controlador;
@@ -30,7 +24,6 @@ public class AlumnoConsulta extends javax.swing.JDialog
     private HashMap<String, Alumno> hash = null;
     private DefaultListModel listModel;
 
-    /** Creates new form AlumnoConsulta2 */
     public AlumnoConsulta(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
         super(parent, modal);

@@ -16,8 +16,8 @@ public class PeriodoInvalidoException extends Exception
      * <b>Pre:</b> El periodo es un String no nulo ni vacío cuyo formato es inválido.<br>
      * <b>Post:</b> Se crea una nueva instancia de la clase.
      * 
-     * @param periodo Periodo de la cursada con un formato no válido. Periodo != null && periodo != "".
-     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
+     * @param periodo Periodo de la cursada con un formato no válido. Periodo != null y periodo != "".
+     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null y mensaje != ""
      */
     public PeriodoInvalidoException(String periodo, String mensaje)
     {

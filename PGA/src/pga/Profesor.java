@@ -29,11 +29,11 @@ public class Profesor extends Persona
      * El mail ya cuenta con el formato correcto.<br>
      * <b> Post:</b> Se crea una nueva instancia de profesor con los parámetros validados.
      * 
-     * @param nombre Nombre del profesor. Nombre != null && nombre != ""
-     * @param apellido Apellido del profesor. Apellido != null && apellido != ""
-     * @param domicilio Domicilio del profesor. Domicilio != null && domicilio != ""
-     * @param telefono Telefono del profesor. Telefono != null && telefono != ""
-     * @param mail Mail del profesor. Mail != null && mail != ""
+     * @param nombre Nombre del profesor. Nombre != null y nombre != ""
+     * @param apellido Apellido del profesor. Apellido != null y apellido != ""
+     * @param domicilio Domicilio del profesor. Domicilio != null y domicilio != ""
+     * @param telefono Telefono del profesor. Telefono != null y telefono != ""
+     * @param mail Mail del profesor. Mail != null y mail != ""
      */
     public Profesor(String nombre, String apellido, String domicilio, String telefono, String mail)
     {

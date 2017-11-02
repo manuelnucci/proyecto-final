@@ -18,7 +18,7 @@ public class NoEstaEntidadException extends Exception
      * <b>Post:</b> Se crea una nueva instancia de la clase.
      * 
      * @param entidad Entidad que sirve como información. Entidad != null.
-     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
+     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null y mensaje != ""
      */
     public NoEstaEntidadException(Entidad entidad, String mensaje)
     {
@@ -32,7 +32,7 @@ public class NoEstaEntidadException extends Exception
     * <b>Pre:</b> El mensaje que viene por parámetro no es nulo ni vacío.<br>
     * <b>Post:</b> Se crea una nueva instancia de la clase.
     * 
-    * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
+    * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null y mensaje != ""
     */
     public NoEstaEntidadException(String mensaje)
     {

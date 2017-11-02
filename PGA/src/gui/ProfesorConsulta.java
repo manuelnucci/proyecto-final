@@ -5,15 +5,10 @@ import javax.swing.JFrame;
 
 import pga.Controlador;
 
-/**
- *
- * @author DELL
- */
 public class ProfesorConsulta extends javax.swing.JFrame
 {
     private Controlador controlador;
 
-    /** Creates new form ProfesorConsulta */
     public ProfesorConsulta(Controlador controlador)
     {
         this.controlador = controlador;

@@ -117,11 +117,11 @@ public class Manager
      * <b>Pre:</b> La colección de alumnos ya fue inicializada.<br>
      * <b>Post:</b> El alumno es dado de alta o se lanza una excepción en el caso que el formato del mail sea incorrecto.
      * 
-     * @param nombre Nombre del alumno. Nombre != null && nombre != "".
-     * @param apellido Apellido del alumno. Apellido != null && apellido != "".
-     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != "".
-     * @param telefono Telefono del alumno. Telefono != null && telefono != "".
-     * @param mail Mail del alumno. Mail != null && mail != "".
+     * @param nombre Nombre del alumno. Nombre != null y nombre != "".
+     * @param apellido Apellido del alumno. Apellido != null y apellido != "".
+     * @param domicilio Domicilio del alumno. Domicilio != null y domicilio != "".
+     * @param telefono Telefono del alumno. Telefono != null y telefono != "".
+     * @param mail Mail del alumno. Mail != null y mail != "".
      * @throws EmailInvalidoException Excepción lanzada si el formato del mail no es válido.
      */
     public void altaAlumno(String nombre, String apellido, String domicilio, String telefono, String mail)
@@ -189,11 +189,11 @@ public class Manager
      * también se lanza una excepción para mostrar este problema.
      * 
      * @param alumno Alumno al cual se le modificarán los atributos. Alumno != null.
-     * @param nombre Nombre del alumno. Nombre != null && nombre != "".
-     * @param apellido Apellido del alumno. Apellido != null && apellido != "".
-     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != "".
-     * @param telefono Telefono del alumno. Telefono != null && telefono != "".
-     * @param mail Mail del alumno. Mail != null && mail != "".
+     * @param nombre Nombre del alumno. Nombre != null y nombre != "".
+     * @param apellido Apellido del alumno. Apellido != null y apellido != "".
+     * @param domicilio Domicilio del alumno. Domicilio != null y domicilio != "".
+     * @param telefono Telefono del alumno. Telefono != null y telefono != "".
+     * @param mail Mail del alumno. Mail != null y mail != "".
      * @throws NoEstaEntidadException Excepción lanzada si el alumno no es encontrado en la colección.
      * @throws EmailInvalidoException Excepción lanzada si el mail no cumple con el formato previsto.
      */
@@ -280,8 +280,8 @@ public class Manager
      * <b>Post:</b> Se devuelve una colección con todos aquellos alumnos que surgieron de la búsqueda o se lanza
      * una excepción en el caso que no se encuente a la entidad.
      * 
-     * @param nombre Nombre del alumno a ubicar. Nombre != null && nombre != "".
-     * @param apellido Apellido del alumno a ubicar. Apellido != null && apellido != "".
+     * @param nombre Nombre del alumno a ubicar. Nombre != null y nombre != "".
+     * @param apellido Apellido del alumno a ubicar. Apellido != null y apellido != "".
      * @return HashMap con todos aquellos alumnos que cumplen la condición.
      * @throws NoEstaEntidadException Excepción lanzada en el caso que no se encuentre ningún alumno con 
      * el nombre y apellido solicitados.
@@ -345,11 +345,11 @@ public class Manager
      * <b>Pre:</b> La colección de profesores ya fue inicializada.<br>
      * <b>Post:</b> El profesor es dado de alta o se lanza una excepción en el caso que el formato del mail sea incorrecto.
      * 
-     * @param nombre Nombre del profesor. Nombre != null && nombre != "".
-     * @param apellido Apellido del profesor. Apellido != null && apellido != "".
-     * @param domicilio Domicilio del profesor. Domicilio != null && domicilio != "".
-     * @param telefono Telefono del profesor. Telefono != null && telefono != "".
-     * @param mail Mail del profesor. Mail != null && mail != "".
+     * @param nombre Nombre del profesor. Nombre != null y nombre != "".
+     * @param apellido Apellido del profesor. Apellido != null y apellido != "".
+     * @param domicilio Domicilio del profesor. Domicilio != null y domicilio != "".
+     * @param telefono Telefono del profesor. Telefono != null y telefono != "".
+     * @param mail Mail del profesor. Mail != null y mail != "".
      * @throws EmailInvalidoException Excepción lanzada si el formato del mail no es válido.
      */
     public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail)
@@ -417,11 +417,11 @@ public class Manager
      * también se lanza una excepción para mostrar este problema.
      * 
      * @param profesor Profesor al cual se le modificarán los atributos. Profesor != null.
-     * @param nombre Nombre del profesor. Nombre != null && nombre != "".
-     * @param apellido Apellido del profesor. Apellido != null && apellido != "".
-     * @param domicilio Domicilio del profesor. Domicilio != null && domicilio != "".
-     * @param telefono Telefono del profesor. Telefono != null && telefono != "".
-     * @param mail Mail del profesor. Mail != null && mail != "".
+     * @param nombre Nombre del profesor. Nombre != null y nombre != "".
+     * @param apellido Apellido del profesor. Apellido != null y apellido != "".
+     * @param domicilio Domicilio del profesor. Domicilio != null y domicilio != "".
+     * @param telefono Telefono del profesor. Telefono != null y telefono != "".
+     * @param mail Mail del profesor. Mail != null y mail != "".
      * @throws NoEstaEntidadException Excepción lanzada si el profesor no es encontrado en la colección.
      * @throws EmailInvalidoException Excepción lanzada si el mail no cumple con el formato previsto.
      */
@@ -509,8 +509,8 @@ public class Manager
      * <b>Post:</b> Se devuelve una colección con todos aquellos profesores que surgieron de la búsqueda o se lanza
      * una excepción en el caso que no se encuente a la entidad.
      * 
-     * @param nombre Nombre del profesor a ubicar. Nombre != null && nombre != "".
-     * @param apellido Apellido del profesor a ubicar. Apellido != null && apellido != "".
+     * @param nombre Nombre del profesor a ubicar. Nombre != null y nombre != "".
+     * @param apellido Apellido del profesor a ubicar. Apellido != null y apellido != "".
      * @return HashMap con todos aquellos profesores que cumplen la condición.
      * @throws NoEstaEntidadException Excepción lanzada en el caso que no se encuentre ningún profesor con 
      * el nombre y apellido solicitados.
@@ -575,7 +575,7 @@ public class Manager
      * <b>Pre:</b> La colección de asignaturas ya fue inicializada.<br>
      * <b>Post:</b> La asignatura es dada de alta.
      * 
-     * @param nombre Nombre de la asignatura. Nombre != null && nombre != "".
+     * @param nombre Nombre de la asignatura. Nombre != null y nombre != "".
      */
     public void altaAsignatura(String nombre) // RF01
     {
@@ -682,7 +682,7 @@ public class Manager
      * se lanza una excepción para notificar que no se halló a la asignatura.
      * 
      * @param asignatura Asignatura a la cual se le modificará el nombre. Asignatura != null.
-     * @param nombre Nombre nuevo de la asignatura. Nombre != null && nombre != "".
+     * @param nombre Nombre nuevo de la asignatura. Nombre != null y nombre != "".
      * @throws NoEstaEntidadException Excepción lanzada si la asignatura no es encontrada en la colección.
      */
     public void modificaAsignatura(Asignatura asignatura, String nombre)
@@ -761,7 +761,7 @@ public class Manager
      * <b>Post:</b> Se devuelve una colección con todas aquellas asignaturas que surgieron de la búsqueda o se lanza
      * una excepción en el caso que no se encuente a la entidad.
      * 
-     * @param nombre Nombre de la asignatura a ubicar. Nombre != null && nombre != "".
+     * @param nombre Nombre de la asignatura a ubicar. Nombre != null y nombre != "".
      * @return HashMap con todas aquellas asignaturas que cumplen la condición.
      * @throws NoEstaEntidadException Excepción lanzada en el caso que no se encuentre ninguna asignatura con 
      * el nombre solicitado.
@@ -789,12 +789,12 @@ public class Manager
      * <b>Post:</b> La cursada es dada de alta o se lanza alguna excepción en el caso que el período o alguna
      * de las horas no cumpla con los formatos prefijados.
      * 
-     * @param nombre Nombre de la cursada a dar de alta. Nombre != null && nombre != "".
+     * @param nombre Nombre de la cursada a dar de alta. Nombre != null y nombre != "".
      * @param asignatura Asignatura a la que pertenecerá la cursada. Asignatura != null.
-     * @param periodo Período de la cursada. Periodo != null && periodo != "".
-     * @param dia Dia de la semana en que se dicta la cursada. Dia != null && dia != "".
-     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null && horaInicio != "".
-     * @param horaFin Hora de finalización de la cursada. HoraFin != null && horaFin != "".
+     * @param periodo Período de la cursada. Periodo != null y periodo != "".
+     * @param dia Dia de la semana en que se dicta la cursada. Dia != null y dia != "".
+     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null y horaInicio != "".
+     * @param horaFin Hora de finalización de la cursada. HoraFin != null y horaFin != "".
      * @throws PeriodoInvalidoException Excepción lanzada si el formato del periodo no es válido.
      * @throws HoraInvalidaException Excepción lanzada si el formato de la hora no es válido.
      */
@@ -850,12 +850,12 @@ public class Manager
      * horaInicio u horaFin no cumplen con el formato también se lanza la excepción correspondiente.
      * 
      * @param cursada  ursada a la cual se le modificarán sus atributos. Cursada != null.
-     * @param nombre Nombre de la cursada. Nombre != null && nombre != "".
+     * @param nombre Nombre de la cursada. Nombre != null y nombre != "".
      * @param asignatura Asignatura a la que pertenece la cursada. Asignatura != null.
-     * @param periodo Período de la cursada. Periodo != null && periodo != "".
-     * @param dia Dia de la semana en que se dicta la cursada. Dia != null && dia != "".
-     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null && horaInicio != "".
-     * @param horaFin Hora de finalización de la cursada. HoraFin != null && horaFin != "".
+     * @param periodo Período de la cursada. Periodo != null y periodo != "".
+     * @param dia Dia de la semana en que se dicta la cursada. Dia != null y dia != "".
+     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null y horaInicio != "".
+     * @param horaFin Hora de finalización de la cursada. HoraFin != null y horaFin != "".
      * @throws NoEstaEntidadException Excepción lanzada si la cursada no es encontrada en la colección.
      * @throws PeriodoInvalidoException Excepción lanzada si el formato del periodo no es válido.
      * @throws HoraInvalidaException Excepción lanzada si el formato de la hora no es válido.
@@ -907,7 +907,7 @@ public class Manager
      * <b>Post:</b> Se devuelve una colección con todas aquellas cursadas que surgieron de la búsqueda o se lanza
      * una excepción en el caso que no se encuente a la entidad.
      * 
-     * @param nombre Nombre de la cursada a ubicar. Nombre != null && nombre != "".
+     * @param nombre Nombre de la cursada a ubicar. Nombre != null y nombre != "".
      * @return HashMap con todas aquellas cursadas que cumplen la condición.
      * @throws NoEstaEntidadException Excepción lanzada en el caso que no se encuentre ninguna cursada con 
      * el nombre solicitado.

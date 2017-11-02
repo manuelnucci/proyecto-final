@@ -23,16 +23,17 @@ public class Persona implements Comparable, Entidad
 
     /**
      * Constructor que crea una nueva instancia de Persona.
-     * 
-     * <b> Pre:</b> Los parámetros vienen ya siendo válidos. Hay una asignación directa. 
+     *
+     * <b> Pre:</b> Los parámetros vienen ya siendo válidos. Hay una asignación directa.
      * El mail ya cuenta con el formato correcto.<br>
      * <b> Post:</b> Se crea una nueva instancia de Persona con los parámetros validados.
-     * 
-     * @param nombre Nombre de la persona. Nombre != null && nombre != ""
-     * @param apellido Apellido de la persona. Apellido != null && apellido != ""
-     * @param domicilio Domicilio de la persona. Domicilio != null && domicilio != ""
-     * @param telefono Telefono de la persona. Telefono != null && telefono != ""
-     * @param mail Mail de la persona. Mail != null && mail != ""
+     *
+     * @param nombre Nombre de la persona. Nombre != null y nombre != ""
+     * @param apellido Apellido de la persona. Apellido != null y apellido != ""
+     * @param legajo Legajo de la persona. Legajo != null y legajo != "".
+     * @param domicilio Domicilio de la persona. Domicilio != null y domicilio != ""
+     * @param telefono Telefono de la persona. Telefono != null y telefono != ""
+     * @param mail Mail de la persona. Mail != null y mail != ""
      */
     public Persona(String nombre, String apellido, String legajo, String domicilio, String telefono, String mail)
     {
@@ -163,7 +164,7 @@ public class Persona implements Comparable, Entidad
      * <b>Post:</b> Se devuelve un entero en función de qué objeto sea mayor en base a la comparación.
      * 
      * @param object objeto a comparar con la instancia actual. Object != null.
-     * @return Entero <, = o > a 0 según el resultado de la comparación.
+     * @return Entero menor, igual o mayor a 0 según el resultado de la comparación.
      */
     @Override
     public int compareTo(Object object) {

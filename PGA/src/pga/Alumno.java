@@ -29,11 +29,11 @@ public class Alumno extends Persona
      * El mail ya cuenta con el formato correcto.<br>
      * <b> Post:</b> Se crea una nueva instancia de alumno con los parámetros validados.
      * 
-     * @param nombre Nombre del alumno. Nombre != null && nombre != ""
-     * @param apellido Apellido del alumno. Apellido != null && apellido != ""
-     * @param domicilio Domicilio del alumno. Domicilio != null && domicilio != ""
-     * @param telefono Telefono del alumno. Telefono != null && telefono != ""
-     * @param mail Mail del alumno. Mail != null && mail != ""
+     * @param nombre Nombre del alumno. Nombre != null y nombre != ""
+     * @param apellido Apellido del alumno. Apellido != null y apellido != ""
+     * @param domicilio Domicilio del alumno. Domicilio != null y domicilio != ""
+     * @param telefono Telefono del alumno. Telefono != null y telefono != ""
+     * @param mail Mail del alumno. Mail != null y mail != ""
      */
     public Alumno(String nombre, String apellido, String domicilio, String telefono, String mail)
     {

@@ -29,11 +29,11 @@ public final class Factory
      * las constantes declaradas en Factory.
      * 
      * @param tipo Entero que indica qué tipo de Persona se desea instanciar. No hay restricciones para este parámetro.
-     * @param nombre Nombre de la persona. Nombre != null && nombre != ""
-     * @param apellido Apellido de la persona. Apellido != null && apellido != ""
-     * @param domicilio Domicilio de la persona. Domicilio != null && domicilio != ""
-     * @param telefono Telefono de la persona. Telefono != null && telefono != ""
-     * @param mail Mail de la persona. Mail != null && mail != ""
+     * @param nombre Nombre de la persona. Nombre != null y nombre != ""
+     * @param apellido Apellido de la persona. Apellido != null y apellido != ""
+     * @param domicilio Domicilio de la persona. Domicilio != null y domicilio != ""
+     * @param telefono Telefono de la persona. Telefono != null y telefono != ""
+     * @param mail Mail de la persona. Mail != null y mail != ""
      * @return Se devuelve una Persona o null en el caso que "tipo" no concuerde ni con ALUMNO ni PROFESOR (constantes públicas).
      */
     public static Persona getPersona(int tipo, String nombre, String apellido, String domicilio, String telefono, String mail)
@@ -56,7 +56,7 @@ public final class Factory
      * <b>Pre:</b> El nombre de la futura asignatura ya se encuenta validado.<br>
      * <b>Post:</b> Se retorna una instancia de Asignatura.
      * 
-     * @param nombre Nombre de la asignatura. Nombre != null && nombre != "".
+     * @param nombre Nombre de la asignatura. Nombre != null y nombre != "".
      * @return Se devuelve una instancia de Asignatura.
      */
     public static Asignatura getAsignatura(String nombre)
@@ -71,12 +71,12 @@ public final class Factory
      * validados. El periodo y las horas de inicio y fin cumplen con el formato correcto.<br>
      * <b>Post:</b> Se retorna una instancia de Cursada.
      * 
-     * @param nombre Nombre de la cursada. Nombre != null && nombre != "".
+     * @param nombre Nombre de la cursada. Nombre != null y nombre != "".
      * @param asignatura Asignatura a la cual pertenece la cursada. Asignatura != null.
-     * @param periodo Período en que se dicta la cursada. Periodo != null && periodo != "".
-     * @param dia Día en que se dicta la cursada. Dia != null && dia != "".
-     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null && HoraInicio != "".
-     * @param horaFin Hora de finalización de la cursada. HoraFin != null && HoraFin != "".
+     * @param periodo Período en que se dicta la cursada. Periodo != null y periodo != "".
+     * @param dia Día en que se dicta la cursada. Dia != null y dia != "".
+     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null y HoraInicio != "".
+     * @param horaFin Hora de finalización de la cursada. HoraFin != null y HoraFin != "".
      * @return Se devuelve una nueva instancia de Cursada.
      */
     public static Cursada getCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)

@@ -37,12 +37,12 @@ public class Cursada implements Comparable, Entidad
      * como las horas de inicio y fin cumplen con los formatos estipulados.<br>
      * <b>Post:</b> Se crea una nueva instancia de Cursada.
      * 
-     * @param nombre Nombre de la cursada. Nombre != null && nombre != "".
+     * @param nombre Nombre de la cursada. Nombre != null y nombre != "".
      * @param asignatura Asignatura a la cual pertenece la cursada. Asignatura != null.
-     * @param periodo Período en que se dicta la cursada. Periodo != null && periodo != "".
-     * @param dia Día en que se dicta la cursada. Dia != null && dia != "".
-     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null && HoraInicio != "".
-     * @param horaFin Hora de finalización de la cursada. HoraFin != null && HoraFin != "".
+     * @param periodo Período en que se dicta la cursada. Periodo != null y periodo != "".
+     * @param dia Día en que se dicta la cursada. Dia != null y dia != "".
+     * @param horaInicio Hora de inicio de la cursada. HoraInicio != null y HoraInicio != "".
+     * @param horaFin Hora de finalización de la cursada. HoraFin != null y HoraFin != "".
      */
     public Cursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, String horaFin)
     {
@@ -203,7 +203,7 @@ public class Cursada implements Comparable, Entidad
      * <b>Post:</b> Se devuelve un entero en función de qué objeto sea mayor en base a la comparación.
      * 
      * @param object objeto a comparar con la instancia actual. Object != null.
-     * @return Entero <, = o > a 0 según el resultado de la comparación.
+     * @return Entero menor, igual o mayor a 0 según el resultado de la comparación.
      */
     @Override
     public int compareTo(Object object) {   

@@ -30,7 +30,7 @@ public class Asignatura implements Comparable, Entidad
      * <b>Pre:</b> El nombre ya se encuentra validado.<br>
      * <b>Post:</b> Se crea una nueva instancia de la Asignatura.
      * 
-     * @param nombre Nombre de la asignatura. Nombre != null && nombre != "".
+     * @param nombre Nombre de la asignatura. Nombre != null y nombre != "".
      */
     public Asignatura(String nombre)
     {
@@ -133,7 +133,7 @@ public class Asignatura implements Comparable, Entidad
      * <b>Post:</b> Se devuelve un entero en función de qué objeto sea mayor en base a la comparación.
      * 
      * @param object objeto a comparar con la instancia actual. Object != null.
-     * @return Entero <, = o > a 0 según el resultado de la comparación.
+     * @return Entero menor, igual o mayor a 0 según el resultado de la comparación.
      */
     @Override
     public int compareTo(Object object) {

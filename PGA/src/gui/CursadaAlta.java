@@ -6,15 +6,10 @@ import javax.swing.SpinnerNumberModel;
 
 import pga.Controlador;
 
-/**
- *
- * @author DELL
- */
 public class CursadaAlta extends javax.swing.JFrame
 {
     private Controlador controlador;
 
-    /** Creates new form CursadaAlta */
     public CursadaAlta(Controlador controlador)
     {
         this.controlador = controlador;
