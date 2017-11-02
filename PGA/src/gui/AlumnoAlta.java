@@ -40,6 +40,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
     {
         super();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.controlador = controlador;
         this.setModal(true);
         this.setResizable(false);
         this.initComponents();
