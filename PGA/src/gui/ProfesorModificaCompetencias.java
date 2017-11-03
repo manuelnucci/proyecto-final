@@ -1,39 +1,53 @@
 package gui;
 
+import exceptions.EntidadRepetidaException;
+import exceptions.NoEstaEntidadException;
+
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import pga.Alumno;
+import pga.Asignatura;
 import pga.Controlador;
+import pga.Profesor;
 
 public class ProfesorModificaCompetencias extends JFrame implements ActionListener
 {
-    private static final String ANADIR = "6";
-    private static final String REMOVER = "7";
-    private static final String BUSCAR = "8";
-    private static final String CANCELAR = "9";
-    private static final String GUARDAR = "10";
+    private static final String ELEGIR = "0";
+    private static final String ANADIR = "1";
+    private static final String REMOVER = "2";
+    private static final String BUSCAR = "3";
+    private static final String CANCELAR = "4";
+    private static final String GUARDAR = "5";
+    private static final String BUSCAR2 = "6";
     
     private Controlador controlador;
     private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
     private JList jListA, jListC1, jListC2;
     private DefaultListModel listModel, listModelC1, listModelC2;
     private JPanel panelA, panelB;
-    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail, jTextFieldNombreAsignatura;
-    private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail, jLabelNombreAsignatura,
-                        jLabelAsigTotales, jLabelAsigHistoria;
-    private JButton jButtonGuardar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonElegir, jButtonBuscar, jButtonBuscar2;
+    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldNombreAsignatura;
+    private JLabel jLabelNombre, jLabelApellido, jLabelNombreAsignatura, jLabelAsigTotales, jLabelAsigHistoria;
+    private JButton jButtonGuardar, jButtonCancelar, jButtonAnadir, jButtonRemover, jButtonElegir, jButtonBuscar, jButtonBuscar2;
+    private HashMap<String, Profesor> hash;
+    private Profesor profesor = null;
     
     public ProfesorModificaCompetencias(Controlador controlador)
     {
@@ -235,10 +249,152 @@ public class ProfesorModificaCompetencias extends JFrame implements ActionListen
         this.panelB.add(this.jButtonCancelar, c);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent)
+    public void listarProfesores(HashMap<String, Profesor> hash)
     {
-        // TODO Implement this method
+        Iterator <Profesor> iA = hash.values().iterator();
+        
+        this.listModel.clear();
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
+    }
+
+    public void listarHA(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModelC2.clear();
+        while(iA.hasNext())
+            this.listModelC2.addElement(iA.next());
+    }
+    
+    public void listarAsignatura(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModelC1.clear();
+        while(iA.hasNext())
+            this.listModelC1.addElement(iA.next());
+    }
+    
+    public boolean camposVaciosAlumno()
+    {
+        return (this.jTextFieldNombre.getText().length() == 0 && this.jTextFieldApellido.getText().length() == 0);
+    }
+    
+    public boolean camposVaciosAsignatura()
+    {
+        return (this.jTextFieldNombreAsignatura.getText().length() == 0);
+    }
+
+    public void deshabilitarPanel(JPanel panel)
+    {
+        Component[] componentes = panel.getComponents();
+        
+        for(int i = 0; i < componentes.length; i++)
+            componentes[i].setEnabled(false);
+    }
+    
+    public void habilitarPanel(JPanel panel)
+    {
+        Component[] componentes = panel.getComponents();
+        
+        for(int i = 0; i < componentes.length; i++)
+            componentes[i].setEnabled(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ae)
+    {
+        switch(ae.getActionCommand())
+        {
+            case BUSCAR:    if (this.camposVaciosAlumno()) 
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            else
+                                try
+                                {
+                                    this.deshabilitarPanel(panelB);
+                                    this.hash = controlador.ubicarProfesor(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText());
+                                    this.listarProfesores(hash);
+                                } catch (NoEstaEntidadException e)
+                                {
+                                    JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                                }
+                            break;
+        
+            case ELEGIR:    if (this.camposVaciosAlumno())
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                            else
+                                if (this.jListA.getSelectedValue() != null)
+                                {
+                                    this.habilitarPanel(panelB);
+                                    int index = this.jListA.getSelectedIndex();
+                                    this.profesor = (Profesor) this.listModel.getElementAt(index);
+                                    this.listarHA(this.profesor.getCompetencias());
+                                }
+                                else
+                                    JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+                            break;
+        
+            case BUSCAR2:   if (this.camposVaciosAsignatura()) 
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            else
+                                try
+                                {
+                                    this.listarAsignatura(controlador.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
+                                } catch (NoEstaEntidadException e)
+                                {
+                                    JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                                }
+                            break;
+            
+            case ANADIR:    if (this.jListC1.getSelectedValue() != null)
+                            {
+                                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea anadir la asignatura a la historia?", "Modificar Historia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                {
+                                    int index = this.jListC1.getSelectedIndex();
+                                    Asignatura asignatura = (Asignatura) this.listModelC1.getElementAt(index);
+                                    try
+                                    {
+                                        this.controlador.agregarCompetencia(this.profesor, asignatura);
+                                        JOptionPane.showMessageDialog(rootPane, "Asignatura anadida a la historia exitosamente");
+                                    } catch (EntidadRepetidaException e)
+                                    {
+                                        JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificacion de Historia", JOptionPane.WARNING_MESSAGE);
+                                    }
+                                }
+                            }
+                            else
+                                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificacion de Historia", JOptionPane.WARNING_MESSAGE);     
+                            break;
+        
+            case REMOVER:   if (this.jListC2.getSelectedValue() != null)
+                            {
+                                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea remover la competencia?", "Modificar Historia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                {
+                                    int index = this.jListC2.getSelectedIndex();
+                                    Asignatura asignatura = (Asignatura) this.listModelC2.getElementAt(index);
+                                    try
+                                    {
+                                        this.controlador.bajaCompetencia(this.profesor, asignatura);
+                                        JOptionPane.showMessageDialog(rootPane, "Asignatura removida de la historia exitosamente");
+                                    } catch (NoEstaEntidadException e)
+                                    {
+                                        JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificacion de Historia", JOptionPane.WARNING_MESSAGE);
+                                    }
+                                }
+                            }
+                            else
+                                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificacion de Historia", JOptionPane.WARNING_MESSAGE);     
+                            break;
+        
+            case GUARDAR:   this.dispose(); // Cierra la ventana de modificacion
+                            break;
+            
+            case CANCELAR:  this.dispose(); // Cierra la ventana de modificacion
+                            break;
+            
+            default:        this.dispose(); // Cierra la ventana de modificacion
+                            break;
+        }
     }
 }

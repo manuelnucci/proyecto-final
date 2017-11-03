@@ -19,8 +19,8 @@ import pga.Controlador;
 
 public class AlumnoConsulta extends javax.swing.JDialog
 {
-    private Controlador controlador;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    private Controlador controlador;
     private HashMap<String, Alumno> hash = null;
     private DefaultListModel listModel1, listModel2;
 
@@ -58,7 +58,7 @@ public class AlumnoConsulta extends javax.swing.JDialog
     
     public boolean camposVacios()
     {
-        return (this.jTextFieldNombre1.getText().length() == 0 && this.jTextFieldApellido1.getText().length() == 0);
+        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
     }
     
     public void listar1(HashMap<String, Alumno> hash)

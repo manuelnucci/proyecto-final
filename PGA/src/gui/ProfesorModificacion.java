@@ -29,6 +29,7 @@ import javax.swing.SpringLayout;
 import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
+import pga.Profesor;
 
 public class ProfesorModificacion extends JFrame implements ActionListener
 {
@@ -204,25 +205,24 @@ public class ProfesorModificacion extends JFrame implements ActionListener
            
     }
     
-    private void listar(HashMap<String, Alumno> h)
+    private void listar(HashMap<String, Profesor> h)
     {
         Iterator i = h.values().iterator();
         
         this.listModel.clear();
         while(i.hasNext())
         {
-            Alumno a = (Alumno) i.next();
-            this.listModel.addElement(a);
+            this.listModel.addElement(i.next());
         }
     }
     
-    public void modificarDatos(Alumno a)
+    public void modificarDatos(Profesor p)
     {
-        this.jTextFieldNombre.setText(a.getNombre());
-        this.jTextFieldApellido.setText(a.getApellido());
-        this.jTextFieldDomicilio.setText(a.getDomicilio());
-        this.jTextFieldTelefono.setText(a.getTelefono());
-        this.jTextFieldMail.setText(a.getMail());
+        this.jTextFieldNombre.setText(p.getNombre());
+        this.jTextFieldApellido.setText(p.getApellido());
+        this.jTextFieldDomicilio.setText(p.getDomicilio());
+        this.jTextFieldTelefono.setText(p.getTelefono());
+        this.jTextFieldMail.setText(p.getMail());
     }
     
     public boolean camposVacios1()
@@ -265,7 +265,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                                 if (this.camposVacios1()) 
                                     JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
                                 else
-                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
+                                    this.listar(controlador.ubicarProfesor(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
                             }
                             catch (NoEstaEntidadException e)
                             {
@@ -280,7 +280,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                                 {
                                 this.habilitarPanel(this.panelB1);
                                 this.habilitarPanel(this.panelB2);
-                                this.modificarDatos((Alumno)this.jList.getSelectedValue());
+                                this.modificarDatos((Profesor)this.jList.getSelectedValue());
                                 }
                                 else
                                     JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
@@ -291,15 +291,15 @@ public class ProfesorModificacion extends JFrame implements ActionListener
                                 if(this.camposVacios2())
                                     JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                                 else
-                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al alumno?", "Modificación Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al profesor?", "Modificación Profesor", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                                     {
-                                        this.controlador.modificaAlumno((Alumno) this.jList.getSelectedValue(),
+                                        this.controlador.modificaProfesor((Profesor) this.jList.getSelectedValue(),
                                         this.jTextFieldNombre.getText(),
                                         this.jTextFieldApellido.getText(),
                                         this.jTextFieldDomicilio.getText(),
                                         this.jTextFieldTelefono.getText(),
                                         this.jTextFieldMail.getText());
-                                        JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
+                                        JOptionPane.showMessageDialog(rootPane, "Modificación del Profesor Exitosa");
                                         this.dispose();
                                     }
                             }
