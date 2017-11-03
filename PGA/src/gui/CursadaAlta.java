@@ -48,7 +48,7 @@ public class CursadaAlta extends javax.swing.JDialog
         return !(this.jTextFieldNombre.getText().length() != 0 && this.jComboBoxDia.getSelectedItem() != null &&
                 this.jTextFieldHIHoras.getText().length() != 0 && this.jTextFieldHIMin.getText().length() != 0 &&
                 this.jTextFieldHFHoras.getText().length() != 0 && this.jTextFieldHFMin.getText().length() != 0 &&
-                !(this.jRadioButton1.isSelected() || this.jRadioButton2.isSelected()) && this.asignatura != null);
+                (this.jRadioButton1.isSelected() || this.jRadioButton2.isSelected()) && this.asignatura != null);
     }
     
     public boolean camposVaciosAsignatura()

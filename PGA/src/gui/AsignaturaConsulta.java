@@ -65,7 +65,7 @@ public class AsignaturaConsulta extends javax.swing.JDialog
     public void consultaDatos(Asignatura asignatura)
     {
         this.jLabelNombreC2.setText(asignatura.getNombre());
-        this.jLabelIDC2.setText(asignatura.getId());
+        this.jLabelIDC2.setText(asignatura.getIdentificacion());
     }
 
     /** This method is called from within the constructor to
