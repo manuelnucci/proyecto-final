@@ -20,10 +20,6 @@ import pga.Controlador;
 import pga.Cursada;
 import pga.Profesor;
 
-/**
- *
- * @author DELL
- */
 public class ProfesorBajaACursada extends javax.swing.JDialog
 {
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +30,6 @@ public class ProfesorBajaACursada extends javax.swing.JDialog
     private Profesor profesor;
     private Cursada cursada;
 
-    /** Creates new form ProfesorBajaACursada */
     public ProfesorBajaACursada(Controlador controlador)
     {
         this.controlador = controlador;

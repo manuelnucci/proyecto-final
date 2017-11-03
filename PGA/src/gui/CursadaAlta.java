@@ -23,10 +23,6 @@ import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 
-/**
- *
- * @author DELL
- */
 public class CursadaAlta extends javax.swing.JDialog
 {
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +30,6 @@ public class CursadaAlta extends javax.swing.JDialog
     private DefaultListModel listModel;
     private Asignatura asignatura = null;
 
-    /** Creates new form CursadaAlta */
     public CursadaAlta(Controlador controlador)
     {
         super();

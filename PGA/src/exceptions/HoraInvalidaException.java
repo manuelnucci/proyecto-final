@@ -16,8 +16,8 @@ public class HoraInvalidaException extends Exception
      * <b>Pre:</b> La hora es un String no nulo ni vacío cuyo formato es inválido.<br>
      * <b>Post:</b> Se crea una nueva instancia de la clase.
      * 
-     * @param hora Hora de la cursada con un formato no válido. Hora != null && hora != "".
-     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
+     * @param hora Hora de la cursada con un formato no válido. Hora != null y hora != "".
+     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null y mensaje != ""
      */
     public HoraInvalidaException(String hora, String mensaje)
     {

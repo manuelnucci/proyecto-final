@@ -136,9 +136,9 @@ public class AlumnoAlta extends JDialog implements ActionListener
     
     public boolean camposVacios()
     {
-        return (this.jTextFieldNombre.getText().length() == 0 && this.jTextFieldApellido.getText().length() == 0 &&
-                this.jTextFieldDomicilio.getText().length() == 0 && this.jTextFieldTelefono.getText().length() == 0 &&
-                this.jTextFieldMail.getText().length() == 0);
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0 &&
+                this.jTextFieldDomicilio.getText().length() != 0 && this.jTextFieldTelefono.getText().length() != 0 &&
+                this.jTextFieldMail.getText().length() != 0);
     }
     
     @Override

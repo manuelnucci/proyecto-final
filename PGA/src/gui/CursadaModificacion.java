@@ -24,10 +24,6 @@ import pga.Asignatura;
 import pga.Controlador;
 import pga.Cursada;
 
-/**
- *
- * @author DELL
- */
 public class CursadaModificacion extends javax.swing.JDialog
 {
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -35,9 +31,8 @@ public class CursadaModificacion extends javax.swing.JDialog
     private DefaultListModel listModel1, listModel2;
     private Cursada cursada;
     private Asignatura asignatura;
-    
 
-    /** Creates new form CursadaModificacion */
+
     public CursadaModificacion(Controlador controlador)
     {
         super();

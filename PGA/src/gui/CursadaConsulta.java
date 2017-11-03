@@ -17,10 +17,6 @@ import javax.swing.JOptionPane;
 import pga.Controlador;
 import pga.Cursada;
 
-/**
- *
- * @author DELL
- */
 public class CursadaConsulta extends javax.swing.JFrame
 {
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -29,7 +25,6 @@ public class CursadaConsulta extends javax.swing.JFrame
     private Cursada cursada;
     private HashMap<String, Cursada> hash;
 
-    /** Creates new form CursadaConsulta */
     public CursadaConsulta(Controlador controlador)
     {
         this.controlador = controlador;

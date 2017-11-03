@@ -20,10 +20,6 @@ import pga.Alumno;
 import pga.Controlador;
 import pga.Cursada;
 
-/**
- *
- * @author DELL
- */
 public class AlumnoBajaACursada extends javax.swing.JDialog
 {
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +30,6 @@ public class AlumnoBajaACursada extends javax.swing.JDialog
     private Alumno alumno;    
     private Cursada cursada;
 
-    /** Creates new form AlumnoBajaACursada */
     public AlumnoBajaACursada(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
         super(parent, modal);
@@ -550,10 +545,10 @@ public class AlumnoBajaACursada extends javax.swing.JDialog
                         public void windowClosing(java.awt.event.WindowEvent e)
                         {
                             System.exit(0);
-                        }
-                    });
-                    dialog.setVisible(true);
                 }
+            });
+                    dialog.setVisible(true);
+    }
             });
     }
 

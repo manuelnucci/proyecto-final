@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 
 import javax.swing.JOptionPane;
 
-import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 
@@ -30,7 +29,6 @@ public class AsignaturaConsulta extends javax.swing.JDialog
     private DefaultListModel listModel1, listModel2;
     private HashMap<String, Asignatura> hash;
 
-    /** Creates new form AsignaturaConsulta */
     public AsignaturaConsulta(Controlador controlador)
     {
         this.controlador = controlador;

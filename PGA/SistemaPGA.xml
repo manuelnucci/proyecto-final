@@ -2,420 +2,16 @@
 <java version="1.8.0_131" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
-   <string>KK</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0008</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>k</string>
-      </void>
-      <void property="domicilio">
-       <string>k</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0008</string>
-      </void>
-      <void property="mail">
-       <string>k</string>
-      </void>
-      <void property="nombre">
-       <string>k</string>
-      </void>
-      <void property="telefono">
-       <string>k</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>HH</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0009</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>H</string>
-      </void>
-      <void property="domicilio">
-       <string>H</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0009</string>
-      </void>
-      <void property="mail">
-       <string>H</string>
-      </void>
-      <void property="nombre">
-       <string>H</string>
-      </void>
-      <void property="telefono">
-       <string>H</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>SS</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0010</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>s</string>
-      </void>
-      <void property="domicilio">
-       <string>s</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0010</string>
-      </void>
-      <void property="mail">
-       <string>s</string>
-      </void>
-      <void property="nombre">
-       <string>s</string>
-      </void>
-      <void property="telefono">
-       <string>s</string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0011</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>s</string>
-      </void>
-      <void property="domicilio">
-       <string>s</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0011</string>
-      </void>
-      <void property="mail">
-       <string>s</string>
-      </void>
-      <void property="nombre">
-       <string>s</string>
-      </void>
-      <void property="telefono">
-       <string>s</string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0016</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>s</string>
-      </void>
-      <void property="domicilio">
-       <string>s</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0016</string>
-      </void>
-      <void property="mail">
-       <string>s@s</string>
-      </void>
-      <void property="nombre">
-       <string>s</string>
-      </void>
-      <void property="telefono">
-       <string></string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0015</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>s</string>
-      </void>
-      <void property="domicilio">
-       <string>s</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0015</string>
-      </void>
-      <void property="mail">
-       <string>s@a</string>
-      </void>
-      <void property="nombre">
-       <string>s</string>
-      </void>
-      <void property="telefono">
-       <string>s</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>DD</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0012</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>d</string>
-      </void>
-      <void property="domicilio">
-       <string>d</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0012</string>
-      </void>
-      <void property="mail">
-       <string>d</string>
-      </void>
-      <void property="nombre">
-       <string>d</string>
-      </void>
-      <void property="telefono">
-       <string>d</string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0013</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>d</string>
-      </void>
-      <void property="domicilio">
-       <string>d</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0013</string>
-      </void>
-      <void property="mail">
-       <string>d</string>
-      </void>
-      <void property="nombre">
-       <string>d</string>
-      </void>
-      <void property="telefono">
-       <string>d</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>55</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0014</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>5</string>
-      </void>
-      <void property="domicilio">
-       <string>5</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0014</string>
-      </void>
-      <void property="mail">
-       <string>5</string>
-      </void>
-      <void property="nombre">
-       <string>5</string>
-      </void>
-      <void property="telefono">
-       <string>5</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>MANUNUCCI</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0005</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>nucci</string>
-      </void>
-      <void property="domicilio">
-       <string>dsada</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0005</string>
-      </void>
-      <void property="mail">
-       <string>sad@sdada</string>
-      </void>
-      <void property="nombre">
-       <string>manu</string>
-      </void>
-      <void property="telefono">
-       <string>dsadasd</string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0007</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>nucci</string>
-      </void>
-      <void property="domicilio">
-       <string>dsadl</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0007</string>
-      </void>
-      <void property="mail">
-       <string>dasljd@djslahdl</string>
-      </void>
-      <void property="nombre">
-       <string>manu</string>
-      </void>
-      <void property="telefono">
-       <string>dasldjha</string>
-      </void>
-     </object>
-    </void>
-    <void method="put">
-     <string>ALU0006</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>nucci</string>
-      </void>
-      <void property="domicilio">
-       <string>dsaljdal</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0006</string>
-      </void>
-      <void property="mail">
-       <string>sda@sdasda</string>
-      </void>
-      <void property="nombre">
-       <string>manu</string>
-      </void>
-      <void property="telefono">
-       <string>dsajhdalj</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>DASSADASDAQ</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0003</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>dasdaq</string>
-      </void>
-      <void property="domicilio">
-       <string>dasdq</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0003</string>
-      </void>
-      <void property="mail">
-       <string>sda@dasd</string>
-      </void>
-      <void property="nombre">
-       <string>dassa</string>
-      </void>
-      <void property="telefono">
-       <string>dasd</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>DSADDASDAS</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0004</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>dasdas</string>
-      </void>
-      <void property="domicilio">
-       <string>dsada</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0004</string>
-      </void>
-      <void property="mail">
-       <string>sada@dasd</string>
-      </void>
-      <void property="nombre">
-       <string>dsad</string>
-      </void>
-      <void property="telefono">
-       <string>dsada</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>DASDDSADSA</string>
+   <string>SEBASTIANCANONACO</string>
    <object class="java.util.HashMap">
     <void method="put">
      <string>ALU0001</string>
      <object class="pga.Alumno">
       <void property="apellido">
-       <string>dsadsa</string>
+       <string>canonaco</string>
       </void>
       <void property="domicilio">
-       <string>dasdas</string>
+       <string>sda</string>
       </void>
       <void property="historiaAcademica">
        <object class="java.util.HashMap"/>
@@ -424,24 +20,29 @@
        <string>ALU0001</string>
       </void>
       <void property="mail">
-       <string>dasdsdadsas@d</string>
+       <string>d@s</string>
       </void>
       <void property="nombre">
-       <string>dasd</string>
+       <string>sebastian</string>
       </void>
       <void property="telefono">
-       <string>dasda</string>
+       <string>d</string>
       </void>
      </object>
     </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>MANUELNUCCI</string>
+   <object class="java.util.HashMap">
     <void method="put">
      <string>ALU0002</string>
      <object class="pga.Alumno">
       <void property="apellido">
-       <string>dsadsa</string>
+       <string>NUCCI</string>
       </void>
       <void property="domicilio">
-       <string>dasdas</string>
+       <string>DA</string>
       </void>
       <void property="historiaAcademica">
        <object class="java.util.HashMap"/>
@@ -450,13 +51,13 @@
        <string>ALU0002</string>
       </void>
       <void property="mail">
-       <string>dasdsdadsas@d</string>
+       <string>D@8</string>
       </void>
       <void property="nombre">
-       <string>dasd</string>
+       <string>manuel</string>
       </void>
       <void property="telefono">
-       <string>dasda</string>
+       <string>J</string>
       </void>
      </object>
     </void>
@@ -464,10 +65,75 @@
   </void>
  </object>
  <object class="java.util.HashMap"/>
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>FISICA2</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0002</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA2</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>FISICA1</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0001</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA1</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>FISICA3</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0003</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA3</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>MATEA</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0004</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>MATEA</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
  <object class="java.util.HashMap"/>
- <object class="java.util.HashMap"/>
- <int>16</int>
+ <int>2</int>
  <int>0</int>
- <int>0</int>
+ <int>4</int>
  <int>0</int>
 </java>

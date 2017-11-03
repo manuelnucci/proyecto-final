@@ -16,8 +16,8 @@ public class EmailInvalidoException extends Exception
      * <b>Pre:</b> El mail es un String no nulo ni vacío cuyo formato es inválido.<br>
      * <b>Post:</b> Se crea una nueva instancia de la clase.
      * 
-     * @param mail Mail del alumno con un formato no válido. Mail != null && mail != "".
-     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null && mensaje != ""
+     * @param mail Mail del alumno con un formato no válido. Mail != null y mail != "".
+     * @param mensaje Mensaje que será mostrado en el bloque catch informando el problema ocurrido. Mensaje != null y mensaje != ""
      */
     public EmailInvalidoException(String mail, String mensaje)
     {

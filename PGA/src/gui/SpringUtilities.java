@@ -1,8 +1,10 @@
 package gui;
 
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.Container;
+
+import javax.swing.Spring;
 import javax.swing.SpringLayout;
-import java.awt.*;
 
 /**
  * A 1.4 file that provides utility methods for
@@ -11,7 +13,7 @@ import java.awt.*;
  * SpringBox and SpringCompactGrid.
  */
 public class SpringUtilities {
-    /**
+    /*
      * A debugging utility that prints to stdout the component's
      * minimum, preferred, and maximum sizes.
      */
@@ -21,7 +23,7 @@ public class SpringUtilities {
         System.out.println("maximumSize = " + c.getMaximumSize());
     }
 
-    /**
+    /*
      * Aligns the first <code>rows</code> * <code>cols</code>
      * components of <code>parent</code> in
      * a grid. Each component is as big as the maximum
@@ -123,7 +125,7 @@ public class SpringUtilities {
         return layout.getConstraints(c);
     }
 
-    /**
+    /*
      * Aligns the first <code>rows</code> * <code>cols</code>
      * components of <code>parent</code> in
      * a grid. Each component in a column is as wide as the maximum

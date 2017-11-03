@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.FileNotFoundException;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -37,7 +39,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt)
             {
-                close();
+                try
+                {
+                    close();
+                } catch (FileNotFoundException e)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "No existe el archivo", "Error al serializar", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         this.setLayout(new BorderLayout());
@@ -146,7 +154,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         this.controlador = controlador;
     }
 
-    private void close()
+    private void close() throws FileNotFoundException
     {
         if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del sistema?", "Salir del Sistema",
                                           JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)

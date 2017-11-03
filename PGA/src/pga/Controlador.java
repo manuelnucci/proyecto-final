@@ -9,6 +9,8 @@ import exceptions.PeriodoInvalidoException;
 
 import gui.VentanaPrincipal;
 
+import java.io.FileNotFoundException;
+
 import java.util.HashMap;
 
 /**
@@ -147,7 +149,7 @@ public class Controlador
         return this.modelo.ubicarCursada(nombre);
     }
     
-    public void guardarArchivo()
+    public void guardarArchivo() throws FileNotFoundException
     {
         PersistenciaXML.guardarArchivo(this.modelo);
     }

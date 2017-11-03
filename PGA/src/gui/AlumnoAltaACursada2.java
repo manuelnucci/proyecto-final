@@ -7,23 +7,16 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import java.util.HashMap;
-
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
-
 import javax.swing.JFrame;
-
 import javax.swing.JOptionPane;
 
 import pga.Alumno;
 import pga.Controlador;
 import pga.Cursada;
 
-/**
- *
- * @author manuc
- */
 public class AlumnoAltaACursada2 extends javax.swing.JDialog
 {
     private Controlador controlador;
@@ -34,7 +27,6 @@ public class AlumnoAltaACursada2 extends javax.swing.JDialog
     private Alumno alumno;    
     private Cursada cursada;
 
-    /** Creates new form AlumnoAltaACursada2 */
     public AlumnoAltaACursada2(java.awt.Frame parent, boolean modal, Controlador controlador)
     {
         super(parent, modal);
