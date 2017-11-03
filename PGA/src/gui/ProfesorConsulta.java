@@ -11,10 +11,8 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-
 import javax.swing.JOptionPane;
 
-import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 import pga.Profesor;
@@ -76,6 +74,7 @@ public class ProfesorConsulta extends javax.swing.JFrame
         this.jLabelDomicilioC2.setText(profesor.getDomicilio());
         this.jLabelTelefonoC2.setText(profesor.getTelefono());
         this.jLabelMailC2.setText(profesor.getMail());
+        this.jLabelLegajoC2.setText(profesor.getLegajo());
     }
 
     /** This method is called from within the constructor to
