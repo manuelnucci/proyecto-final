@@ -12,7 +12,7 @@ import exceptions.PeriodoInvalidoException;
 public final class Formato
 {
     public static final int TAMANO_PERIODO = 7; // Longitud que debe poseer el período si respeta el formato
-    public static final int TAMANO_HORA = 7; // Longitud que deben poseer las horas de inicio y fin si respetan el formato
+    public static final int TAMANO_HORA = 5; // Longitud que deben poseer las horas de inicio y fin si respetan el formato
     
     /**
      * Constructor de la clase. Se lo declara privado para evitar la instanciación de la clase Formato,
@@ -59,10 +59,10 @@ public final class Formato
         
         if(periodo.length() == TAMANO_PERIODO && periodo.indexOf("-") == 2)
         {
-            cad = periodo.substring(0,1);
+            cad = periodo.substring(0,2);
             if(cad.equals("01") || cad.equals("02"))
             {
-                cad = periodo.substring(3, 6);
+                cad = periodo.substring(3);
                 ret = cad.compareTo("2000") >= 0 && cad.compareTo("2100") <= 0;
             }
         }
@@ -87,10 +87,10 @@ public final class Formato
         
         if(hora.length() == TAMANO_HORA && hora.indexOf(":") == 2)
         {
-            cad = hora.substring(0,1);
+            cad = hora.substring(0,2);
             if(cad.compareTo("00") >= 0 && cad.compareTo("23") <= 0)
             {
-                cad = hora.substring(3, 4);
+                cad = hora.substring(3);
                 ret = cad.compareTo("00") >= 0 && cad.compareTo("59") <= 0;
             }
         }

@@ -1,13 +1,10 @@
 
 package gui;
 
-import exceptions.EmailInvalidoException;
 import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;
-
 import exceptions.PeriodoInvalidoException;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -19,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 
-import pga.Alumno;
 import pga.Asignatura;
 import pga.Controlador;
 
@@ -68,8 +64,8 @@ public class CursadaAlta extends javax.swing.JDialog
     private String armaPeriodo()
     {
         String cad;
-        cad = (this.jRadioButton1.isSelected()) ? "C1:": "C2:";
-        cad += this.jSpinnerAno.getValue();
+        cad = (this.jRadioButton1.isSelected()) ? "01-": "02-";
+        cad += this.jSpinnerAno.getModel().getValue();
 
         return cad;
     }
@@ -78,9 +74,8 @@ public class CursadaAlta extends javax.swing.JDialog
     {
         String cad;
         
-        cad = (tipo == 0) ? this.jTextFieldHIHoras + ":" + this.jTextFieldHIMin : 
-                            this.jTextFieldHFHoras + ":" + this.jTextFieldHFMin ;
-        
+        cad = (tipo == 0) ? this.jTextFieldHIHoras.getText() + ":" + this.jTextFieldHIMin.getText(): 
+                            this.jTextFieldHFHoras.getText() + ":" + this.jTextFieldHFMin.getText();
         return cad;
     }
     /** This method is called from within the constructor to
@@ -480,7 +475,7 @@ public class CursadaAlta extends javax.swing.JDialog
                 {
                    
                         controlador.altaCursada(this.jTextFieldNombre.getText(), this.asignatura, this.armaPeriodo(), (String) this.jComboBoxDia.getSelectedItem(), this.armaHora(0), this.armaHora(1));
-                        JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                        JOptionPane.showMessageDialog(rootPane, "Alta del Cursada Exitosa");
                         this.dispose();
                 }
             }

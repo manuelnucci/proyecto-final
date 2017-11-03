@@ -11,7 +11,6 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-
 import javax.swing.JOptionPane;
 
 import pga.Asignatura;
@@ -65,7 +64,7 @@ public class AsignaturaConsulta extends javax.swing.JDialog
     public void consultaDatos(Asignatura asignatura)
     {
         this.jLabelNombreC2.setText(asignatura.getNombre());
-        this.jLabelIDC2.setText(asignatura.getIdentificacion());
+        this.jLabelIDC2.setText(asignatura.getId());
     }
 
     /** This method is called from within the constructor to

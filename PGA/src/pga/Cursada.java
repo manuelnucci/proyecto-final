@@ -69,6 +69,11 @@ public class Cursada implements Comparable, Entidad
         return numCursada;
     }
 
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
     public String getId()
     {
         return id;

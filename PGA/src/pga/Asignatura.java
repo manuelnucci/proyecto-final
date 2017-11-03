@@ -11,7 +11,7 @@ public class Asignatura implements Comparable, Entidad
     private static int numAsignatura = 0; // Número de id de la última asignatura registrada
     private static final String ID_LEGAJO = "ASI"; // Parte del formato con que se arma el id de la asignatura
     
-    private String identificacion; // Identificación de la asignatura
+    private String id; // Identificación de la asignatura
     private String nombre; // Nombre de la asignatura
     private HashMap<String, Asignatura> correlatividades; // Colección de las asignaturas correlativas con la asignatura en cuestión
     // Las claves serán las IDs de la asignaturas
@@ -34,7 +34,7 @@ public class Asignatura implements Comparable, Entidad
      */
     public Asignatura(String nombre)
     {
-        this.identificacion = ID_LEGAJO + String.format("%04d", ++numAsignatura);
+        this.id = ID_LEGAJO + String.format("%04d", ++numAsignatura);
         this.nombre = nombre;
         this.correlatividades = new HashMap<String, Asignatura>();
     }
@@ -49,9 +49,14 @@ public class Asignatura implements Comparable, Entidad
         return numAsignatura;
     }
 
-    public String getIdentificacion()
+    public void setId(String id)
     {
-        return identificacion;
+        this.id = id;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     public void setNombre(String nombre)
@@ -110,7 +115,7 @@ public class Asignatura implements Comparable, Entidad
             return false;
         }
         final Asignatura other = (Asignatura) object;
-        if (!(identificacion == null ? other.identificacion == null : identificacion.equals(other.identificacion)))
+        if (!(id == null ? other.id == null : id.equals(other.id)))
         {
             return false;
         }
@@ -122,7 +127,7 @@ public class Asignatura implements Comparable, Entidad
     {
         final int PRIME = 37;
         int result = 1;
-        result = PRIME * result + ((identificacion == null) ? 0 : identificacion.hashCode());
+        result = PRIME * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -137,7 +142,7 @@ public class Asignatura implements Comparable, Entidad
      */
     @Override
     public int compareTo(Object object) {
-        return this.identificacion.compareTo(((Asignatura) object).getIdentificacion()); // Las asignaturas serán ordenadas por su ID
+        return this.id.compareTo(((Asignatura) object).getId()); // Las asignaturas serán ordenadas por su ID
     }    
 
     /**
@@ -155,12 +160,12 @@ public class Asignatura implements Comparable, Entidad
         String cad;
         Asignatura asignatura;
         
-        cad = "Id: " + this.identificacion + "\nNombre: " + this.nombre + "\nCorrelatividades: ";
+        cad = "Id: " + this.id + "\nNombre: " + this.nombre + "\nCorrelatividades: ";
         
         while(it.hasNext())
         {
             asignatura = it.next();
-            cad += "\n\tId: " + asignatura.getIdentificacion() + ", Nombre: " + asignatura.getNombre();
+            cad += "\n\tId: " + asignatura.getId() + ", Nombre: " + asignatura.getNombre();
         }
         
         return cad;
@@ -177,6 +182,6 @@ public class Asignatura implements Comparable, Entidad
     @Override
     public String toString()
     {
-        return "Id: " + this.identificacion + "\nNombre: " + this.nombre;
+        return "Id: " + this.id + "\nNombre: " + this.nombre;
     }
 }
