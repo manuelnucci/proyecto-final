@@ -248,10 +248,10 @@ public class Manager
      */
     public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws EntidadRepetidaException // RF03
     {
-        if (alumno.getHistoriaAcademica().containsKey(asignatura.getIdentificacion()))
+        if (alumno.getHistoriaAcademica().containsKey(asignatura.getId()))
             throw new EntidadRepetidaException(asignatura, "El alumno ya ha aprobado la asignatura.");
         else
-            alumno.getHistoriaAcademica().put(asignatura.getIdentificacion(), asignatura);
+            alumno.getHistoriaAcademica().put(asignatura.getId(), asignatura);
     }
 
     /**
@@ -268,7 +268,7 @@ public class Manager
      */
     public void bajaAprobada(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException // RF03
     {
-        if (!alumno.getHistoriaAcademica().remove(asignatura.getIdentificacion(), asignatura))
+        if (!alumno.getHistoriaAcademica().remove(asignatura.getId(), asignatura))
             throw new NoEstaEntidadException(asignatura, "No se ha encontrado la asignatura en la historia académica del alumno");
     }
     
@@ -276,7 +276,7 @@ public class Manager
     {
         HashMap <String, Asignatura> historiaAcademica = alumno.getHistoriaAcademica();
         
-        if (!historiaAcademica.remove(asignatura.getIdentificacion(), asignatura))
+        if (!historiaAcademica.remove(asignatura.getId(), asignatura))
             throw new NoEstaEntidadException(asignatura, "El alumno no tiene esta asignatura en su historia");
     }
 
@@ -485,10 +485,10 @@ public class Manager
      */
     public void agregarCompetencia(Profesor profesor, Asignatura asignatura) throws EntidadRepetidaException // RF03
     {   
-        if (profesor.getCompetencias().containsKey(asignatura.getIdentificacion()))
+        if (profesor.getCompetencias().containsKey(asignatura.getId()))
             throw new EntidadRepetidaException(asignatura, "El profesor ya tiene la competencia.");
         else
-            profesor.getCompetencias().put(asignatura.getIdentificacion(), asignatura);
+            profesor.getCompetencias().put(asignatura.getId(), asignatura);
     }
 
     /**
@@ -505,7 +505,7 @@ public class Manager
      */
     public void bajaCompetencia(Profesor profesor, Asignatura asignatura) throws NoEstaEntidadException // RF03
     {
-        if (!profesor.getCompetencias().remove(asignatura.getIdentificacion(), asignatura))
+        if (!profesor.getCompetencias().remove(asignatura.getId(), asignatura))
             throw new NoEstaEntidadException(asignatura, "No se encuentra la asignatura entre las competencias.");
     }
     
@@ -592,12 +592,12 @@ public class Manager
         Asignatura asignatura = Factory.getAsignatura(nombreAsignaturaMayus);
         
         if (this.asignaturas.containsKey(nombreAsignaturaMayus))
-            this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getIdentificacion(), asignatura); // Agregamos al HashMap la asignatura
+            this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
         else
         {
             HashMap<String, Asignatura> hash = new HashMap<String, Asignatura>(); // Creamos una nueva cubeta y 
                                                                                   // depositamos a la asignatura allí
-            hash.put(asignatura.getIdentificacion(), asignatura);
+            hash.put(asignatura.getId(), asignatura);
             this.asignaturas.put(nombreAsignaturaMayus, hash); 
         }
     }
@@ -633,7 +633,7 @@ public class Manager
         
         String nombreCursadaMayus;
         
-        if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getIdentificacion(), asignatura))
+        if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getId(), asignatura))
             // Si hemos encontrado la asignatura y podido eliminarla
         {   
             if (this.asignaturas.get(nombreAsignaturaMayus).isEmpty()) // Si el HashMap de las asignaturas ha quedado
@@ -700,7 +700,7 @@ public class Manager
         if (!nombreAsignaturaMayus.equals(nombre.toUpperCase()))
         // El nombre de la asignatura ha cambiado, habrá un movimiento de cubetas.
         {            
-            if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getIdentificacion(), asignatura))
+            if (this.asignaturas.containsKey(nombreAsignaturaMayus) && this.asignaturas.get(nombreAsignaturaMayus).remove(asignatura.getId(), asignatura))
             {
                 if (this.asignaturas.get(nombreAsignaturaMayus).isEmpty()) // El HashMap ha quedado vacío, sin asignaturas
                     this.asignaturas.remove(nombreAsignaturaMayus);
@@ -709,13 +709,13 @@ public class Manager
                 nombreAsignaturaMayus = nombre.toUpperCase(); // El hash está en mayúscula
                 
                 if (this.asignaturas.containsKey(nombreAsignaturaMayus))
-                    this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getIdentificacion(), asignatura); // Agregamos al HashMap la asignatura
+                    this.asignaturas.get(nombreAsignaturaMayus).put(asignatura.getId(), asignatura); // Agregamos al HashMap la asignatura
                 else
                 {
                     HashMap<String, Asignatura> hash = new HashMap<String, Asignatura>(); // Creamos una nueva cubeta y 
                                                                                           // depositamos a la
                                                                                           // asignatura allí
-                    hash.put(asignatura.getIdentificacion(), asignatura);
+                    hash.put(asignatura.getId(), asignatura);
                     this.asignaturas.put(nombreAsignaturaMayus, hash); 
                 }
             }
@@ -737,10 +737,10 @@ public class Manager
      */
     public void agregarCorrelativa(Asignatura asignatura, Asignatura correlativa) throws EntidadRepetidaException
     {
-        if (asignatura.getCorrelatividades().containsKey(correlativa.getIdentificacion()))
+        if (asignatura.getCorrelatividades().containsKey(correlativa.getId()))
             throw new EntidadRepetidaException(correlativa, "La asignatura ya tiene la correlativa.");
         else 
-            asignatura.getCorrelatividades().put(correlativa.getIdentificacion(), correlativa);
+            asignatura.getCorrelatividades().put(correlativa.getId(), correlativa);
     }
     
     /**
@@ -757,7 +757,7 @@ public class Manager
      */
     public void bajaCorrelativa(Asignatura asignatura, Asignatura correlativa) throws NoEstaEntidadException
     {
-        if (!asignatura.getCorrelatividades().remove(correlativa.getIdentificacion(), correlativa))
+        if (!asignatura.getCorrelatividades().remove(correlativa.getId(), correlativa))
             throw new NoEstaEntidadException(correlativa, "No se encuentra la correlativa dentro de las correlatividades.");
     }
     
@@ -993,7 +993,7 @@ public class Manager
         
         it = cursada.getAsignatura().getCorrelatividades().values().iterator();
         while(it.hasNext() && sigue)
-            sigue = alumno.getHistoriaAcademica().containsKey(it.next().getIdentificacion()); // La clave de la asignatura es su ID
+            sigue = alumno.getHistoriaAcademica().containsKey(it.next().getId()); // La clave de la asignatura es su ID
         
         if(!sigue)
             throw new EntidadNoAptaParaCursadaException(alumno, "El alumno no cumple con las correlatividades para " +
@@ -1071,7 +1071,7 @@ public class Manager
     public void verificaProfesorHabilitado(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
         // RF18
     {
-        if(!profesor.getCompetencias().containsKey(cursada.getAsignatura().getIdentificacion()))
+        if(!profesor.getCompetencias().containsKey(cursada.getAsignatura().getId()))
                 throw new EntidadNoAptaParaCursadaException(profesor, "El profesor no está habilitado para dictar la cursada.");
 
     }

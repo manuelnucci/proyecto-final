@@ -64,7 +64,39 @@
    </object>
   </void>
  </object>
- <object class="java.util.HashMap"/>
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>SEBASEBA</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>PRO0001</string>
+     <object class="pga.Profesor">
+      <void property="apellido">
+       <string>seba</string>
+      </void>
+      <void property="competencias">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="domicilio">
+       <string>faa,</string>
+      </void>
+      <void property="legajo">
+       <string>PRO0001</string>
+      </void>
+      <void property="mail">
+       <string>dd@ss</string>
+      </void>
+      <void property="nombre">
+       <string>seba</string>
+      </void>
+      <void property="telefono">
+       <string>,</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
  <object class="java.util.HashMap">
   <void method="put">
    <string>FISICA2</string>
@@ -93,6 +125,22 @@
       </void>
       <void property="nombre">
        <string>FISICA1</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>TALLER</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0005</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>TALLER</string>
       </void>
      </object>
     </void>
@@ -133,7 +181,7 @@
  </object>
  <object class="java.util.HashMap"/>
  <int>2</int>
- <int>0</int>
- <int>4</int>
+ <int>1</int>
+ <int>5</int>
  <int>0</int>
 </java>
