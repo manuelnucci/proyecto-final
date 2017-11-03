@@ -2,6 +2,7 @@ package pga;
 
 import exceptions.EmailInvalidoException;
 import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.EntidadRepetidaException;
 import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;
 import exceptions.PeriodoInvalidoException;
@@ -90,6 +91,22 @@ public class Controlador
     {
         this.modelo.bajaProfesor(profesor);
     }
+    
+    public void modificaProfesor(Profesor profesor, String nombre, String apellido, String domicilio, String telefono,
+                                 String mail) throws NoEstaEntidadException, EmailInvalidoException
+    {
+        this.modelo.modificaProfesor(profesor, nombre, apellido, domicilio, telefono, mail);
+    }
+    
+    public void agregarCompetencia(Profesor profesor, Asignatura asignatura) throws EntidadRepetidaException
+    {
+        this.modelo.agregarCompetencia(profesor, asignatura);
+    }
+    
+    public void bajaCompetencia(Profesor profesor, Asignatura asignatura) throws NoEstaEntidadException
+    {
+        this.modelo.bajaCompetencia(profesor, asignatura);
+    }    
     
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException
     {

@@ -1,20 +1,81 @@
 
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+
+import pga.Alumno;
+import pga.Asignatura;
 import pga.Controlador;
+import pga.Profesor;
 
 public class ProfesorConsulta extends javax.swing.JFrame
 {
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
+    private DefaultListModel listModel1, listModel2;
+    private HashMap<String, Profesor> hash = null;
 
     public ProfesorConsulta(Controlador controlador)
     {
         this.controlador = controlador;
         initComponents();
+        this.setTitle("Consulta Profesor");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
+    }
+
+    public boolean camposVacios()
+    {
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0);
+    }
+    
+    public void listar1(HashMap<String, Profesor> hash)
+    {
+        Iterator <Profesor> iP = hash.values().iterator();
+        
+        this.listModel1.clear();
+        while(iP.hasNext())
+            this.listModel1.addElement(iP.next());
+    }
+    
+    public void listar2(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModel2.clear();
+        while(iA.hasNext())
+            this.listModel2.addElement(iA.next());
+    }
+    
+    public void vaciaCamposConsulta()
+    {
+        this.jLabelNombreC2.setText("...............");
+        this.jLabelApellidoC2.setText("...............");
+        this.jLabelDomicilioC2.setText("...............");
+        this.jLabelTelefonoC2.setText("...............");
+        this.jLabelMailC2.setText("...............");
+        this.listModel2.clear();
+    }
+    
+    public void consultaDatos(Profesor profesor)
+    {
+        this.jLabelNombreC2.setText(profesor.getNombre());
+        this.jLabelApellidoC2.setText(profesor.getApellido());
+        this.jLabelDomicilioC2.setText(profesor.getDomicilio());
+        this.jLabelTelefonoC2.setText(profesor.getTelefono());
+        this.jLabelMailC2.setText(profesor.getMail());
     }
 
     /** This method is called from within the constructor to
@@ -32,7 +93,8 @@ public class ProfesorConsulta extends javax.swing.JFrame
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellido = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listModel1 = new DefaultListModel();
+        jList1 = new javax.swing.JList<>(listModel1);
         jButtonElegir = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -52,7 +114,8 @@ public class ProfesorConsulta extends javax.swing.JFrame
         jLabelTelefonoC2 = new javax.swing.JLabel();
         jLabelCompetencias = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListCompetencias = new javax.swing.JList<>();
+        listModel2 = new DefaultListModel();
+        jListCompetencias = new javax.swing.JList<>(listModel2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,17 +125,25 @@ public class ProfesorConsulta extends javax.swing.JFrame
 
         jLabelApellido.setText("Apellido");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         jButtonElegir.setText("Elegir");
+        jButtonElegir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirActionPerformed(evt);
+            }
+        });
 
         jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,6 +190,13 @@ public class ProfesorConsulta extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jLabelNombreC1.setText("Nombre");
 
@@ -135,6 +213,13 @@ public class ProfesorConsulta extends javax.swing.JFrame
         jLabelNombreC2.setText("..............");
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jLabelApellidoC2.setText("..............");
 
@@ -148,12 +233,6 @@ public class ProfesorConsulta extends javax.swing.JFrame
 
         jLabelCompetencias.setText("Competencias");
 
-        jListCompetencias.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jListCompetencias);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -166,8 +245,7 @@ public class ProfesorConsulta extends javax.swing.JFrame
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabelLegajoC1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelLegajoC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(206, Short.MAX_VALUE))
+                        .addComponent(jLabelLegajoC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombreC1)
@@ -178,13 +256,11 @@ public class ProfesorConsulta extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelNombreC2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelMailC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelTelefonoC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelDomicilioC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelApellidoC2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(185, 185, 185))))))
+                            .addComponent(jLabelMailC2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTelefonoC2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilioC2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelApellidoC2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,6 +332,57 @@ public class ProfesorConsulta extends javax.swing.JFrame
 
         pack();
     }//GEN-END:initComponents
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarActionPerformed
+        this.vaciaCamposConsulta();
+        if (this.camposVacios()) 
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        else
+            try
+            {
+                this.hash = controlador.ubicarProfesor(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText());
+                this.listar1(hash);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirActionPerformed
+        int index;
+        Profesor profesor = null;
+        
+        if (this.camposVacios())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jList1.getSelectedValue() != null)
+            {
+                index = this.jList1.getSelectedIndex();
+                profesor = (Profesor) this.listModel1.getElementAt(index);
+                this.consultaDatos(profesor);
+                this.listar2(profesor.getCompetencias());
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarActionPerformed
+    {//GEN-HEADEREND:event_jButtonAceptarActionPerformed
+        if (this.hash != null)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Consulta del Profesor Exitosa");
+            this.dispose();   
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Realice una consulta o presione \"Cancelar\" para salir", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed
+    {//GEN-HEADEREND:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
