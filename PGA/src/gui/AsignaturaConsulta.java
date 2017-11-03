@@ -1,8 +1,21 @@
 
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+
+import pga.Alumno;
+import pga.Asignatura;
 import pga.Controlador;
 
 
@@ -10,9 +23,12 @@ import pga.Controlador;
  *
  * @author DELL
  */
-public class AsignaturaConsulta extends javax.swing.JFrame
+public class AsignaturaConsulta extends javax.swing.JDialog
 {
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
+    private DefaultListModel listModel1, listModel2;
+    private HashMap<String, Asignatura> hash;
 
     /** Creates new form AsignaturaConsulta */
     public AsignaturaConsulta(Controlador controlador)
@@ -20,7 +36,38 @@ public class AsignaturaConsulta extends javax.swing.JFrame
         this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
+    }
+
+    public boolean camposVacios()
+    {
+        return this.jTextFieldNombre.getText().length() == 0;
+    }
+    
+    public void listar(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModel1.clear();
+        while(iA.hasNext())
+            this.listModel1.addElement(iA.next());
+    }
+    
+    public void listar2(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModel2.clear();
+        while(iA.hasNext())
+            this.listModel2.addElement(iA.next());
+    }
+    
+    public void consultaDatos(Asignatura asignatura)
+    {
+        this.jLabelNombreC2.setText(asignatura.getNombre());
+        this.jLabelIDC2.setText(asignatura.getId());
     }
 
     /** This method is called from within the constructor to
@@ -36,7 +83,8 @@ public class AsignaturaConsulta extends javax.swing.JFrame
         jLabelNombre = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListAsignaturas = new javax.swing.JList<>();
+        listModel1 = new DefaultListModel();
+        jListAsignaturas = new javax.swing.JList<>(listModel1);
         jButtonElegir = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -47,26 +95,35 @@ public class AsignaturaConsulta extends javax.swing.JFrame
         jButtonAceptar = new javax.swing.JButton();
         jLabelIDC2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListCorrelativas = new javax.swing.JList<>();
+        listModel2 = new DefaultListModel();
+        jListCorrelativas = new javax.swing.JList<>(listModel2);
         jLabelCorrelatividades = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabelNombre.setText("Nombre");
 
-        jListAsignaturas.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jListAsignaturas);
 
         jButtonElegir.setText("Elegir");
+        jButtonElegir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirActionPerformed(evt);
+            }
+        });
 
         jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,7 +140,7 @@ public class AsignaturaConsulta extends javax.swing.JFrame
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonElegir)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,6 +162,13 @@ public class AsignaturaConsulta extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jLabelNombreC1.setText("Nombre");
 
@@ -113,15 +177,16 @@ public class AsignaturaConsulta extends javax.swing.JFrame
         jLabelNombreC2.setText("..............");
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jLabelIDC2.setText("..............");
 
-        jListCorrelativas.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jListCorrelativas);
 
         jLabelCorrelatividades.setText("Correlatividades");
@@ -165,8 +230,7 @@ public class AsignaturaConsulta extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelIDC2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelIDC1))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabelIDC1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 23, Short.MAX_VALUE)
                         .addComponent(jLabelCorrelatividades)
@@ -196,6 +260,57 @@ public class AsignaturaConsulta extends javax.swing.JFrame
 
         pack();
     }//GEN-END:initComponents
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarActionPerformed
+        try
+        {
+            if (this.camposVacios()) 
+                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+            else
+                this.listar(controlador.ubicarAsignatura(this.jTextFieldNombre.getText()));
+        }
+        catch (NoEstaEntidadException e)
+        {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirActionPerformed
+        int index;
+        Asignatura asignatura = null;
+        
+        if (this.camposVacios())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jListAsignaturas.getSelectedValue() != null)
+            {
+                index = this.jListAsignaturas.getSelectedIndex();
+                asignatura = (Asignatura) this.listModel1.getElementAt(index);
+                this.consultaDatos(asignatura);
+                this.hash = asignatura.getCorrelatividades();
+                this.listar2(this.hash);
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAceptarActionPerformed
+    {//GEN-HEADEREND:event_jButtonAceptarActionPerformed
+        if (this.hash != null)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Consulta de la Asignatura Exitosa");
+            this.dispose();   
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Realice una consulta o presione \"Cancelar\" para salir", "Error de Consulta", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonCancelarActionPerformed
+    {//GEN-HEADEREND:event_jButtonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

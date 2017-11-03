@@ -3,8 +3,10 @@ package gui;
 import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
@@ -35,6 +37,7 @@ public class CursadaBaja extends JDialog implements ActionListener
     private static final String ELEGIR = "1";
     private static final String CANCELAR = "2";
     
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre;
     private JTextField jTextFieldNombre;
@@ -57,6 +60,7 @@ public class CursadaBaja extends JDialog implements ActionListener
 
         this.add(this.panel, BorderLayout.WEST);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setResizable(false);
         this.setVisible(true);
 

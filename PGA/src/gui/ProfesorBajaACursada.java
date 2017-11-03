@@ -1,17 +1,38 @@
 
 package gui;
 
+import exceptions.EntidadNoAptaParaCursadaException;
+import exceptions.NoEstaEntidadException;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import java.util.HashMap;
+
+import java.util.Iterator;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
+import javax.swing.JOptionPane;
+
 import pga.Controlador;
+import pga.Cursada;
+import pga.Profesor;
 
 /**
  *
  * @author DELL
  */
-public class ProfesorBajaACursada extends javax.swing.JFrame
+public class ProfesorBajaACursada extends javax.swing.JDialog
 {
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
+    private DefaultListModel listModel1, listModel2;
+    private HashMap<String, Profesor> hash1;
+    private HashMap<String, Cursada> hash2;
+    private Profesor profesor;
+    private Cursada cursada;
 
     /** Creates new form ProfesorBajaACursada */
     public ProfesorBajaACursada(Controlador controlador)
@@ -19,7 +40,36 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
         this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
+    }
+
+    public boolean camposVaciosP()
+    {
+        return !(this.jTextFieldNombreP.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0);
+    }
+    
+    public void listar1(HashMap<String, Profesor> hash)
+    {
+        Iterator <Profesor> iA = hash.values().iterator();
+        
+        this.listModel1.clear();
+        while(iA.hasNext())
+            this.listModel1.addElement(iA.next());
+    }
+    
+    public boolean camposVaciosC()
+    {
+        return this.jTextFieldNombreC.getText().length() == 0;
+    }
+    
+    public void listar2(HashMap<String, Cursada> hash)
+    {
+        Iterator <Cursada> iC = hash.values().iterator();
+        
+        this.listModel2.clear();
+        while(iC.hasNext())
+            this.listModel2.addElement(iC.next());
     }
 
     /** This method is called from within the constructor to
@@ -38,14 +88,16 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
         jTextFieldNombreP = new javax.swing.JTextField();
         jButtonBuscarP = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListP = new javax.swing.JList<>();
+        listModel1 = new DefaultListModel();
+        jListP = new javax.swing.JList<>(listModel1);
         jButtonElegirP = new javax.swing.JButton();
         jLabelProfesor = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabelNombreC = new javax.swing.JLabel();
         jTextFieldNombreC = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jListC = new javax.swing.JList<>();
+        listModel2 = new DefaultListModel();
+        jListC = new javax.swing.JList<>(listModel2);
         jButtonBuscarC = new javax.swing.JButton();
         jButtonElegirC = new javax.swing.JButton();
         jLabelCursada = new javax.swing.JLabel();
@@ -57,7 +109,7 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
         jButtonBaja = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -74,16 +126,24 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
         });
 
         jButtonBuscarP.setText("Buscar");
-
-        jListP.setModel(new javax.swing.AbstractListModel<String>()
+        jButtonBuscarP.addActionListener(new java.awt.event.ActionListener()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarPActionPerformed(evt);
+            }
         });
+
         jScrollPane1.setViewportView(jListP);
 
         jButtonElegirP.setText("Elegir");
+        jButtonElegirP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirPActionPerformed(evt);
+            }
+        });
 
         jLabelProfesor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelProfesor.setText("Profesores");
@@ -142,17 +202,25 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
 
         jLabelNombreC.setText("Nombre");
 
-        jListC.setModel(new javax.swing.AbstractListModel<String>()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jListC);
 
         jButtonBuscarC.setText("Buscar");
+        jButtonBuscarC.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBuscarCActionPerformed(evt);
+            }
+        });
 
         jButtonElegirC.setText("Elegir");
+        jButtonElegirC.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonElegirCActionPerformed(evt);
+            }
+        });
 
         jLabelCursada.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCursada.setText("Cursadas");
@@ -210,6 +278,13 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
         jLabelDatosCursadaBaja.setText("Elija una cursada");
 
         jButtonBaja.setText("Dar baja");
+        jButtonBaja.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -282,6 +357,94 @@ public class ProfesorBajaACursada extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jTextFieldApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldApellidoActionPerformed
+
+    private void jButtonBuscarPActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarPActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarPActionPerformed
+        if (this.camposVaciosP())
+        JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        else
+            try
+            {
+                this.hash1 = controlador.ubicarProfesor(this.jTextFieldNombreP.getText(), this.jTextFieldApellido.getText());
+                this.listar1(hash1);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonBuscarPActionPerformed
+
+    private void jButtonElegirPActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirPActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirPActionPerformed
+        int index;
+
+        if (this.camposVaciosP())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jListP.getSelectedValue() != null)
+            {
+                index = this.jListP.getSelectedIndex();
+                this.profesor = (Profesor) this.listModel1.getElementAt(index);
+                JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado al alumno");
+                this.jLabelDatosProfesorBaja.setText(this.profesor.getNombre() + " " + this.profesor.getNombre());
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirPActionPerformed
+
+    private void jButtonBuscarCActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBuscarCActionPerformed
+    {//GEN-HEADEREND:event_jButtonBuscarCActionPerformed
+        if (this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Falta completar el campo", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+        else
+            try
+            {
+                this.hash2 = controlador.ubicarCursada(this.jTextFieldNombreC.getText());
+                this.listar2(hash2);
+            } catch (NoEstaEntidadException e)
+            {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonBuscarCActionPerformed
+
+    private void jButtonElegirCActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonElegirCActionPerformed
+    {//GEN-HEADEREND:event_jButtonElegirCActionPerformed
+        int index;
+
+        if (this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar el campo", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jListC.getSelectedValue() != null)
+            {
+                index = this.jListC.getSelectedIndex();
+                this.cursada = (Cursada) this.listModel2.getElementAt(index);
+                JOptionPane.showMessageDialog(rootPane, "Se ha seleccionado a la cursada");
+                this.jLabelDatosCursadaBaja.setText(this.cursada.getNombre());
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_jButtonElegirCActionPerformed
+
+    private void jButtonBajaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBajaActionPerformed
+    {//GEN-HEADEREND:event_jButtonBajaActionPerformed
+        if (this.camposVaciosP() || this.camposVaciosC())
+            JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+        else
+            if (this.jListP.getSelectedValue() == null || this.jListC.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(rootPane, "Seleccione un alumno y/o una cursada de las listas", "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de baja al profesor en la cursada?", "Profesor - Baja De Cursada", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                    try
+                    {
+                        this.controlador.bajaProfesorDeCursada(this.profesor, this.cursada);
+                        JOptionPane.showMessageDialog(rootPane, "Baja de Profesor a la Cursada Exitosa");
+                        this.dispose();
+                    } catch (NoEstaEntidadException e)
+                    {
+                        JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Baja a Cursada", JOptionPane.WARNING_MESSAGE);
+                    }
+            }
+    }//GEN-LAST:event_jButtonBajaActionPerformed
 
     /**
      * @param args the command line arguments

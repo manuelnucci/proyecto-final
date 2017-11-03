@@ -153,11 +153,10 @@ public class AlumnoAlta extends JDialog implements ActionListener
                                 else
                                 {
                                     if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta al alumno?", "Alta Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-                                    {
-                                       
-                                            controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
-                                            JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
-                                            this.dispose();
+                                    {                                       
+                                        controlador.altaAlumno(this.jTextFieldNombre.getText(), this.jTextFieldApellido.getText(), this.jTextFieldDomicilio.getText(), this.jTextFieldTelefono.getText(), this.jTextFieldMail.getText());
+                                        JOptionPane.showMessageDialog(rootPane, "Alta del Alumno Exitosa");
+                                        this.dispose();
                                     }
                                 }
                             }
@@ -166,8 +165,10 @@ public class AlumnoAlta extends JDialog implements ActionListener
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
+        
             case CANCELAR:  this.dispose(); // Cierra la ventana de alta
                             break;
+        
             default:        this.dispose(); // Cierra la ventana de alta
                             break;
         }

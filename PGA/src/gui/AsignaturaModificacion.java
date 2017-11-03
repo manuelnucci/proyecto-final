@@ -1,11 +1,14 @@
 package gui;
 
+import exceptions.EmailInvalidoException;
 import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -29,12 +33,11 @@ import pga.Controlador;
 public class AsignaturaModificacion extends JFrame implements ActionListener
 {
     private static final String ELEGIR = "0";
-    private static final String ACEPTAR2 = "1";
+    private static final String ACEPTAR = "1";
     private static final String BUSCAR = "2";
-    private static final String CANCELAR1 = "3";
-    private static final String CANCELAR2 = "4";
-    private static final String BUSCAR2 = "8";
+    private static final String CANCELAR = "3";
 
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre1;
     private JTextField jTextFieldNombre1;
@@ -59,6 +62,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
         this.deshabilitarPanel(this.panelB2);
         this.setResizable(false);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
 
@@ -70,7 +74,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
         
         this.panelA.setLayout(new GridBagLayout());
 
-        this.jLabelNombre1 = new JLabel("Nombre");
+        this.jLabelNombre1 = new JLabel("Nombre Asignatura");
         this.jTextFieldNombre1 = new JTextField();
         this.jButtonBuscar1 = new JButton("Buscar");
 
@@ -115,11 +119,9 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
         
         this.jButtonElegir.setActionCommand(ELEGIR);
         this.jButtonBuscar1.setActionCommand(BUSCAR);
-        this.jButtonCancelar1.setActionCommand(CANCELAR1);
         
         this.jButtonElegir.addActionListener(this);
         this.jButtonBuscar1.addActionListener(this);
-        this.jButtonCancelar1.addActionListener(this);
     }
     
     public void initComponentsB()
@@ -154,8 +156,8 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
         this.panelB2.add(new JLabel(" "), BorderLayout.CENTER);
         this.panelB2.add(this.jButtonCancelar, BorderLayout.SOUTH);   
         
-        this.jButtonAceptar.setActionCommand(ACEPTAR2);
-        this.jButtonCancelar.setActionCommand(CANCELAR2);
+        this.jButtonAceptar.setActionCommand(ACEPTAR);
+        this.jButtonCancelar.setActionCommand(CANCELAR);
         
         this.jButtonAceptar.addActionListener(this);
         this.jButtonCancelar.addActionListener(this);
@@ -172,20 +174,7 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
         this.listModel.clear();
         while(i.hasNext())
         {
-            Asignatura a = (Asignatura) i.next();
-            this.listModel.addElement(a);
-        }
-    }
-    
-    private void listarAsignaturas(HashMap<String, Asignatura> h)
-    {
-        Iterator i = h.values().iterator();
-        
-        this.listModel.clear();
-        while(i.hasNext())
-        {
-            Alumno a = (Alumno) i.next();
-            this.listModel.addElement(a);
+            this.listModel.addElement(i.next());
         }
     }
     
@@ -210,49 +199,68 @@ public class AsignaturaModificacion extends JFrame implements ActionListener
             componentes[i].setEnabled(true);
     }
     
+    public boolean camposVacios()
+    {
+        return this.jLabelNombre1.getText().length() == 0;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent ae)
     {
         switch(ae.getActionCommand())
         {
-            case ELEGIR:  if(this.jTextFieldNombre.getText().length() != 0);
-                                //2
-                                //TODO ventana error
+            case ELEGIR:    if (this.camposVacios())
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificacion", JOptionPane.WARNING_MESSAGE);
                             else
                             {
-                                int index = this.jListA.getSelectedIndex();
-                                Asignatura a = (Asignatura) this.listModel.getElementAt(index);
-                                this.habilitarPanel(this.panelB1);
-                                this.habilitarPanel(this.panelB2);
-                                this.modificarDatos(a);
+                                if(this.jListA.getSelectedValue() != null)
+                                {
+                                    int index = this.jListA.getSelectedIndex();
+                                    Asignatura a = (Asignatura) this.listModel.getElementAt(index);
+                                    this.habilitarPanel(this.panelB1);
+                                    this.habilitarPanel(this.panelB2);
+                                    this.modificarDatos(a);
+                                }
                             }
                             break;
         
-            case BUSCAR:    if(this.jTextFieldNombre1.getText().length() != 0)
+            case BUSCAR:    try
                             {
-                                try
-                                {
+                                if (this.camposVacios()) 
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificacion", JOptionPane.WARNING_MESSAGE);
+                                else
                                     this.listar(controlador.ubicarAsignatura(this.jTextFieldNombre1.getText()));
-                                }
-                                catch(NoEstaEntidadException e)
-                                {
-                                    new VentanaAlerta(this, e.getMessage(), "Error");
-                                }
                             }
-
-                                //TODO ventana error
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            }
                             break;
         
-            case CANCELAR1: 
-            case ACEPTAR2:  
-            case BUSCAR2:
-                            try
+            case ACEPTAR:   try
                             {
-                                this.listarAsignaturas(controlador.ubicarAsignatura(this.jTextFieldNombre.getText()));
-                            } catch (NoEstaEntidadException e)
+                                if(this.camposVacios())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar la asignatura?", "Modificación Asignatura", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                    {
+                                        this.controlador.modificaAsignatura((Asignatura) this.jListA.getSelectedValue(),
+                                        this.jTextFieldNombre.getText());
+                                        JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
+                                        this.dispose();
+                                    }
+                            }
+                            catch(NoEstaEntidadException e)
                             {
-                                new VentanaAlerta(this, e.getMessage(), "Error");
-                            }    
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                            }
+                            break;
+        
+            case CANCELAR:  this.dispose(); // Cierra la ventana de modificacion
+                            break;
+        
+            default:        this.dispose(); // Cierra la ventana de modificacion
+                            break;
         }
     }       
 }

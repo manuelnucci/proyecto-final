@@ -3,6 +3,9 @@ package gui;
 
 import exceptions.NoEstaEntidadException;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -20,6 +23,7 @@ import pga.Cursada;
  */
 public class CursadaConsulta extends javax.swing.JFrame
 {
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private DefaultListModel listModel;
     private Cursada cursada;
@@ -31,6 +35,8 @@ public class CursadaConsulta extends javax.swing.JFrame
         this.controlador = controlador;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
+        this.setResizable(false);
         this.setVisible(true);
     }
 

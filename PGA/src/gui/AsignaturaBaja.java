@@ -1,35 +1,50 @@
 package gui;
 
+import exceptions.NoEstaEntidadException;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import pga.Alumno;
+import pga.Asignatura;
 import pga.Controlador;
 
-public class AsignaturaBaja extends JFrame implements ActionListener
+public class AsignaturaBaja extends JDialog implements ActionListener
 {
+    private static final String BUSCAR = "0";
+    private static final String ACEPTAR = "1";
+    private static final String CANCELAR = "2";
+    
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre;
     private JTextField jTextFieldNombre;
     private JButton jButtonBuscar, jButtonAceptar, jButtonCancelar;
     private JScrollPane scrollPanel;
-    private JTextArea jTextArea;
     private DefaultListModel listModel;
     private JList jList;
-    private JPanel panel, panelDer;
+    private JPanel panel;
     
     public AsignaturaBaja(Controlador controlador)
     {
@@ -38,13 +53,12 @@ public class AsignaturaBaja extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Baja Asigantura");
         this.initComponents();
-        //this.setLayout(new GridLayout(2,2));
-
         this.add(this.panel, BorderLayout.WEST);
+        this.setModal(true);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setResizable(false);
         this.setVisible(true);
-
     }
     
     public void initComponents()
@@ -105,12 +119,73 @@ public class AsignaturaBaja extends JFrame implements ActionListener
         c.gridheight = 3; 
         c.gridwidth = 2;
         this.panel.add(this.scrollPanel, c);
+        
+        this.jButtonAceptar.setActionCommand(ACEPTAR);
+        this.jButtonBuscar.setActionCommand(BUSCAR);
+        this.jButtonCancelar.setActionCommand(CANCELAR);
+        
+        this.jButtonAceptar.addActionListener(this);
+        this.jButtonBuscar.addActionListener(this);
+        this.jButtonCancelar.addActionListener(this);
+    }
 
+    public boolean camposVacios()
+    {
+        return this.jTextFieldNombre.getText().length() == 0;
+    }
+    
+    public void listar(HashMap<String, Asignatura> hash)
+    {
+        Iterator <Asignatura> iA = hash.values().iterator();
+        
+        this.listModel.clear();
+        while(iA.hasNext())
+            this.listModel.addElement(iA.next());
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
+        switch(actionEvent.getActionCommand())
+        {
+            case BUSCAR:    try
+                            {
+                                if (this.camposVacios()) 
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    this.listar(controlador.ubicarAsignatura(this.jTextFieldNombre.getText()));
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            }
+                            break;
         
+            case ACEPTAR:   try
+                            {
+                                if(this.camposVacios())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    if (this.jList.getSelectedValue() != null)
+                                    {
+                                        if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de baja a la asignatura?", "Baja Asignatura", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                        {
+                                            controlador.bajaAsignatura((Asignatura)this.jList.getSelectedValue());
+                                            JOptionPane.showMessageDialog(rootPane, "Baja de Asignatura Exitosa");
+                                            this.dispose();
+                                        }
+                                    }
+                                    else
+                                        JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Baja", JOptionPane.WARNING_MESSAGE);
+                            }                            
+                            break;
+        
+            default:        this.dispose(); // Cierra la ventana de baja
+                            break;
+        }
     }
 }

@@ -7,9 +7,11 @@ import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +42,7 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
     private static final String GUARDAR = "5";
     private static final String BUSCAR2 = "6";
     
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
     private JList jListA, jListC1, jListC2;
@@ -63,6 +66,7 @@ public class ModificaHistoriaAlumno extends JFrame implements ActionListener
         this.add(this.panelB, BorderLayout.SOUTH);
         this.deshabilitarPanel(panelB);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
     

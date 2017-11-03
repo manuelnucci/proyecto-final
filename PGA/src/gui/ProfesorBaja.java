@@ -36,8 +36,6 @@ public class ProfesorBaja extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Baja Profesor");
         this.initComponents();
-        //this.setLayout(new GridLayout(2,2));
-
         this.add(this.panel, BorderLayout.WEST);
         this.pack();
         this.setResizable(false);

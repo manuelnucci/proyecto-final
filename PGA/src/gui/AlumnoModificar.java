@@ -40,6 +40,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
     private static final String ACEPTAR = "2";
     private static final String CANCELAR = "3";
     
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre1, jLabelApellido1;
     private JTextField jTextFieldNombre1, jTextFieldApellido1;
@@ -50,8 +51,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
     private JPanel panelA, panelB, panelB1, panelB2;
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
-    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-    
+
     public AlumnoModificar(Controlador controlador)
     {
         super();
@@ -88,7 +88,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
         this.jButtonAceptar = new JButton("Aceptar");
         this.jButtonCancelar = new JButton("Cancelar");
         this.listModel = new DefaultListModel();
-        this.jList = new JList();
+        this.jList = new JList(listModel);
         this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.jList.setLayoutOrientation(JList.VERTICAL);
         this.scrollPanel = new JScrollPane(this.jList);
@@ -228,8 +228,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
         this.listModel.clear();
         while(iA.hasNext())
             this.listModel.addElement(iA.next());
-        this.jList.setModel(this.listModel);
-        }
+    }
     
     public void modificarDatos(Alumno alumno)
     {
@@ -275,6 +274,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
+        
             case ELEGIR:    if (this.camposVacios1())
                                 JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             else
@@ -287,6 +287,7 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 else
                                     JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             break;
+        
             case ACEPTAR:   try
                             {
                                 if(this.camposVacios2())
@@ -313,8 +314,10 @@ public class AlumnoModificar extends JDialog implements ActionListener
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
+        
             case CANCELAR:  this.dispose(); // Cierra la ventana de modificacion
                             break;
+        
             default:        this.dispose(); // Cierra la ventana de modificacion
                             break;
         }

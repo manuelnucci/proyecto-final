@@ -78,6 +78,47 @@ public class Controlador
         this.modelo.quitarAsignatura(alumno, asignatura);
     }
     
+    public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException
+    {
+        return this.modelo.ubicarProfesor(nombre, apellido);
+    }
+    
+    public void altaProfesorACursada(Profesor profesor, Cursada cursada) throws EntidadNoAptaParaCursadaException
+    {
+        this.modelo.altaProfesorACursada(profesor, cursada);
+    }
+    
+    public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException
+    {
+        this.modelo.bajaProfesorDeCursada(profesor, cursada);
+    }
+    
+    public void altaAsignatura(String nombre)
+    {
+        this.modelo.altaAsignatura(nombre);
+    }
+    
+    public void bajaAsignatura(Asignatura asignatura) throws NoEstaEntidadException
+    {
+        this.modelo.bajaAsignatura(asignatura);
+    }
+    
+    public void modificaAsignatura(Asignatura asignatura, String nombre)
+        throws NoEstaEntidadException
+    {
+        this.modelo.modificaAsignatura(asignatura, nombre);
+    }
+    
+    public void agregarCorrelativa(Asignatura asignatura, Asignatura correlativa) throws exceptions.EntidadRepetidaException
+    {
+        this.modelo.agregarCorrelativa(asignatura, correlativa);
+    }
+    
+    public void bajaCorrelativa(Asignatura asignatura, Asignatura correlativa) throws NoEstaEntidadException
+    {
+        this.modelo.bajaCorrelativa(asignatura, correlativa);
+    }
+    
     public HashMap<String, Asignatura> ubicarAsignatura(String nombre) throws NoEstaEntidadException
     {
         return this.modelo.ubicarAsignatura(nombre);

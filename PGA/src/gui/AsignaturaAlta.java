@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +17,13 @@ import javax.swing.SpringLayout;
 
 import pga.Controlador;
 
-public class AsignaturaAlta extends JFrame implements ActionListener
+public class AsignaturaAlta extends JDialog implements ActionListener
 
 {
     private static final String ACEPTAR = "0";
     private static final String CANCELAR = "1";
+    
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JPanel panel1, panel2;
     private JTextField jTextFieldNombre;
@@ -27,7 +31,6 @@ public class AsignaturaAlta extends JFrame implements ActionListener
     private JButton jButtonAceptar, jButtonCancelar;
     //Cantidad de campos
     private int numPairs = 1;
-    private Controlador c;
     
     public AsignaturaAlta(Controlador controlador)
     {
@@ -35,13 +38,14 @@ public class AsignaturaAlta extends JFrame implements ActionListener
         this.controlador = controlador;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Alta asignatura");
-        this.c = c;
         this.initComponents();
+        this.setModal(true);
         this.add(panel1, BorderLayout.WEST);
         panel1.setOpaque(true);
         this.add(panel2, BorderLayout.EAST);
         this.addListeners();
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
         this.setResizable(false);
     }
@@ -102,10 +106,19 @@ public class AsignaturaAlta extends JFrame implements ActionListener
                             }
                             else
                             {
-                                //this.c.altaAsignatura(this.jTextFieldNombre.getText());
+                                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea dar de alta a la asignatura?", "Alta Asignatura", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                {    
+                                    this.controlador.altaAsignatura(this.jTextFieldNombre.getText());
+                                    JOptionPane.showMessageDialog(rootPane, "Alta de Asignatura Exitosa");
+                                    this.dispose();
+                                }
                             }
                             break;
-            case CANCELAR:  this.dispose();//Ponele que cierra la ventana
+        
+            case CANCELAR:  this.dispose();//cierra la ventana
+                            break;
+            
+            default:        this.dispose();//cierra la ventana
                             break;
         }
     }

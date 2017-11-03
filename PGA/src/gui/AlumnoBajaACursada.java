@@ -26,8 +26,8 @@ import pga.Cursada;
  */
 public class AlumnoBajaACursada extends javax.swing.JDialog
 {
-    private Controlador controlador;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+    private Controlador controlador;
     private HashMap<String, Alumno> hash1;
     private HashMap<String, Cursada> hash2;
     private DefaultListModel listModel1, listModel2;
@@ -112,7 +112,7 @@ public class AlumnoBajaACursada extends javax.swing.JDialog
         jButtonBaja = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 

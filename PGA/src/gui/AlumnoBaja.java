@@ -38,6 +38,7 @@ public class AlumnoBaja extends JDialog implements ActionListener
     private static final String ACEPTAR = "1";
     private static final String CANCELAR = "2";
     
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre, jLabelApellido;
     private JTextField jTextFieldNombre, jTextFieldApellido;
@@ -46,7 +47,6 @@ public class AlumnoBaja extends JDialog implements ActionListener
     private JList jList;
     private DefaultListModel listModel;
     private JPanel panel;
-    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
     public AlumnoBaja(Controlador controlador)
     {
@@ -177,6 +177,7 @@ public class AlumnoBaja extends JDialog implements ActionListener
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
+        
             case ACEPTAR:   try
                             {
                                 if(this.camposVacios())
@@ -199,7 +200,9 @@ public class AlumnoBaja extends JDialog implements ActionListener
                                 JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Baja", JOptionPane.WARNING_MESSAGE);
                             }                            
                             break;
+        
             default:        this.dispose(); // Cierra la ventana de baja
+                            break;
         }
     }
 }
