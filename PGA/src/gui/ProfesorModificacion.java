@@ -1,11 +1,14 @@
 package gui;
 
+import exceptions.EmailInvalidoException;
 import exceptions.NoEstaEntidadException;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -28,29 +32,23 @@ import pga.Controlador;
 
 public class ProfesorModificacion extends JFrame implements ActionListener
 {
-    private static final String ELEGIR = "0";
-    private static final String ACEPTAR2 = "1";
-    private static final String BUSCAR = "2";
-    private static final String CANCELAR1 = "3";
-    private static final String CANCELAR2 = "4";
-    private static final String ANADIR = "6";
-    private static final String REMOVER = "7";
-    private static final String BUSCAR2 = "8";
-    private static final String CANCELAR3 = "9";
-    private static final String ACEPTAR3 = "10";
+    private static final String BUSCAR = "0";
+    private static final String ELEGIR = "1";
+    private static final String ACEPTAR = "2";
+    private static final String CANCELAR = "3";
     
+    private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     private Controlador controlador;
     private JLabel jLabelNombre1, jLabelApellido1, jLabelLegajo1;
     private JTextField jTextFieldNombre1, jTextFieldApellido1, jTextFieldLegajo1;
-    private JButton jButtonBuscar1, jButtonElegir, jButtonCancelar1, jButtonAceptar3, jButtonCancelar3;
-    private JScrollPane scrollPanel, scrollPanelC1, scrollPanelC2;
-    private JList jListA, jListC1, jListC2;
-    private DefaultListModel listModel, listModelC1, listModelC2;
-    private JPanel panelA, panelB, panelB1, panelB2, panelC, panelC1, panelC2;
-    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail, jTextFieldNombreAsignatura;
-    private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail, jLabelNombreAsignatura,
-                        jLabelAsigTotales, jLabelAsigHistoria;
-    private JButton jButtonAceptar, jButtonCancelar, jButtonModificarHistoria, jButtonAnadir, jButtonRemover, jButtonBuscar2;
+    private JButton jButtonBuscar1, jButtonElegir;
+    private JScrollPane scrollPanel;
+    private JList jList;
+    private DefaultListModel listModel;
+    private JPanel panelA, panelB, panelB1, panelB2;
+    private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
+    private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
+    private JButton jButtonAceptar, jButtonCancelar;
     
     public ProfesorModificacion (Controlador controlador)
     {
@@ -64,6 +62,7 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         this.deshabilitarPanel(this.panelB2);
         this.setResizable(false);
         this.pack();
+        this.setLocation(d.width / 2 - this.getWidth() / 2, d.height / 2 - this.getHeight() / 2);
         this.setVisible(true);
     }
 
@@ -83,10 +82,9 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         this.jLabelLegajo1 = new JLabel("Legajo");
         this.jTextFieldLegajo1 = new JTextField();
         this.jButtonElegir = new JButton("Elegir");
-        this.jButtonCancelar1 = new JButton("Cancelar");
         this.listModel = new DefaultListModel();
-        this.jListA = new JList(this.listModel);
-        this.scrollPanel = new JScrollPane(this.jListA);
+        this.jList = new JList(this.listModel);
+        this.scrollPanel = new JScrollPane(this.jList);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -134,11 +132,9 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         
         this.jButtonElegir.setActionCommand(ELEGIR);
         this.jButtonBuscar1.setActionCommand(BUSCAR);
-        this.jButtonCancelar1.setActionCommand(CANCELAR1);
         
         this.jButtonElegir.addActionListener(this);
         this.jButtonBuscar1.addActionListener(this);
-        this.jButtonCancelar1.addActionListener(this);
     }
     
     public void initComponentsB()
@@ -197,8 +193,8 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         this.panelB2.add(new JLabel(" "), BorderLayout.CENTER);
         this.panelB2.add(this.jButtonCancelar, BorderLayout.SOUTH);   
         
-        this.jButtonAceptar.setActionCommand(ACEPTAR2);
-        this.jButtonCancelar.setActionCommand(CANCELAR2);
+        this.jButtonAceptar.setActionCommand(ACEPTAR);
+        this.jButtonCancelar.setActionCommand(CANCELAR);
         
         this.jButtonAceptar.addActionListener(this);
         this.jButtonCancelar.addActionListener(this);
@@ -220,18 +216,6 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         }
     }
     
-    private void listarAsignaturas(HashMap<String, Asignatura> h)
-    {
-        Iterator i = h.values().iterator();
-        
-        this.listModel.clear();
-        while(i.hasNext())
-        {
-            Alumno a = (Alumno) i.next();
-            this.listModel.addElement(a);
-        }
-    }
-    
     public void modificarDatos(Alumno a)
     {
         this.jTextFieldNombre.setText(a.getNombre());
@@ -241,22 +225,17 @@ public class ProfesorModificacion extends JFrame implements ActionListener
         this.jTextFieldMail.setText(a.getMail());
     }
     
-    private void anadirAsignatura()
+    public boolean camposVacios1()
     {
-        int index = this.jListC1.getSelectedIndex();
-        Asignatura as = (Asignatura) this.listModelC1.getElementAt(index);
-        this.listModelC2.addElement(as);
+        return !(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0);
     }
-    
-    private void removerAsignatura()
-    {
-        int index = this.jListC2.getSelectedIndex();
-        this.listModelC2.removeElementAt(index);
-    }
-    
-    public void modificarHistoria(Alumno a)
-    {
-    }
+        
+    public boolean camposVacios2()
+        {
+        return !(this.jTextFieldNombre.getText().length() != 0 && this.jTextFieldApellido.getText().length() != 0 &&
+                this.jTextFieldDomicilio.getText().length() != 0 && this.jTextFieldTelefono.getText().length() != 0 &&
+                this.jTextFieldMail.getText().length() != 0);
+        }
     
     public void deshabilitarPanel(JPanel panel)
     {
@@ -275,55 +254,70 @@ public class ProfesorModificacion extends JFrame implements ActionListener
     }
     
     @Override
-    public void actionPerformed(ActionEvent ae)
+    public void actionPerformed(ActionEvent actionEvent)
     {
-        switch(ae.getActionCommand())
+        switch(actionEvent.getActionCommand())
         {
-            case ELEGIR:  if(this.jTextFieldLegajo1.getText().length() != 0);
-                                //2
-                                //TODO ventana error
-                            else
+            case BUSCAR:    try
                             {
-                                int index = this.jListA.getSelectedIndex();
-                                Alumno a = (Alumno) this.listModel.getElementAt(index);
+                                this.deshabilitarPanel(this.panelB1);
+                                this.deshabilitarPanel(this.panelB2);
+                                if (this.camposVacios1()) 
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
+                            }
+                            catch (NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Búsqueda", JOptionPane.WARNING_MESSAGE);
+                            }
+                            break;
+        
+            case ELEGIR:    if (this.camposVacios1())
+                                JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                            else
+                                if (this.jList.getSelectedValue() != null)
+                                {
                                 this.habilitarPanel(this.panelB1);
                                 this.habilitarPanel(this.panelB2);
-                                this.modificarDatos(a);
+                                this.modificarDatos((Alumno)this.jList.getSelectedValue());
+                                }
+                                else
+                                    JOptionPane.showMessageDialog(rootPane, "Seleccione un elemento de la lista", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                            break;
+        
+            case ACEPTAR:   try
+                            {
+                                if(this.camposVacios2())
+                                    JOptionPane.showMessageDialog(rootPane, "Faltan completar campos", "Error de Modificación", JOptionPane.WARNING_MESSAGE);
+                                else
+                                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea modificar al alumno?", "Modificación Alumno", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                                    {
+                                        this.controlador.modificaAlumno((Alumno) this.jList.getSelectedValue(),
+                                        this.jTextFieldNombre.getText(),
+                                        this.jTextFieldApellido.getText(),
+                                        this.jTextFieldDomicilio.getText(),
+                                        this.jTextFieldTelefono.getText(),
+                                        this.jTextFieldMail.getText());
+                                        JOptionPane.showMessageDialog(rootPane, "Modificación del Alumno Exitosa");
+                                        this.dispose();
+                                    }
+                            }
+                            catch(EmailInvalidoException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Alta", JOptionPane.WARNING_MESSAGE);
+                            }
+                            catch(NoEstaEntidadException e)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error de Modificación", JOptionPane.WARNING_MESSAGE);
                             }
                             break;
         
-            case BUSCAR:    if(this.jTextFieldNombre1.getText().length() != 0 && this.jTextFieldApellido1.getText().length() != 0)
-                            {
-                                try
-                                {
-                                    this.listar(controlador.ubicarAlumno(this.jTextFieldNombre1.getText(), this.jTextFieldApellido1.getText()));
-                                }
-                                catch(NoEstaEntidadException e)
-                                {
-                                    new VentanaAlerta(this, e.getMessage(), "Error");
-                                }
-                            }
-
-                                //TODO ventana error
+            case CANCELAR:  this.dispose(); // Cierra la ventana de modificacion
                             break;
         
-            case CANCELAR1: 
-            case ACEPTAR2:  
-            case BUSCAR2:
-                            try
-                            {
-                                this.listarAsignaturas(controlador.ubicarAsignatura(this.jTextFieldNombreAsignatura.getText()));
-                            } catch (NoEstaEntidadException e)
-                            {
-                                new VentanaAlerta(this, e.getMessage(), "Error");
-                            }
-            
-            case ANADIR:    this.anadirAsignatura();
-                            break;               
-            
-            case REMOVER:   this.removerAsignatura();
+            default:        this.dispose(); // Cierra la ventana de modificacion
                             break;
-            
         }
-    }       
+    }    
 }
