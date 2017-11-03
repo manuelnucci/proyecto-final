@@ -31,7 +31,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
     private JTextField jTextFieldNombre, jTextFieldApellido, jTextFieldDomicilio, jTextFieldTelefono, jTextFieldMail;
     private JLabel jLabelNombre, jLabelApellido, jLabelDomicilio, jLabelTelefono, jLabelMail;
     private JButton jButtonAceptar, jButtonCancelar;
-    //Cantidad de campos
+    // Cantidad de campos
     private int numPairs = 5;
     private Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
     
@@ -39,6 +39,7 @@ public class AlumnoAlta extends JDialog implements ActionListener
     {
         super();
         this.controlador = controlador;
+        this.setTitle("Alta Alumno");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setModal(true);
         this.setResizable(false);

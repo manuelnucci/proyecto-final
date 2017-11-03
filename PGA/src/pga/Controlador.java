@@ -4,7 +4,6 @@ import exceptions.EmailInvalidoException;
 import exceptions.EntidadNoAptaParaCursadaException;
 import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;
-
 import exceptions.PeriodoInvalidoException;
 
 import gui.VentanaPrincipal;
@@ -55,6 +54,16 @@ public class Controlador
         this.modelo.modificaAlumno(alumno, nombre, apellido, domicilio, telefono, mail);
     }
     
+    public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws exceptions.EntidadRepetidaException
+    {
+        this.modelo.aprobarAsignatura(alumno, asignatura);
+    }
+    
+    public void quitarAsignatura(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException
+    {
+        this.modelo.quitarAsignatura(alumno, asignatura);
+    }
+    
     public HashMap<String, Alumno> ubicarAlumno(String nombre, String apellido) throws NoEstaEntidadException
     {
         return this.modelo.ubicarAlumno(nombre, apellido);
@@ -70,14 +79,16 @@ public class Controlador
         this.modelo.bajaAlumnoDeCursada(alumno, cursada);
     }
     
-    public void aprobarAsignatura(Alumno alumno, Asignatura asignatura) throws exceptions.EntidadRepetidaException
+    /*---------------------------------------------------------------------------------------------------------------*/
+    
+    public void altaProfesor(String nombre, String apellido, String domicilio, String telefono, String mail) throws EmailInvalidoException
     {
-        this.modelo.aprobarAsignatura(alumno, asignatura);
+        this.modelo.altaProfesor(nombre, apellido, domicilio, telefono, mail);
     }
     
-    public void quitarAsignatura(Alumno alumno, Asignatura asignatura) throws NoEstaEntidadException
+    public void bajaProfesor(Profesor profesor) throws NoEstaEntidadException
     {
-        this.modelo.quitarAsignatura(alumno, asignatura);
+        this.modelo.bajaProfesor(profesor);
     }
     
     public HashMap<String, Profesor> ubicarProfesor(String nombre, String apellido) throws NoEstaEntidadException
@@ -94,6 +105,8 @@ public class Controlador
     {
         this.modelo.bajaProfesorDeCursada(profesor, cursada);
     }
+    
+    /*---------------------------------------------------------------------------------------------------------------*/
     
     public void altaAsignatura(String nombre)
     {
@@ -126,6 +139,8 @@ public class Controlador
         return this.modelo.ubicarAsignatura(nombre);
     }
     
+    /*---------------------------------------------------------------------------------------------------------------*/
+    
     public void altaCursada(String nombre, Asignatura asignatura, String periodo, String dia, String horaInicio, 
                             String horaFin) throws PeriodoInvalidoException, HoraInvalidaException
     {
@@ -148,6 +163,8 @@ public class Controlador
     {
         return this.modelo.ubicarCursada(nombre);
     }
+    
+    /*---------------------------------------------------------------------------------------------------------------*/
     
     public void guardarArchivo() throws FileNotFoundException
     {
