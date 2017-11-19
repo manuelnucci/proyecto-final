@@ -1,6 +1,7 @@
 package tests;
 
 import exceptions.EmailInvalidoException;
+import exceptions.NoEstaEntidadException;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -9,41 +10,52 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AgregarAlumnoTest
+import pga.Alumno;
+
+public class ModificaAlumnoTest
 {
-    private TestFixtureAlumno fixture = new TestFixtureAlumno(); 
-    
-    public AgregarAlumnoTest()
+    private TestFixtureAlumno fixture = new TestFixtureAlumno();
+
+    public ModificaAlumnoTest()
     {
     }
 
     @Before
     public void setUp() throws Exception
     {
-        this.fixture.setUpAgregarYModif();
+        fixture.setUpAgregarYModif();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        this.fixture.tearDown();
+        fixture.tearDown();
     }
 
     /**
      * @see pga.Manager#altaAlumno(String,String,String,String,String)
      */
     @Test
-    public void testAltaAlumnoExitoso_1_1()
+    public void testModificaAlumnoExitoso_1_1()
     {   
         try
         {
             int size = this.fixture.manager.getAlumnos().size();
-            this.fixture.manager.altaAlumno("Martin", "Perez", "Catamarca 2050", "2235235475", "mprez@live.com");
-            assertTrue("El alumno no se modificó correctamente en el sistema", this.fixture.manager.getAlumnos().size() == size + 1);
+            this.fixture.manager.modificaAlumno(this.fixture.alumno_a, "Martin", "Perez", "Catamarca 2050", "2235235475", "mprez@live.com");            
+            assertTrue("El alumno no se modificó correctamente en el sistema", 
+                       this.fixture.alumno_a.getNombre().equals("Martin") &&
+                       this.fixture.alumno_a.getApellido().equals("Perez") &&
+                       this.fixture.alumno_a.getDomicilio().equals("Catamarca 2050") &&
+                       this.fixture.alumno_a.getTelefono().equals("2235235475") &&
+                       this.fixture.alumno_a.getMail().equals("mprez@live.com"));
         } 
         catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
         }
     }
     
@@ -51,17 +63,25 @@ public class AgregarAlumnoTest
      * @see pga.Manager#altaAlumno(String,String,String,String,String)
      */
     @Test
-    public void testAltaAlumnoExitoso_1_2()
+    public void testModificaAlumnoExitoso_1_2()
     {   
         try
         {
-            int size = this.fixture.manager.getAlumnos().size();
-            this.fixture.manager.altaAlumno("M", "P", "D", "1", "a@j");
-            assertTrue("El alumno no se agregó bien al sistema", this.fixture.manager.getAlumnos().size() == size + 1);
+            this.fixture.manager.modificaAlumno(this.fixture.alumno_a, "M", "P", "D", "1", "a@j");
+            assertTrue("El alumno no se modificó correctamente en el sistema", 
+                       this.fixture.alumno_a.getNombre().equals("M") &&
+                       this.fixture.alumno_a.getApellido().equals("P") &&
+                       this.fixture.alumno_a.getDomicilio().equals("D") &&
+                       this.fixture.alumno_a.getTelefono().equals("1") &&
+                       this.fixture.alumno_a.getMail().equals("a@j"));
         } 
         catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
         }
     }
     
@@ -69,20 +89,22 @@ public class AgregarAlumnoTest
      * @see pga.Manager#altaAlumno(String,String,String,String,String)
      */
     @Test
-    public void testAltaAlumnoErroneo_2_2()
+    public void testModificaAlumnoErroneo_2_2()
     {   
         try
         {
-            this.fixture.manager.altaAlumno(null, "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
-        } 
-        catch (EmailInvalidoException e)
+            this.fixture.manager.modificaAlumno(this.fixture.alumno_a, null, "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
+        } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
         }
         catch (NullPointerException e)
         {
             fail("Se intentó agregar un alumno con un nombre nulo.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
         }
     }
     
@@ -95,7 +117,6 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Adolfo", null, "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
@@ -147,7 +168,6 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", null);
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
@@ -162,15 +182,20 @@ public class AgregarAlumnoTest
      * @see pga.Manager#altaAlumno(String,String,String,String,String)
      */
     @Test
-    public void testAltaAlumnoErroneo_4_2()
+    public void testModificaAlumnoErroneo_4_2()
     {   
         try
         {
-            this.fixture.manager.altaAlumno("", "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Se intentó agregar un alumno con un nombre vacío.");
-        } catch (EmailInvalidoException e)
+            this.fixture.manager.modificaAlumno(this.fixture.alumno_a, "", "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
+            fail("Se intentó modificar un alumno poniéndole un nombre vacío.");
+        } 
+        catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
         }
     }
     
@@ -231,7 +256,6 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "");
-            fail("Tendría que haberse lanzado la excepción EmailInvalidoException.");
         } catch (EmailInvalidoException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "El mail ingresado no cumple con el formato previsto.");
@@ -247,7 +271,6 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "@mail");
-            fail("Tendría que haberse lanzado la excepción EmailInvalidoException.");
         } catch (EmailInvalidoException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "El mail ingresado no cumple con el formato previsto.");
@@ -263,7 +286,6 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "mail@");
-            fail("Tendría que haberse lanzado la excepción EmailInvalidoException.");
         } catch (EmailInvalidoException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "El mail ingresado no cumple con el formato previsto.");
@@ -279,10 +301,31 @@ public class AgregarAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "mail");
-            fail("Tendría que haberse lanzado la excepción EmailInvalidoException.");
         } catch (EmailInvalidoException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "El mail ingresado no cumple con el formato previsto.");
         }
-    }    
+    }
+    
+    /**
+     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     */
+    @Test
+    public void testModificaAlumnoErroneo_14()
+    {   
+        try
+        {
+            Alumno alumno = new Alumno("Manuel", "Nucci", "Rawson 273", "4518663", "manuucci96@gmail.com");
+            this.fixture.manager.modificaAlumno(alumno, "", "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
+            fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
+        } 
+        catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
+        }
+    }
 }
