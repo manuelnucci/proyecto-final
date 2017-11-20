@@ -108,7 +108,7 @@ public class BajaAlumnoTest
                 .manager
                 .bajaAlumno(this.fixture.alumno_c);
             assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture.
-                                                                             cursada.
+                                                                             cursada_a.
                                                                              getAlumnos().
                                                                              containsKey(this.fixture.alumno_c.getLegajo()));
         } 
