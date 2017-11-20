@@ -95,6 +95,7 @@ public class TestFixtureCursada
     
     public void tearDown()
     {
+        
         this.manager.getCursadas().clear();
         this.manager.getAsignaturas().clear();
         this.manager.getAlumnos().clear();
