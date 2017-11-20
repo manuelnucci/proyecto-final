@@ -18,7 +18,7 @@ public class BajaProfesorTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUp();
+        fixture1.setUpBaja();
     }
 
     @After
@@ -35,7 +35,7 @@ public class BajaProfesorTest
     {
         try
         {
-            this.fixture1.manager.bajaProfesor(this.fixture1.profesor);
+            this.fixture1.manager.bajaProfesor(this.fixture1.profesor_a);
         } catch (NoEstaEntidadException e)
         {
             fail("No tendria que lanzar la excepcion de que no esta la entidad");
@@ -83,6 +83,24 @@ public class BajaProfesorTest
         }
             
     }
-
     
+    /**
+     * @see pga.Manager#bajaProfesor(pga.Profesor)
+     */
+    @Test
+    public void testBajaAlumnoErroneo6()
+    {
+        
+        try
+        {
+            this.fixture1.manager.bajaProfesor(this.fixture1.profesor_c);
+            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture1.cursada.getProfesores().containsKey(this.fixture1.profesor_c.getLegajo()));
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
+        }
+        
+    }
+
 }

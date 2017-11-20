@@ -29,13 +29,11 @@ public class AltaProfesorTest
         
     }
 
-    //TODO falta los valores limite
-
     /**
      * @see pga.Manager#altaProfesor(String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorExitoso()
+    public void testModificacionProfesorExitoso_1_1()
     {   
         try
         {
@@ -48,6 +46,22 @@ public class AltaProfesorTest
         }
     }
     
+    /**
+     * @see pga.Manager#altaProfesor(String,String,String,String,String)
+     */
+    @Test
+    public void testModificacionProfesorExitoso_1_2()
+    {   
+        try
+        {
+            int size = this.fixture.manager.getAlumnos().size();
+            this.fixture.manager.altaProfesor("M", "P", "D", "1", "a@j");
+            assertTrue("El profesor se agrego correctamente al sistema", this.fixture.manager.getAlumnos().size() == size + 1);
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        }
+    }
     
     /**
      * @see pga.Manager#altaProfesor(String,String,String,String,String)
