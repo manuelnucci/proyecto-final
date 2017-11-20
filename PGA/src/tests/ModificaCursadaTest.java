@@ -1202,7 +1202,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
+            this.fixture1.manager.modificaCursada(this.fixture1.cursada_c, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
             fail("La cursada que se modifico no se encuentra en el sistema");
         } catch (HoraInvalidaException e)
         {
