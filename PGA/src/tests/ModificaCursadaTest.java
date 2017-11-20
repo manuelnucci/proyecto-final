@@ -149,7 +149,7 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_2_3()
+    public void testModificaCursadaErronea_2_3()
     {
         
         try
@@ -173,13 +173,13 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_2_4()
+    public void testModificaCursadaErronea_2_4()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, null, "Lunes", "12:00", "14:00");
-            fail("La cursada se anadio al sistema");
+            fail("La cursada se modifico con un periodo nulo");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -188,22 +188,25 @@ public class ModificaCursadaTest
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         } catch (NullPointerException e)
         {
-            fail("Se intento dar de alta una cursada con periodo nulo");
+            fail("Se intento modificar una cursada con periodo nulo");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_2_5()
+    public void testModificaCursadaErronea_2_5()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", null, "12:00", "14:00");
-            fail("La cursada se anadio al sistema");
+            fail("La cursada se modifico con un dia nulo");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -212,22 +215,25 @@ public class ModificaCursadaTest
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         } catch (NullPointerException e)
         {
-            fail("Se intento dar de alta una cursada con dia nulo");
+            fail("Se intento modificar una cursada con dia nulo");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_2_6()
+    public void testModificaCursadaErronea_2_6()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes", null, "14:00");
-            fail("La cursada se anadio al sistema");
+            fail("La cursada se modifico con una hora de inicio nula");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -236,22 +242,25 @@ public class ModificaCursadaTest
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         } catch (NullPointerException e)
         {
-            fail("Se intento dar de alta una cursada con hora de inicio nulo");
+            fail("Se intento modificar una cursada con hora de inicio nulo");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_2_7()
+    public void testModificaCursadaErronea_2_7()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00", null);
-            fail("La cursada se anadio al sistema");
+            fail("La cursada se modifico con un dia nulo");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -260,576 +269,660 @@ public class ModificaCursadaTest
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         } catch (NullPointerException e)
         {
-            fail("Se intento dar de alta una cursada con hora de fin nulo");
+            fail("Se intento modificar una cursada con hora de fin nulo");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_4_2()
+    public void testModificaCursadaErronea_4_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un nombre vacio");
+            fail("La cursada se modifico con un nombre vacio");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_4_3()
+    public void testModificaCursadaErronea_4_3()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo vacio");
+            fail("La cursada se modifico con un periodo vacio");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_4_4()
+    public void testModificaCursadaErronea_4_4()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "","12:00","14:00");
-            fail("La cursada se anadio al sistema con un dia vacio");
+            fail("La cursada se modifico con un dia vacio");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_4_5()
+    public void testModificaCursadaErronea_4_5()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio vacio");
+            fail("La cursada se modifico con una hora de inicio vacio");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coincides", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_4_6()
+    public void testModificaCursadaErronea_4_6()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","");
-            fail("La cursada se anadio al sistema con una hora de fin vacio");
+            fail("La cursada se modifico con una hora de fin vacio");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coincides", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_1()
+    public void testModificaCursadaErronea_8_1()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01P-A2017", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_2()
+    public void testModificaCursadaErronea_8_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01:2017", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_3()
+    public void testModificaCursadaErronea_8_3()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "03-2017", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_4()
+    public void testModificaCursadaErronea_8_4()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-20L7", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_5()
+    public void testModificaCursadaErronea_8_5()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-1950", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_5_2()
+    public void testModificaCursadaErronea_8_5_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-1999", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_6()
+    public void testModificaCursadaErronea_8_6()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2150", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_8_6_2()
+    public void testModificaCursadaErronea_8_6_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2101", "Lunes","12:00","14:00");
-            fail("La cursada se anadio al sistema con un periodo invalido");
+            fail("La cursada se modifico con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_10()
+    public void testModificaCursadaErronea_10()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2101", "Osvaldo","12:00","14:00");
-            fail("La cursada se anadio al sistema con un dia invalido");
+            fail("La cursada se modifico con un dia invalido");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
         } catch (PeriodoInvalidoException e)
         {
             assertEquals("Las excepciones no coinciden", "El periodo ingresado no cumple con el formato previsto.", e.getMessage());
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_1()
+    public void testModificaCursadaErronea_12_1()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","122:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_2()
+    public void testModificaCursadaErronea_12_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","A1:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }   
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_3()
+    public void testModificaCursadaErronea_12_3()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:D2","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }   
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_4()
+    public void testModificaCursadaErronea_12_4()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12-00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_5()
+    public void testModificaCursadaErronea_12_5()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","-5:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_5_2()
+    public void testModificaCursadaErronea_12_5_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","-1:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_6()
+    public void testModificaCursadaErronea_12_6()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","40:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_6_2()
+    public void testModificaCursadaErronea_12_6_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","24:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_7()
+    public void testModificaCursadaErronea_12_7()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:-5","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_7_2()
+    public void testModificaCursadaErronea_12_7_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:-1","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_8()
+    public void testModificaCursadaErronea_12_8()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:67","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_8_2()
+    public void testModificaCursadaErronea_12_8_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:60","14:00");
-            fail("La cursada se anadio al sistema con una hora de inicio invalido");
+            fail("La cursada se modifico con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_9()
+    public void testModificaCursadaErronea_12_9()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","143:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     
@@ -837,21 +930,24 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_10()
+    public void testModificaCursadaErronea_12_10()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","A2:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     
@@ -859,21 +955,24 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_11()
+    public void testModificaCursadaErronea_12_11()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:F3");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     
@@ -881,168 +980,192 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_12()
+    public void testModificaCursadaErronea_12_12()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14-00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_14()
+    public void testModificaCursadaErronea_12_14()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","-5:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_14_2()
+    public void testModificaCursadaErronea_12_14_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","-1:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_15()
+    public void testModificaCursadaErronea_12_15()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:-5");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_15_2()
+    public void testModificaCursadaErronea_12_15_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:-1");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_16()
+    public void testModificaCursadaErronea_12_16()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:67");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_12_16_2()
+    public void testModificaCursadaErronea_12_16_2()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:60");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
-    public void testAltaCursadaErronea_14()
+    public void testModificaCursadaErronea_14()
     {
         
         try
         {
             this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","16:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se modifico con una hora invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
         } catch (PeriodoInvalidoException e)
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
         }
-        
+
     }
     
     /**
@@ -1054,8 +1177,8 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada("Cursada Estadistica", this.fixture1.asignatura_d, "01-2017", "Lunes","16:00","14:00");
-            fail("La cursada se anadio al sistema con una asignatura que no pertenece al sistema");
+            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Estadistica", this.fixture1.asignatura_d, "01-2017", "Lunes","16:00","14:00");
+            fail("La cursada se modifico con una asignatura que no pertenece al sistema");
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -1063,6 +1186,61 @@ public class ModificaCursadaTest
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         }
+        catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
+        }
         
+    }
+    
+    /**
+     * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
+     */
+    @Test
+    public void testModificaCursadaErronea_30()
+    {
+        
+        try
+        {
+            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
+            fail("La cursada que se modifico no se encuentra en el sistema");
+        } catch (HoraInvalidaException e)
+        {
+            assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
+        } catch (PeriodoInvalidoException e)
+        {
+            fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            assertEquals("Las excepciones no coinciden", "Cursada no encontrada en el sistema.", e.getMessage());
+        }
+
+    }
+    
+    /**
+     * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
+     */
+    @Test
+    public void testModificaCursadaErronea_32()
+    {
+        
+        try
+        {
+            this.fixture1.manager.modificaCursada(null, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
+            fail("La cursada que se modifico es nula");
+        } catch (HoraInvalidaException e)
+        {
+            assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
+        } catch (PeriodoInvalidoException e)
+        {
+            fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
+        } catch (NullPointerException e)
+        {
+            fail("Se intento modificar una cursada nula");
+        }
+
     }
 }

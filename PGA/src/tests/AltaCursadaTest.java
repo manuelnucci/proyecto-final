@@ -1002,7 +1002,7 @@ public class AltaCursadaTest
         try
         {
             this.fixture1.manager.altaCursada("Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","16:00","14:00");
-            fail("La cursada se anadio al sistema con una hora de fin invalido");
+            fail("La cursada se anadio al sistema con una hora invalido");
         } catch (HoraInvalidaException e)
         {
             assertEquals("Las excepciones no coinciden", "La hora ingresada no cumple con el formato previsto.", e.getMessage());
