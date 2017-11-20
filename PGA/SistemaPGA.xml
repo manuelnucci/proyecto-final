@@ -2,37 +2,6 @@
 <java version="1.8.0_131" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
-   <string>GERMANMOLINA</string>
-   <object class="java.util.HashMap">
-    <void method="put">
-     <string>ALU0003</string>
-     <object class="pga.Alumno">
-      <void property="apellido">
-       <string>molina</string>
-      </void>
-      <void property="domicilio">
-       <string>dwmiai</string>
-      </void>
-      <void property="historiaAcademica">
-       <object class="java.util.HashMap"/>
-      </void>
-      <void property="legajo">
-       <string>ALU0003</string>
-      </void>
-      <void property="mail">
-       <string>fmwaiomfa@mail.com</string>
-      </void>
-      <void property="nombre">
-       <string>german</string>
-      </void>
-      <void property="telefono">
-       <string>nfinfoa</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="put">
    <string>SEBASTIANCANONACO</string>
    <object class="java.util.HashMap">
     <void method="put">
@@ -163,7 +132,7 @@
   </void>
  </object>
  <object class="java.util.HashMap"/>
- <int>3</int>
+ <int>2</int>
  <int>0</int>
  <int>4</int>
  <int>0</int>

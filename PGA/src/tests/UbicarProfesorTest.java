@@ -5,16 +5,17 @@ import exceptions.NoEstaEntidadException;
 import java.util.HashMap;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import pga.Alumno;
 import pga.Profesor;
 
 public class UbicarProfesorTest
 {
-    TestFixtureProfesor fixture1 = new TestFixtureProfesor();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
     public UbicarProfesorTest()
     {
@@ -23,13 +24,13 @@ public class UbicarProfesorTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUpAgregarYModif();
+        fixture.setUpAgregarYModif();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        fixture1.tearDown();
+        fixture.tearDown();
     }
 
     /**
@@ -40,9 +41,9 @@ public class UbicarProfesorTest
     {
         try
         {
-            HashMap<String, Profesor> hash = this.fixture1.manager.ubicarProfesor(
-                                                this.fixture1.profesor_b.getNombre(), this.fixture1.profesor_b.getApellido());
-            assertTrue("El profesor debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture1.profesor_b.getLegajo()));
+            HashMap<String, Profesor> hash = this.fixture.manager.ubicarProfesor(
+                                                this.fixture.profesor_b.getNombre(), this.fixture.profesor_b.getApellido());
+            assertTrue("El profesor debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture.profesor_b.getLegajo()));
             
         }
         catch (NoEstaEntidadException e)
@@ -60,7 +61,7 @@ public class UbicarProfesorTest
     {
         try
         {
-            this.fixture1.manager.ubicarProfesor(null, this.fixture1.profesor_b.getApellido());
+            this.fixture.manager.ubicarProfesor(null, this.fixture.profesor_b.getApellido());
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (NoEstaEntidadException e)
@@ -81,7 +82,7 @@ public class UbicarProfesorTest
     {
         try
         {
-            this.fixture1.manager.ubicarProfesor(this.fixture1.profesor_b.getNombre(), null);
+            this.fixture.manager.ubicarProfesor(this.fixture.profesor_b.getNombre(), null);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (NoEstaEntidadException e)
@@ -102,7 +103,7 @@ public class UbicarProfesorTest
     {
         try
         {
-            this.fixture1.manager.ubicarProfesor(this.fixture1.profesor_a.getApellido(), this.fixture1.profesor_a.getNombre());
+            this.fixture.manager.ubicarProfesor(this.fixture.profesor_a.getApellido(), this.fixture.profesor_a.getNombre());
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         } 
         catch (NoEstaEntidadException e)

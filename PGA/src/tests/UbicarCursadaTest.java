@@ -5,16 +5,17 @@ import exceptions.NoEstaEntidadException;
 import java.util.HashMap;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
 import pga.Cursada;
-import pga.Profesor;
 
 public class UbicarCursadaTest
 {
-    TestFixtureCursada fixture1 = new TestFixtureCursada();
+    private TestFixtureCursada fixture = new TestFixtureCursada();
 
     public UbicarCursadaTest()
     {
@@ -23,13 +24,13 @@ public class UbicarCursadaTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUpUbicar();
+        fixture.setUpUbicar();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        fixture1.tearDown();
+        fixture.tearDown();
     }
 
     /**
@@ -41,8 +42,8 @@ public class UbicarCursadaTest
         
         try
         {
-            HashMap<String, Cursada> hash = this.fixture1.manager.ubicarCursada("Cursada Mate A 2");
-            assertTrue("La cursada debería haber sido encontrada en el sistema.", hash.containsKey(this.fixture1.cursada_b.getId()));
+            HashMap<String, Cursada> hash = this.fixture.manager.ubicarCursada("Cursada Mate A 2");
+            assertTrue("La cursada debería haber sido encontrada en el sistema.", hash.containsKey(this.fixture.cursada_b.getId()));
         } catch (NoEstaEntidadException e)
         {
             fail("No tendria que haber salido por la excepcion NoEstaEntidadException");
@@ -59,7 +60,7 @@ public class UbicarCursadaTest
         
         try
         {
-            HashMap<String, Cursada> hash = this.fixture1.manager.ubicarCursada(null);
+            HashMap<String, Cursada> hash = this.fixture.manager.ubicarCursada(null);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } catch (NoEstaEntidadException e)
         {
@@ -80,7 +81,7 @@ public class UbicarCursadaTest
         
         try
         {
-            HashMap<String, Cursada> hash = this.fixture1.manager.ubicarCursada("Cursada Mate A 4");
+            HashMap<String, Cursada> hash = this.fixture.manager.ubicarCursada("Cursada Mate A 4");
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         } catch (NoEstaEntidadException e)
         {

@@ -346,7 +346,7 @@ public class Manager
      * ***************************************************************************************************************
      * ***************************************************************************************************************
      */
-
+    
     /**
      * Método que realiza un alta de un profesor en el sistema.<br>
      * 
@@ -568,7 +568,7 @@ public class Manager
     public void bajaProfesorDeCursada(Profesor profesor, Cursada cursada) throws NoEstaEntidadException // RF12, RF16
     {
         if(!cursada.getProfesores().remove(profesor.getLegajo(), profesor))
-            throw new NoEstaEntidadException(profesor, "Profesor no encontrado en la cursada");
+            throw new NoEstaEntidadException(profesor, "Profesor no encontrado en la cursada.");
     }
     
     /*

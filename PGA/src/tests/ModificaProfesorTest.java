@@ -1,11 +1,12 @@
 package tests;
 
 import exceptions.EmailInvalidoException;
-
 import exceptions.NoEstaEntidadException;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import pga.Profesor;
 
 public class ModificaProfesorTest
 {
-    TestFixtureProfesor fixture = new TestFixtureProfesor();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
     public ModificaProfesorTest()
     {
@@ -36,7 +37,7 @@ public class ModificaProfesorTest
      * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorExitoso()
+    public void testModificacionProfesorExitoso_1_1()
     {   
         try
         {
@@ -61,11 +62,37 @@ public class ModificaProfesorTest
      * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
      */
     @Test
+    public void testModificacionProfesorExitoso_1_2()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "M", "P", "D", "1", "A@J");
+            assertTrue("El profesor no se modifico correctamente",
+                        this.fixture.profesor_a.getNombre().equals("M") &&
+                        this.fixture.profesor_a.getApellido().equals("P") &&
+                        this.fixture.profesor_a.getDomicilio().equals("D") &&
+                        this.fixture.profesor_a.getTelefono().equals("1") &&
+                        this.fixture.profesor_a.getMail().equals("A@J"));
+            
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción por no encontrarse la entidad.");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
     public void testModificacionProfesorErroneo_2_2()
     {   
         try
         {
             this.fixture.manager.modificaProfesor(this.fixture.profesor_a, null, "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
+            fail("Se modifico un profesor con un nombre nulo");
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
@@ -75,6 +102,94 @@ public class ModificaProfesorTest
         } catch (NullPointerException e)
         {
             fail("Se intento modificar un profesor con un nombre nulo");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
+    public void testModificacionProfesorErroneo_2_3()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Esteban", null, "Alvear 123", "4756545", "mimail@gmail.com");
+            fail("Se modifico un profesor con un apellido nulo");
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No deberia lanzarse la excepcion de que no se encuentra la entidad");
+        } catch (NullPointerException e)
+        {
+            fail("Se intento modificar un profesor con un apellido nulo");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
+    public void testModificacionProfesorErroneo_2_4()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Esteban", "Quito", null, "4756545", "mimail@gmail.com");
+            fail("Se modifico un profesor con un domicilio nulo");
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No deberia lanzarse la excepcion de que no se encuentra la entidad");
+        } catch (NullPointerException e)
+        {
+            fail("Se intento modificar un profesor con un domicilio nulo");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
+    public void testModificacionProfesorErroneo_2_5()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Esteban", "Quito", "Alvear 123", null, "mimail@gmail.com");
+            fail("Se modifico un profesor con un apellido nulo");
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No deberia lanzarse la excepcion de que no se encuentra la entidad");
+        } catch (NullPointerException e)
+        {
+            fail("Se intento modificar un profesor con un telefono nulo");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
+    public void testModificacionProfesorErroneo_2_6()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Esteban", "Quito", "Alvear 123", "4756545", null);
+            fail("Se modifico un profesor con un mail nulo");
+        } catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No deberia lanzarse la excepcion de que no se encuentra la entidad");
+        } catch (NullPointerException e)
+        {
+            fail("Se intento modificar un profesor con un mail nulo");
         }
     }
     
@@ -106,7 +221,7 @@ public class ModificaProfesorTest
         try
         {
             this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Adolfo", "", "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Se intentó modificar un profesor poniéndole un apellido vacío.");
+            fail("Se modifico un profesor poniéndole un apellido vacío.");
         } 
         catch (EmailInvalidoException e)
         {
@@ -127,7 +242,7 @@ public class ModificaProfesorTest
         try
         {
             this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Leonel", "Quito", "", "4756545", "mimail@gmail.com");
-            fail("Se intentó modificar un profesor poniéndole un domicilio vacío.");
+            fail("Se modifico un profesor poniéndole un domicilio vacío.");
         } 
         catch (EmailInvalidoException e)
         {
@@ -148,7 +263,7 @@ public class ModificaProfesorTest
         try
         {
             this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Aquiles", "Bailo", "Alvear 123", "", "mimail@gmail.com");
-            fail("Se intentó modificar un profesor poniéndole un teléfono vacío.");
+            fail("Se modifico un profesor poniéndole un teléfono vacío.");
         } 
         catch (EmailInvalidoException e)
         {

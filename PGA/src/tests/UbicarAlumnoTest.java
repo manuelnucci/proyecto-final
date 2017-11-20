@@ -41,7 +41,9 @@ public class UbicarAlumnoTest
     {
         try
         {
-            HashMap<String, Alumno> hash = this.fixture.manager.ubicarAlumno(this.fixture.alumno_b.getNombre(), this.fixture.alumno_b.getApellido());
+            HashMap<String, Alumno> hash = this.fixture
+                                               .manager
+                                               .ubicarAlumno(this.fixture.alumno_b.getNombre(), this.fixture.alumno_b.getApellido());
             assertTrue("El alumno debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture.alumno_b.getLegajo()));
             
         }
@@ -55,7 +57,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo2_1()
+    public void testUbicarAlumnoErroneo_2_1()
     {
         try
         {
@@ -76,7 +78,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo2_2()
+    public void testUbicarAlumnoErroneo_2_2()
     {
         try
         {
@@ -97,7 +99,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo4()
+    public void testUbicarAlumnoErroneo_4()
     {
         try
         {
