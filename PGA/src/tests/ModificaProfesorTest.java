@@ -37,22 +37,24 @@ public class ModificaProfesorTest
      * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorExitoso()
+    public void testModificaProfesorExitoso_1_1()
     {   
         try
         {
             this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Oscar", "Acol", "Entre Rios 2674", "2235235475", "oacol@live.com");
-            assertTrue("El profesor no se modifico correctamente",
+            assertTrue("El profesor no se modificó correctamente",
                         this.fixture.profesor_a.getNombre().equals("Oscar") &&
                         this.fixture.profesor_a.getApellido().equals("Acol") &&
                         this.fixture.profesor_a.getDomicilio().equals("Entre Rios 2674") &&
                         this.fixture.profesor_a.getTelefono().equals("2235235475") &&
                         this.fixture.profesor_a.getMail().equals("oacol@live.com"));
             
-        } catch (EmailInvalidoException e)
+        } 
+        catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
-        } catch (NoEstaEntidadException e)
+        } 
+        catch (NoEstaEntidadException e)
         {
             fail("No debería lanzarse la excepción por no encontrarse la entidad.");
         }
@@ -62,7 +64,33 @@ public class ModificaProfesorTest
      * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorErroneo_2_2()
+    public void testModificaProfesorExitoso_1_2()
+    {   
+        try
+        {
+            this.fixture.manager.modificaProfesor(this.fixture.profesor_a, "Oscar", "Acol", "Entre Rios 2674", "2235235475", "oacol@live.com");
+            assertTrue("El profesor no se modificó correctamente",
+                        this.fixture.profesor_a.getNombre().equals("M") &&
+                        this.fixture.profesor_a.getApellido().equals("P") &&
+                        this.fixture.profesor_a.getDomicilio().equals("D") &&
+                        this.fixture.profesor_a.getTelefono().equals("1") &&
+                        this.fixture.profesor_a.getMail().equals("a@j"));
+        } 
+        catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        } 
+        catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción por no encontrarse la entidad.");
+        }
+    }
+    
+    /**
+     * @see Manager#modificaProfesor(Profesor,String,String,String,String,String)
+     */
+    @Test
+    public void testModificaProfesorErroneo_2_2()
     {   
         try
         {
@@ -265,5 +293,4 @@ public class ModificaProfesorTest
             assertEquals("Las excepciones no coinciden", "Profesor no encontrado en el sistema.",e.getMessage());
         }
     }
-    
 }

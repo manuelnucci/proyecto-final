@@ -2,10 +2,10 @@ package tests;
 
 import exceptions.EmailInvalidoException;
 
-import exceptions.NoEstaEntidadException;
-
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,13 +33,13 @@ public class AltaProfesorTest
      * @see pga.Manager#altaProfesor(String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorExitoso_1_1()
+    public void testAltaProfesorExitoso_1_1()
     {   
         try
         {
-            int size = this.fixture.manager.getAlumnos().size();
+            int size = this.fixture.manager.getProfesores().size();
             this.fixture.manager.altaProfesor("Oscar", "Acol", "Entre Rios 2674", "2235235475", "oacol@live.com");
-            assertTrue("El profesor se agrego correctamente al sistema", this.fixture.manager.getAlumnos().size() == size + 1);
+            assertTrue("El profesor no se agregó correctamente al sistema", this.fixture.manager.getProfesores().size() == size + 1);
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
@@ -50,13 +50,13 @@ public class AltaProfesorTest
      * @see pga.Manager#altaProfesor(String,String,String,String,String)
      */
     @Test
-    public void testModificacionProfesorExitoso_1_2()
+    public void testAltaProfesorExitoso_1_2()
     {   
         try
         {
-            int size = this.fixture.manager.getAlumnos().size();
+            int size = this.fixture.manager.getProfesores().size();
             this.fixture.manager.altaProfesor("M", "P", "D", "1", "a@j");
-            assertTrue("El profesor se agrego correctamente al sistema", this.fixture.manager.getAlumnos().size() == size + 1);
+            assertTrue("El profesor no se agregó correctamente al sistema", this.fixture.manager.getProfesores().size() == size + 1);
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
@@ -72,14 +72,10 @@ public class AltaProfesorTest
         try
         {
             this.fixture.manager.altaProfesor(null, "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendria que haberse lanzado la excepcion NullPointerException");
+            fail("Se intento agregar un profesor con un nombre nulo.");
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
-        }
-        catch (NullPointerException e)
-        {
-            fail("Se intento agregar un profesor con un nombre nulo.");
         }
     }
     
@@ -92,14 +88,10 @@ public class AltaProfesorTest
         try
         {
             this.fixture.manager.altaProfesor("Adolfo", null, "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendria que haberse lanzado la excepcion NullPointerException");
+            fail("Se intento agregar un profesor con un apellido nulo.");
         } catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
-        }
-        catch (NullPointerException e)
-        {
-            fail("Se intento agregar un profesor con un apellido nulo.");
         }
     }
     
@@ -282,5 +274,4 @@ public class AltaProfesorTest
             assertEquals("Las excepciones no coinciden", "El mail ingresado no cumple con el formato previsto.", e.getMessage());
         }
     }
-    
 }

@@ -78,22 +78,16 @@ public class BajaCursadaTest
     @Test
     public void testBajaCursadaErronea_4()
     {
-        
         try
         {
             this.fixture.manager.bajaCursada(this.fixture.cursada_b);
             fail("Tendria que haber salido por la excepcion NoEstaEntidadException");
-        } catch (NoEstaEntidadException e)
+        } 
+        catch (NoEstaEntidadException e)
         {
             assertEquals("Las excepciones no coinciden", "Cursada no encontrada en el sistema.", e.getMessage());
         } 
-
     }
-    
-    
-    
-    
-    
     
     /**
      * @see pga.Manager#bajaCursada(pga.Cursada)
