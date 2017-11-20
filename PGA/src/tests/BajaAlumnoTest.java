@@ -2,12 +2,17 @@ package tests;
 
 import exceptions.NoEstaEntidadException;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
+
+import pga.Alumno;
 
 public class BajaAlumnoTest
 {
@@ -40,6 +45,8 @@ public class BajaAlumnoTest
             this.fixture
                 .manager
                 .bajaAlumno(this.fixture.alumno_a);
+            assertTrue("La colección de alumnos aún contiene al alumno eliminado.", 
+                       !this.tieneAlumno(this.fixture.alumno_a, this.fixture.manager.getAlumnos()));
         } 
         catch (NoEstaEntidadException e)
         {
@@ -58,6 +65,7 @@ public class BajaAlumnoTest
             this.fixture
                 .manager
                 .bajaAlumno(null);
+            fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (NoEstaEntidadException e)
         {
@@ -106,7 +114,21 @@ public class BajaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
+    }
+    
+    private boolean tieneAlumno(Alumno alumno, HashMap<String, HashMap<String, Alumno>> hash)
+    {
+        Iterator<HashMap<String, Alumno>> itH;
+        boolean sigue = true;
+        
+        itH = hash.values().iterator();
+        while (itH.hasNext() && sigue)
+        {
+            if (itH.next().containsKey(alumno.getLegajo()))
+                sigue = false;
+        }
+        return !sigue;
     }
 }

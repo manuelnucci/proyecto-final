@@ -41,8 +41,8 @@ public class ModificaAsignaturaTest
         {
             this.fixture
                 .manager
-                .modificaAsignatura(this.fixture.asignatura, "Mate C");
-            assertTrue("La asignatura no se modificó correctamente en el sistema", this.fixture.asignatura.getNombre().equals("Mate C"));
+                .modificaAsignatura(this.fixture.asignatura_a, "Mate C");
+            assertTrue("La asignatura no se modificó correctamente en el sistema", this.fixture.asignatura_a.getNombre().equals("Mate C"));
         } 
         catch (NoEstaEntidadException e)
         {
@@ -60,8 +60,8 @@ public class ModificaAsignaturaTest
         {
             this.fixture
                 .manager
-                .modificaAsignatura(this.fixture.asignatura, "A");
-            assertTrue("La asignatura no se modificó correctamente en el sistema", this.fixture.asignatura.getNombre().equals("A"));
+                .modificaAsignatura(this.fixture.asignatura_a, "A");
+            assertTrue("La asignatura no se modificó correctamente en el sistema", this.fixture.asignatura_a.getNombre().equals("A"));
         } 
         catch (NoEstaEntidadException e)
         {
@@ -79,7 +79,7 @@ public class ModificaAsignaturaTest
         {
             this.fixture
                 .manager
-                .modificaAsignatura(this.fixture.asignatura, null);
+                .modificaAsignatura(this.fixture.asignatura_a, null);
             fail("Tendría que haberse lanzado la excepción NullPointerException."); 
         } 
         catch (NoEstaEntidadException e)
@@ -102,7 +102,7 @@ public class ModificaAsignaturaTest
         {
             this.fixture
                 .manager
-                .modificaAsignatura(this.fixture.asignatura, "");
+                .modificaAsignatura(this.fixture.asignatura_a, "");
             fail("Se intentó modificar una asignatura poniéndole un nombre vacío.");
         } 
         catch (NoEstaEntidadException e)
