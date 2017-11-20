@@ -6,7 +6,6 @@ import pga.Alumno;
 import pga.Asignatura;
 import pga.Cursada;
 import pga.Manager;
-import pga.Profesor;
 
 public class TestFixtureAlumno
 {
@@ -15,10 +14,6 @@ public class TestFixtureAlumno
     protected Alumno alumno_a;
     protected Alumno alumno_b;
     protected Alumno alumno_c;
-    
-    protected Profesor profesor1;
-    protected Profesor profesor2;
-    protected Profesor profesor3;
     
     protected Asignatura asignatura;
     protected Cursada cursada;

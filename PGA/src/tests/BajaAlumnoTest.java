@@ -109,5 +109,4 @@ public class BajaAlumnoTest
             fail("No debería lanzarse la excepción porque en el TextFicture se lo agregó.");
         }
     }
-    
 }
