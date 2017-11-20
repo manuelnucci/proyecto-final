@@ -13,7 +13,7 @@ import pga.Cursada;
 
 public class ModificaCursadaTest
 {
-    TestFixtureCursada fixture1 = new TestFixtureCursada();
+    private TestFixtureCursada fixture = new TestFixtureCursada();
 
     public ModificaCursadaTest()
     {
@@ -22,13 +22,13 @@ public class ModificaCursadaTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUpAltayModif();
+        fixture.setUpAltayModif();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        fixture1.tearDown();
+        fixture.tearDown();
     }
 
     /**
@@ -40,13 +40,13 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes", "15:00", "17:00");
-            assertTrue("La cursada no se modifico correctamente", this.fixture1.cursada_b.getNombre().equals("Cursada Mate A 1") &&
-                                                    this.fixture1.cursada_b.getAsignatura().equals(this.fixture1.asignatura_a) &&
-                                                    this.fixture1.cursada_b.getDia().equals("Lunes") &&
-                                                    this.fixture1.cursada_b.getPeriodo().equals("01-2017") &&
-                                                    this.fixture1.cursada_b.getHoraInicio().equals("15:00") &&
-                                                    this.fixture1.cursada_b.getHoraFin().equals("17:00"));
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes", "15:00", "17:00");
+            assertTrue("La cursada no se modifico correctamente", this.fixture.cursada_b.getNombre().equals("Cursada Mate A 1") &&
+                                                    this.fixture.cursada_b.getAsignatura().equals(this.fixture.asignatura_a) &&
+                                                    this.fixture.cursada_b.getDia().equals("Lunes") &&
+                                                    this.fixture.cursada_b.getPeriodo().equals("01-2017") &&
+                                                    this.fixture.cursada_b.getHoraInicio().equals("15:00") &&
+                                                    this.fixture.cursada_b.getHoraFin().equals("17:00"));
                                                     
         } catch (HoraInvalidaException e)
         {
@@ -69,13 +69,13 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "C", this.fixture1.asignatura_a, "01-2000", "Lunes", "00:00", "00:01");
-            assertTrue("La cursada no se modifico correctamente", this.fixture1.cursada_b.getNombre().equals("C") &&
-                                                    this.fixture1.cursada_b.getAsignatura().equals(this.fixture1.asignatura_a) &&
-                                                    this.fixture1.cursada_b.getDia().equals("Lunes") &&
-                                                    this.fixture1.cursada_b.getPeriodo().equals("01-2000") &&
-                                                    this.fixture1.cursada_b.getHoraInicio().equals("00:00") &&
-                                                    this.fixture1.cursada_b.getHoraFin().equals("00:01"));
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "C", this.fixture.asignatura_a, "01-2000", "Lunes", "00:00", "00:01");
+            assertTrue("La cursada no se modifico correctamente", this.fixture.cursada_b.getNombre().equals("C") &&
+                                                    this.fixture.cursada_b.getAsignatura().equals(this.fixture.asignatura_a) &&
+                                                    this.fixture.cursada_b.getDia().equals("Lunes") &&
+                                                    this.fixture.cursada_b.getPeriodo().equals("01-2000") &&
+                                                    this.fixture.cursada_b.getHoraInicio().equals("00:00") &&
+                                                    this.fixture.cursada_b.getHoraFin().equals("00:01"));
         } catch (HoraInvalidaException e)
         {
             fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -97,14 +97,14 @@ public class ModificaCursadaTest
         
         try
         {
-            int size = this.fixture1.manager.getCursadas().size();
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "C", this.fixture1.asignatura_a, "02-2100", "Domingo", "23:58", "23:59");
-            assertTrue("La cursada no se modifico correctamente", this.fixture1.cursada_b.getNombre().equals("C") &&
-                                                    this.fixture1.cursada_b.getAsignatura().equals(this.fixture1.asignatura_a) &&
-                                                    this.fixture1.cursada_b.getDia().equals("Domingo") &&
-                                                    this.fixture1.cursada_b.getPeriodo().equals("02-2100") &&
-                                                    this.fixture1.cursada_b.getHoraInicio().equals("23:58") &&
-                                                    this.fixture1.cursada_b.getHoraFin().equals("23:59"));
+            int size = this.fixture.manager.getCursadas().size();
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "C", this.fixture.asignatura_a, "02-2100", "Domingo", "23:58", "23:59");
+            assertTrue("La cursada no se modifico correctamente", this.fixture.cursada_b.getNombre().equals("C") &&
+                                                    this.fixture.cursada_b.getAsignatura().equals(this.fixture.asignatura_a) &&
+                                                    this.fixture.cursada_b.getDia().equals("Domingo") &&
+                                                    this.fixture.cursada_b.getPeriodo().equals("02-2100") &&
+                                                    this.fixture.cursada_b.getHoraInicio().equals("23:58") &&
+                                                    this.fixture.cursada_b.getHoraFin().equals("23:59"));
             } catch (HoraInvalidaException e)
             {
                 fail("No tendria que haber salido por la excepcion HoraInvalidaException");
@@ -127,7 +127,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, null, this.fixture1.asignatura_a, "01-2017", "Lunes", "12:00", "14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, null, this.fixture.asignatura_a, "01-2017", "Lunes", "12:00", "14:00");
             fail("La cursada se modifico con un nombre nulo");
         } catch (HoraInvalidaException e)
         {
@@ -154,7 +154,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", null, "01-2017", "Lunes", "12:00", "14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", null, "01-2017", "Lunes", "12:00", "14:00");
             fail("La cursada se modifico con una asignatura nula");
         } catch (HoraInvalidaException e)
         {
@@ -178,7 +178,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, null, "Lunes", "12:00", "14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, null, "Lunes", "12:00", "14:00");
             fail("La cursada se anadio al sistema");
         } catch (HoraInvalidaException e)
         {
@@ -202,7 +202,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", null, "12:00", "14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", null, "12:00", "14:00");
             fail("La cursada se anadio al sistema");
         } catch (HoraInvalidaException e)
         {
@@ -226,7 +226,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes", null, "14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes", null, "14:00");
             fail("La cursada se anadio al sistema");
         } catch (HoraInvalidaException e)
         {
@@ -250,7 +250,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00", null);
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00", null);
             fail("La cursada se anadio al sistema");
         } catch (HoraInvalidaException e)
         {
@@ -274,7 +274,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un nombre vacio");
         } catch (HoraInvalidaException e)
         {
@@ -295,7 +295,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo vacio");
         } catch (HoraInvalidaException e)
         {
@@ -316,7 +316,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "","12:00","14:00");
             fail("La cursada se anadio al sistema con un dia vacio");
         } catch (HoraInvalidaException e)
         {
@@ -337,7 +337,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio vacio");
         } catch (HoraInvalidaException e)
         {
@@ -358,7 +358,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","");
             fail("La cursada se anadio al sistema con una hora de fin vacio");
         } catch (HoraInvalidaException e)
         {
@@ -379,7 +379,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01P-A2017", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01P-A2017", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -400,7 +400,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01:2017", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01:2017", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -421,7 +421,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "03-2017", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "03-2017", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -442,7 +442,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-20L7", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-20L7", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -463,7 +463,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-1950", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-1950", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -484,7 +484,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-1999", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-1999", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -505,7 +505,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2150", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2150", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -526,7 +526,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2101", "Lunes","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2101", "Lunes","12:00","14:00");
             fail("La cursada se anadio al sistema con un periodo invalido");
         } catch (HoraInvalidaException e)
         {
@@ -547,7 +547,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2101", "Osvaldo","12:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2101", "Osvaldo","12:00","14:00");
             fail("La cursada se anadio al sistema con un dia invalido");
         } catch (HoraInvalidaException e)
         {
@@ -568,7 +568,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","122:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","122:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -589,7 +589,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","A1:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","A1:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -610,7 +610,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:D2","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:D2","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -631,7 +631,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12-00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12-00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -652,7 +652,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","-5:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","-5:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -673,7 +673,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","-1:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","-1:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -694,7 +694,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","40:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","40:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -715,7 +715,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","24:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","24:00","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -736,7 +736,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:-5","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:-5","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -757,7 +757,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:-1","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:-1","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -778,7 +778,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:67","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:67","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -799,7 +799,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:60","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:60","14:00");
             fail("La cursada se anadio al sistema con una hora de inicio invalido");
         } catch (HoraInvalidaException e)
         {
@@ -820,7 +820,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","143:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","143:00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -842,7 +842,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","A2:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","A2:00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -864,7 +864,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:F3");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:F3");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -886,7 +886,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14-00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14-00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -907,7 +907,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","-5:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","-5:00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -928,7 +928,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","-1:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","-1:00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -949,7 +949,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:-5");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:-5");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -970,7 +970,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:-1");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:-1");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -991,7 +991,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:67");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:67");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -1012,7 +1012,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","12:00","14:60");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","12:00","14:60");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -1033,7 +1033,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada(this.fixture1.cursada_b, "Cursada Mate A 1", this.fixture1.asignatura_a, "01-2017", "Lunes","16:00","14:00");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "Cursada Mate A 1", this.fixture.asignatura_a, "01-2017", "Lunes","16:00","14:00");
             fail("La cursada se anadio al sistema con una hora de fin invalido");
         } catch (HoraInvalidaException e)
         {
@@ -1054,7 +1054,7 @@ public class ModificaCursadaTest
         
         try
         {
-            this.fixture1.manager.modificaCursada("Cursada Estadistica", this.fixture1.asignatura_d, "01-2017", "Lunes","16:00","14:00");
+            this.fixture.manager.modificaCursada("Cursada Estadistica", this.fixture.asignatura_d, "01-2017", "Lunes","16:00","14:00");
             fail("La cursada se anadio al sistema con una asignatura que no pertenece al sistema");
         } catch (HoraInvalidaException e)
         {
@@ -1063,6 +1063,5 @@ public class ModificaCursadaTest
         {
             fail("No tendria que haber salido por la excepcion PeriodoInvalidoException");
         }
-        
     }
 }

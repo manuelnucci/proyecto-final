@@ -1,7 +1,6 @@
 package tests;
 
 import exceptions.HoraInvalidaException;
-
 import exceptions.NoEstaEntidadException;
 import exceptions.PeriodoInvalidoException;
 
@@ -9,7 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import pga.Cursada;
 
 public class BajaCursadaTest
 {
-    TestFixtureCursada fixture1 = new TestFixtureCursada();
+    private TestFixtureCursada fixture = new TestFixtureCursada();
 
     public BajaCursadaTest()
     {
@@ -26,13 +27,13 @@ public class BajaCursadaTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUpBaja();
+        fixture.setUpBaja();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        fixture1.tearDown();
+        fixture.tearDown();
     }
     
     /**
@@ -43,8 +44,8 @@ public class BajaCursadaTest
     {
         try
         {
-            this.fixture1.manager.bajaCursada(this.fixture1.cursada_a);
-            assertFalse("La cursada no fue eliminada", this.buscaCursada(this.fixture1.cursada_a));
+            this.fixture.manager.bajaCursada(this.fixture.cursada_a);
+            assertFalse("La cursada no fue eliminada", this.buscaCursada(this.fixture.cursada_a));
         } catch (NoEstaEntidadException e)
         {
             fail("No tendria que haber salido la excepcion de NoEstaEntidadException");
@@ -60,7 +61,7 @@ public class BajaCursadaTest
     {
         try
         {
-            this.fixture1.manager.bajaCursada(null);
+            this.fixture.manager.bajaCursada(null);
         } catch (NoEstaEntidadException e)
         {
             fail("No tendria que haber salido la excepcion de NoEstaEntidadException");
@@ -80,7 +81,7 @@ public class BajaCursadaTest
         
         try
         {
-            this.fixture1.manager.bajaCursada(this.fixture1.cursada_b);
+            this.fixture.manager.bajaCursada(this.fixture.cursada_b);
             fail("Tendria que haber salido por la excepcion NoEstaEntidadException");
         } catch (NoEstaEntidadException e)
         {
@@ -102,12 +103,12 @@ public class BajaCursadaTest
     {
         try
         {
-            this.fixture1.manager.altaCursada(this.fixture1.cursada_a.getNombre(),
-                                              this.fixture1.cursada_a.getAsignatura(),
-                                              this.fixture1.cursada_a.getPeriodo(),
-                                              this.fixture1.cursada_a.getDia(), 
-                                              this.fixture1.cursada_a.getHoraInicio(), 
-                                              this.fixture1.cursada_a.getHoraFin());
+            this.fixture.manager.altaCursada(this.fixture.cursada_a.getNombre(),
+                                              this.fixture.cursada_a.getAsignatura(),
+                                              this.fixture.cursada_a.getPeriodo(),
+                                              this.fixture.cursada_a.getDia(), 
+                                              this.fixture.cursada_a.getHoraInicio(), 
+                                              this.fixture.cursada_a.getHoraFin());
         } 
         catch(HoraInvalidaException e)
         {
@@ -127,12 +128,12 @@ public class BajaCursadaTest
     {
         try
         {
-            this.fixture1.manager.altaCursada(this.fixture1.cursada_a.getNombre(),
-                                              this.fixture1.cursada_a.getAsignatura(),
-                                              this.fixture1.cursada_a.getPeriodo(),
-                                              this.fixture1.cursada_a.getDia(), 
-                                              this.fixture1.cursada_a.getHoraInicio(), 
-                                              this.fixture1.cursada_a.getHoraFin());
+            this.fixture.manager.altaCursada(this.fixture.cursada_a.getNombre(),
+                                              this.fixture.cursada_a.getAsignatura(),
+                                              this.fixture.cursada_a.getPeriodo(),
+                                              this.fixture.cursada_a.getDia(), 
+                                              this.fixture.cursada_a.getHoraInicio(), 
+                                              this.fixture.cursada_a.getHoraFin());
         } 
         catch(HoraInvalidaException e)
         {
@@ -146,7 +147,7 @@ public class BajaCursadaTest
 
     private boolean buscaCursada(Cursada cursada)
     {
-        Iterator<HashMap<String, Cursada>> it = this.fixture1.manager.getCursadas().values().iterator();
+        Iterator<HashMap<String, Cursada>> it = this.fixture.manager.getCursadas().values().iterator();
         boolean sigue = false;
         
         while(it.hasNext() && !sigue)

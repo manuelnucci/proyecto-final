@@ -1,11 +1,12 @@
 package tests;
 
 import exceptions.EmailInvalidoException;
-
 import exceptions.NoEstaEntidadException;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import pga.Profesor;
 
 public class ModificaProfesorTest
 {
-    TestFixtureProfesor fixture = new TestFixtureProfesor();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
     public ModificaProfesorTest()
     {

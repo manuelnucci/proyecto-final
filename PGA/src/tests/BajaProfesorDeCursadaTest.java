@@ -9,11 +9,11 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BajaAlumnoDeCursadaTest
+public class BajaProfesorDeCursadaTest
 {
-    private TestFixtureAlumno fixture = new TestFixtureAlumno();
+    TestFixtureProfesor fixture = new TestFixtureProfesor();
 
-    public BajaAlumnoDeCursadaTest()
+    public BajaProfesorDeCursadaTest()
     {
     }
 
@@ -30,36 +30,36 @@ public class BajaAlumnoDeCursadaTest
     }
 
     /**
-     * @see pga.Manager#bajaAlumnoDeCursada(pga.Alumno,pga.Cursada)
+     * @see pga.Manager#bajaProfesorDeCursada(pga.Profesor,pga.Cursada)
      */
     @Test
-    public void testBajaAlumnoDeCursadaExitoso()
+    public void testBajaProfesorDeCursadaExitoso()
     {
         try
         {
             this.fixture
                 .manager
-                .bajaAlumnoDeCursada(this.fixture.alumno_a, this.fixture.cursada_a);
-            assertTrue("No se eliminó correctamente al alumno de la cursada.", 
-                       !this.fixture.cursada_a.getAlumnos().containsKey(this.fixture.alumno_a.getLegajo()));
+                .bajaProfesorDeCursada(this.fixture.profesor_a, this.fixture.cursada_a);
+            assertTrue("No se eliminó correctamente al profesor de la cursada.", 
+                       !this.fixture.cursada_a.getProfesores().containsKey(this.fixture.profesor_a.getLegajo()));
         }
         catch (NoEstaEntidadException e)
         {
-            fail("No tendría que haberse lanzado la excepción NoEstaEntidadException ya que en el TestFixtureAlumno se agregó al alumno.");
+            fail("No tendría que haberse lanzado la excepción NoEstaEntidadException ya que en el TestFixtureProfesor se agregó al profesor.");
         }
     }
     
     /**
-     * @see pga.Manager#bajaAlumnoDeCursada(pga.Alumno,pga.Cursada)
+     * @see pga.Manager#bajaProfesorDeCursada(pga.Profesor,pga.Cursada)
      */
     @Test
-    public void testBajaAlumnoDeCursadaErroneo_2_1()
+    public void testBajaProfesorDeCursadaErroneo_2_1()
     {
         try
         {
             this.fixture
                 .manager
-                .bajaAlumnoDeCursada(this.fixture.alumno_a, null);
+                .bajaProfesorDeCursada(this.fixture.profesor_a, null);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         }
         catch (NoEstaEntidadException e)
@@ -68,21 +68,21 @@ public class BajaAlumnoDeCursadaTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó dar de baja un alumno de una cursada nula.");
+            fail("Se intentó dar de baja un profesor de una cursada nula.");
         }
     }
     
     /**
-     * @see pga.Manager#bajaAlumnoDeCursada(pga.Alumno,pga.Cursada)
+     * @see pga.Manager#bajaProfesorDeCursada(pga.Profesor,pga.Cursada)
      */
     @Test
-    public void testBajaAlumnoDeCursadaErroneo_2_2()
+    public void testBajaProfesorDeCursadaErroneo_2_2()
     {
         try
         {
             this.fixture
                 .manager
-                .bajaAlumnoDeCursada(null, this.fixture.cursada_a);
+                .bajaProfesorDeCursada(null, this.fixture.cursada_a);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         }
         catch (NoEstaEntidadException e)
@@ -91,27 +91,27 @@ public class BajaAlumnoDeCursadaTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó dar de baja de una cursada un alumno nulo.");
+            fail("Se intentó dar de baja de una cursada un profesor nulo.");
         }
     }
     
     /**
-     * @see pga.Manager#bajaAlumnoDeCursada(pga.Alumno,pga.Cursada)
+     * @see pga.Manager#bajaProfesorDeCursada(pga.Profesor,pga.Cursada)
      */
     @Test
-    public void testBajaAlumnoDeCursadaErroneo_4()
+    public void testBajaProfesorDeCursadaErroneo_4()
     {
         try
         {
             this.fixture
                 .manager
-                .bajaAlumnoDeCursada(this.fixture.alumno_b, this.fixture.cursada_a);
+                .bajaProfesorDeCursada(this.fixture.profesor_b, this.fixture.cursada_a);
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         }
         catch (NoEstaEntidadException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", 
-                         e.getMessage(), "Alumno no encontrado en la cursada.");
+                         e.getMessage(), "Profesor no encontrado en la cursada.");
         }
     }
 }

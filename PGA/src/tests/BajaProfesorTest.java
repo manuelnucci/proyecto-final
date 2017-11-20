@@ -3,13 +3,14 @@ package tests;
 import exceptions.NoEstaEntidadException;
 
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BajaProfesorTest
 {
-    TestFixtureProfesor fixture1 = new TestFixtureProfesor();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
     public BajaProfesorTest()
     {
@@ -18,13 +19,13 @@ public class BajaProfesorTest
     @Before
     public void setUp() throws Exception
     {
-        fixture1.setUpBaja();
+        fixture.setUpBaja();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        fixture1.tearDown();
+        fixture.tearDown();
     }
 
     /**
@@ -35,7 +36,7 @@ public class BajaProfesorTest
     {
         try
         {
-            this.fixture1.manager.bajaProfesor(this.fixture1.profesor_a);
+            this.fixture.manager.bajaProfesor(this.fixture.profesor_a);
         } catch (NoEstaEntidadException e)
         {
             fail("No tendria que lanzar la excepcion de que no esta la entidad");
@@ -51,7 +52,7 @@ public class BajaProfesorTest
         
         try
         {
-            this.fixture1.manager.bajaProfesor(null);
+            this.fixture.manager.bajaProfesor(null);
             fail("Tendria que lanzar la excepcion NullPointerException");
         } catch (NoEstaEntidadException e)
         {
@@ -72,7 +73,7 @@ public class BajaProfesorTest
         
         try
         {
-            this.fixture1.manager.bajaProfesor(null);
+            this.fixture.manager.bajaProfesor(null);
             fail("Tendria que lanzar la excepcion NullPointerException");
         } catch (NoEstaEntidadException e)
         {
@@ -93,8 +94,8 @@ public class BajaProfesorTest
         
         try
         {
-            this.fixture1.manager.bajaProfesor(this.fixture1.profesor_c);
-            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture1.cursada.getProfesores().containsKey(this.fixture1.profesor_c.getLegajo()));
+            this.fixture.manager.bajaProfesor(this.fixture.profesor_c);
+            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture.cursada.getProfesores().containsKey(this.fixture.profesor_c.getLegajo()));
         } 
         catch (NoEstaEntidadException e)
         {
