@@ -77,8 +77,6 @@ public class TestFixtureAlumno
     public void tearDown() throws Exception
     {
         this.manager.getAlumnos().clear();
-        this.manager.getAsignaturas().clear();
         this.manager.getCursadas().clear();
-        this.manager.getProfesores().clear();
     }
 }

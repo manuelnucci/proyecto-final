@@ -33,7 +33,7 @@ public class ModificaAlumnoTest
     }
 
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoExitoso_1_1()
@@ -54,12 +54,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoExitoso_1_2()
@@ -80,12 +80,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_2_2()
@@ -101,16 +101,16 @@ public class ModificaAlumnoTest
         }
         catch (NullPointerException e)
         {
-            fail("Se intentó agregar un alumno con un nombre nulo.");
+            fail("Se intentó modificar un alumno dándole un nombre nulo.");
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_2_3()
@@ -126,16 +126,16 @@ public class ModificaAlumnoTest
         }
         catch (NullPointerException e)
         {
-            fail("Se intentó agregar un alumno con un apellido nulo.");
+            fail("Se intentó modificar un alumno dándole un apellido nulo.");
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_2_4()
@@ -151,12 +151,12 @@ public class ModificaAlumnoTest
         }
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_2_5()
@@ -172,12 +172,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_2_6()
@@ -196,12 +196,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_4_2()
@@ -217,12 +217,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_4_3()
@@ -238,12 +238,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_4_4()
@@ -259,12 +259,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_4_5()
@@ -280,12 +280,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_4_6()
@@ -301,12 +301,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_8_1()
@@ -322,12 +322,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_8_2()
@@ -343,12 +343,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_8_3()
@@ -364,12 +364,12 @@ public class ModificaAlumnoTest
         } 
         catch (NoEstaEntidadException e)
         {
-            fail("No debería lanzarse la excepción porque en el TextFixtureAlumno se lo agregó.");
+            fail("No debería lanzarse la excepción porque en el TestFixtureAlumno se lo agregó.");
         }
     }
     
     /**
-     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     * @see pga.Manager#modificaAlumno(Alumno,String,String,String,String,String)
      */
     @Test
     public void testModificaAlumnoErroneo_14()

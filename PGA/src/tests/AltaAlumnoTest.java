@@ -9,11 +9,13 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AgregarAlumnoTest
+import pga.Alumno;
+
+public class AltaAlumnoTest
 {
     private TestFixtureAlumno fixture = new TestFixtureAlumno(); 
     
-    public AgregarAlumnoTest()
+    public AltaAlumnoTest()
     {
     }
 
@@ -296,5 +298,23 @@ public class AgregarAlumnoTest
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "El mail ingresado no cumple con el formato previsto.");
         }
-    }    
+    }
+    
+    /**
+     * @see pga.Manager#altaAlumno(String,String,String,String,String)
+     */
+    @Test
+    public void testAltaAlumnoErroneo_10()
+    {   
+        try
+        {
+            Alumno.setLegajoAlumno(Alumno.getLegajoAlumno() - 1);
+            this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "mail");
+            fail("Tendría que haberse lanzado la excepción EntidadRepetidaException que no está contemplada en el método.");
+        } 
+        catch (EmailInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+        }
+    }  
 }

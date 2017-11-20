@@ -51,7 +51,7 @@ public class BajaAlumnoTest
      * @see pga.Manager#bajaAlumno(pga.Alumno)
      */
     @Test
-    public void testBajaAlumnoErroneo2()
+    public void testBajaAlumnoErroneo_2()
     {
         try
         {
@@ -73,7 +73,7 @@ public class BajaAlumnoTest
      * @see pga.Manager#bajaAlumno(pga.Alumno)
      */
     @Test
-    public void testBajaAlumnoErroneo4()
+    public void testBajaAlumnoErroneo_4()
     {
         try
         {
@@ -92,7 +92,7 @@ public class BajaAlumnoTest
      * @see pga.Manager#bajaAlumno(pga.Alumno)
      */
     @Test
-    public void testBajaAlumnoErroneo6()
+    public void testBajaAlumnoErroneo_6()
     {
         try
         {

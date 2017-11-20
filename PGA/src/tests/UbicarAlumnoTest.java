@@ -57,7 +57,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo2_1()
+    public void testUbicarAlumnoErroneo_2_1()
     {
         try
         {
@@ -78,7 +78,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo2_2()
+    public void testUbicarAlumnoErroneo_2_2()
     {
         try
         {
@@ -99,7 +99,7 @@ public class UbicarAlumnoTest
      * @see pga.Manager#ubicarAlumno(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo4()
+    public void testUbicarAlumnoErroneo_4()
     {
         try
         {
