@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class BajaProfesorDeCursadaTest
 {
-    TestFixtureProfesor fixture = new TestFixtureProfesor();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
     public BajaProfesorDeCursadaTest()
     {

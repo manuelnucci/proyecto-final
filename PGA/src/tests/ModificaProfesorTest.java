@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import pga.Profesor;
 
-
 public class ModificaProfesorTest
 {
     private TestFixtureProfesor fixture = new TestFixtureProfesor();
