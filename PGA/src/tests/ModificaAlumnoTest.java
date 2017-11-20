@@ -185,6 +185,7 @@ public class ModificaAlumnoTest
         try
         {
             this.fixture.manager.modificaAlumno(this.fixture.alumno_a, "Elsa", "Pato", "Alvear 123", "4756545", null);
+            fail("Se debería haber lanzado la excepción NullPointerException.");
         } 
         catch (EmailInvalidoException e)
         {
