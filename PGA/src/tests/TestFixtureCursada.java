@@ -90,10 +90,12 @@ public class TestFixtureCursada
         HashMap<String, Cursada> hashCur_c = new HashMap<>();
         hashCur_c.put(this.cursada_c.getClave(), this.cursada_c);
         this.manager.getCursadas().put(this.cursada_c.getClave(), hashCur_c);
+        
     }
     
     public void tearDown()
     {
+        
         this.manager.getCursadas().clear();
         this.manager.getAsignaturas().clear();
         this.manager.getAlumnos().clear();
