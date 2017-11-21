@@ -24,7 +24,7 @@ public class UbicarProfesorTest
     @Before
     public void setUp() throws Exception
     {
-        fixture.setUpAgregarYModif();
+        fixture.setUpUbicar();
     }
 
     @After
