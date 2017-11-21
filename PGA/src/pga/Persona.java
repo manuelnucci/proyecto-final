@@ -4,7 +4,7 @@ package pga;
 /**
  * Clase que reúne las características comunes entre las clases Alumno y Profesor.
  */
-public class Persona implements Comparable, Entidad
+public abstract class Persona implements Comparable, Entidad
 {
     private String nombre; // Nombre de la persona
     private String apellido; // Apellido de la persona

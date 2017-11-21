@@ -129,7 +129,7 @@ public class Manager
     {
         Formato.verificaMail(mail);
         Alumno alumno = (Alumno) Factory.getPersona(Factory.ALUMNO, nombre, apellido, domicilio, telefono, mail);
-        String nombreCompleto = (alumno.getNombre() + alumno.getApellido()).toUpperCase(); // El hash está en mayúscula
+        String nombreCompleto = alumno.getClave().toUpperCase(); // El hash está en mayúscula
     
         if (this.alumnos.containsKey(nombreCompleto))
             this.alumnos.get(nombreCompleto).put(alumno.getLegajo(), alumno); // Agregamos al HashMap el alumno cuya clave

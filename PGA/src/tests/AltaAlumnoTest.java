@@ -41,7 +41,7 @@ public class AltaAlumnoTest
         {
             int size = this.fixture.manager.getAlumnos().size();
             this.fixture.manager.altaAlumno("Martin", "Perez", "Catamarca 2050", "2235235475", "mprez@live.com");
-            assertTrue("El alumno no se modificó correctamente en el sistema.", this.fixture.manager.getAlumnos().size() == size + 1);
+            assertTrue("El alumno no se agregó bien al sistema.", this.fixture.manager.getAlumnos().size() == size + 1);
         } 
         catch (EmailInvalidoException e)
         {
@@ -76,15 +76,11 @@ public class AltaAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno(null, "Quito", "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
+            fail("Se intentó agregar un alumno con un nombre nulo.");
         } 
         catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
-        }
-        catch (NullPointerException e)
-        {
-            fail("Se intentó agregar un alumno con un nombre nulo.");
         }
     }
     
@@ -97,15 +93,11 @@ public class AltaAlumnoTest
         try
         {
             this.fixture.manager.altaAlumno("Adolfo", null, "Alvear 123", "4756545", "mimail@gmail.com");
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
+            fail("Se intentó agregar un alumno con un apellido nulo.");
         } 
         catch (EmailInvalidoException e)
         {
             fail("No debería lanzarse la excepción por el formato del email incorrecto.");
-        }
-        catch (NullPointerException e)
-        {
-            fail("Se intentó agregar un alumno con un apellido nulo.");
         }
     }
     
@@ -309,7 +301,7 @@ public class AltaAlumnoTest
         try
         {
             Alumno.setLegajoAlumno(Alumno.getLegajoAlumno() - 1);
-            this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "mail");
+            this.fixture.manager.altaAlumno("Elsa", "Pato", "Alvear 123", "4756545", "mimail@gmail.com");
             fail("Tendría que haberse lanzado la excepción EntidadRepetidaException que no está contemplada en el método.");
         } 
         catch (EmailInvalidoException e)

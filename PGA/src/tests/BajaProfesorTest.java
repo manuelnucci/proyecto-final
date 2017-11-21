@@ -3,6 +3,7 @@ package tests;
 import exceptions.NoEstaEntidadException;
 
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -73,16 +74,13 @@ public class BajaProfesorTest
         
         try
         {
-            this.fixture.manager.bajaProfesor(null);
-            fail("Tendria que lanzar la excepcion NullPointerException");
-        } catch (NoEstaEntidadException e)
+            this.fixture.manager.bajaProfesor(this.fixture.profesor_b);
+            fail("El método debería haber lanzado la excepción NoEstaEntidadException.");
+        } 
+        catch (NoEstaEntidadException e)
         {
-            fail("No tendria que lanzar la excepcion de que no esta la entidad");
-        } catch(NullPointerException e)
-        {
-            fail("Se intento dar de baja a un profesor nulo");
-        }
-            
+            assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "Profesor no encontrado en el sistema.");
+        }      
     }
     
     /**
@@ -95,7 +93,7 @@ public class BajaProfesorTest
         try
         {
             this.fixture.manager.bajaProfesor(this.fixture.profesor_c);
-            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture.cursada.getProfesores().containsKey(this.fixture.profesor_c.getLegajo()));
+            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture.cursada_a.getProfesores().containsKey(this.fixture.profesor_c.getLegajo()));
         } 
         catch (NoEstaEntidadException e)
         {

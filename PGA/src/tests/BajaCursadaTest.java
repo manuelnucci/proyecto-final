@@ -1,8 +1,6 @@
 package tests;
 
-import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;
-import exceptions.PeriodoInvalidoException;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,12 +43,12 @@ public class BajaCursadaTest
         try
         {
             this.fixture.manager.bajaCursada(this.fixture.cursada_a);
-            assertFalse("La cursada no fue eliminada", this.buscaCursada(this.fixture.cursada_a));
-        } catch (NoEstaEntidadException e)
+            assertFalse("La cursada no fue eliminada.", this.buscaCursada(this.fixture.cursada_a));
+        } 
+        catch (NoEstaEntidadException e)
         {
-            fail("No tendria que haber salido la excepcion de NoEstaEntidadException");
+            fail("No tendría que haber salido la excepción NoEstaEntidadException.");
         }
-
     }
     
     /**
@@ -62,14 +60,16 @@ public class BajaCursadaTest
         try
         {
             this.fixture.manager.bajaCursada(null);
-        } catch (NoEstaEntidadException e)
+            fail("Tendría que haberse lanzado la excepción NullPointerException.");
+        } 
+        catch (NoEstaEntidadException e)
         {
-            fail("No tendria que haber salido la excepcion de NoEstaEntidadException");
-        } catch(NullPointerException e)
+            fail("No tendría que haber salido la excepción NoEstaEntidadException.");
+        } 
+        catch(NullPointerException e)
         {
-            fail("Se intento dar de baja una cursada nula");
+            fail("Se intentó dar de baja una cursada nula.");
         }
-
     }
     
     /**
@@ -78,71 +78,15 @@ public class BajaCursadaTest
     @Test
     public void testBajaCursadaErronea_4()
     {
-        
         try
         {
             this.fixture.manager.bajaCursada(this.fixture.cursada_b);
-            fail("Tendria que haber salido por la excepcion NoEstaEntidadException");
-        } catch (NoEstaEntidadException e)
+            fail("Tendría que haber salido por la excepción NoEstaEntidadException");
+        } 
+        catch (NoEstaEntidadException e)
         {
             assertEquals("Las excepciones no coinciden", "Cursada no encontrada en el sistema.", e.getMessage());
         } 
-
-    }
-    
-    
-    
-    
-    
-    
-    /**
-     * @see pga.Manager#bajaCursada(pga.Cursada)
-     */
-    @Test
-    public void testBajaCursadaExitosa_1_1()
-    {
-        try
-        {
-            this.fixture.manager.altaCursada(this.fixture.cursada_a.getNombre(),
-                                              this.fixture.cursada_a.getAsignatura(),
-                                              this.fixture.cursada_a.getPeriodo(),
-                                              this.fixture.cursada_a.getDia(), 
-                                              this.fixture.cursada_a.getHoraInicio(), 
-                                              this.fixture.cursada_a.getHoraFin());
-        } 
-        catch(HoraInvalidaException e)
-        {
-            fail("No tendria que haber salido la excepcion de HoraInvalidaException");
-        } catch(PeriodoInvalidoException e)
-        {
-            fail("No tendria que haber salido la excepcion de PeriodoInvalidoException");
-        }
-        
-    }
-    
-    /**
-     * @see pga.Manager#bajaCursada(pga.Cursada)
-     */
-    @Test
-    public void testBajaCursadaExitosa_1_2()
-    {
-        try
-        {
-            this.fixture.manager.altaCursada(this.fixture.cursada_a.getNombre(),
-                                              this.fixture.cursada_a.getAsignatura(),
-                                              this.fixture.cursada_a.getPeriodo(),
-                                              this.fixture.cursada_a.getDia(), 
-                                              this.fixture.cursada_a.getHoraInicio(), 
-                                              this.fixture.cursada_a.getHoraFin());
-        } 
-        catch(HoraInvalidaException e)
-        {
-            fail("No tendria que haber salido la excepcion de HoraInvalidaException");
-        } catch(PeriodoInvalidoException e)
-        {
-            fail("No tendria que haber salido la excepcion de PeriodoInvalidoException");
-        }
-        
     }
 
     private boolean buscaCursada(Cursada cursada)

@@ -63,7 +63,7 @@ public final class Formato
             if(cad.equals("01") || cad.equals("02"))
             {
                 cad = periodo.substring(3);
-                ret = cad.compareTo("2000") >= 0 && cad.compareTo("2100") <= 0;
+                ret = cad.compareTo("2000") >= 0 && cad.compareTo("2099") <= 0;
             }
         }
         if (!ret)
