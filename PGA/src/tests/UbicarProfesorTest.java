@@ -24,7 +24,7 @@ public class UbicarProfesorTest
     @Before
     public void setUp() throws Exception
     {
-        fixture.setUpAgregarYModif();
+        fixture.setUpUbicar();
     }
 
     @After
@@ -42,7 +42,12 @@ public class UbicarProfesorTest
         try
         {
             HashMap<String, Profesor> hash = this.fixture.manager.ubicarProfesor(
-                                                this.fixture.profesor_b.getNombre(), this.fixture.profesor_b.getApellido());
+                    this.fixture
+                        .profesor_b
+                        .getNombre(), 
+                    this.fixture
+                        .profesor_b
+                        .getApellido());
             assertTrue("El profesor debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture.profesor_b.getLegajo()));
             
         }
