@@ -841,10 +841,12 @@ public class Manager
         String nombreCursadaMayus = cursada.getClave().toUpperCase(); // El hash está en mayúscula
         
         if (this.cursadas.containsKey(nombreCursadaMayus) && this.cursadas.get(nombreCursadaMayus).remove(cursada.getId(), cursada))
+        {
             // Si hemos encontrado la cursada y podido eliminarla
             if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si el HashMap de las cursadas ha quedado vacío
                                                                   // lo eliminamos del HashMap general de cursadas
-                this.cursadas.remove(nombreCursadaMayus);
+                this.cursadas.remove(nombreCursadaMayus);   
+        }
         else
             throw new NoEstaEntidadException(cursada, "Cursada no encontrada en el sistema.");
     }
@@ -925,7 +927,7 @@ public class Manager
         HashMap<String, Cursada> ret = this.cursadas.get(nombre.toUpperCase()); // El hash está en mayúscula
         
         if(ret == null)
-            throw new NoEstaEntidadException("Ninguna cursada encontrada");
+            throw new NoEstaEntidadException("Ninguna cursada encontrada.");
         
         return ret;
     }

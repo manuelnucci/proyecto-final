@@ -98,11 +98,11 @@ public class ModificaCursadaTest
         try
         {
             int size = this.fixture.manager.getCursadas().size();
-            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "C", this.fixture.asignatura_a, "02-2100", "Domingo", "23:58", "23:59");
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "C", this.fixture.asignatura_a, "02-2099", "Domingo", "23:58", "23:59");
             assertTrue("La cursada no se modifico correctamente", this.fixture.cursada_b.getNombre().equals("C") &&
                                                     this.fixture.cursada_b.getAsignatura().equals(this.fixture.asignatura_a) &&
                                                     this.fixture.cursada_b.getDia().equals("Domingo") &&
-                                                    this.fixture.cursada_b.getPeriodo().equals("02-2100") &&
+                                                    this.fixture.cursada_b.getPeriodo().equals("02-2099") &&
                                                     this.fixture.cursada_b.getHoraInicio().equals("23:58") &&
                                                     this.fixture.cursada_b.getHoraFin().equals("23:59"));
             } catch (HoraInvalidaException e)

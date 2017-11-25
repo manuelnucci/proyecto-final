@@ -62,13 +62,9 @@ public class UbicarProfesorTest
         try
         {
             this.fixture.manager.ubicarProfesor(null, this.fixture.profesor_b.getApellido());
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
+            fail("Tendrpia que haberse lanzado la excepción NoEstaEntidadException.");
         } 
         catch (NoEstaEntidadException e)
-        {
-            fail("No debería lanzarse la excepción NoEstaEntidadException");
-        }
-        catch(NullPointerException e)
         {
             fail("Se intentó buscar un profesor con un nombre nulo.");
         }
@@ -83,13 +79,9 @@ public class UbicarProfesorTest
         try
         {
             this.fixture.manager.ubicarProfesor(this.fixture.profesor_b.getNombre(), null);
-            fail("Tendría que haberse lanzado la excepción NullPointerException.");
+            fail("Tendrpia que haberse lanzado la excepción NoEstaEntidadException.");
         } 
         catch (NoEstaEntidadException e)
-        {
-            fail("No debería lanzarse la excepción NoEstaEntidadException");
-        }
-        catch(NullPointerException e)
         {
             fail("Se intentó buscar un profesor con un apellido nulo.");
         }

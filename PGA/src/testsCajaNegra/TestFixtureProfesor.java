@@ -55,7 +55,7 @@ public class TestFixtureProfesor
         
         this.asignatura_a = new Asignatura("Mate A"); 
         this.cursada_a = new Cursada("Cursada Mate A", this.asignatura_a, "01-2017", "Lunes", "09:00", "12:00");
-        this.cursada_a.getProfesores().put(this.profesor_a.getLegajo(), this.profesor_a);
+        this.cursada_a.getProfesores().put(this.profesor_c.getLegajo(), this.profesor_c);
         
         HashMap<String, Cursada> hashCur = new HashMap<>();
         hashCur.put(this.cursada_a.getId(), this.cursada_a);

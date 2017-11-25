@@ -87,13 +87,13 @@ public class BajaProfesorTest
      * @see pga.Manager#bajaProfesor(pga.Profesor)
      */
     @Test
-    public void testBajaAlumnoErroneo6()
+    public void testBajaProfesorErroneo6()
     {
         
         try
         {
             this.fixture.manager.bajaProfesor(this.fixture.profesor_c);
-            assertTrue("La cursada aún contiene al alumno a eliminar.", this.fixture.cursada_a.getProfesores().containsKey(this.fixture.profesor_c.getLegajo()));
+            assertTrue("La cursada aún contiene al profesor a eliminar.", !this.fixture.cursada_a.getProfesores().containsKey(this.fixture.profesor_c.getLegajo()));
         } 
         catch (NoEstaEntidadException e)
         {

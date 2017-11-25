@@ -85,7 +85,7 @@ public class UbicarCursadaTest
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         } catch (NoEstaEntidadException e)
         {
-            assertEquals("El mensaje de la excepción no coincide con el previsto.", "Cursada no encontrada en el sistema.", e.getMessage());
+            assertEquals("El mensaje de la excepción no coincide con el previsto.", "Ninguna cursada encontrada.", e.getMessage());
         }
         
     }
