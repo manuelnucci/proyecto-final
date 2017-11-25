@@ -1,4 +1,4 @@
-package tests;
+package testsCajaNegra;
 
 import exceptions.EntidadNoAptaParaCursadaException;
 
@@ -9,11 +9,11 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AltaProfesorACursadaTest
+public class AltaAlumnoACursadaTest
 {
-    TestFixtureProfesor fixture = new TestFixtureProfesor();
+    private TestFixtureAlumno fixture = new TestFixtureAlumno();
 
-    public AltaProfesorACursadaTest()
+    public AltaAlumnoACursadaTest()
     {
     }
 
@@ -30,35 +30,35 @@ public class AltaProfesorACursadaTest
     }
 
     /**
-     * @see pga.Manager#altaProfesorACursada(pga.Profesor,pga.Cursada)
+     * @see pga.Manager#altaAlumnoACursada(pga.Alumno,pga.Cursada)
      */
     @Test
-    public void testAltaProfesorACursadaExitoso()
+    public void testAltaAlumnoACursadaExitoso()
     {
         try
         {
             this.fixture
                 .manager
-                .altaProfesorACursada(this.fixture.profesor_b, this.fixture.cursada_b);
-            assertTrue("El profesor no se incribió correctamente en la cursada.", this.fixture.cursada_b.getProfesores().containsKey(this.fixture.profesor_b.getLegajo()));
+                .altaAlumnoACursada(this.fixture.alumno_b, this.fixture.cursada_b);
+            assertTrue("El alumno no se incribió correctamente en la cursada.", this.fixture.cursada_b.getAlumnos().containsKey(this.fixture.alumno_b.getLegajo()));
         } 
         catch (EntidadNoAptaParaCursadaException e)
         {
-            fail("No tendría que haberse lanzado la excepción EntidadNoAptaParaCursadaException ya que en el TestFixtureProfesor se arregló el escenario para que esto no ocurra.");
+            fail("No tendría que haberse lanzado la excepción EntidadNoAptaParaCursadaException ya que en el TestFixtureAlumno se arregló el escenario para que esto no ocurra.");
         }
     }
     
     /**
-     * @see pga.Manager#altaProfesorACursada(pga.Profesor,pga.Cursada)
+     * @see pga.Manager#altaAlumnoACursada(pga.Alumno,pga.Cursada)
      */
     @Test
-    public void testAltaProfesorACursadaErroneo_2_1()
+    public void testAltaAlumnoACursadaErroneo_2_1()
     {
         try
         {
             this.fixture
                 .manager
-                .altaProfesorACursada(this.fixture.profesor_b, null);
+                .altaAlumnoACursada(this.fixture.alumno_b, null);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (EntidadNoAptaParaCursadaException e)
@@ -67,21 +67,21 @@ public class AltaProfesorACursadaTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó agregar un profesor a una cursada nula.");
+            fail("Se intentó agregar un alumno a una cursada nula.");
         }
     }
     
     /**
-     * @see pga.Manager#altaProfesorACursada(pga.Profesor,pga.Cursada)
+     * @see pga.Manager#altaAlumnoACursada(pga.Alumno,pga.Cursada)
      */
     @Test
-    public void testAltaProfesorACursadaErroneo_2_2()
+    public void testAltaAlumnoACursadaErroneo_2_2()
     {
         try
         {
             this.fixture
                 .manager
-                .altaProfesorACursada(null, this.fixture.cursada_b);
+                .altaAlumnoACursada(null, this.fixture.cursada_b);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (EntidadNoAptaParaCursadaException e)
@@ -90,47 +90,47 @@ public class AltaProfesorACursadaTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó agregar a una cursada un profesor nulo.");
+            fail("Se intentó agregar a una cursada un alumno nulo.");
         }
     }
     
     /**
-     * @see pga.Manager#altaProfesorACursada(pga.Profesor,pga.Cursada)
+     * @see pga.Manager#altaAlumnoACursada(pga.Alumno,pga.Cursada)
      */
     @Test
-    public void testAltaProfesorACursadaErroneo_6()
+    public void testAltaAlumnoACursadaErroneo_6()
     {
         try
         {
             this.fixture
                 .manager
-                .altaProfesorACursada(this.fixture.profesor_a, this.fixture.cursada_c);
+                .altaAlumnoACursada(this.fixture.alumno_a, this.fixture.cursada_b);
             fail("Tendría que haberse lanzado la excepción EntidadNoAptaParaCursadaException.");
         } 
         catch (EntidadNoAptaParaCursadaException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", 
-                         e.getMessage(), "El profesor no está habilitado para dictar la cursada.");
+                         e.getMessage(), "El alumno no cumple con las correlatividades para inscribirse a la cursada");
         }
     }
     
     /**
-     * @see pga.Manager#altaProfesorACursada(pga.Profesor,pga.Cursada)
+     * @see pga.Manager#altaAlumnoACursada(pga.Alumno,pga.Cursada)
      */
     @Test
-    public void testAltaProfesorACursadaErroneo_8()
+    public void testAltaAlumnoACursadaErroneo_8()
     {
         try
         {
             this.fixture
                 .manager
-                .altaProfesorACursada(this.fixture.profesor_a, this.fixture.cursada_d);
+                .altaAlumnoACursada(this.fixture.alumno_a, this.fixture.cursada_d);
             fail("Tendría que haberse lanzado la excepción EntidadNoAptaParaCursadaException.");
         } 
         catch (EntidadNoAptaParaCursadaException e)
         {
             assertEquals("El mensaje de la excepción no coincide con el previsto.", 
-                         e.getMessage(), "El profesor no cumple con las franjas horarias para inscribirse a la cursada");
+                         e.getMessage(), "El alumno no cumple con las franjas horarias para inscribirse a la cursada");
         }
     }
 }

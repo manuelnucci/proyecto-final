@@ -1,4 +1,4 @@
-package tests;
+package testsCajaNegra;
 
 import exceptions.HoraInvalidaException;
 import exceptions.NoEstaEntidadException;

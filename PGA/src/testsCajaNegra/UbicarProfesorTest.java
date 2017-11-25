@@ -1,4 +1,4 @@
-package tests;
+package testsCajaNegra;
 
 import exceptions.NoEstaEntidadException;
 
@@ -11,13 +11,13 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import pga.Alumno;
+import pga.Profesor;
 
-public class UbicarAlumnoTest
+public class UbicarProfesorTest
 {
-    private TestFixtureAlumno fixture = new TestFixtureAlumno();
+    private TestFixtureProfesor fixture = new TestFixtureProfesor();
 
-    public UbicarAlumnoTest()
+    public UbicarProfesorTest()
     {
     }
 
@@ -34,17 +34,16 @@ public class UbicarAlumnoTest
     }
 
     /**
-     * @see pga.Manager#ubicarAlumno(String,String)
+     * @see pga.Manager#ubicarProfesor(String,String)
      */
     @Test
-    public void testUbicarAlumnoExitoso()
+    public void testUbicarProfesorExitoso()
     {
         try
         {
-            HashMap<String, Alumno> hash = this.fixture
-                                               .manager
-                                               .ubicarAlumno(this.fixture.alumno_b.getNombre(), this.fixture.alumno_b.getApellido());
-            assertTrue("El alumno debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture.alumno_b.getLegajo()));
+            HashMap<String, Profesor> hash = this.fixture.manager.ubicarProfesor(
+                                                this.fixture.profesor_b.getNombre(), this.fixture.profesor_b.getApellido());
+            assertTrue("El profesor debería haber sido encontrado en el sistema.", hash.containsKey(this.fixture.profesor_b.getLegajo()));
             
         }
         catch (NoEstaEntidadException e)
@@ -53,15 +52,16 @@ public class UbicarAlumnoTest
         }
     }
     
+
     /**
-     * @see pga.Manager#ubicarAlumno(String,String)
+     * @see pga.Manager#ubicarProfesor(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo_2_1()
+    public void testUbicarProfesorErroneo2_1()
     {
         try
         {
-            this.fixture.manager.ubicarAlumno(null, this.fixture.alumno_b.getApellido());
+            this.fixture.manager.ubicarProfesor(null, this.fixture.profesor_b.getApellido());
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (NoEstaEntidadException e)
@@ -70,19 +70,19 @@ public class UbicarAlumnoTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó buscar un alumno con un nombre nulo.");
+            fail("Se intentó buscar un profesor con un nombre nulo.");
         }
     }
     
     /**
-     * @see pga.Manager#ubicarAlumno(String,String)
+     * @see pga.Manager#ubicarProfesor(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo_2_2()
+    public void testUbicarProfesorErroneo2_2()
     {
         try
         {
-            this.fixture.manager.ubicarAlumno(this.fixture.alumno_b.getNombre(), null);
+            this.fixture.manager.ubicarProfesor(this.fixture.profesor_b.getNombre(), null);
             fail("Tendría que haberse lanzado la excepción NullPointerException.");
         } 
         catch (NoEstaEntidadException e)
@@ -91,24 +91,25 @@ public class UbicarAlumnoTest
         }
         catch(NullPointerException e)
         {
-            fail("Se intentó buscar un alumno con un apellido nulo.");
+            fail("Se intentó buscar un profesor con un apellido nulo.");
         }
     }
     
     /**
-     * @see pga.Manager#ubicarAlumno(String,String)
+     * @see pga.Manager#ubicarProfesor(String,String)
      */
     @Test
-    public void testUbicarAlumnoErroneo_4()
+    public void testUbicarProfesorErroneo4()
     {
         try
         {
-            this.fixture.manager.ubicarAlumno(this.fixture.alumno_a.getApellido(), this.fixture.alumno_a.getNombre());
+            this.fixture.manager.ubicarProfesor(this.fixture.profesor_a.getApellido(), this.fixture.profesor_a.getNombre());
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         } 
         catch (NoEstaEntidadException e)
         {
-            assertEquals("El mensaje de la excepción no coincide con el previsto.", e.getMessage(), "Ningún alumno encontrado.");
+            assertEquals("El mensaje de la excepción no coincide con el previsto.", "Ningún profesor encontrado.", e.getMessage());
         }
     }
+
 }
