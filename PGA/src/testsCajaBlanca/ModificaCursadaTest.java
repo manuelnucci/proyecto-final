@@ -89,7 +89,7 @@ public class ModificaCursadaTest
     {
         try
         {
-            this.fixture.setUpModificaCursadaCamino4();
+            this.fixture.setUpModificaCursadaCamino9();
             this.fixture.manager.modificaCursada(this.fixture.cursada_a, "cursada2", this.fixture.asignatura, "01-2018", "Lunes", "14:00", "16:00");
             assertTrue("La cursada no se modificó correctamente en el sistema.", 
                        this.fixture.cursada_a.getNombre().equals("cursada2") &&
