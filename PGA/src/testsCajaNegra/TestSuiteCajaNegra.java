@@ -13,13 +13,13 @@ import org.junit.runners.Suite;
                       AltaProfesorACursadaTest.class, AltaCursadaTest.class, AltaAsignaturaTest.class,
                       AltaAlumnoTest.class, AltaAlumnoACursadaTest.class
     })
-public class TestSuitePGA
+public class TestSuiteCajaNegra
 {
     public static void main(String[] args)
     {
         String[] args2 =
         {
-            TestSuitePGA.class.getName()
+            TestSuiteCajaNegra.class.getName()
         };
         JUnitCore.main(args2);
     }
