@@ -32,6 +32,11 @@ public class TestFixtureCursada
         this.manager.getCursadas().put(this.cursada_a.getClave().toUpperCase(), hashCur);
     }
     
+    public void setUpBajaCursada() throws Exception
+    {
+        
+    }
+    
     public void setUpModificaCursadaCamino4() throws Exception
     {
         this.asignatura = new Asignatura("Programación 3");

@@ -32,11 +32,12 @@ import testsCajaNegra.UbicarProfesorTest;
 @Suite.SuiteClasses({ UbicarProfesorTest.class, UbicarCursadaTest.class, UbicarAsignaturaTest.class,
                       UbicarAlumnoTest.class, TestSuiteCajaNegra.class, TestSuiteCajaBlanca.class,
                       ModificaProfesorTest.class, ModificaCursadaTest.class, testsCajaBlanca.ModificaCursadaTest.class,
+                      testsCajaBlanca.BajaAsignaturaTest.class,testsCajaBlanca.BajaAlumnoTest.class,
                       ModificaAsignaturaTest.class, ModificaAlumnoTest.class, testsCajaBlanca.ModificaAlumnoTest.class,
                       BajaProfesorTest.class, BajaProfesorDeCursadaTest.class, BajaCursadaTest.class,
                       BajaAsignaturaTest.class, BajaAlumnoTest.class, BajaAlumnoDeCursadaTest.class,
                       AltaProfesorTest.class, AltaProfesorACursadaTest.class, AltaCursadaTest.class,
-                      testsCajaBlanca.AltaCursadaTest.class, AltaAsignaturaTest.class, AltaAlumnoTest.class,
+                      testsCajaBlanca.AltaCursadaTest.class, testsCajaNegra.AltaAsignaturaTest.class, AltaAlumnoTest.class,
                       testsCajaBlanca.AltaAlumnoTest.class, AltaAlumnoACursadaTest.class
     })
 public class TestSuitePGA

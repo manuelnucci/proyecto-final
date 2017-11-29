@@ -652,7 +652,7 @@ public class Manager
                     if (cursada.getAsignatura().equals(asignatura))
                     {
                         nombreCursadaMayus = cursada.getClave().toUpperCase(); // El hash está en mayúscula
-                        this.cursadas.get(nombreCursadaMayus).remove(cursada); // Eliminamos la cursada de su HashMap
+                        this.cursadas.get(nombreCursadaMayus).remove(cursada.getId(), cursada); // Eliminamos la cursada de su HashMap
                         if (this.cursadas.get(nombreCursadaMayus).isEmpty()) // Si el HashMap queda vacío se lo debe
                                                                              // eliminar del HashMap general de cursadas
                             this.cursadas.remove(nombreCursadaMayus);
@@ -723,6 +723,7 @@ public class Manager
                 throw new NoEstaEntidadException(asignatura, "Asignatura no encontrada en el sistema.");
         }
     }
+    
     
     /**
      * Se añade a las correlatividades de la asignatura una nueva asignatura que será necesaria para poder cursarla.<br>
