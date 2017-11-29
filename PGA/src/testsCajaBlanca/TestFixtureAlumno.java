@@ -27,6 +27,35 @@ public class TestFixtureAlumno
         this.manager.getAlumnos().put(this.alumno_a.getClave().toUpperCase(), hash);
     }
     
+    public void setUpBajaAlumnoCamino1() throws Exception
+    {
+        this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
+    }
+    
+    public void setUpBajaAlumnoCamino2() throws Exception
+    {
+        this.alumno_a = new Alumno("Manuel", "Nucci", "Otro 2345", "123456789", "otro@gmail.com");
+        
+        HashMap<String, Alumno> hash = new HashMap<String, Alumno>();
+        hash.put(this.alumno_a.getLegajo(), this.alumno_a);
+        this.manager.getAlumnos().put(this.alumno_a.getClave().toUpperCase(), hash);
+        
+        this.alumno_b = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
+    }
+    
+    public void setUpBajaAlumnoCamino3() throws Exception
+    {
+        this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
+        this.alumno_b = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
+        
+        HashMap<String, Alumno> hash = new HashMap<String, Alumno>();
+        
+        hash.put(this.alumno_a.getLegajo(), this.alumno_a);
+        hash.put(this.alumno_b.getLegajo(), this.alumno_b);
+        
+        this.manager.getAlumnos().put(this.alumno_a.getClave().toUpperCase(), hash);
+    }
+    
     public void setUpModificaAlumnoCamino2() throws Exception
     {
         this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
@@ -69,5 +98,6 @@ public class TestFixtureAlumno
     public void tearDown() throws Exception
     {
         this.manager.getAlumnos().clear();
+        this.manager.getCursadas().clear();
     }
 }
