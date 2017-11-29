@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_131" class="java.beans.XMLDecoder">
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>SEBASTIANCANONACO</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ALU0001</string>
+     <object class="pga.Alumno">
+      <void property="apellido">
+       <string>canonaco</string>
+      </void>
+      <void property="domicilio">
+       <string>sda</string>
+      </void>
+      <void property="historiaAcademica">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="legajo">
+       <string>ALU0001</string>
+      </void>
+      <void property="mail">
+       <string>d@s</string>
+      </void>
+      <void property="nombre">
+       <string>sebastian</string>
+      </void>
+      <void property="telefono">
+       <string>d</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>MANUELNUCCI</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ALU0002</string>
+     <object class="pga.Alumno">
+      <void property="apellido">
+       <string>NUCCI</string>
+      </void>
+      <void property="domicilio">
+       <string>DA</string>
+      </void>
+      <void property="historiaAcademica">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="legajo">
+       <string>ALU0002</string>
+      </void>
+      <void property="mail">
+       <string>D@8</string>
+      </void>
+      <void property="nombre">
+       <string>manuel</string>
+      </void>
+      <void property="telefono">
+       <string>J</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="java.util.HashMap"/>
+ <object class="java.util.HashMap">
+  <void method="put">
+   <string>FISICA2</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0002</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA2</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>FISICA1</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0001</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA1</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>FISICA3</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0003</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>FISICA3</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>MATEA</string>
+   <object class="java.util.HashMap">
+    <void method="put">
+     <string>ASI0004</string>
+     <object class="pga.Asignatura">
+      <void property="correlatividades">
+       <object class="java.util.HashMap"/>
+      </void>
+      <void property="nombre">
+       <string>MATEA</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+ <object class="java.util.HashMap"/>
+ <int>2</int>
+ <int>0</int>
+ <int>4</int>
+ <int>0</int>
+</java>
