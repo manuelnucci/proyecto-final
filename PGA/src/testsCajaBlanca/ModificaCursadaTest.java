@@ -85,6 +85,32 @@ public class ModificaCursadaTest
      * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
      */
     @Test
+    public void testModificaCursadaCamino6() throws Exception
+    {
+        try
+        {
+            this.fixture.setUpModificaCursadaCamino6();
+            this.fixture.manager.modificaCursada(this.fixture.cursada_b, "CURSADA3", this.fixture.asignatura, "01-2018", "Lunes", "14:00", "16:00");
+            fail("Tendría que haberse lanzado la excepción NoEstaEntidadException");
+        } 
+        catch (PeriodoInvalidoException e)
+        {
+            fail("No debería lanzarse la excepción por el formato del período incorrecto.");
+        }
+        catch (HoraInvalidaException e)
+        {
+            fail("No debería lanzarse la excepción por el formato de la hora incorrecta.");
+        }
+        catch (NoEstaEntidadException e)
+        {
+            assertTrue("El mensaje de la excepción no coincide con el previsto.", e.getMessage().equals("Cursada no encontrada en el sistema."));
+        }
+    }
+    
+    /**
+     * @see pga.Manager#modificaCursada(pga.Cursada,String,pga.Asignatura,String,String,String,String)
+     */
+    @Test
     public void testModificaCursadaCamino9() throws Exception
     {
         try

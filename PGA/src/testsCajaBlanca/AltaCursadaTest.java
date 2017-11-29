@@ -25,7 +25,7 @@ public class AltaCursadaTest
     @Before
     public void setUp() throws Exception
     {
-        fixture.setUpAltaCursada();
+        fixture.setUpAltaCursadaCamino4();
     }
 
     @After

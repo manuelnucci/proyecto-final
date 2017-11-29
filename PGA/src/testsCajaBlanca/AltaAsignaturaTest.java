@@ -21,7 +21,7 @@ public class AltaAsignaturaTest
     @Before
     public void setUp() throws Exception
     {
-        fixture.setUpAltaAsignatura();
+        fixture.setUpAltaAsignaturaCamino1();
     }
 
     @After

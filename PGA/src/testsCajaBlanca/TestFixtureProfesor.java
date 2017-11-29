@@ -75,7 +75,7 @@ public class TestFixtureProfesor
         hash.put(this.profesor_a.getLegajo(), this.profesor_a);
         this.manager.getProfesores().put(this.profesor_a.getClave().toUpperCase(), hash);
         
-        this.profesor_b = new Profesor("Manuel", "Nuccia", "Alberti 2345", "987654321", "manu@gmail.com");
+        this.profesor_b = new Profesor("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
     }
     
     public void setUpModificaProfesorCamino6() throws Exception

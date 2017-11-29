@@ -85,7 +85,7 @@ public class ModificaProfesorTest
             this.fixture.setUpModificaProfesorCamino5();
             this.fixture
                 .manager
-                .modificaProfesor(this.fixture.profesor_b, "Manuel", "nucci", "Jujuy 345", "123456789", "nucci@gmail.com");
+                .modificaProfesor(this.fixture.profesor_b, "Manuel", "nuccia", "Jujuy 345", "123456789", "nucci@gmail.com");
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");            
         }
         catch (EmailInvalidoException e)

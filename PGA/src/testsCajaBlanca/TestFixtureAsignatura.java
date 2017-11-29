@@ -22,7 +22,7 @@ public class TestFixtureAsignatura
         this.manager = Manager.getInstancia();
     }
     
-    public void setUpAltaAsignatura() throws Exception
+    public void setUpAltaAsignaturaCamino1() throws Exception
     {
         this.asignatura_a = new Asignatura("Programación");
         

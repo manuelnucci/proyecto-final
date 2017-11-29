@@ -18,7 +18,7 @@ public class TestFixtureAlumno
         this.manager = Manager.getInstancia();
     }
     
-    public void setUpAltaAlumno() throws Exception
+    public void setUpAltaAlumnoCamino2() throws Exception
     {
         this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
         
