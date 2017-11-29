@@ -37,7 +37,7 @@ public class BajaAsignaturaTest
         try
         {
             this.fixture1.setUpBajaAsignaturaCamino2();
-            this.fixture1.manager.bajaAsignatura(this.fixture1.asignatura_a);
+            this.fixture1.manager.bajaAsignatura(this.fixture1.asignatura_b);
             fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
         } catch (NoEstaEntidadException e)
         {
