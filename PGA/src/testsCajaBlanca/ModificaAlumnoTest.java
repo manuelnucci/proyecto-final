@@ -72,6 +72,28 @@ public class ModificaAlumnoTest
     }
     
     /**
+         * @see pga.Manager#modificaAlumno(pga.Alumno,String,String,String,String,String)
+         */
+        @Test
+        public void testModificaAlumnoCamino5() throws Exception
+        {
+            try
+            {
+                this.fixture.setUpModificaAlumnoCamino5();
+                this.fixture.manager.modificaAlumno(this.fixture.alumno_b, "Manuel", "nucci", "Jujuy 345", "123456789", "nucci@gmail.com");
+                fail("Tendría que haberse lanzado la excepción NoEstaEntidadException.");
+            } 
+            catch (EmailInvalidoException e)
+            {
+                fail("No debería lanzarse la excepción por el formato del email incorrecto.");
+            } 
+            catch (NoEstaEntidadException e)
+            {
+                assertTrue("El mensaje de la excepción no coincide con el previsto.", e.getMessage().equals("Alumno no encontrado en el sistema."));
+            }
+        }
+    
+    /**
      * @see pga.Manager#modificaAlumno(pga.Alumno,String,String,String,String,String)
      */
     @Test

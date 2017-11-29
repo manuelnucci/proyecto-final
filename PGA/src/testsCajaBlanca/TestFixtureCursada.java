@@ -32,9 +32,38 @@ public class TestFixtureCursada
         this.manager.getCursadas().put(this.cursada_a.getClave().toUpperCase(), hashCur);
     }
     
-    public void setUpBajaCursada() throws Exception
+    public void setUpBajaCursadaCamino1() throws Exception
     {
+        this.asignatura = new Asignatura("Programación");
+        this.cursada_a = new Cursada("Mi cursada", this.asignatura, "01-2018", "Martes", "12:00", "14:00");
+    }
+    
+    public void setUpBajaCursadaCamino2() throws Exception
+    {
+        this.asignatura = new Asignatura("Programación");
         
+        this.cursada_a = new Cursada("Mi cursada", this.asignatura, "01-2018", "Lunes", "12:00", "14:00");
+        
+        HashMap<String, Cursada> hashCur = new HashMap<>();
+        hashCur.put(this.cursada_a.getId(), this.cursada_a);
+        this.manager.getCursadas().put(this.cursada_a.getClave().toUpperCase(), hashCur);
+        
+        this.cursada_b = new Cursada("Mi cursada", this.asignatura, "01-2018", "Martes", "12:00", "14:00");
+    }
+    
+    public void setUpBajaCursadaCamino3() throws Exception
+    {
+        this.asignatura = new Asignatura("Programación");
+        
+        this.cursada_a = new Cursada("Mi cursada", this.asignatura, "01-2018", "Lunes", "12:00", "14:00");
+        this.cursada_b = new Cursada("Mi cursada", this.asignatura, "01-2018", "Martes", "12:00", "14:00");
+        
+        HashMap<String, Cursada> hashCur = new HashMap<>();
+        
+        hashCur.put(this.cursada_a.getId(), this.cursada_a);
+        hashCur.put(this.cursada_b.getId(), this.cursada_b);
+        
+        this.manager.getCursadas().put(this.cursada_a.getClave().toUpperCase(), hashCur);
     }
     
     public void setUpModificaCursadaCamino4() throws Exception

@@ -14,7 +14,8 @@ public class TestFixtureAsignatura
     protected Asignatura asignatura_b;
     protected Asignatura asignatura_c;
     
-    protected Cursada cursada;
+    protected Cursada cursada_a;
+    protected Cursada cursada_b;
     
     public TestFixtureAsignatura()
     {
@@ -41,6 +42,35 @@ public class TestFixtureAsignatura
         this.asignatura_b = new Asignatura("Programación");
     }
     
+    public void setUpBajaAsignaturaCamino7() throws Exception
+    {
+        this.asignatura_a = new Asignatura("Programación");
+        this.asignatura_b = new Asignatura("Programación");
+        
+        HashMap<String, Asignatura> hashA = new HashMap<>();
+        
+        hashA.put(this.asignatura_a.getId(), this.asignatura_a);
+        hashA.put(this.asignatura_b.getId(), this.asignatura_b);
+        
+        this.manager.getAsignaturas().put(this.asignatura_a.getClave().toUpperCase(), hashA);
+        
+        this.cursada_a = new Cursada("Mi cursada", this.asignatura_a, "01-2018", "Martes", "12:00", "14:00");
+        
+        HashMap<String, Cursada> hashC1yC2 = new HashMap<>();
+        hashC1yC2.put(this.cursada_a.getId(), this.cursada_a);
+        
+        this.asignatura_c = new Asignatura("Algebra A");
+        
+        HashMap<String, Asignatura> hashA2 = new HashMap<>();
+        hashA2.put(this.asignatura_c.getId(), this.asignatura_c);
+        this.manager.getAsignaturas().put(this.asignatura_c.getClave().toUpperCase(), hashA2);
+        
+        this.cursada_b = new Cursada("Mi cursada", this.asignatura_b, "02-2018", "Lunes", "12:00", "14:00");
+        
+        hashC1yC2.put(this.cursada_b.getId(), this.cursada_b);
+        this.manager.getCursadas().put(this.cursada_b.getClave().toUpperCase(), hashC1yC2);
+    }
+    
     public void setUpBajaAsignaturaCamino8() throws Exception
     {
         this.asignatura_a = new Asignatura("Programación");
@@ -49,11 +79,11 @@ public class TestFixtureAsignatura
         hashA.put(this.asignatura_a.getId(), this.asignatura_a);
         this.manager.getAsignaturas().put(this.asignatura_a.getClave().toUpperCase(), hashA);
         
-        this.cursada = new Cursada("Mi cursada", this.asignatura_a, "01-2018", "Martes", "12:00", "14:00");
+        this.cursada_a = new Cursada("Mi cursada", this.asignatura_a, "01-2018", "Martes", "12:00", "14:00");
         
         HashMap<String, Cursada> hashC = new HashMap<>();
-        hashC.put(this.cursada.getId(), this.cursada);
-        this.manager.getCursadas().put(this.cursada.getClave().toUpperCase(), hashC);
+        hashC.put(this.cursada_a.getId(), this.cursada_a);
+        this.manager.getCursadas().put(this.cursada_a.getClave().toUpperCase(), hashC);
     }
     
     public void setUpModificaAsignaturaCamino1() throws Exception

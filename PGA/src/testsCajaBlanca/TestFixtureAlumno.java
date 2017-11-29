@@ -76,6 +76,17 @@ public class TestFixtureAlumno
         this.alumno_b = new Alumno("Manuelita", "Nuccia", "Alberti 2345", "987654321", "manu@gmail.com");
     }
     
+    public void setUpModificaAlumnoCamino5() throws Exception
+        {
+            this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");
+            
+            HashMap<String, Alumno> hash = new HashMap<String, Alumno>();
+            hash.put(this.alumno_a.getLegajo(), this.alumno_a);
+            this.manager.getAlumnos().put(this.alumno_a.getClave().toUpperCase(), hash);
+            
+            this.alumno_b = new Alumno("Manuel", "Nuccia", "Alberti 2345", "987654321", "manu@gmail.com");
+        }
+    
     public void setUpModificaAlumnoCamino6() throws Exception
     {
         this.alumno_a = new Alumno("Manuel", "Nucci", "Alberti 2345", "987654321", "manu@gmail.com");

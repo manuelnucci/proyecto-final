@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import org.junit.After;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
@@ -44,6 +45,29 @@ public class BajaAsignaturaTest
              assertTrue("El mensaje de la excepción no coincide con el previsto.", e.getMessage().equals("Asignatura no encontrada en el sistema."));
          }
      }
+     
+    /**
+         * @see pga.Manager#bajaAsignatura(pga.Asignatura)
+         */
+        @Test
+        public void testBajaAsignaturaCamino7() throws Exception
+        {
+            try
+            {
+                this.fixture.setUpBajaAsignaturaCamino7();
+                this.fixture.manager.bajaAsignatura(this.fixture.asignatura_a);
+                assertTrue("La asignatura sigue existiendo en asignaturas o cursadas.",this.existeAsignatura(this.fixture.asignatura_a,
+                                                                                                            this.fixture.manager.getAsignaturas(),
+                                                                                                            this.fixture.manager.getCursadas()));
+                assertFalse("La asignatura se eliminó cuando no debía.",this.existeAsignatura(this.fixture.asignatura_b,
+                                                                                                            this.fixture.manager.getAsignaturas(),
+                                                                                                            this.fixture.manager.getCursadas()));
+            } 
+            catch (NoEstaEntidadException e)
+            {
+                fail("No debería lanzarse la excepción porque en el TestFixtureAsignatura se la agregó.");
+            }
+        }
      
      /**
       * @see pga.Manager#bajaAsignatura(pga.Asignatura)
