@@ -4,8 +4,6 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import testsCajaBlanca.TestSuiteCajaBlanca;
-
 import testsCajaNegra.AltaAlumnoACursadaTest;
 import testsCajaNegra.AltaAlumnoTest;
 import testsCajaNegra.AltaAsignaturaTest;
@@ -22,7 +20,6 @@ import testsCajaNegra.ModificaAlumnoTest;
 import testsCajaNegra.ModificaAsignaturaTest;
 import testsCajaNegra.ModificaCursadaTest;
 import testsCajaNegra.ModificaProfesorTest;
-import testsCajaNegra.TestSuiteCajaNegra;
 import testsCajaNegra.UbicarAlumnoTest;
 import testsCajaNegra.UbicarAsignaturaTest;
 import testsCajaNegra.UbicarCursadaTest;
@@ -31,12 +28,16 @@ import testsCajaNegra.UbicarProfesorTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ UbicarProfesorTest.class, UbicarCursadaTest.class, UbicarAsignaturaTest.class,
                       UbicarAlumnoTest.class, TestSuiteCajaNegra.class, TestSuiteCajaBlanca.class,
-                      ModificaProfesorTest.class, ModificaCursadaTest.class, testsCajaBlanca.ModificaCursadaTest.class,
-                      ModificaAsignaturaTest.class, ModificaAlumnoTest.class, testsCajaBlanca.ModificaAlumnoTest.class,
-                      BajaProfesorTest.class, BajaProfesorDeCursadaTest.class, BajaCursadaTest.class,
-                      BajaAsignaturaTest.class, BajaAlumnoTest.class, BajaAlumnoDeCursadaTest.class,
-                      AltaProfesorTest.class, AltaProfesorACursadaTest.class, AltaCursadaTest.class,
-                      testsCajaBlanca.AltaCursadaTest.class, AltaAsignaturaTest.class, AltaAlumnoTest.class,
+                      ModificaProfesorTest.class, testsCajaBlanca.ModificaProfesorTest.class, ModificaCursadaTest.class,
+                      testsCajaBlanca.ModificaCursadaTest.class, ModificaAsignaturaTest.class,
+                      testsCajaBlanca.ModificaAsignaturaTest.class, ModificaAlumnoTest.class,
+                      testsCajaBlanca.ModificaAlumnoTest.class, BajaProfesorTest.class,
+                      testsCajaBlanca.BajaProfesorTest.class, BajaProfesorDeCursadaTest.class, BajaCursadaTest.class,
+                      testsCajaBlanca.BajaCursadaTest.class, BajaAsignaturaTest.class,
+                      testsCajaBlanca.BajaAsignaturaTest.class, BajaAlumnoTest.class,
+                      testsCajaBlanca.BajaAlumnoTest.class, BajaAlumnoDeCursadaTest.class, AltaProfesorTest.class,
+                      AltaProfesorACursadaTest.class, AltaCursadaTest.class, testsCajaBlanca.AltaCursadaTest.class,
+                      AltaAsignaturaTest.class, testsCajaBlanca.AltaAsignaturaTest.class, AltaAlumnoTest.class,
                       testsCajaBlanca.AltaAlumnoTest.class, AltaAlumnoACursadaTest.class
     })
 public class TestSuitePGA
