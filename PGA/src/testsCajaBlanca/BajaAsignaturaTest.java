@@ -49,6 +49,29 @@ public class BajaAsignaturaTest
      * @see pga.Manager#bajaAsignatura(pga.Asignatura)
      */
     @Test
+    public void testBajaAsignaturaCamino7() throws Exception
+    {
+        try
+        {
+            this.fixture1.setUpBajaAsignaturaCamino7();
+            this.fixture1.manager.bajaAsignatura(this.fixture1.asignatura_a);
+            assertTrue("La asignatura sigue existiendo en asignaturas o cursadas",this.existeAsignatura(this.fixture1.asignatura_a,
+                                                                                                        this.fixture1.manager.getAsignaturas(),
+                                                                                                        this.fixture1.manager.getCursadas()));
+            assertFalse("La asignatura se elimino cuando no debia",this.existeAsignatura(this.fixture1.asignatura_b,
+                                                                                                        this.fixture1.manager.getAsignaturas(),
+                                                                                                        this.fixture1.manager.getCursadas()));
+        } catch (NoEstaEntidadException e)
+        {
+            fail("No debería lanzarse la excepción porque en el TestFixtureAsignatura se lo agregó.");
+        }
+
+    }
+    
+    /**
+     * @see pga.Manager#bajaAsignatura(pga.Asignatura)
+     */
+    @Test
     public void testBajaAsignaturaCamino8() throws Exception
     {
         try
